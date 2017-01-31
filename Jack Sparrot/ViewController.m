@@ -7,16 +7,22 @@
 //
 
 #import "ViewController.h"
+#import "EcranAccueil.h"
 
 @interface ViewController ()
 
 @end
+
+EcranAccueil *ecranAccueil;
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    ecranAccueil = [[EcranAccueil alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ecranAccueil setBackgroundColor:[UIColor whiteColor]];
+    [self setView: ecranAccueil];
 }
 
 
