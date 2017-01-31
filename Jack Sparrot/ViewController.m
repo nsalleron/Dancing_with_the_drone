@@ -21,7 +21,8 @@ EcranAccueil *ecranAccueil;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     ecranAccueil = [[EcranAccueil alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [ecranAccueil setBackgroundColor:[UIColor whiteColor]];
+    [ecranAccueil setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setView: ecranAccueil];
 }
 
@@ -29,6 +30,9 @@ EcranAccueil *ecranAccueil;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
 }
 
 
