@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "EcranAccueil.h"
+#import "ControlerDroneViewController.h"
 
 @implementation EcranAccueil
 
@@ -88,32 +89,32 @@ UIDevice *myDevice;
         
         
         /* Mise en place du logo et des boutons */
-        [_imgLogo setFrame:CGRectMake (format.width/6.0,
-                            (format.height)/5.5, tailleIcones*2, tailleIcones*2)];
+        [_imgLogo setFrame:CGRectMake (format.width/5.5,
+                            (format.height)/5, tailleIcones*2, tailleIcones*2)];
         
         
-        [_btnDrone setFrame:CGRectMake(format.width/6.0 + tailleIcones*2 + 10,
-                                       (format.height/5.5),
+        [_btnDrone setFrame:CGRectMake(format.width/5.5 + tailleIcones*2 + 10,
+                                       (format.height/5),
                                        tailleIcones*2, tailleIcones/2)];
         
-        [_btnChore setFrame:CGRectMake(format.width/6.0 + tailleIcones*2 + 10,
-                                       format.height/5.5 + tailleIcones/2 + 10,
+        [_btnChore setFrame:CGRectMake(format.width/5.5 + tailleIcones*2 + 10,
+                                       format.height/5 + tailleIcones/2 + 10,
                                        tailleIcones*2, tailleIcones/2)];
         
-        [_btnOptions setFrame:CGRectMake(format.width/6.0 + tailleIcones*2 + 10,
-                                       format.height/5.5 + tailleIcones + 20,
+        [_btnOptions setFrame:CGRectMake(format.width/5.5 + tailleIcones*2 + 10,
+                                       format.height/5 + tailleIcones + 20,
                                        tailleIcones*2, tailleIcones/2)];
         
         /* Mise en place des labels */
             /* LabelBatterySmartphone */
         [_labelBatterySmartphone setHidden:NO];
-        [_labelBatterySmartphone setFrame:CGRectMake(format.width - tailleIcones*1.2,10,tailleIcones*1.2,tailleIcones/3)];
+        [_labelBatterySmartphone setFrame:CGRectMake(format.width - tailleIcones*1.2-10,10,tailleIcones*1.2,tailleIcones/3)];
         
             /* LabelBatteryDrone */
-        [_labelBatteryDrone setFrame:CGRectMake(10,10,tailleIcones*2,tailleIcones/2)];
+        [_labelBatteryDrone setFrame:CGRectMake(10,10,tailleIcones*1.2,tailleIcones/3)];
         
             /* LabelVersionApp*/
-        [_labelVersionApp setFrame:CGRectMake(format.width - tailleIcones*1.2 ,format.height -tailleIcones/2 - 20,tailleIcones,tailleIcones/2)];
+        [_labelVersionApp setFrame:CGRectMake(format.width - tailleIcones + (tailleIcones/3) ,format.height - tailleIcones/2 + 10,tailleIcones,tailleIcones/2)];
         [_labelVersionApp setTextAlignment:NSTextAlignmentLeft];
         
     }else{
@@ -143,15 +144,31 @@ UIDevice *myDevice;
             /* LabelBatterySmartphone */
         [_labelBatterySmartphone setHidden:YES];
             /* LabelBatteryDrone */
-        [_labelBatteryDrone setFrame:CGRectMake(10,10,tailleIcones,tailleIcones/2)];
+        [_labelBatteryDrone setFrame:CGRectMake(10,
+                                                format.height - tailleIcones/3,
+                                                tailleIcones,
+                                                tailleIcones/2)];
             /* LabelVersionApp */
-        [_labelVersionApp setFrame:CGRectMake(format.width - tailleIcones -10 ,format.height -tailleIcones/3,tailleIcones,tailleIcones/2)];
+        [_labelVersionApp setFrame:CGRectMake(format.width - tailleIcones - 10 ,
+                                              format.height -tailleIcones/3,
+                                              tailleIcones,
+                                              tailleIcones/2)];
         [_labelVersionApp setTextAlignment:NSTextAlignmentRight];
         
+        [_btnDrone addTarget:self action:@selector(goToDroneControl) forControlEvents:UIControlEventTouchUpInside];
+     
+        
     }
+}
+
+-(void) goToDroneControl{
+    printf("TOTO");
+    UIViewController *myVC = [[ControlerDroneViewController alloc]init];
+    UINavigationController *myNVC = [[UINavigationController alloc ] initWithRootViewController:myVC ];
+    UIView *viewCtrlDrone = [[UIView alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [viewCtrlDrone addSubview:[myNVC view]];
     
-    
-    
+    [self setMaskView:viewCtrlDrone];
     
 }
 

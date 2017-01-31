@@ -13,6 +13,8 @@
 
 @interface ControlerDrone : UIView
 
+@property (readonly,nonatomic,retain) UIImageView *imgLogo;
+
 - (void) updateView:(CGSize) format;
 
 @end

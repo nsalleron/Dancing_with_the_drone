@@ -13,10 +13,13 @@
 
 @implementation ControlerDrone
 
-
 - (id) initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if(self){
+        _imgLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ParrotUniversal"]];
+        [self addSubview:_imgLogo];
+
+      
     }
     return self;
 }
