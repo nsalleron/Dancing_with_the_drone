@@ -1,0 +1,546 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A61AEECB1E40978F00EDB53B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEECA1E40978F00EDB53B /* main.m */; };
+		A61AEECE1E40978F00EDB53B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEECD1E40978F00EDB53B /* AppDelegate.m */; };
+		A61AEED11E40978F00EDB53B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEED01E40978F00EDB53B /* ViewController.m */; };
+		A61AEED41E40978F00EDB53B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61AEED21E40978F00EDB53B /* Main.storyboard */; };
+		A61AEED71E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A61AEED51E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld */; };
+		A61AEED91E40978F00EDB53B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A61AEED81E40978F00EDB53B /* Assets.xcassets */; };
+		A61AEEDC1E40978F00EDB53B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61AEEDA1E40978F00EDB53B /* LaunchScreen.storyboard */; };
+		A61AEEE71E40978F00EDB53B /* Jack_SparrotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEEE61E40978F00EDB53B /* Jack_SparrotTests.m */; };
+		A61AEEF21E40978F00EDB53B /* Jack_SparrotUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEEF11E40978F00EDB53B /* Jack_SparrotUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A61AEEE31E40978F00EDB53B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A61AEEBE1E40978F00EDB53B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A61AEEC51E40978F00EDB53B;
+			remoteInfo = "Jack Sparrot";
+		};
+		A61AEEEE1E40978F00EDB53B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A61AEEBE1E40978F00EDB53B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A61AEEC51E40978F00EDB53B;
+			remoteInfo = "Jack Sparrot";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A61AEEC61E40978F00EDB53B /* Jack Sparrot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jack Sparrot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A61AEECA1E40978F00EDB53B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A61AEECC1E40978F00EDB53B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A61AEECD1E40978F00EDB53B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A61AEECF1E40978F00EDB53B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A61AEED01E40978F00EDB53B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A61AEED31E40978F00EDB53B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A61AEED61E40978F00EDB53B /* Jack_Sparrot.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Jack_Sparrot.xcdatamodel; sourceTree = "<group>"; };
+		A61AEED81E40978F00EDB53B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A61AEEDB1E40978F00EDB53B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A61AEEDD1E40978F00EDB53B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A61AEEE21E40978F00EDB53B /* Jack SparrotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Jack SparrotTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A61AEEE61E40978F00EDB53B /* Jack_SparrotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Jack_SparrotTests.m; sourceTree = "<group>"; };
+		A61AEEE81E40978F00EDB53B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A61AEEED1E40978F00EDB53B /* Jack SparrotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Jack SparrotUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A61AEEF11E40978F00EDB53B /* Jack_SparrotUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Jack_SparrotUITests.m; sourceTree = "<group>"; };
+		A61AEEF31E40978F00EDB53B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A61AEEC31E40978F00EDB53B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A61AEEDF1E40978F00EDB53B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A61AEEEA1E40978F00EDB53B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A61AEEBD1E40978F00EDB53B = {
+			isa = PBXGroup;
+			children = (
+				A61AEEC81E40978F00EDB53B /* Jack Sparrot */,
+				A61AEEE51E40978F00EDB53B /* Jack SparrotTests */,
+				A61AEEF01E40978F00EDB53B /* Jack SparrotUITests */,
+				A61AEEC71E40978F00EDB53B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A61AEEC71E40978F00EDB53B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A61AEEC61E40978F00EDB53B /* Jack Sparrot.app */,
+				A61AEEE21E40978F00EDB53B /* Jack SparrotTests.xctest */,
+				A61AEEED1E40978F00EDB53B /* Jack SparrotUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A61AEEC81E40978F00EDB53B /* Jack Sparrot */ = {
+			isa = PBXGroup;
+			children = (
+				A61AEECC1E40978F00EDB53B /* AppDelegate.h */,
+				A61AEECD1E40978F00EDB53B /* AppDelegate.m */,
+				A61AEECF1E40978F00EDB53B /* ViewController.h */,
+				A61AEED01E40978F00EDB53B /* ViewController.m */,
+				A61AEED21E40978F00EDB53B /* Main.storyboard */,
+				A61AEED81E40978F00EDB53B /* Assets.xcassets */,
+				A61AEEDA1E40978F00EDB53B /* LaunchScreen.storyboard */,
+				A61AEEDD1E40978F00EDB53B /* Info.plist */,
+				A61AEED51E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld */,
+				A61AEEC91E40978F00EDB53B /* Supporting Files */,
+			);
+			path = "Jack Sparrot";
+			sourceTree = "<group>";
+		};
+		A61AEEC91E40978F00EDB53B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A61AEECA1E40978F00EDB53B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A61AEEE51E40978F00EDB53B /* Jack SparrotTests */ = {
+			isa = PBXGroup;
+			children = (
+				A61AEEE61E40978F00EDB53B /* Jack_SparrotTests.m */,
+				A61AEEE81E40978F00EDB53B /* Info.plist */,
+			);
+			path = "Jack SparrotTests";
+			sourceTree = "<group>";
+		};
+		A61AEEF01E40978F00EDB53B /* Jack SparrotUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A61AEEF11E40978F00EDB53B /* Jack_SparrotUITests.m */,
+				A61AEEF31E40978F00EDB53B /* Info.plist */,
+			);
+			path = "Jack SparrotUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A61AEEC51E40978F00EDB53B /* Jack Sparrot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A61AEEF61E40978F00EDB53B /* Build configuration list for PBXNativeTarget "Jack Sparrot" */;
+			buildPhases = (
+				A61AEEC21E40978F00EDB53B /* Sources */,
+				A61AEEC31E40978F00EDB53B /* Frameworks */,
+				A61AEEC41E40978F00EDB53B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Jack Sparrot";
+			productName = "Jack Sparrot";
+			productReference = A61AEEC61E40978F00EDB53B /* Jack Sparrot.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A61AEEE11E40978F00EDB53B /* Jack SparrotTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A61AEEF91E40978F00EDB53B /* Build configuration list for PBXNativeTarget "Jack SparrotTests" */;
+			buildPhases = (
+				A61AEEDE1E40978F00EDB53B /* Sources */,
+				A61AEEDF1E40978F00EDB53B /* Frameworks */,
+				A61AEEE01E40978F00EDB53B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A61AEEE41E40978F00EDB53B /* PBXTargetDependency */,
+			);
+			name = "Jack SparrotTests";
+			productName = "Jack SparrotTests";
+			productReference = A61AEEE21E40978F00EDB53B /* Jack SparrotTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A61AEEEC1E40978F00EDB53B /* Jack SparrotUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A61AEEFC1E40978F00EDB53B /* Build configuration list for PBXNativeTarget "Jack SparrotUITests" */;
+			buildPhases = (
+				A61AEEE91E40978F00EDB53B /* Sources */,
+				A61AEEEA1E40978F00EDB53B /* Frameworks */,
+				A61AEEEB1E40978F00EDB53B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A61AEEEF1E40978F00EDB53B /* PBXTargetDependency */,
+			);
+			name = "Jack SparrotUITests";
+			productName = "Jack SparrotUITests";
+			productReference = A61AEEED1E40978F00EDB53B /* Jack SparrotUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A61AEEBE1E40978F00EDB53B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				TargetAttributes = {
+					A61AEEC51E40978F00EDB53B = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					A61AEEE11E40978F00EDB53B = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A61AEEC51E40978F00EDB53B;
+					};
+					A61AEEEC1E40978F00EDB53B = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A61AEEC51E40978F00EDB53B;
+					};
+				};
+			};
+			buildConfigurationList = A61AEEC11E40978F00EDB53B /* Build configuration list for PBXProject "Jack Sparrot" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A61AEEBD1E40978F00EDB53B;
+			productRefGroup = A61AEEC71E40978F00EDB53B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A61AEEC51E40978F00EDB53B /* Jack Sparrot */,
+				A61AEEE11E40978F00EDB53B /* Jack SparrotTests */,
+				A61AEEEC1E40978F00EDB53B /* Jack SparrotUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A61AEEC41E40978F00EDB53B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A61AEEDC1E40978F00EDB53B /* LaunchScreen.storyboard in Resources */,
+				A61AEED91E40978F00EDB53B /* Assets.xcassets in Resources */,
+				A61AEED41E40978F00EDB53B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A61AEEE01E40978F00EDB53B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A61AEEEB1E40978F00EDB53B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A61AEEC21E40978F00EDB53B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A61AEED71E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld in Sources */,
+				A61AEED11E40978F00EDB53B /* ViewController.m in Sources */,
+				A61AEECE1E40978F00EDB53B /* AppDelegate.m in Sources */,
+				A61AEECB1E40978F00EDB53B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A61AEEDE1E40978F00EDB53B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A61AEEE71E40978F00EDB53B /* Jack_SparrotTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A61AEEE91E40978F00EDB53B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A61AEEF21E40978F00EDB53B /* Jack_SparrotUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A61AEEE41E40978F00EDB53B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A61AEEC51E40978F00EDB53B /* Jack Sparrot */;
+			targetProxy = A61AEEE31E40978F00EDB53B /* PBXContainerItemProxy */;
+		};
+		A61AEEEF1E40978F00EDB53B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A61AEEC51E40978F00EDB53B /* Jack Sparrot */;
+			targetProxy = A61AEEEE1E40978F00EDB53B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A61AEED21E40978F00EDB53B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A61AEED31E40978F00EDB53B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A61AEEDA1E40978F00EDB53B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A61AEEDB1E40978F00EDB53B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A61AEEF41E40978F00EDB53B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A61AEEF51E40978F00EDB53B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A61AEEF71E40978F00EDB53B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Jack Sparrot/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A61AEEF81E40978F00EDB53B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Jack Sparrot/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A61AEEFA1E40978F00EDB53B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Jack SparrotTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-SparrotTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Jack Sparrot.app/Jack Sparrot";
+			};
+			name = Debug;
+		};
+		A61AEEFB1E40978F00EDB53B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Jack SparrotTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-SparrotTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Jack Sparrot.app/Jack Sparrot";
+			};
+			name = Release;
+		};
+		A61AEEFD1E40978F00EDB53B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Jack SparrotUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-SparrotUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Jack Sparrot";
+			};
+			name = Debug;
+		};
+		A61AEEFE1E40978F00EDB53B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Jack SparrotUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-SparrotUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Jack Sparrot";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A61AEEC11E40978F00EDB53B /* Build configuration list for PBXProject "Jack Sparrot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A61AEEF41E40978F00EDB53B /* Debug */,
+				A61AEEF51E40978F00EDB53B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A61AEEF61E40978F00EDB53B /* Build configuration list for PBXNativeTarget "Jack Sparrot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A61AEEF71E40978F00EDB53B /* Debug */,
+				A61AEEF81E40978F00EDB53B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A61AEEF91E40978F00EDB53B /* Build configuration list for PBXNativeTarget "Jack SparrotTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A61AEEFA1E40978F00EDB53B /* Debug */,
+				A61AEEFB1E40978F00EDB53B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A61AEEFC1E40978F00EDB53B /* Build configuration list for PBXNativeTarget "Jack SparrotUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A61AEEFD1E40978F00EDB53B /* Debug */,
+				A61AEEFE1E40978F00EDB53B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A61AEED51E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A61AEED61E40978F00EDB53B /* Jack_Sparrot.xcdatamodel */,
+			);
+			currentVersion = A61AEED61E40978F00EDB53B /* Jack_Sparrot.xcdatamodel */;
+			path = Jack_Sparrot.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = A61AEEBE1E40978F00EDB53B /* Project object */;
+}
