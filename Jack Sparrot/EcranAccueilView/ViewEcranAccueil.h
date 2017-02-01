@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface EcranAccueil : UIView
+@interface ViewEcranAccueil : UIView
 
 @property (readonly,nonatomic,retain) UIImageView *imgLogo;
 @property (readonly,nonatomic,retain) UIButton *btnDrone;

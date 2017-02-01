@@ -8,15 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		A61AEECE1E40978F00EDB53B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEECD1E40978F00EDB53B /* AppDelegate.m */; };
-		A61AEED11E40978F00EDB53B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEED01E40978F00EDB53B /* ViewController.m */; };
+		A61AEED11E40978F00EDB53B /* ViewControllerAcceuil.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEED01E40978F00EDB53B /* ViewControllerAcceuil.m */; };
 		A61AEED71E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A61AEED51E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld */; };
 		A61AEED91E40978F00EDB53B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A61AEED81E40978F00EDB53B /* Assets.xcassets */; };
 		A61AEEDC1E40978F00EDB53B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61AEEDA1E40978F00EDB53B /* LaunchScreen.storyboard */; };
 		A61AEEE71E40978F00EDB53B /* Jack_SparrotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEEE61E40978F00EDB53B /* Jack_SparrotTests.m */; };
 		A61AEEF21E40978F00EDB53B /* Jack_SparrotUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEEF11E40978F00EDB53B /* Jack_SparrotUITests.m */; };
-		A61AEF011E409EEC00EDB53B /* EcranAccueil.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEF001E409EEC00EDB53B /* EcranAccueil.m */; };
-		A6D1EE211E40FD91006947B8 /* ControlerDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D1EE1D1E40FD91006947B8 /* ControlerDrone.m */; };
-		A6D1EE221E40FD91006947B8 /* ControlerDroneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D1EE1F1E40FD91006947B8 /* ControlerDroneViewController.m */; };
+		A61AEF011E409EEC00EDB53B /* ViewEcranAccueil.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */; };
 		A6EC7A6F1E40A4E00075039E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EC7A6E1E40A4E00075039E /* main.m */; };
 		A6EC7A721E40A54D0075039E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6EC7A701E40A54D0075039E /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -42,8 +40,8 @@
 		A61AEEC61E40978F00EDB53B /* Jack Sparrot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jack Sparrot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A61AEECC1E40978F00EDB53B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A61AEECD1E40978F00EDB53B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A61AEECF1E40978F00EDB53B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A61AEED01E40978F00EDB53B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A61AEECF1E40978F00EDB53B /* ViewControllerAcceuil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewControllerAcceuil.h; sourceTree = "<group>"; };
+		A61AEED01E40978F00EDB53B /* ViewControllerAcceuil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewControllerAcceuil.m; sourceTree = "<group>"; };
 		A61AEED61E40978F00EDB53B /* Jack_Sparrot.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Jack_Sparrot.xcdatamodel; sourceTree = "<group>"; };
 		A61AEED81E40978F00EDB53B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A61AEEDB1E40978F00EDB53B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,12 +52,8 @@
 		A61AEEED1E40978F00EDB53B /* Jack SparrotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Jack SparrotUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A61AEEF11E40978F00EDB53B /* Jack_SparrotUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Jack_SparrotUITests.m; sourceTree = "<group>"; };
 		A61AEEF31E40978F00EDB53B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A61AEEFF1E409ED800EDB53B /* EcranAccueil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EcranAccueil.h; path = EcranAccueilView/EcranAccueil.h; sourceTree = "<group>"; };
-		A61AEF001E409EEC00EDB53B /* EcranAccueil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EcranAccueil.m; path = EcranAccueilView/EcranAccueil.m; sourceTree = "<group>"; };
-		A6D1EE1D1E40FD91006947B8 /* ControlerDrone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControlerDrone.m; path = ControlerDrone/ControlerDrone.m; sourceTree = "<group>"; };
-		A6D1EE1E1E40FD91006947B8 /* ControlerDroneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlerDroneViewController.h; path = ControlerDrone/ControlerDroneViewController.h; sourceTree = "<group>"; };
-		A6D1EE1F1E40FD91006947B8 /* ControlerDroneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControlerDroneViewController.m; path = ControlerDrone/ControlerDroneViewController.m; sourceTree = "<group>"; };
-		A6D1EE201E40FD91006947B8 /* ControlerDrone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlerDrone.h; path = ControlerDrone/ControlerDrone.h; sourceTree = "<group>"; };
+		A61AEEFF1E409ED800EDB53B /* ViewEcranAccueil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewEcranAccueil.h; path = EcranAccueilView/ViewEcranAccueil.h; sourceTree = "<group>"; };
+		A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewEcranAccueil.m; path = EcranAccueilView/ViewEcranAccueil.m; sourceTree = "<group>"; };
 		A6EC7A6E1E40A4E00075039E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EcranAccueilView/main.m; sourceTree = "<group>"; };
 		A6EC7A711E40A54D0075039E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Jack Sparrot/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,7 +107,6 @@
 		A61AEEC81E40978F00EDB53B /* Jack Sparrot */ = {
 			isa = PBXGroup;
 			children = (
-				A6D1EE0C1E40FCFD006947B8 /* ControlerDroneView */,
 				A61AEECC1E40978F00EDB53B /* AppDelegate.h */,
 				A61AEECD1E40978F00EDB53B /* AppDelegate.m */,
 				A61AEED81E40978F00EDB53B /* Assets.xcassets */,
@@ -128,11 +121,11 @@
 		A61AEEC91E40978F00EDB53B /* EcranAccueilView */ = {
 			isa = PBXGroup;
 			children = (
-				A61AEECF1E40978F00EDB53B /* ViewController.h */,
-				A61AEED01E40978F00EDB53B /* ViewController.m */,
+				A61AEECF1E40978F00EDB53B /* ViewControllerAcceuil.h */,
+				A61AEED01E40978F00EDB53B /* ViewControllerAcceuil.m */,
 				A6EC7A6E1E40A4E00075039E /* main.m */,
-				A61AEEFF1E409ED800EDB53B /* EcranAccueil.h */,
-				A61AEF001E409EEC00EDB53B /* EcranAccueil.m */,
+				A61AEEFF1E409ED800EDB53B /* ViewEcranAccueil.h */,
+				A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */,
 			);
 			name = EcranAccueilView;
 			sourceTree = "<group>";
@@ -153,17 +146,6 @@
 				A61AEEF31E40978F00EDB53B /* Info.plist */,
 			);
 			path = "Jack SparrotUITests";
-			sourceTree = "<group>";
-		};
-		A6D1EE0C1E40FCFD006947B8 /* ControlerDroneView */ = {
-			isa = PBXGroup;
-			children = (
-				A6D1EE1D1E40FD91006947B8 /* ControlerDrone.m */,
-				A6D1EE1E1E40FD91006947B8 /* ControlerDroneViewController.h */,
-				A6D1EE1F1E40FD91006947B8 /* ControlerDroneViewController.m */,
-				A6D1EE201E40FD91006947B8 /* ControlerDrone.h */,
-			);
-			name = ControlerDroneView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,13 +280,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6D1EE221E40FD91006947B8 /* ControlerDroneViewController.m in Sources */,
 				A6EC7A6F1E40A4E00075039E /* main.m in Sources */,
 				A61AEED71E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld in Sources */,
-				A6D1EE211E40FD91006947B8 /* ControlerDrone.m in Sources */,
-				A61AEED11E40978F00EDB53B /* ViewController.m in Sources */,
+				A61AEED11E40978F00EDB53B /* ViewControllerAcceuil.m in Sources */,
 				A61AEECE1E40978F00EDB53B /* AppDelegate.m in Sources */,
-				A61AEF011E409EEC00EDB53B /* EcranAccueil.m in Sources */,
+				A61AEF011E409EEC00EDB53B /* ViewEcranAccueil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

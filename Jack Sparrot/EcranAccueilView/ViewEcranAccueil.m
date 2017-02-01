@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "EcranAccueil.h"
-#import "ControlerDroneViewController.h"
+#import "ViewEcranAccueil.h"
 
-@implementation EcranAccueil
+
+@implementation ViewEcranAccueil
 
 
 CGFloat tailleIcones;
@@ -24,15 +24,21 @@ UIDevice *myDevice;
         myDevice = [UIDevice currentDevice];
         
         _imgLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ParrotUniversal"]];
-        _btnDrone = [UIButton buttonWithType:UIButtonTypeSystem];
+        
         [_btnDrone setTitle:@"Contrôler drone" forState:UIControlStateNormal];
-        [_btnDrone setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-        _btnChore = [UIButton buttonWithType:UIButtonTypeSystem];
         [_btnChore setTitle:@"Chorégraphier drone" forState:UIControlStateNormal];
-        [_btnChore setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-        _btnOptions  = [UIButton buttonWithType:UIButtonTypeSystem];
         [_btnOptions setTitle:@"Options" forState:UIControlStateNormal];
+        
+        
+        [_btnDrone setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_btnOptions setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        [_btnChore setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        
+        
+        _btnDrone = [UIButton buttonWithType:UIButtonTypeSystem];
+        _btnOptions  = [UIButton buttonWithType:UIButtonTypeSystem];
+        _btnChore = [UIButton buttonWithType:UIButtonTypeSystem];
+       
         
         [[_btnDrone layer] setBorderWidth:1.0f];
         [[_btnDrone layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
@@ -162,13 +168,14 @@ UIDevice *myDevice;
 }
 
 -(void) goToDroneControl{
-    printf("TOTO");
-    UIViewController *myVC = [[ControlerDroneViewController alloc]init];
-    UINavigationController *myNVC = [[UINavigationController alloc ] initWithRootViewController:myVC ];
-    UIView *viewCtrlDrone = [[UIView alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [viewCtrlDrone addSubview:[myNVC view]];
     
-    [self setMaskView:viewCtrlDrone];
+}
+
+-(void) goToDroneChorégraphie{
+    
+}
+
+-(void) goToDroneOptions{
     
 }
 

@@ -6,24 +6,26 @@
 //
 //
 
-#import "ControlerDroneViewController.h"
-#import "ControlerDrone.h"
+#import "ViewControllerAcceuil.h"
+#import "ViewEcranAccueil.h"
 
-@interface ControlerDroneViewController ()
+@interface ViewController()
 
 @end
 
-ControlerDrone *controlerDrone;
+ViewEcranAccueil *ecranAccueil;
 
-@implementation ControlerDroneViewController
+@implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    controlerDrone = [[ControlerDrone alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [controlerDrone setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
+    ecranAccueil = [[ViewEcranAccueil alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ecranAccueil setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [self setView: controlerDrone];
+    [self setView: ecranAccueil];
+    self.title = @"Accueil";
+    
 }
 
 
@@ -34,6 +36,7 @@ ControlerDrone *controlerDrone;
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
 }
+
 
 
 @end
