@@ -24,7 +24,6 @@ ViewEcranAccueil *ecranAccueil;
     [ecranAccueil setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setView: ecranAccueil];
-    self.title = @"Accueil";
     
 }
 

@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
-{
-UIButton *navButton;
-}
 
 @end
 

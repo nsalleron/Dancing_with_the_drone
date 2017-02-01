@@ -25,20 +25,17 @@ UIDevice *myDevice;
         
         _imgLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ParrotUniversal"]];
         
-        [_btnDrone setTitle:@"Contrôler drone" forState:UIControlStateNormal];
-        [_btnChore setTitle:@"Chorégraphier drone" forState:UIControlStateNormal];
-        [_btnOptions setTitle:@"Options" forState:UIControlStateNormal];
-        
+        _btnDrone = [UIButton buttonWithType:UIButtonTypeSystem];
+        _btnOptions  = [UIButton buttonWithType:UIButtonTypeSystem];
+        _btnChore = [UIButton buttonWithType:UIButtonTypeSystem];
         
         [_btnDrone setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_btnOptions setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_btnChore setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         
-        
-        _btnDrone = [UIButton buttonWithType:UIButtonTypeSystem];
-        _btnOptions  = [UIButton buttonWithType:UIButtonTypeSystem];
-        _btnChore = [UIButton buttonWithType:UIButtonTypeSystem];
-       
+        [_btnDrone setTitle:@"Contrôler drone" forState:UIControlStateNormal];
+        [_btnChore setTitle:@"Chorégraphier drone" forState:UIControlStateNormal];
+        [_btnOptions setTitle:@"Options" forState:UIControlStateNormal];
         
         [[_btnDrone layer] setBorderWidth:1.0f];
         [[_btnDrone layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
