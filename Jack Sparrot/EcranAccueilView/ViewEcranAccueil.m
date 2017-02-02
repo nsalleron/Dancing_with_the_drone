@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ViewEcranAccueil.h"
+#import "ViewControllerAcceuil.h"
 
 
 @implementation ViewEcranAccueil
@@ -15,6 +16,7 @@
 
 CGFloat tailleIcones;
 UIDevice *myDevice;
+UINavigationController *myVC;
 
 
 - (id) initWithFrame:(CGRect)frame{
@@ -76,11 +78,20 @@ UIDevice *myDevice;
         [self addSubview:_labelBatteryDrone];
         [self addSubview:_labelBatterySmartphone];
         
+        [_btnDrone addTarget:self.superview action:@selector(goToDroneControl:) forControlEvents:UIControlEventTouchUpInside];
         
         
-        [self updateView:frame.size];
+        [self setNeedsDisplay];
     }
     return self;
+}
+
+- (void)setNavigationController:(UINavigationController*) nv{
+    if (nv != nil) {
+        myVC = nv;
+    }else{
+        printf("NULL Inside view\n");
+    }
 }
 
 - (void)updateView:(CGSize)format{
@@ -158,22 +169,9 @@ UIDevice *myDevice;
                                               tailleIcones/2)];
         [_labelVersionApp setTextAlignment:NSTextAlignmentRight];
         
-        [_btnDrone addTarget:self action:@selector(goToDroneControl) forControlEvents:UIControlEventTouchUpInside];
-     
+        
         
     }
-}
-
--(void) goToDroneControl{
-    
-}
-
--(void) goToDroneChorégraphie{
-    
-}
-
--(void) goToDroneOptions{
-    
 }
 
 -(void) drawRect:(CGRect)rect{

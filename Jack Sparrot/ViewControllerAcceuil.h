@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewControllerAccueil : UIViewController
+
+@property (readonly,nonatomic,retain) UIButton *btnDrone;
+@property (readonly,nonatomic,retain) UIButton *btnChore;
+@property (readonly,nonatomic,retain) UIButton *btnOptions;
+
+- (void) setNavigationController:(UINavigationController*) nv;
+- (void) goToDroneControl:(UIButton*)send;
 
 @end
 

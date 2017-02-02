@@ -23,6 +23,8 @@
 
 - (void) updateView:(CGSize) format;
 
+- (void) setNavigationController:(UINavigationController*) nv;
+
 @end
 
 #endif

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "ViewControllerAcceuil.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
