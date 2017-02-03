@@ -14,7 +14,6 @@
 @property (readonly,nonatomic,retain) UIButton *btnChore;
 @property (readonly,nonatomic,retain) UIButton *btnOptions;
 
-- (void) setNavigationController:(UINavigationController*) nv;
 - (void) goToDroneControl:(UIButton*)send;
 
 @end

@@ -15,7 +15,6 @@
 		A61AEEE71E40978F00EDB53B /* Jack_SparrotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEEE61E40978F00EDB53B /* Jack_SparrotTests.m */; };
 		A61AEEF21E40978F00EDB53B /* Jack_SparrotUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEEF11E40978F00EDB53B /* Jack_SparrotUITests.m */; };
 		A61AEF011E409EEC00EDB53B /* ViewEcranAccueil.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */; };
-		A67EC1711E43215D00F08072 /* ViewControllerNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1701E43215D00F08072 /* ViewControllerNavigationController.m */; };
 		A67EC1751E4333AA00F08072 /* ViewControllerDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1741E4333AA00F08072 /* ViewControllerDrone.m */; };
 		A67EC1791E4333E500F08072 /* ViewDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1781E4333E500F08072 /* ViewDrone.m */; };
 		A6EC7A6F1E40A4E00075039E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EC7A6E1E40A4E00075039E /* main.m */; };
@@ -57,8 +56,6 @@
 		A61AEEF31E40978F00EDB53B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A61AEEFF1E409ED800EDB53B /* ViewEcranAccueil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewEcranAccueil.h; path = EcranAccueilView/ViewEcranAccueil.h; sourceTree = "<group>"; };
 		A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewEcranAccueil.m; path = EcranAccueilView/ViewEcranAccueil.m; sourceTree = "<group>"; };
-		A67EC1701E43215D00F08072 /* ViewControllerNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerNavigationController.m; sourceTree = "<group>"; };
-		A67EC1721E43217300F08072 /* ViewControllerNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewControllerNavigationController.h; sourceTree = "<group>"; };
 		A67EC1731E4333AA00F08072 /* ViewControllerDrone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerDrone.h; path = ControlerDroneView/ViewControllerDrone.h; sourceTree = "<group>"; };
 		A67EC1741E4333AA00F08072 /* ViewControllerDrone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerDrone.m; path = ControlerDroneView/ViewControllerDrone.m; sourceTree = "<group>"; };
 		A67EC1771E4333E500F08072 /* ViewDrone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewDrone.h; path = ControlerDroneView/ViewDrone.h; sourceTree = "<group>"; };
@@ -123,8 +120,6 @@
 				A61AEEDD1E40978F00EDB53B /* Info.plist */,
 				A61AEED51E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld */,
 				A61AEEC91E40978F00EDB53B /* EcranAccueilView */,
-				A67EC1701E43215D00F08072 /* ViewControllerNavigationController.m */,
-				A67EC1721E43217300F08072 /* ViewControllerNavigationController.h */,
 				A67EC1761E4333BF00F08072 /* EcranDroneView */,
 			);
 			path = "Jack Sparrot";
@@ -307,7 +302,6 @@
 				A67EC1791E4333E500F08072 /* ViewDrone.m in Sources */,
 				A6EC7A6F1E40A4E00075039E /* main.m in Sources */,
 				A61AEED71E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld in Sources */,
-				A67EC1711E43215D00F08072 /* ViewControllerNavigationController.m in Sources */,
 				A61AEED11E40978F00EDB53B /* ViewControllerAcceuil.m in Sources */,
 				A61AEECE1E40978F00EDB53B /* AppDelegate.m in Sources */,
 				A61AEF011E409EEC00EDB53B /* ViewEcranAccueil.m in Sources */,
