@@ -15,8 +15,14 @@
 		A61AEEE71E40978F00EDB53B /* Jack_SparrotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEEE61E40978F00EDB53B /* Jack_SparrotTests.m */; };
 		A61AEEF21E40978F00EDB53B /* Jack_SparrotUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEEF11E40978F00EDB53B /* Jack_SparrotUITests.m */; };
 		A61AEF011E409EEC00EDB53B /* ViewEcranAccueil.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */; };
+		A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */; };
+		A6565EDB1E49C9AB00CC7621 /* ViewControllerDrone.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6565EDA1E49C9AB00CC7621 /* ViewControllerDrone.xib */; };
+		A6565EDF1E4A0D8D00CC7621 /* ViewControllerImitation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565EDE1E4A0D8D00CC7621 /* ViewControllerImitation.m */; };
+		A6565EE31E4A0DBE00CC7621 /* ViewImitation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565EE21E4A0DBE00CC7621 /* ViewImitation.m */; };
+		A6565EE61E4A0DF000CC7621 /* ViewControllerChoregraphie.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565EE51E4A0DF000CC7621 /* ViewControllerChoregraphie.m */; };
+		A6565EEA1E4A0E1500CC7621 /* ViewEcranChoregraphie.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565EE91E4A0E1500CC7621 /* ViewEcranChoregraphie.m */; };
 		A67EC1751E4333AA00F08072 /* ViewControllerDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1741E4333AA00F08072 /* ViewControllerDrone.m */; };
-		A67EC1791E4333E500F08072 /* ViewDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1781E4333E500F08072 /* ViewDrone.m */; };
+		A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1781E4333E500F08072 /* ViewManuel.m */; };
 		A6EC7A6F1E40A4E00075039E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EC7A6E1E40A4E00075039E /* main.m */; };
 		A6EC7A721E40A54D0075039E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6EC7A701E40A54D0075039E /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -56,10 +62,21 @@
 		A61AEEF31E40978F00EDB53B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A61AEEFF1E409ED800EDB53B /* ViewEcranAccueil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewEcranAccueil.h; path = EcranAccueilView/ViewEcranAccueil.h; sourceTree = "<group>"; };
 		A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewEcranAccueil.m; path = EcranAccueilView/ViewEcranAccueil.m; sourceTree = "<group>"; };
+		A6565ED31E49C1E900CC7621 /* ViewControllerManuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerManuel.h; path = ChildViewController/ViewControllerManuel.h; sourceTree = "<group>"; };
+		A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerManuel.m; path = ChildViewController/ViewControllerManuel.m; sourceTree = "<group>"; };
+		A6565EDA1E49C9AB00CC7621 /* ViewControllerDrone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewControllerDrone.xib; sourceTree = "<group>"; };
+		A6565EDD1E4A0D8D00CC7621 /* ViewControllerImitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerImitation.h; path = EcranImitationView/ViewControllerImitation.h; sourceTree = "<group>"; };
+		A6565EDE1E4A0D8D00CC7621 /* ViewControllerImitation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerImitation.m; path = EcranImitationView/ViewControllerImitation.m; sourceTree = "<group>"; };
+		A6565EE11E4A0DBE00CC7621 /* ViewImitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewImitation.h; path = EcranImitationView/ViewImitation.h; sourceTree = "<group>"; };
+		A6565EE21E4A0DBE00CC7621 /* ViewImitation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewImitation.m; path = EcranImitationView/ViewImitation.m; sourceTree = "<group>"; };
+		A6565EE41E4A0DF000CC7621 /* ViewControllerChoregraphie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerChoregraphie.h; path = EcranChoregraphieView/ViewControllerChoregraphie.h; sourceTree = "<group>"; };
+		A6565EE51E4A0DF000CC7621 /* ViewControllerChoregraphie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerChoregraphie.m; path = EcranChoregraphieView/ViewControllerChoregraphie.m; sourceTree = "<group>"; };
+		A6565EE81E4A0E1500CC7621 /* ViewEcranChoregraphie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewEcranChoregraphie.h; path = EcranChoregraphieView/ViewEcranChoregraphie.h; sourceTree = "<group>"; };
+		A6565EE91E4A0E1500CC7621 /* ViewEcranChoregraphie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewEcranChoregraphie.m; path = EcranChoregraphieView/ViewEcranChoregraphie.m; sourceTree = "<group>"; };
 		A67EC1731E4333AA00F08072 /* ViewControllerDrone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerDrone.h; path = ControlerDroneView/ViewControllerDrone.h; sourceTree = "<group>"; };
 		A67EC1741E4333AA00F08072 /* ViewControllerDrone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerDrone.m; path = ControlerDroneView/ViewControllerDrone.m; sourceTree = "<group>"; };
-		A67EC1771E4333E500F08072 /* ViewDrone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewDrone.h; path = ControlerDroneView/ViewDrone.h; sourceTree = "<group>"; };
-		A67EC1781E4333E500F08072 /* ViewDrone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewDrone.m; path = ControlerDroneView/ViewDrone.m; sourceTree = "<group>"; };
+		A67EC1771E4333E500F08072 /* ViewManuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewManuel.h; path = ControlerDroneView/ViewManuel.h; sourceTree = "<group>"; };
+		A67EC1781E4333E500F08072 /* ViewManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewManuel.m; path = ControlerDroneView/ViewManuel.m; sourceTree = "<group>"; };
 		A6EC7A6E1E40A4E00075039E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EcranAccueilView/main.m; sourceTree = "<group>"; };
 		A6EC7A711E40A54D0075039E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Jack Sparrot/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,13 +172,56 @@
 			path = "Jack SparrotUITests";
 			sourceTree = "<group>";
 		};
+		A6565EDC1E49CA0B00CC7621 /* ViewManuel */ = {
+			isa = PBXGroup;
+			children = (
+				A67EC1771E4333E500F08072 /* ViewManuel.h */,
+				A67EC1781E4333E500F08072 /* ViewManuel.m */,
+				A6565ED31E49C1E900CC7621 /* ViewControllerManuel.h */,
+				A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */,
+			);
+			name = ViewManuel;
+			sourceTree = "<group>";
+		};
+		A6565EE01E4A0D9600CC7621 /* ViewImitation */ = {
+			isa = PBXGroup;
+			children = (
+				A6565EDD1E4A0D8D00CC7621 /* ViewControllerImitation.h */,
+				A6565EDE1E4A0D8D00CC7621 /* ViewControllerImitation.m */,
+				A6565EE11E4A0DBE00CC7621 /* ViewImitation.h */,
+				A6565EE21E4A0DBE00CC7621 /* ViewImitation.m */,
+			);
+			name = ViewImitation;
+			sourceTree = "<group>";
+		};
+		A6565EE71E4A0DF700CC7621 /* ViewChorégraphie */ = {
+			isa = PBXGroup;
+			children = (
+				A6565EE41E4A0DF000CC7621 /* ViewControllerChoregraphie.h */,
+				A6565EE51E4A0DF000CC7621 /* ViewControllerChoregraphie.m */,
+				A6565EE81E4A0E1500CC7621 /* ViewEcranChoregraphie.h */,
+				A6565EE91E4A0E1500CC7621 /* ViewEcranChoregraphie.m */,
+			);
+			name = "ViewChorégraphie";
+			sourceTree = "<group>";
+		};
+		A6565EEB1E4A0E2800CC7621 /* ViewControllerEcranDrone */ = {
+			isa = PBXGroup;
+			children = (
+				A6565EDA1E49C9AB00CC7621 /* ViewControllerDrone.xib */,
+				A67EC1731E4333AA00F08072 /* ViewControllerDrone.h */,
+				A67EC1741E4333AA00F08072 /* ViewControllerDrone.m */,
+			);
+			name = ViewControllerEcranDrone;
+			sourceTree = "<group>";
+		};
 		A67EC1761E4333BF00F08072 /* EcranDroneView */ = {
 			isa = PBXGroup;
 			children = (
-				A67EC1731E4333AA00F08072 /* ViewControllerDrone.h */,
-				A67EC1741E4333AA00F08072 /* ViewControllerDrone.m */,
-				A67EC1771E4333E500F08072 /* ViewDrone.h */,
-				A67EC1781E4333E500F08072 /* ViewDrone.m */,
+				A6565EEB1E4A0E2800CC7621 /* ViewControllerEcranDrone */,
+				A6565EE01E4A0D9600CC7621 /* ViewImitation */,
+				A6565EDC1E49CA0B00CC7621 /* ViewManuel */,
+				A6565EE71E4A0DF700CC7621 /* ViewChorégraphie */,
 			);
 			name = EcranDroneView;
 			sourceTree = "<group>";
@@ -274,6 +334,7 @@
 				A6EC7A721E40A54D0075039E /* Main.storyboard in Resources */,
 				A61AEEDC1E40978F00EDB53B /* LaunchScreen.storyboard in Resources */,
 				A61AEED91E40978F00EDB53B /* Assets.xcassets in Resources */,
+				A6565EDB1E49C9AB00CC7621 /* ViewControllerDrone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,8 +360,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A67EC1751E4333AA00F08072 /* ViewControllerDrone.m in Sources */,
-				A67EC1791E4333E500F08072 /* ViewDrone.m in Sources */,
+				A6565EE31E4A0DBE00CC7621 /* ViewImitation.m in Sources */,
+				A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */,
 				A6EC7A6F1E40A4E00075039E /* main.m in Sources */,
+				A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */,
+				A6565EE61E4A0DF000CC7621 /* ViewControllerChoregraphie.m in Sources */,
+				A6565EDF1E4A0D8D00CC7621 /* ViewControllerImitation.m in Sources */,
+				A6565EEA1E4A0E1500CC7621 /* ViewEcranChoregraphie.m in Sources */,
 				A61AEED71E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld in Sources */,
 				A61AEED11E40978F00EDB53B /* ViewControllerAcceuil.m in Sources */,
 				A61AEECE1E40978F00EDB53B /* AppDelegate.m in Sources */,

@@ -1,14 +1,14 @@
 //
-//  ViewDrone.m
+//  ViewImitation.m
 //  Jack Sparrot
 //
-//  Created by Nicolas Salleron on 02/02/2017.
+//  Created by Nicolas Salleron on 07/02/2017.
 //
 //
 
-#import "ViewDrone.h"
+#import "ViewImitation.h"
 
-@implementation ViewDrone
+@implementation ViewImitation
 
 /*
 // Only override drawRect: if you perform custom drawing.

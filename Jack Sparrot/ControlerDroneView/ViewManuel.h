@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewDrone : UIView
+@interface ViewManuel : UIView
 
 @end
