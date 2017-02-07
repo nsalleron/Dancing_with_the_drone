@@ -8,12 +8,13 @@
 
 #import "ViewControllerDrone.h"
 #import "ViewControllerManuel.h"
-
-#import "ViewControllerAcceuil.h"
+#import "ViewControllerImitation.h"
+#import "ViewControllerChoregraphie.h"
 
 
 #import "ViewManuel.h"
-#import "ViewEcranAccueil.h"
+#import "ViewImitation.h"
+#import "ViewEcranChoregraphie.h"
 
 
 @interface ViewControllerDrone ()
@@ -38,14 +39,9 @@ UIView *ecranDrone;
     
     //On place les views
     UIViewController *page1 = [self viewControllerAtIndex:0];
-    //UIViewController *page2 = [self viewControllerAtIndex:1];
-    //UIViewController *page3 = [self viewControllerAtIndex:2];
-    
-    
     
     // load the view controllers in our pages array
     NSArray *pages = [[NSArray alloc] initWithObjects:page1, nil];
-    
     
     //NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
    
@@ -57,6 +53,13 @@ UIView *ecranDrone;
     [self addChildViewController:self.pageController];
     [[self view] addSubview:[self.pageController view]];
     [self.pageController didMoveToParentViewController:self];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0];
+    
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor grayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+  
     
     
     
@@ -79,9 +82,7 @@ UIView *ecranDrone;
 */
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
-    
-    NSLog(@"Passage pageViewController");
-    
+
     NSUInteger index = [(ViewControllerManuel *)viewController index];
     
     if (index == 0) {
@@ -136,31 +137,31 @@ UIView *ecranDrone;
             
             [childViewController setView:ecranDrone];
              ((ViewControllerManuel*)childViewController).index = index;
+            
             break;
             
         case 1:
-            childViewController = [[ViewControllerAccueil alloc] init];
+            childViewController = [[ViewControllerImitation alloc] init];
             
-            ecranDrone = [[ViewEcranAccueil alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
+            ecranDrone = [[ViewImitation alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
             [ecranDrone setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
             
             [childViewController setView:ecranDrone];
-            ((ViewControllerAccueil*)childViewController).index = 1;
-            
-            
+            ((ViewControllerImitation*)childViewController).index = 1;
             
             // LE BREAK LAAAA
             break;
             
         case 2:
-            childViewController = [[ViewControllerManuel alloc] init];
+            childViewController = [[ViewControllerChoregraphie alloc] init];
            
-            ecranDrone = [[ViewManuel alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
+            ecranDrone = [[ViewEcranChoregraphie alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
             [ecranDrone setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
             
             [childViewController setView:ecranDrone];
             
-             ((ViewControllerManuel*)childViewController).index = index;
+             ((ViewControllerChoregraphie*)childViewController).index = index;
+           
             break;
         default:
             childViewController = nil;

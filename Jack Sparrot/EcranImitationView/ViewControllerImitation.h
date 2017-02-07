@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewControllerImitation : UIViewController
+@property (assign, nonatomic) NSInteger index;
 
 @end

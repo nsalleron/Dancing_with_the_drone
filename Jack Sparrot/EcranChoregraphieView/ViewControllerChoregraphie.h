@@ -10,4 +10,6 @@
 
 @interface ViewControllerChoregraphie : UIViewController
 
+@property (assign, nonatomic) NSInteger index;
+
 @end
