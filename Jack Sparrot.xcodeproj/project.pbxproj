@@ -16,7 +16,6 @@
 		A61AEEF21E40978F00EDB53B /* Jack_SparrotUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEEF11E40978F00EDB53B /* Jack_SparrotUITests.m */; };
 		A61AEF011E409EEC00EDB53B /* ViewEcranAccueil.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */; };
 		A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */; };
-		A6565EDB1E49C9AB00CC7621 /* ViewControllerDrone.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6565EDA1E49C9AB00CC7621 /* ViewControllerDrone.xib */; };
 		A6565EDF1E4A0D8D00CC7621 /* ViewControllerImitation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565EDE1E4A0D8D00CC7621 /* ViewControllerImitation.m */; };
 		A6565EE31E4A0DBE00CC7621 /* ViewImitation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565EE21E4A0DBE00CC7621 /* ViewImitation.m */; };
 		A6565EE61E4A0DF000CC7621 /* ViewControllerChoregraphie.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565EE51E4A0DF000CC7621 /* ViewControllerChoregraphie.m */; };
@@ -64,7 +63,6 @@
 		A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewEcranAccueil.m; path = EcranAccueilView/ViewEcranAccueil.m; sourceTree = "<group>"; };
 		A6565ED31E49C1E900CC7621 /* ViewControllerManuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerManuel.h; path = ChildViewController/ViewControllerManuel.h; sourceTree = "<group>"; };
 		A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerManuel.m; path = ChildViewController/ViewControllerManuel.m; sourceTree = "<group>"; };
-		A6565EDA1E49C9AB00CC7621 /* ViewControllerDrone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewControllerDrone.xib; sourceTree = "<group>"; };
 		A6565EDD1E4A0D8D00CC7621 /* ViewControllerImitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerImitation.h; path = EcranImitationView/ViewControllerImitation.h; sourceTree = "<group>"; };
 		A6565EDE1E4A0D8D00CC7621 /* ViewControllerImitation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerImitation.m; path = EcranImitationView/ViewControllerImitation.m; sourceTree = "<group>"; };
 		A6565EE11E4A0DBE00CC7621 /* ViewImitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewImitation.h; path = EcranImitationView/ViewImitation.h; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 		A6565EEB1E4A0E2800CC7621 /* ViewControllerEcranDrone */ = {
 			isa = PBXGroup;
 			children = (
-				A6565EDA1E49C9AB00CC7621 /* ViewControllerDrone.xib */,
 				A67EC1731E4333AA00F08072 /* ViewControllerDrone.h */,
 				A67EC1741E4333AA00F08072 /* ViewControllerDrone.m */,
 			);
@@ -334,7 +331,6 @@
 				A6EC7A721E40A54D0075039E /* Main.storyboard in Resources */,
 				A61AEEDC1E40978F00EDB53B /* LaunchScreen.storyboard in Resources */,
 				A61AEED91E40978F00EDB53B /* Assets.xcassets in Resources */,
-				A6565EDB1E49C9AB00CC7621 /* ViewControllerDrone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
