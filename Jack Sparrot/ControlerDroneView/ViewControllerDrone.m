@@ -82,8 +82,19 @@ UIView *ecranDrone;
 */
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
-
-    NSUInteger index = [(ViewControllerManuel *)viewController index];
+    
+    NSUInteger index;
+    if([viewController class] == [ViewControllerManuel class]){
+            index = [(ViewControllerManuel *)viewController index];
+            NSLog(@"Before : Manuel");
+    }else if ([viewController class ] == [ViewControllerImitation class]){
+            index = [(ViewControllerImitation *)viewController index];
+            NSLog(@"Before : Imitation");
+    }else{
+            index = [(ViewControllerChoregraphie *)viewController index];
+            NSLog(@"Before : Chorégraphie");
+    }
+   
     
     if (index == 0) {
         return nil;
@@ -97,9 +108,17 @@ UIView *ecranDrone;
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     
-    NSLog(@"Passage pageViewController2");
-    
-    NSUInteger index = [(ViewControllerManuel *)viewController index];
+    NSUInteger index;
+    if([viewController class] == [ViewControllerManuel class]){
+        NSLog(@"After : Manuel");
+        index = [(ViewControllerManuel *)viewController index];
+    }else if ([viewController class ] == [ViewControllerImitation class]){
+        index = [(ViewControllerImitation *)viewController index];
+        NSLog(@"After : Imitation");
+    }else{
+        index = [(ViewControllerChoregraphie *)viewController index];
+        NSLog(@"After : Chorégraphie");
+    }
     
     index++;
     
@@ -124,8 +143,6 @@ UIView *ecranDrone;
 - (UIViewController *)viewControllerAtIndex:(NSUInteger)index {
     
     UIViewController *childViewController;
-    childViewController = [[ViewControllerManuel alloc] init];
-    
     NSLog(@"Page :  %ld",index);
     
     switch (index) {
@@ -157,7 +174,7 @@ UIView *ecranDrone;
            
             ecranDrone = [[ViewEcranChoregraphie alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
             [ecranDrone setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
-            
+           
             [childViewController setView:ecranDrone];
             
              ((ViewControllerChoregraphie*)childViewController).index = index;

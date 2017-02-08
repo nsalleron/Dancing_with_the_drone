@@ -10,4 +10,7 @@
 
 @interface ViewManuel : UIView
 
+@property (readonly,nonatomic,retain) UILabel *label;
+@property (assign, nonatomic) CGFloat tailleIcones;
+
 @end
