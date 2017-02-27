@@ -16,14 +16,19 @@
 		A61AEEF21E40978F00EDB53B /* Jack_SparrotUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEEF11E40978F00EDB53B /* Jack_SparrotUITests.m */; };
 		A61AEF011E409EEC00EDB53B /* ViewEcranAccueil.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */; };
 		A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */; };
-		A6565EDF1E4A0D8D00CC7621 /* ViewControllerImitation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565EDE1E4A0D8D00CC7621 /* ViewControllerImitation.m */; };
-		A6565EE31E4A0DBE00CC7621 /* ViewImitation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565EE21E4A0DBE00CC7621 /* ViewImitation.m */; };
-		A6565EE61E4A0DF000CC7621 /* ViewControllerChoregraphie.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565EE51E4A0DF000CC7621 /* ViewControllerChoregraphie.m */; };
-		A6565EEA1E4A0E1500CC7621 /* ViewEcranChoregraphie.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565EE91E4A0E1500CC7621 /* ViewEcranChoregraphie.m */; };
-		A67EC1751E4333AA00F08072 /* ViewControllerDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1741E4333AA00F08072 /* ViewControllerDrone.m */; };
 		A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1781E4333E500F08072 /* ViewManuel.m */; };
-		A6EC7A6F1E40A4E00075039E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EC7A6E1E40A4E00075039E /* main.m */; };
+		A6E50DCB1E5E0A9800830EFD /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E50DC91E5E0A9800830EFD /* Interface.storyboard */; };
+		A6E50DCD1E5E0A9800830EFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E50DCC1E5E0A9800830EFD /* Assets.xcassets */; };
+		A6E50DD41E5E0A9800830EFD /* Jack Sparrot Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A6E50DD31E5E0A9800830EFD /* Jack Sparrot Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A6E50DDC1E5E0A9800830EFD /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E50DDB1E5E0A9800830EFD /* InterfaceController.m */; };
+		A6E50DDF1E5E0A9800830EFD /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E50DDE1E5E0A9800830EFD /* ExtensionDelegate.m */; };
+		A6E50DE21E5E0A9800830EFD /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E50DE11E5E0A9800830EFD /* NotificationController.m */; };
+		A6E50DE41E5E0A9800830EFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E50DE31E5E0A9800830EFD /* Assets.xcassets */; };
+		A6E50DE81E5E0A9800830EFD /* Jack Sparrot Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A6E50DC71E5E0A9800830EFD /* Jack Sparrot Watch.app */; };
 		A6EC7A721E40A54D0075039E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6EC7A701E40A54D0075039E /* Main.storyboard */; };
+		A6F6EE661E64EBB10007B54D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE651E64EBB10007B54D /* main.m */; };
+		A6F6EE6A1E64F05B0007B54D /* ViewDimensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE691E64F05B0007B54D /* ViewDimensionViewController.m */; };
+		A6F6EE6D1E64F0760007B54D /* ViewDimension.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE6C1E64F0760007B54D /* ViewDimension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +46,46 @@
 			remoteGlobalIDString = A61AEEC51E40978F00EDB53B;
 			remoteInfo = "Jack Sparrot";
 		};
+		A6E50DD51E5E0A9800830EFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A61AEEBE1E40978F00EDB53B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A6E50DD21E5E0A9800830EFD;
+			remoteInfo = "Jack Sparrot Watch Extension";
+		};
+		A6E50DE61E5E0A9800830EFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A61AEEBE1E40978F00EDB53B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A6E50DC61E5E0A9800830EFD;
+			remoteInfo = "Jack Sparrot Watch";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A6E50DEE1E5E0A9800830EFD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A6E50DD41E5E0A9800830EFD /* Jack Sparrot Watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6E50DF01E5E0A9800830EFD /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				A6E50DE81E5E0A9800830EFD /* Jack Sparrot Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A61AEEC61E40978F00EDB53B /* Jack Sparrot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jack Sparrot.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,20 +107,28 @@
 		A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewEcranAccueil.m; path = EcranAccueilView/ViewEcranAccueil.m; sourceTree = "<group>"; };
 		A6565ED31E49C1E900CC7621 /* ViewControllerManuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerManuel.h; path = ChildViewController/ViewControllerManuel.h; sourceTree = "<group>"; };
 		A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerManuel.m; path = ChildViewController/ViewControllerManuel.m; sourceTree = "<group>"; };
-		A6565EDD1E4A0D8D00CC7621 /* ViewControllerImitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerImitation.h; path = EcranImitationView/ViewControllerImitation.h; sourceTree = "<group>"; };
-		A6565EDE1E4A0D8D00CC7621 /* ViewControllerImitation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerImitation.m; path = EcranImitationView/ViewControllerImitation.m; sourceTree = "<group>"; };
-		A6565EE11E4A0DBE00CC7621 /* ViewImitation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewImitation.h; path = EcranImitationView/ViewImitation.h; sourceTree = "<group>"; };
-		A6565EE21E4A0DBE00CC7621 /* ViewImitation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewImitation.m; path = EcranImitationView/ViewImitation.m; sourceTree = "<group>"; };
-		A6565EE41E4A0DF000CC7621 /* ViewControllerChoregraphie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerChoregraphie.h; path = EcranChoregraphieView/ViewControllerChoregraphie.h; sourceTree = "<group>"; };
-		A6565EE51E4A0DF000CC7621 /* ViewControllerChoregraphie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerChoregraphie.m; path = EcranChoregraphieView/ViewControllerChoregraphie.m; sourceTree = "<group>"; };
-		A6565EE81E4A0E1500CC7621 /* ViewEcranChoregraphie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewEcranChoregraphie.h; path = EcranChoregraphieView/ViewEcranChoregraphie.h; sourceTree = "<group>"; };
-		A6565EE91E4A0E1500CC7621 /* ViewEcranChoregraphie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewEcranChoregraphie.m; path = EcranChoregraphieView/ViewEcranChoregraphie.m; sourceTree = "<group>"; };
-		A67EC1731E4333AA00F08072 /* ViewControllerDrone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerDrone.h; path = ControlerDroneView/ViewControllerDrone.h; sourceTree = "<group>"; };
-		A67EC1741E4333AA00F08072 /* ViewControllerDrone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerDrone.m; path = ControlerDroneView/ViewControllerDrone.m; sourceTree = "<group>"; };
 		A67EC1771E4333E500F08072 /* ViewManuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewManuel.h; path = ControlerDroneView/ViewManuel.h; sourceTree = "<group>"; };
 		A67EC1781E4333E500F08072 /* ViewManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewManuel.m; path = ControlerDroneView/ViewManuel.m; sourceTree = "<group>"; };
-		A6EC7A6E1E40A4E00075039E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EcranAccueilView/main.m; sourceTree = "<group>"; };
+		A6E50DC71E5E0A9800830EFD /* Jack Sparrot Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jack Sparrot Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6E50DCA1E5E0A9800830EFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		A6E50DCC1E5E0A9800830EFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A6E50DCE1E5E0A9800830EFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6E50DD31E5E0A9800830EFD /* Jack Sparrot Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Jack Sparrot Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6E50DD91E5E0A9800830EFD /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		A6E50DDA1E5E0A9800830EFD /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
+		A6E50DDB1E5E0A9800830EFD /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		A6E50DDD1E5E0A9800830EFD /* ExtensionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionDelegate.h; sourceTree = "<group>"; };
+		A6E50DDE1E5E0A9800830EFD /* ExtensionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionDelegate.m; sourceTree = "<group>"; };
+		A6E50DE01E5E0A9800830EFD /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
+		A6E50DE11E5E0A9800830EFD /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
+		A6E50DE31E5E0A9800830EFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A6E50DE51E5E0A9800830EFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6EC7A711E40A54D0075039E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Jack Sparrot/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
+		A6F6EE651E64EBB10007B54D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A6F6EE681E64F05B0007B54D /* ViewDimensionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewDimensionViewController.h; path = EcranDimensionsView/ViewDimensionViewController.h; sourceTree = "<group>"; };
+		A6F6EE691E64F05B0007B54D /* ViewDimensionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewDimensionViewController.m; path = EcranDimensionsView/ViewDimensionViewController.m; sourceTree = "<group>"; };
+		A6F6EE6B1E64F0760007B54D /* ViewDimension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewDimension.h; path = EcranDimensionsView/ViewDimension.h; sourceTree = "<group>"; };
+		A6F6EE6C1E64F0760007B54D /* ViewDimension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewDimension.m; path = EcranDimensionsView/ViewDimension.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +153,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A6E50DD01E5E0A9800830EFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -111,6 +170,8 @@
 				A61AEEC81E40978F00EDB53B /* Jack Sparrot */,
 				A61AEEE51E40978F00EDB53B /* Jack SparrotTests */,
 				A61AEEF01E40978F00EDB53B /* Jack SparrotUITests */,
+				A6E50DC81E5E0A9800830EFD /* Jack Sparrot Watch */,
+				A6E50DD71E5E0A9800830EFD /* Jack Sparrot Watch Extension */,
 				A61AEEC71E40978F00EDB53B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -121,6 +182,8 @@
 				A61AEEC61E40978F00EDB53B /* Jack Sparrot.app */,
 				A61AEEE21E40978F00EDB53B /* Jack SparrotTests.xctest */,
 				A61AEEED1E40978F00EDB53B /* Jack SparrotUITests.xctest */,
+				A6E50DC71E5E0A9800830EFD /* Jack Sparrot Watch.app */,
+				A6E50DD31E5E0A9800830EFD /* Jack Sparrot Watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,9 +206,9 @@
 		A61AEEC91E40978F00EDB53B /* EcranAccueilView */ = {
 			isa = PBXGroup;
 			children = (
+				A6F6EE651E64EBB10007B54D /* main.m */,
 				A61AEECF1E40978F00EDB53B /* ViewControllerAcceuil.h */,
 				A61AEED01E40978F00EDB53B /* ViewControllerAcceuil.m */,
-				A6EC7A6E1E40A4E00075039E /* main.m */,
 				A61AEEFF1E409ED800EDB53B /* ViewEcranAccueil.h */,
 				A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */,
 			);
@@ -170,57 +233,61 @@
 			path = "Jack SparrotUITests";
 			sourceTree = "<group>";
 		};
-		A6565EDC1E49CA0B00CC7621 /* ViewManuel */ = {
+		A67EC1761E4333BF00F08072 /* EcranDroneView */ = {
 			isa = PBXGroup;
 			children = (
+				A6F6EE671E64F0210007B54D /* EcranDimensionsView */,
 				A67EC1771E4333E500F08072 /* ViewManuel.h */,
 				A67EC1781E4333E500F08072 /* ViewManuel.m */,
 				A6565ED31E49C1E900CC7621 /* ViewControllerManuel.h */,
 				A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */,
 			);
-			name = ViewManuel;
-			sourceTree = "<group>";
-		};
-		A6565EE01E4A0D9600CC7621 /* ViewImitation */ = {
-			isa = PBXGroup;
-			children = (
-				A6565EDD1E4A0D8D00CC7621 /* ViewControllerImitation.h */,
-				A6565EDE1E4A0D8D00CC7621 /* ViewControllerImitation.m */,
-				A6565EE11E4A0DBE00CC7621 /* ViewImitation.h */,
-				A6565EE21E4A0DBE00CC7621 /* ViewImitation.m */,
-			);
-			name = ViewImitation;
-			sourceTree = "<group>";
-		};
-		A6565EE71E4A0DF700CC7621 /* ViewChorégraphie */ = {
-			isa = PBXGroup;
-			children = (
-				A6565EE41E4A0DF000CC7621 /* ViewControllerChoregraphie.h */,
-				A6565EE51E4A0DF000CC7621 /* ViewControllerChoregraphie.m */,
-				A6565EE81E4A0E1500CC7621 /* ViewEcranChoregraphie.h */,
-				A6565EE91E4A0E1500CC7621 /* ViewEcranChoregraphie.m */,
-			);
-			name = "ViewChorégraphie";
-			sourceTree = "<group>";
-		};
-		A6565EEB1E4A0E2800CC7621 /* ViewControllerEcranDrone */ = {
-			isa = PBXGroup;
-			children = (
-				A67EC1731E4333AA00F08072 /* ViewControllerDrone.h */,
-				A67EC1741E4333AA00F08072 /* ViewControllerDrone.m */,
-			);
-			name = ViewControllerEcranDrone;
-			sourceTree = "<group>";
-		};
-		A67EC1761E4333BF00F08072 /* EcranDroneView */ = {
-			isa = PBXGroup;
-			children = (
-				A6565EEB1E4A0E2800CC7621 /* ViewControllerEcranDrone */,
-				A6565EE01E4A0D9600CC7621 /* ViewImitation */,
-				A6565EDC1E49CA0B00CC7621 /* ViewManuel */,
-				A6565EE71E4A0DF700CC7621 /* ViewChorégraphie */,
-			);
 			name = EcranDroneView;
+			sourceTree = "<group>";
+		};
+		A6E50DC81E5E0A9800830EFD /* Jack Sparrot Watch */ = {
+			isa = PBXGroup;
+			children = (
+				A6E50DC91E5E0A9800830EFD /* Interface.storyboard */,
+				A6E50DCC1E5E0A9800830EFD /* Assets.xcassets */,
+				A6E50DCE1E5E0A9800830EFD /* Info.plist */,
+			);
+			path = "Jack Sparrot Watch";
+			sourceTree = "<group>";
+		};
+		A6E50DD71E5E0A9800830EFD /* Jack Sparrot Watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A6E50DDA1E5E0A9800830EFD /* InterfaceController.h */,
+				A6E50DDB1E5E0A9800830EFD /* InterfaceController.m */,
+				A6E50DDD1E5E0A9800830EFD /* ExtensionDelegate.h */,
+				A6E50DDE1E5E0A9800830EFD /* ExtensionDelegate.m */,
+				A6E50DE01E5E0A9800830EFD /* NotificationController.h */,
+				A6E50DE11E5E0A9800830EFD /* NotificationController.m */,
+				A6E50DE31E5E0A9800830EFD /* Assets.xcassets */,
+				A6E50DE51E5E0A9800830EFD /* Info.plist */,
+				A6E50DD81E5E0A9800830EFD /* Supporting Files */,
+			);
+			path = "Jack Sparrot Watch Extension";
+			sourceTree = "<group>";
+		};
+		A6E50DD81E5E0A9800830EFD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A6E50DD91E5E0A9800830EFD /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A6F6EE671E64F0210007B54D /* EcranDimensionsView */ = {
+			isa = PBXGroup;
+			children = (
+				A6F6EE681E64F05B0007B54D /* ViewDimensionViewController.h */,
+				A6F6EE691E64F05B0007B54D /* ViewDimensionViewController.m */,
+				A6F6EE6B1E64F0760007B54D /* ViewDimension.h */,
+				A6F6EE6C1E64F0760007B54D /* ViewDimension.m */,
+			);
+			name = EcranDimensionsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,10 +300,12 @@
 				A61AEEC21E40978F00EDB53B /* Sources */,
 				A61AEEC31E40978F00EDB53B /* Frameworks */,
 				A61AEEC41E40978F00EDB53B /* Resources */,
+				A6E50DF01E5E0A9800830EFD /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A6E50DE71E5E0A9800830EFD /* PBXTargetDependency */,
 			);
 			name = "Jack Sparrot";
 			productName = "Jack Sparrot";
@@ -279,6 +348,40 @@
 			productReference = A61AEEED1E40978F00EDB53B /* Jack SparrotUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		A6E50DC61E5E0A9800830EFD /* Jack Sparrot Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6E50DEF1E5E0A9800830EFD /* Build configuration list for PBXNativeTarget "Jack Sparrot Watch" */;
+			buildPhases = (
+				A6E50DC51E5E0A9800830EFD /* Resources */,
+				A6E50DEE1E5E0A9800830EFD /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A6E50DD61E5E0A9800830EFD /* PBXTargetDependency */,
+			);
+			name = "Jack Sparrot Watch";
+			productName = "Jack Sparrot Watch";
+			productReference = A6E50DC71E5E0A9800830EFD /* Jack Sparrot Watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		A6E50DD21E5E0A9800830EFD /* Jack Sparrot Watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A6E50DED1E5E0A9800830EFD /* Build configuration list for PBXNativeTarget "Jack Sparrot Watch Extension" */;
+			buildPhases = (
+				A6E50DCF1E5E0A9800830EFD /* Sources */,
+				A6E50DD01E5E0A9800830EFD /* Frameworks */,
+				A6E50DD11E5E0A9800830EFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Jack Sparrot Watch Extension";
+			productName = "Jack Sparrot Watch Extension";
+			productReference = A6E50DD31E5E0A9800830EFD /* Jack Sparrot Watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -301,6 +404,14 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = A61AEEC51E40978F00EDB53B;
 					};
+					A6E50DC61E5E0A9800830EFD = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					A6E50DD21E5E0A9800830EFD = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = A61AEEC11E40978F00EDB53B /* Build configuration list for PBXProject "Jack Sparrot" */;
@@ -319,6 +430,8 @@
 				A61AEEC51E40978F00EDB53B /* Jack Sparrot */,
 				A61AEEE11E40978F00EDB53B /* Jack SparrotTests */,
 				A61AEEEC1E40978F00EDB53B /* Jack SparrotUITests */,
+				A6E50DC61E5E0A9800830EFD /* Jack Sparrot Watch */,
+				A6E50DD21E5E0A9800830EFD /* Jack Sparrot Watch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -348,6 +461,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A6E50DC51E5E0A9800830EFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6E50DCD1E5E0A9800830EFD /* Assets.xcassets in Resources */,
+				A6E50DCB1E5E0A9800830EFD /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6E50DD11E5E0A9800830EFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6E50DE41E5E0A9800830EFD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -355,17 +485,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A67EC1751E4333AA00F08072 /* ViewControllerDrone.m in Sources */,
-				A6565EE31E4A0DBE00CC7621 /* ViewImitation.m in Sources */,
+				A6F6EE6A1E64F05B0007B54D /* ViewDimensionViewController.m in Sources */,
 				A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */,
-				A6EC7A6F1E40A4E00075039E /* main.m in Sources */,
 				A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */,
-				A6565EE61E4A0DF000CC7621 /* ViewControllerChoregraphie.m in Sources */,
-				A6565EDF1E4A0D8D00CC7621 /* ViewControllerImitation.m in Sources */,
-				A6565EEA1E4A0E1500CC7621 /* ViewEcranChoregraphie.m in Sources */,
 				A61AEED71E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld in Sources */,
 				A61AEED11E40978F00EDB53B /* ViewControllerAcceuil.m in Sources */,
 				A61AEECE1E40978F00EDB53B /* AppDelegate.m in Sources */,
+				A6F6EE661E64EBB10007B54D /* main.m in Sources */,
+				A6F6EE6D1E64F0760007B54D /* ViewDimension.m in Sources */,
 				A61AEF011E409EEC00EDB53B /* ViewEcranAccueil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,6 +513,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A6E50DCF1E5E0A9800830EFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6E50DDF1E5E0A9800830EFD /* ExtensionDelegate.m in Sources */,
+				A6E50DDC1E5E0A9800830EFD /* InterfaceController.m in Sources */,
+				A6E50DE21E5E0A9800830EFD /* NotificationController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -399,6 +536,16 @@
 			target = A61AEEC51E40978F00EDB53B /* Jack Sparrot */;
 			targetProxy = A61AEEEE1E40978F00EDB53B /* PBXContainerItemProxy */;
 		};
+		A6E50DD61E5E0A9800830EFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A6E50DD21E5E0A9800830EFD /* Jack Sparrot Watch Extension */;
+			targetProxy = A6E50DD51E5E0A9800830EFD /* PBXContainerItemProxy */;
+		};
+		A6E50DE71E5E0A9800830EFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A6E50DC61E5E0A9800830EFD /* Jack Sparrot Watch */;
+			targetProxy = A6E50DE61E5E0A9800830EFD /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -408,6 +555,14 @@
 				A61AEEDB1E40978F00EDB53B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A6E50DC91E5E0A9800830EFD /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A6E50DCA1E5E0A9800830EFD /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 		A6EC7A701E40A54D0075039E /* Main.storyboard */ = {
@@ -579,6 +734,66 @@
 			};
 			name = Release;
 		};
+		A6E50DE91E5E0A9800830EFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				IBSC_MODULE = Jack_Sparrot_Watch_Extension;
+				INFOPLIST_FILE = "Jack Sparrot Watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Debug;
+		};
+		A6E50DEA1E5E0A9800830EFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				IBSC_MODULE = Jack_Sparrot_Watch_Extension;
+				INFOPLIST_FILE = "Jack Sparrot Watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Release;
+		};
+		A6E50DEB1E5E0A9800830EFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				INFOPLIST_FILE = "Jack Sparrot Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Debug;
+		};
+		A6E50DEC1E5E0A9800830EFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				INFOPLIST_FILE = "Jack Sparrot Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -614,6 +829,24 @@
 			buildConfigurations = (
 				A61AEEFD1E40978F00EDB53B /* Debug */,
 				A61AEEFE1E40978F00EDB53B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A6E50DED1E5E0A9800830EFD /* Build configuration list for PBXNativeTarget "Jack Sparrot Watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6E50DEB1E5E0A9800830EFD /* Debug */,
+				A6E50DEC1E5E0A9800830EFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A6E50DEF1E5E0A9800830EFD /* Build configuration list for PBXNativeTarget "Jack Sparrot Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A6E50DE91E5E0A9800830EFD /* Debug */,
+				A6E50DEA1E5E0A9800830EFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

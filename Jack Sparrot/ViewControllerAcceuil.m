@@ -7,8 +7,9 @@
 //
 
 #import "ViewControllerAcceuil.h"
+#import "ViewControllerManuel.h"
 #import "ViewEcranAccueil.h"
-#import "ControlerDroneView/ViewControllerDrone.h"
+
 
 @interface ViewControllerAccueil()
 
@@ -43,14 +44,15 @@ ViewEcranAccueil *ecranAccueil;
     [ecranAccueil updateView:size];
 }
 
--(void) goToDroneControl:(UIButton*)send{
-
-    ViewControllerDrone *secondController = [[ViewControllerDrone alloc] init];
-    [self.navigationController pushViewController:secondController animated:YES];
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
 }
 
--(void) goToDroneChorégraphie:(UIButton*)send{
-    
+-(void) goToDroneControl:(UIButton*)send{
+
+    ViewControllerManuel *secondController = [[ViewControllerManuel alloc] init];
+    [self.navigationController pushViewController:secondController animated:YES];
 }
 
 -(void) goToDroneOptions:(UIButton*)send{

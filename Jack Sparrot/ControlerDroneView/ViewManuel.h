@@ -11,11 +11,15 @@
 @interface ViewManuel : UIView
 
 @property (readonly,nonatomic,retain) UILabel *label;
-@property (readonly,nonatomic,retain) UIButton *btnRotateAvant;
-@property (readonly,nonatomic,retain) UIButton *btnRotateArriere;
-@property (readonly,nonatomic,retain) UIButton *btnRotateGauche;
-@property (readonly,nonatomic,retain) UIButton *btnRotateDroit;
+@property (readwrite,nonatomic,retain) UIButton *btnDimensions;
+@property (readonly,nonatomic,retain) UIButton *btnChangementMode;
+@property (readonly,nonatomic,retain) UIButton *btnStatioDecoAttr;
+@property (readonly,nonatomic,retain) UIButton *btnHome;
+
+
 
 @property (assign, nonatomic) CGFloat tailleIcones;
+
+- (void) updateView:(CGSize) format;
 
 @end

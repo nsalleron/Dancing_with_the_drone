@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Jack Sparrot Watch (Notification).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Jack Sparrot Watch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Jack Sparrot.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +33,11 @@
 			<true/>
 		</dict>
 		<key>A61AEEEC1E40978F00EDB53B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A6E50DC61E5E0A9800830EFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

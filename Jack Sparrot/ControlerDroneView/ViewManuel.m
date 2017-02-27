@@ -10,58 +10,57 @@
 
 @implementation ViewManuel
 
+
+
 - (id) initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     
     if(self){
         
-        /* Label */
-        _label = [[UILabel alloc] init];
-        [_label setText:@"Manuel"];
-        [self addSubview:_label];
+        /* Boutons */
+        _btnChangementMode = [[UIButton alloc] init];
+        _btnStatioDecoAttr  = [[UIButton alloc] init];
+        _btnHome  = [[UIButton alloc] init];
+        _btnDimensions = [[UIButton alloc] init];
         
-        _btnRotateAvant = [[UIButton alloc] init];
-        _btnRotateArriere  = [[UIButton alloc] init];
-        _btnRotateGauche  = [[UIButton alloc] init];
-        _btnRotateDroit  = [[UIButton alloc] init];
-        
-        [_btnRotateAvant setTitle:@"btnRtAvant" forState:UIControlStateNormal];
-        [_btnRotateArriere  setTitle:@"btnRtArriere" forState:UIControlStateNormal];
-        [_btnRotateGauche setTitle:@"btnRtGauche" forState:UIControlStateNormal];
-        [_btnRotateDroit  setTitle:@"btnRtDroit" forState:UIControlStateNormal];
-        
-        [_btnRotateAvant setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_btnRotateArriere  setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_btnRotateGauche setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_btnRotateDroit  setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        
-        [[_btnRotateArriere layer] setBorderWidth:1.0f];
-        [[_btnRotateArriere layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
-        [[_btnRotateArriere layer] setCornerRadius:8.0f];
-        [[_btnRotateArriere layer] setBorderWidth:2.0f];
-        
-        [[_btnRotateAvant layer] setBorderWidth:1.0f];
-        [[_btnRotateAvant layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
-        [[_btnRotateAvant layer] setCornerRadius:8.0f];
-        [[_btnRotateAvant layer] setBorderWidth:2.0f];
-        
-        [[_btnRotateGauche layer] setBorderWidth:1.0f];
-        [[_btnRotateGauche layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
-        [[_btnRotateGauche layer] setCornerRadius:8.0f];
-        [[_btnRotateGauche layer] setBorderWidth:2.0f];
-        
-        [[_btnRotateDroit layer] setBorderWidth:1.0f];
-        [[_btnRotateDroit layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
-        [[_btnRotateDroit layer] setCornerRadius:8.0f];
-        [[_btnRotateDroit layer] setBorderWidth:2.0f];
+        [_btnDimensions setTitle:@"1D" forState:UIControlStateNormal];
+        [_btnChangementMode setTitle:@"btnChangementDeMode" forState:UIControlStateNormal];
+        [_btnStatioDecoAttr  setTitle:@"btnStatioDecoAttr" forState:UIControlStateNormal];
+        [_btnHome setTitle:@"btnHome" forState:UIControlStateNormal];
+       
+        [_btnDimensions setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_btnChangementMode setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_btnStatioDecoAttr  setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_btnHome setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
         
-        [self addSubview:_btnRotateAvant];
-        [self addSubview:_btnRotateArriere];
-        [self addSubview:_btnRotateDroit];
-        [self addSubview:_btnRotateGauche];
-        //Exemple de selector
-        //[_btnDrone addTarget:self.superview action:@selector(goToDroneControl:) forControlEvents:UIControlEventTouchUpInside];
+        [[_btnStatioDecoAttr layer] setBorderWidth:1.0f];
+        [[_btnStatioDecoAttr layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnStatioDecoAttr layer] setCornerRadius:8.0f];
+        [[_btnStatioDecoAttr layer] setBorderWidth:2.0f];
+        
+        [[_btnChangementMode layer] setBorderWidth:1.0f];
+        [[_btnChangementMode layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnChangementMode layer] setCornerRadius:8.0f];
+        [[_btnChangementMode layer] setBorderWidth:2.0f];
+        
+        [[_btnHome layer] setBorderWidth:1.0f];
+        [[_btnHome layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnHome layer] setCornerRadius:8.0f];
+        [[_btnHome layer] setBorderWidth:2.0f];
+        
+        [[_btnDimensions layer] setBorderWidth:1.0f];
+        [[_btnDimensions layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnDimensions layer] setCornerRadius:8.0f];
+        [[_btnDimensions layer] setBorderWidth:2.0f];
+        
+        [_btnDimensions addTarget:self.superview action:@selector(goToDimensionChoice:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        [self addSubview:_btnChangementMode];
+        [self addSubview:_btnStatioDecoAttr];
+        [self addSubview:_btnHome];
+        [self addSubview:_btnDimensions];
         
     }
     
@@ -71,27 +70,35 @@
 - (void)updateView:(CGSize)format{
     
     NSLog(@"Width : %f Height : %f ",format.width,format.height);
-    _tailleIcones = format.height/3 - 30;
+    _tailleIcones = format.height/4;
     
     
-    /* Mise en place des labels */
-    [_label setFrame:CGRectMake(0,0,_tailleIcones,_tailleIcones)];
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
+    {
+        /* Mise en place des labels */
+        [_btnDimensions setFrame:CGRectMake(0,0,format.width,32+_tailleIcones/2)];
+        
+        [_btnChangementMode setFrame:CGRectMake(0,32+_tailleIcones/2,format.width, _tailleIcones/2+_tailleIcones+_tailleIcones/2)];
+        
+        [_btnStatioDecoAttr setFrame:CGRectMake(0,32+_tailleIcones*2+_tailleIcones/2, format.width/2,_tailleIcones+6)];
+        
+        [_btnHome setFrame:CGRectMake(format.width/2,32+_tailleIcones*2+_tailleIcones/2,format.width/2, _tailleIcones +6)];
+        
+    }else{
+        
+        /* Mise en place des labels */
+        [_btnDimensions setFrame:CGRectMake(0,0,format.width,32+_tailleIcones/2)];
+        
+        [_btnChangementMode setFrame:CGRectMake(0,32+_tailleIcones/2,format.width, _tailleIcones/2+_tailleIcones)];
+        
+        [_btnStatioDecoAttr setFrame:CGRectMake(0,32+_tailleIcones+_tailleIcones, format.width,_tailleIcones)];
+        
+        [_btnHome setFrame:CGRectMake(0,32+_tailleIcones*2+_tailleIcones,format.width, _tailleIcones/2+6)];
+    }
     
-    [_btnRotateAvant setFrame:CGRectMake(format.width/2,
-                                         format.height/3,
-                                         _tailleIcones/2, _tailleIcones/2)];
+   
     
-    [_btnRotateDroit setFrame:CGRectMake(format.width/2 + _tailleIcones/2,
-                                         format.height/3 +_tailleIcones/2,
-                                         _tailleIcones/2, _tailleIcones/2)];
-    
-    [_btnRotateGauche setFrame:CGRectMake(format.width/2 - _tailleIcones/2,
-                                         format.height/3 +_tailleIcones/2,
-                                         _tailleIcones/2, _tailleIcones/2)];
-    
-    [_btnRotateArriere setFrame:CGRectMake(format.width/2,
-                                          format.height/3 +_tailleIcones,
-                                          _tailleIcones/2, _tailleIcones/2)];
+   
     
     
     

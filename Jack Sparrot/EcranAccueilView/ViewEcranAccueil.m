@@ -29,25 +29,17 @@ UINavigationController *myVC;
         
         _btnDrone = [UIButton buttonWithType:UIButtonTypeSystem];
         _btnOptions  = [UIButton buttonWithType:UIButtonTypeSystem];
-        _btnChore = [UIButton buttonWithType:UIButtonTypeSystem];
         
         [_btnDrone setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_btnOptions setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-        [_btnChore setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         
         [_btnDrone setTitle:@"Contrôler drone" forState:UIControlStateNormal];
-        [_btnChore setTitle:@"Chorégraphier drone" forState:UIControlStateNormal];
         [_btnOptions setTitle:@"Options" forState:UIControlStateNormal];
         
         [[_btnDrone layer] setBorderWidth:1.0f];
         [[_btnDrone layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
         [[_btnDrone layer] setCornerRadius:8.0f];
         [[_btnDrone layer] setBorderWidth:2.0f];
-        
-        [[_btnChore layer] setBorderWidth:1.0f];
-        [[_btnChore layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
-        [[_btnChore layer] setCornerRadius:8.0f];
-        [[_btnChore layer] setBorderWidth:2.0f];
         
         [[_btnOptions layer] setBorderWidth:1.0f];
         [[_btnOptions layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
@@ -70,16 +62,17 @@ UINavigationController *myVC;
         [_labelBatterySmartphone setFont:[UIFont systemFontOfSize:9]];
         
         
+        [_btnDrone addTarget:self.superview action:@selector(goToDroneControl:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
         [self addSubview:_imgLogo];
         [self addSubview:_btnOptions];
-        [self addSubview:_btnChore];
         [self addSubview:_btnDrone];
         [self addSubview:_labelVersionApp];
         [self addSubview:_labelBatteryDrone];
         [self addSubview:_labelBatterySmartphone];
         
-        [_btnDrone addTarget:self.superview action:@selector(goToDroneControl:) forControlEvents:UIControlEventTouchUpInside];
-        
+       
         
         [self setNeedsDisplay];
     }
@@ -111,12 +104,9 @@ UINavigationController *myVC;
                                        (format.height/5),
                                        _tailleIcones*2, _tailleIcones/2)];
         
-        [_btnChore setFrame:CGRectMake(format.width/5.5 + _tailleIcones*2 + 10,
-                                       format.height/5 + _tailleIcones/2 + 10,
-                                       _tailleIcones*2, _tailleIcones/2)];
-        
+              
         [_btnOptions setFrame:CGRectMake(format.width/5.5 + _tailleIcones*2 + 10,
-                                       format.height/5 + _tailleIcones + 20,
+                                       format.height/5 + _tailleIcones/2 + 20,
                                        _tailleIcones*2, _tailleIcones/2)];
         
         /* Mise en place des labels */
@@ -142,12 +132,9 @@ UINavigationController *myVC;
                                        (format.height/6.0) + _tailleIcones + 10,
                                        _tailleIcones, _tailleIcones/5)];
         
-        [_btnChore setFrame:CGRectMake(format.width/4.0 ,
-                                       format.height/6.0 + _tailleIcones + 10 + 50,
-                                       _tailleIcones, _tailleIcones/5)];
         
         [_btnOptions setFrame:CGRectMake(format.width/4.0,
-                                         format.height/6.0 + _tailleIcones + 10 + 100,
+                                         format.height/6.0 + _tailleIcones + 50 ,
                                          _tailleIcones, _tailleIcones/5)];
         
         //[_btnOptions sizeToFit];

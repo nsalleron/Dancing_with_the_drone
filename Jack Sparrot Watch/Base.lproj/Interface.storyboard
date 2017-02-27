@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController">
+                    <items>
+                        <picker height="42" alignment="left" id="0aq-hl-6an">
+                            <connections>
+                                <action selector="picker:" destination="AgC-eL-Hgc" id="CZl-fA-Z4V"/>
+                            </connections>
+                        </picker>
+                        <button width="156" height="62" alignment="left" title="btnChangementMode" id="iwq-kp-4e2">
+                            <gestureRecognizers>
+                                <swipeGestureRecognizer id="F1S-0k-zH9">
+                                    <connections>
+                                        <action selector="swipeAction:" destination="AgC-eL-Hgc" id="XHP-SV-ayT"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                                <swipeGestureRecognizer direction="2" id="Lku-v0-ot7">
+                                    <connections>
+                                        <action selector="swipeAction:" destination="AgC-eL-Hgc" id="EKn-J5-1Ld"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                            </gestureRecognizers>
+                            <connections>
+                                <action selector="btnClick" destination="AgC-eL-Hgc" id="pva-Wh-adu"/>
+                            </connections>
+                        </button>
+                        <switch width="1" alignment="left" value="YES" title="Statio." id="q0T-uv-1Dv"/>
+                    </items>
+                    <menu key="menu" id="YrS-fp-ANw">
+                        <items>
+                            <menuItem title="Décollage" icon="play" id="lTs-aw-qL6"/>
+                            <menuItem title="Atterrissage" icon="block" id="YRA-mL-4PB"/>
+                            <menuItem title="Home" icon="maybe" id="A0K-sh-FSM"/>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="swipeCtrl" destination="F1S-0k-zH9" id="ycX-Fn-uA7"/>
+                        <outlet property="tp" destination="0aq-hl-6an" id="SkT-DN-FPK"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="219" y="334"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="643"/>
+        </scene>
+    </scenes>
+</document>

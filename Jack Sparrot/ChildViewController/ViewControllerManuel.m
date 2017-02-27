@@ -7,6 +7,7 @@
 //
 
 #import "ViewControllerManuel.h"
+#import "ViewDimensionViewController.h"
 #import "ViewManuel.h"
 
 @interface ViewControllerManuel ()
@@ -20,18 +21,57 @@ ViewManuel *ecran;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Horizontal
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    
     ecran = [[ViewManuel alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecran setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setView: ecran];
     [self setTitle:@"Manuel"];
     // Do any additional setup after loading the view from its nib.
+    
+    UISwipeGestureRecognizer * swipeUp=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeUp:)];
+    
+    swipeUp.direction=UISwipeGestureRecognizerDirectionUp;
+    [self.view addGestureRecognizer:swipeUp];
+    
+    UISwipeGestureRecognizer * swipeDown=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown:)];
+    swipeDown.direction=UISwipeGestureRecognizerDirectionDown;
+    [self.view addGestureRecognizer:swipeDown];
+    
+    
+}
+
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+    
+    [ecran updateView:size];
+}
+
+-(void) goToDimensionChoice:(UIButton*)send{
+    
+    ViewDimensionViewController *secondController = [[ViewDimensionViewController alloc] init];
+    [self.navigationController pushViewController:secondController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)swipeUp:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    NSLog(@"Up");
+}
+
+-(void)swipeDown:(UISwipeGestureRecognizer*)gestureRecognizer
+{
+    NSLog(@"Down");
+}
+
+
 
 /*
 #pragma mark - Navigation

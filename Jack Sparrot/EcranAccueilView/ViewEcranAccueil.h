@@ -15,7 +15,6 @@
 
 @property (readonly,nonatomic,retain) UIImageView *imgLogo;
 @property (readonly,nonatomic,retain) UIButton *btnDrone;
-@property (readonly,nonatomic,retain) UIButton *btnChore;
 @property (readonly,nonatomic,retain) UIButton *btnOptions;
 @property (readonly,nonatomic,retain) UILabel *labelBatteryDrone;
 @property (readonly,nonatomic,retain) UILabel *labelBatterySmartphone;

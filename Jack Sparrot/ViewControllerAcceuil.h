@@ -11,9 +11,10 @@
 @interface ViewControllerAccueil : UIViewController
 
 @property (readonly,nonatomic,retain) UIButton *btnDrone;
-@property (readonly,nonatomic,retain) UIButton *btnChore;
 @property (readonly,nonatomic,retain) UIButton *btnOptions;
 @property (assign, nonatomic) NSInteger index;
+
+
 
 - (void) goToDroneControl:(UIButton*)send;
 
