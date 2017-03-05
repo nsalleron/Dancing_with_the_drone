@@ -11,10 +11,13 @@
 
 @interface ViewControllerManuel : UIViewController <ViewDimensionViewControllerDelegate>
 
--(void) goToDimensionChoice:(UIButton*)send;
+- (void) goToDimensionChoice:(UIButton*)send;
+- (void) changeSatio:(UIButton*)send;
 - (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture;
+- (void) changeAxe:(UIButton*)send;
 
 @property (assign, nonatomic) NSInteger index;
 @property (readwrite, nonatomic) Boolean enVol;
-
+@property (readwrite, nonatomic) Boolean enStatio;
+@property (readwrite, nonatomic) Boolean axeX;
 @end

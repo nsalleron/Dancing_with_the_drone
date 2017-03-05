@@ -21,7 +21,9 @@
 @property (assign, nonatomic) ViewControllerManuel *vc;
 
 - (void) updateView:(CGSize) format;
-- (void) updateBtn:(NSString*) item;
+- (void) updateBtnDimensions:(NSString*) item;
+- (void) updateBtnChangementMode:(NSString*) item;
+- (void) updateBtnStatioDecoAttr:(NSString*) item;
 - (void) setViewController:(ViewControllerManuel *) me;
 - (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture;
 @end

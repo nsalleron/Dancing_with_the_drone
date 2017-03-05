@@ -59,6 +59,8 @@
         
         /* Gestion des évènements */
         [_btnDimensions addTarget:self.superview action:@selector(goToDimensionChoice:) forControlEvents:UIControlEventTouchUpInside];
+        [_btnStatioDecoAttr addTarget:self.superview action:@selector(changeSatio:) forControlEvents:UIControlEventTouchUpInside];
+         [_btnChangementMode addTarget:self.superview action:@selector(changeAxe:) forControlEvents:UIControlEventTouchUpInside];
         
         /* Gestion Pression longue btnStatioDecoAttr */
         _longPress = [[UILongPressGestureRecognizer alloc] init];
@@ -114,8 +116,14 @@
     
 }
 
-- (void) updateBtn:(NSString*) item{
+- (void) updateBtnDimensions:(NSString*) item{
     [_btnDimensions setTitle:item forState:UIControlStateNormal];
+}
+- (void) updateBtnChangementMode:(NSString *)item{
+    [_btnChangementMode setTitle:item forState:UIControlStateNormal];
+}
+- (void) updateBtnStatioDecoAttr:(NSString*) item{
+    [_btnStatioDecoAttr setTitle:item forState:UIControlStateNormal];
 }
 
 -(void) drawRect:(CGRect)rect{
