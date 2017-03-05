@@ -13,7 +13,10 @@
 @interface ViewControllerManuel ()
 
 @end
+
+
 ViewManuel *ecran;
+
 
 @implementation ViewControllerManuel
 
@@ -24,13 +27,14 @@ ViewManuel *ecran;
     
     ecran = [[ViewManuel alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecran setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
-    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [ecran setViewController:self];
     [self setView: ecran];
     [self setTitle:@"Manuel"];
-    // Do any additional setup after loading the view from its nib.
     
+    
+
+    //Swipe
     UISwipeGestureRecognizer * swipeUp=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeUp:)];
-    
     swipeUp.direction=UISwipeGestureRecognizerDirectionUp;
     [self.view addGestureRecognizer:swipeUp];
     
@@ -39,24 +43,44 @@ ViewManuel *ecran;
     [self.view addGestureRecognizer:swipeDown];
     
     
+   
+    
+    
+    
 }
+
+- (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture{
+    switch (_enVol) {
+        case TRUE:
+            //Atterrissage;
+            NSLog(@"Atterrissage");
+            _enVol = FALSE;
+            break;
+            
+        case FALSE:
+            //Decollage;
+            NSLog(@"Decollage");
+            _enVol = TRUE;
+        default:
+            break;
+    }
+    
+}
+
+/* Rotation de l'écran */
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    NSLog(@"Passage shouldAutotoratote");
     return (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
-
 - (BOOL)shouldAutorotate  // iOS 6 autorotation fix
 {
     return YES;
 }
-
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations // iOS 6 autorotation fix
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        NSLog(@"LANDSCAPE");
         return UIInterfaceOrientationMaskLandscapeRight;
     } else {
         return UIInterfaceOrientationMaskAll;
@@ -65,10 +89,8 @@ ViewManuel *ecran;
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation // iOS 6 autorotation fix
 {
-    NSLog(@"PREFERRED");
-    return UIInterfaceOrientationLandscapeRight;
+       return UIInterfaceOrientationLandscapeRight;
 }
-
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
     [ecran updateView:size];

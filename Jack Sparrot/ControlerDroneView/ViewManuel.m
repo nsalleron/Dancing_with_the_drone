@@ -9,6 +9,7 @@
 #import "ViewManuel.h"
 #import "ViewControllerManuel.h"
 
+
 @implementation ViewManuel
 
 
@@ -26,7 +27,7 @@
         _btnHome  = [[UIButton alloc] init];
         _btnDimensions = [[UIButton alloc] init];
         
-        [_btnDimensions setTitle:@"btnDimensions" forState:UIControlStateNormal];
+        [_btnDimensions setTitle:@"1D" forState:UIControlStateNormal];
         [_btnChangementMode setTitle:@"btnChangementDeMode" forState:UIControlStateNormal];
         [_btnStatioDecoAttr  setTitle:@"btnStatioDecoAttr" forState:UIControlStateNormal];
         [_btnHome setTitle:@"btnHome" forState:UIControlStateNormal];
@@ -35,7 +36,6 @@
         [_btnChangementMode setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_btnStatioDecoAttr  setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_btnHome setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        
         
         [[_btnStatioDecoAttr layer] setBorderWidth:1.0f];
         [[_btnStatioDecoAttr layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
@@ -57,7 +57,14 @@
         [[_btnDimensions layer] setCornerRadius:8.0f];
         [[_btnDimensions layer] setBorderWidth:2.0f];
         
+        /* Gestion des évènements */
         [_btnDimensions addTarget:self.superview action:@selector(goToDimensionChoice:) forControlEvents:UIControlEventTouchUpInside];
+        
+        /* Gestion Pression longue btnStatioDecoAttr */
+        _longPress = [[UILongPressGestureRecognizer alloc] init];
+        [_longPress addTarget:self action:@selector(changeDecoAttr:)];
+        [_longPress setMinimumPressDuration:1];
+        [_btnStatioDecoAttr addGestureRecognizer:_longPress];
         
         
         [self addSubview:_btnChangementMode];
@@ -69,6 +76,10 @@
     }
     
     return self;
+}
+
+- (void) setViewController:(ViewControllerManuel *) me{
+    self.vc = me;
 }
 
 - (void)updateView:(CGSize)format{
@@ -109,6 +120,14 @@
 
 -(void) drawRect:(CGRect)rect{
     [self updateView:rect.size];
+}
+
+- (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture{
+    if ( gesture.state == UIGestureRecognizerStateBegan) {
+        //Update du View Controller
+        [_vc changeDecoAttr:gesture];
+    }
+
 }
 
 

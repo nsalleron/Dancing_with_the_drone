@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Jack Sparrot/ChildViewController/ViewControllerManuel.m"
-            timestampString = "510408610.710107"
+            timestampString = "510419834.26926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "-viewWillTransitionToSize:withTransitionCoordinator:"
             landmarkType = "7">
          </BreakpointContent>

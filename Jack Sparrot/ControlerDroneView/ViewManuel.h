@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewControllerManuel.h"
 
 @interface ViewManuel : UIView
 
@@ -15,12 +16,12 @@
 @property (readonly,nonatomic,retain) UIButton *btnChangementMode;
 @property (readonly,nonatomic,retain) UIButton *btnStatioDecoAttr;
 @property (readonly,nonatomic,retain) UIButton *btnHome;
-
-
-
+@property (readwrite,nonatomic,retain) UILongPressGestureRecognizer *longPress ;
 @property (assign, nonatomic) CGFloat tailleIcones;
+@property (assign, nonatomic) ViewControllerManuel *vc;
 
 - (void) updateView:(CGSize) format;
 - (void) updateBtn:(NSString*) item;
-
+- (void) setViewController:(ViewControllerManuel *) me;
+- (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture;
 @end

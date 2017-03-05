@@ -12,7 +12,9 @@
 @interface ViewControllerManuel : UIViewController <ViewDimensionViewControllerDelegate>
 
 -(void) goToDimensionChoice:(UIButton*)send;
+- (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture;
 
 @property (assign, nonatomic) NSInteger index;
+@property (readwrite, nonatomic) Boolean enVol;
 
 @end

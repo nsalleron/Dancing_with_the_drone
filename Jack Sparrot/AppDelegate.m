@@ -45,9 +45,7 @@
     
 }
 
-- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window  // iOS 6 autorotation fix
-{
-    NSLog(@"Passage : supportedInterfaceOrientationsForWindows");
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
     return UIInterfaceOrientationMaskAll;
 }
 
