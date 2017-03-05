@@ -676,9 +676,36 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "./ARSDK3_iOS_3_9_2/iOS-iphoneos/staging/usr/include";
+				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "./ARSDK3_iOS_3_9_2/iOS-iphonesimulator/staging/usr/include";
+				"HEADER_SEARCH_PATHS[sdk=watchos3.1]" = "./ARSDK3_iOS_3_9_2/iOS-iphoneos/staging/usr/include";
+				"HEADER_SEARCH_PATHS[sdk=watchsimulator*]" = "./ARSDK3_iOS_3_9_2/iOS-iphonesimulator/staging/usr/include";
 				INFOPLIST_FILE = "Jack Sparrot/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "./ARSDK3_iOS_3_9_2/iOS-iphoneos/staging/usr/lib";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "./ARSDK3_iOS_3_9_2/iOS-iphonesimulator/staging/usr/lib";
+				"LIBRARY_SEARCH_PATHS[sdk=watchos3.1]" = "./ARSDK3_iOS_3_9_2/iOS-iphoneos/staging/usr/lib";
+				"LIBRARY_SEARCH_PATHS[sdk=watchsimulator3.1]" = "./ARSDK3_iOS_3_9_2/iOS-iphonesimulator/staging/usr/lib";
+				OTHER_LDFLAGS = (
+					"-larcommands",
+					"-larcontroller",
+					"-lardiscovery",
+					"-larnetwork",
+					"-larnetworkal",
+					"-larsal",
+					"-larstream",
+					"-larstream2",
+					"-larmavlink",
+					"-ljson",
+					"-larmedia",
+					"-larutils",
+					"-lcurl",
+					"-lardatatransfer",
+					"-lcrypto",
+					"-lssl",
+					"-lz",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -689,9 +716,36 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "./ARSDK3_iOS_3_9_2/iOS-iphoneos/staging/usr/include";
+				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "./ARSDK3_iOS_3_9_2/iOS-iphonesimulator/staging/usr/include";
+				"HEADER_SEARCH_PATHS[sdk=watchos3.1]" = "./ARSDK3_iOS_3_9_2/iOS-iphoneos/staging/usr/include";
+				"HEADER_SEARCH_PATHS[sdk=watchsimulator3.1]" = "./ARSDK3_iOS_3_9_2/iOS-iphonesimulator/staging/usr/include";
 				INFOPLIST_FILE = "Jack Sparrot/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "./ARSDK3_iOS_3_9_2/iOS-iphoneos/staging/usr/lib";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "./ARSDK3_iOS_3_9_2/iOS-iphonesimulator/staging/usr/lib";
+				"LIBRARY_SEARCH_PATHS[sdk=watchos3.1]" = "./ARSDK3_iOS_3_9_2/iOS-iphoneos/staging/usr/lib";
+				"LIBRARY_SEARCH_PATHS[sdk=watchsimulator3.1]" = "./ARSDK3_iOS_3_9_2/iOS-iphonesimulator/staging/usr/lib";
+				OTHER_LDFLAGS = (
+					"-larcommands",
+					"-larcontroller",
+					"-lardiscovery",
+					"-larnetwork",
+					"-larnetworkal",
+					"-larsal",
+					"-larstream",
+					"-larstream2",
+					"-larmavlink",
+					"-ljson",
+					"-larmedia",
+					"-larutils",
+					"-lcurl",
+					"-lardatatransfer",
+					"-lcrypto",
+					"-lssl",
+					"-lz",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
