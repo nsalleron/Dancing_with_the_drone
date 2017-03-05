@@ -8,6 +8,7 @@
 
 #import "ViewControllerAcceuil.h"
 #import "ViewControllerManuel.h"
+#import "ViewDimensionViewController.h"
 #import "ViewEcranAccueil.h"
 
 
@@ -21,6 +22,7 @@ ViewEcranAccueil *ecranAccueil;
 @implementation ViewControllerAccueil
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     ecranAccueil = [[ViewEcranAccueil alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -29,7 +31,13 @@ ViewEcranAccueil *ecranAccueil;
     [self setView: ecranAccueil];
     [self setTitle:@"Accueil"];
     
+    
+    
 }
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

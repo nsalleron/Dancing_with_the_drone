@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "ViewControllerAcceuil.h"
+#import "ViewDimensionViewController.h"
+#import "ViewControllerManuel.h"
+#import "CustomNavigationViewController.h"
 
 @interface AppDelegate ()
 
@@ -18,12 +21,33 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+   
+    
+    UINavigationController *myNVC;
+    
+    // set initial view
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     ViewControllerAccueil *myVC = [[ViewControllerAccueil alloc ] init ];
     
-    UINavigationController *myNVC = [[UINavigationController alloc ] initWithRootViewController:myVC];
+    myNVC = [[CustomNavigationViewController alloc]
+                            initWithRootViewController:myVC]; // iOS 6 autorotation fix
+    [myNVC setNavigationBarHidden:YES animated:YES];
     
-    [_window setRootViewController:myNVC];
+    self.window = [[UIWindow alloc]
+                   initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [self.window setRootViewController:myNVC];
+    [self.window makeKeyAndVisible];
+    
     return YES;
+
+    
+}
+
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    return UIInterfaceOrientationMaskAll;
 }
 
 

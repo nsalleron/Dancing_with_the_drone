@@ -7,6 +7,7 @@
 //
 
 #import "ViewManuel.h"
+#import "ViewControllerManuel.h"
 
 @implementation ViewManuel
 
@@ -23,7 +24,7 @@
         _btnHome  = [[UIButton alloc] init];
         _btnDimensions = [[UIButton alloc] init];
         
-        [_btnDimensions setTitle:@"1D" forState:UIControlStateNormal];
+        [_btnDimensions setTitle:@"btnDimensions" forState:UIControlStateNormal];
         [_btnChangementMode setTitle:@"btnChangementDeMode" forState:UIControlStateNormal];
         [_btnStatioDecoAttr  setTitle:@"btnStatioDecoAttr" forState:UIControlStateNormal];
         [_btnHome setTitle:@"btnHome" forState:UIControlStateNormal];
@@ -62,6 +63,7 @@
         [self addSubview:_btnHome];
         [self addSubview:_btnDimensions];
         
+        [self updateView:frame.size];
     }
     
     return self;
@@ -95,11 +97,6 @@
         
         [_btnHome setFrame:CGRectMake(0,32+_tailleIcones*2+_tailleIcones,format.width, _tailleIcones/2+6)];
     }
-    
-   
-    
-   
-    
     
     
 }

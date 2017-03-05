@@ -22,9 +22,7 @@ ViewManuel *ecran;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Horizontal
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    
     
     ecran = [[ViewManuel alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecran setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
@@ -44,6 +42,19 @@ ViewManuel *ecran;
     
     
 }
+
+-(void) viewWillAppear:(BOOL)animated{
+    
+}
+
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskLandscapeRight;
+}
+
+-(BOOL)shouldAutorotate {
+    return NO;
+}
+
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
     

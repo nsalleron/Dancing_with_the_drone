@@ -10,6 +10,8 @@
 
 @interface ViewControllerManuel : UIViewController
 
+-(void) goToDimensionChoice:(UIButton*)send;
+
 @property (assign, nonatomic) NSInteger index;
 
 @end

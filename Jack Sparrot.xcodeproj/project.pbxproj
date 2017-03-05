@@ -29,6 +29,7 @@
 		A6F6EE661E64EBB10007B54D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE651E64EBB10007B54D /* main.m */; };
 		A6F6EE6A1E64F05B0007B54D /* ViewDimensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE691E64F05B0007B54D /* ViewDimensionViewController.m */; };
 		A6F6EE6D1E64F0760007B54D /* ViewDimension.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE6C1E64F0760007B54D /* ViewDimension.m */; };
+		A6F6EE701E69D38A0007B54D /* CustomNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE6F1E69D38A0007B54D /* CustomNavigationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,8 @@
 		A6F6EE691E64F05B0007B54D /* ViewDimensionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewDimensionViewController.m; path = EcranDimensionsView/ViewDimensionViewController.m; sourceTree = "<group>"; };
 		A6F6EE6B1E64F0760007B54D /* ViewDimension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewDimension.h; path = EcranDimensionsView/ViewDimension.h; sourceTree = "<group>"; };
 		A6F6EE6C1E64F0760007B54D /* ViewDimension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewDimension.m; path = EcranDimensionsView/ViewDimension.m; sourceTree = "<group>"; };
+		A6F6EE6E1E69D38A0007B54D /* CustomNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomNavigationViewController.h; path = EcranAccueilView/CustomNavigationViewController.h; sourceTree = "<group>"; };
+		A6F6EE6F1E69D38A0007B54D /* CustomNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomNavigationViewController.m; path = EcranAccueilView/CustomNavigationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +214,8 @@
 				A61AEED01E40978F00EDB53B /* ViewControllerAcceuil.m */,
 				A61AEEFF1E409ED800EDB53B /* ViewEcranAccueil.h */,
 				A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */,
+				A6F6EE6E1E69D38A0007B54D /* CustomNavigationViewController.h */,
+				A6F6EE6F1E69D38A0007B54D /* CustomNavigationViewController.m */,
 			);
 			name = EcranAccueilView;
 			sourceTree = "<group>";
@@ -485,6 +490,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6F6EE701E69D38A0007B54D /* CustomNavigationViewController.m in Sources */,
 				A6F6EE6A1E64F05B0007B54D /* ViewDimensionViewController.m in Sources */,
 				A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */,
 				A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */,
@@ -674,6 +680,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -685,6 +692,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

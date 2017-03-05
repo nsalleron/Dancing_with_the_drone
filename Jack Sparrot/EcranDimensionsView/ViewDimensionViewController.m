@@ -12,6 +12,7 @@
 @interface ViewDimensionViewController ()
 @end
 ViewDimension *ecranDimension;
+NSString *selected;
 
 @implementation ViewDimensionViewController
 
@@ -19,18 +20,46 @@ ViewDimension *ecranDimension;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //Horizontal
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    //NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+    //[[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     
     ecranDimension = [[ViewDimension alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecranDimension setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setView: ecranDimension];
     [self setTitle:@"Dimensions"];
+    
     // Do any additional setup after loading the view from its nib.
     
     
 }
+
+
+- (void) viewDidAppear:(BOOL)animated{
+    
+    //Horizontal
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    
+}
+-(void) endDimensionChoice:(UIButton*)send{
+    
+    selected = send.titleLabel.text;
+    NSLog(@"%@", selected);
+    [self.navigationController popViewControllerAnimated:YES];
+    //Reprise de la variable dans la globale puis fermeture fenetre
+    
+    
+}
+
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskLandscapeRight;
+}
+
+-(BOOL)shouldAutorotate {
+    return NO;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -50,5 +79,12 @@ ViewDimension *ecranDimension;
     // Pass the selected object to the new view controller.
 }
 */
+
+@synthesize delegate;
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [delegate sendDimensions:selected];
+    
+}
 
 @end

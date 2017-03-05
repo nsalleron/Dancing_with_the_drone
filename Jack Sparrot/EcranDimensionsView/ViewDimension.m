@@ -7,6 +7,7 @@
 //
 
 #import "ViewDimension.h"
+#import "ViewDimensionViewController.h"
 
 @implementation ViewDimension
 
@@ -44,6 +45,10 @@
         [[_btn3D layer] setCornerRadius:8.0f];
         [[_btn3D layer] setBorderWidth:2.0f];
         
+        [_btn1D addTarget:self.superview action:@selector(endDimensionChoice:) forControlEvents:UIControlEventTouchUpInside];
+        [_btn2D addTarget:self.superview action:@selector(endDimensionChoice:) forControlEvents:UIControlEventTouchUpInside];
+        [_btn3D addTarget:self.superview action:@selector(endDimensionChoice:) forControlEvents:UIControlEventTouchUpInside];
+        
         [self addSubview:_btn1D];
         [self addSubview:_btn2D];
         [self addSubview:_btn3D];
@@ -58,6 +63,7 @@
     
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
     {
+        NSLog(@"Landscape");
         /* Mise en place des labels */
         [_btn1D setFrame:CGRectMake(0,0,format.width/3,format.height)];
         
@@ -65,15 +71,7 @@
         
         [_btn3D setFrame:CGRectMake(2*format.width/3,0,format.width/3,format.height)];
         
-    }else{
-        
-        
-    }
-    
-    
-    
-    
-    
+    }   
     
     
 }

@@ -34,7 +34,6 @@
     
 
     // Connect data
-    
     [_tp setItems:self.pickerItems];
     [_tp setSelectedItemIndex:0];
     
@@ -42,6 +41,9 @@
 }
 
 - (IBAction)swipeAction:(id)sender {
+    
+    
+    
     WKSwipeGestureRecognizer* send = (WKSwipeGestureRecognizer*)sender;
     
     if(send.direction == WKSwipeGestureRecognizerDirectionRight){
