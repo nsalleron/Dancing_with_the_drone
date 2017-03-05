@@ -8,19 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol senddataProtocol <NSObject>
+@class ViewDimensionViewController;
 
--(void)sendDimensions:(NSString *)dim;
--(void) endDimensionChoice:(UIButton*)send;
-
+@protocol ViewDimensionViewControllerDelegate <NSObject>
+- (void)addItemViewController:(ViewDimensionViewController *)controller didFinishEnteringItem:(NSString *)item;
 @end
 
 @interface ViewDimensionViewController : UIViewController
 
-@property(nonatomic,assign)id delegate;
-
+@property (nonatomic, weak) id <ViewDimensionViewControllerDelegate> delegate;
 
 @end
-
-
 

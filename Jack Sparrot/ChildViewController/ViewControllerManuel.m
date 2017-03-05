@@ -22,8 +22,6 @@ ViewManuel *ecran;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
     ecran = [[ViewManuel alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecran setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -43,28 +41,50 @@ ViewManuel *ecran;
     
 }
 
--(void) viewWillAppear:(BOOL)animated{
-    
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    NSLog(@"Passage shouldAutotoratote");
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
--(UIInterfaceOrientationMask)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskLandscapeRight;
+- (BOOL)shouldAutorotate  // iOS 6 autorotation fix
+{
+    return YES;
 }
 
--(BOOL)shouldAutorotate {
-    return NO;
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations // iOS 6 autorotation fix
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        NSLog(@"LANDSCAPE");
+        return UIInterfaceOrientationMaskLandscapeRight;
+    } else {
+        return UIInterfaceOrientationMaskAll;
+    }
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation // iOS 6 autorotation fix
+{
+    NSLog(@"PREFERRED");
+    return UIInterfaceOrientationLandscapeRight;
 }
 
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
-    
     [ecran updateView:size];
 }
 
 -(void) goToDimensionChoice:(UIButton*)send{
     
     ViewDimensionViewController *secondController = [[ViewDimensionViewController alloc] init];
+    secondController.delegate = self;
     [self.navigationController pushViewController:secondController animated:YES];
+    
+}
+
+- (void)addItemViewController:(ViewDimensionViewController *)controller didFinishEnteringItem:(NSString *)item
+{
+    [ecran updateBtn:item];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,18 +101,6 @@ ViewManuel *ecran;
 {
     NSLog(@"Down");
 }
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 

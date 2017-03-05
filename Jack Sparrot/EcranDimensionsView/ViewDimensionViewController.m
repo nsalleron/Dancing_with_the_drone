@@ -34,32 +34,45 @@ NSString *selected;
     
 }
 
-
-- (void) viewDidAppear:(BOOL)animated{
-    
-    //Horizontal
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-    
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    NSLog(@"Passage shouldAutotoratote");
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
+
+- (BOOL)shouldAutorotate  // iOS 6 autorotation fix
+{
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations // iOS 6 autorotation fix
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        NSLog(@"LANDSCAPE");
+        return UIInterfaceOrientationMaskLandscapeRight;
+    } else {
+        return UIInterfaceOrientationMaskAll;
+    }
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation // iOS 6 autorotation fix
+{
+    NSLog(@"PREFERRED");
+    return UIInterfaceOrientationLandscapeRight;
+}
+
+
 -(void) endDimensionChoice:(UIButton*)send{
     
     selected = send.titleLabel.text;
     NSLog(@"%@", selected);
     [self.navigationController popViewControllerAnimated:YES];
+    
     //Reprise de la variable dans la globale puis fermeture fenetre
     
     
 }
-
--(UIInterfaceOrientationMask)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskLandscapeRight;
-}
-
--(BOOL)shouldAutorotate {
-    return NO;
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -80,11 +93,10 @@ NSString *selected;
 }
 */
 
-@synthesize delegate;
+
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [delegate sendDimensions:selected];
-    
+    [self.delegate addItemViewController:self didFinishEnteringItem:selected];
 }
 
 @end

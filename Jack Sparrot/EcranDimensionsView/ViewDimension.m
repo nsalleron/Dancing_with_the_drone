@@ -15,6 +15,8 @@
     self = [super initWithFrame:frame];
     
     if(self){
+        NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+        [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
         
         /* Boutons */
         _btn1D = [[UIButton alloc] init];
@@ -75,6 +77,7 @@
     
     
 }
+
 
 -(void) drawRect:(CGRect)rect{
     [self updateView:rect.size];

@@ -21,5 +21,6 @@
 @property (assign, nonatomic) CGFloat tailleIcones;
 
 - (void) updateView:(CGSize) format;
+- (void) updateBtn:(NSString*) item;
 
 @end

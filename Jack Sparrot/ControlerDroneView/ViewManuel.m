@@ -17,6 +17,8 @@
     self = [super initWithFrame:frame];
     
     if(self){
+        NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+        [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
         
         /* Boutons */
         _btnChangementMode = [[UIButton alloc] init];
@@ -63,7 +65,7 @@
         [self addSubview:_btnHome];
         [self addSubview:_btnDimensions];
         
-        [self updateView:frame.size];
+        
     }
     
     return self;
@@ -99,6 +101,10 @@
     }
     
     
+}
+
+- (void) updateBtn:(NSString*) item{
+    [_btnDimensions setTitle:item forState:UIControlStateNormal];
 }
 
 -(void) drawRect:(CGRect)rect{

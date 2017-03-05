@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CustomNavigationViewController : UINavigationController
+@interface CustomNavigation : UINavigationController
 
 @end

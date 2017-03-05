@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewDimensionViewController.h"
 
-@interface ViewControllerManuel : UIViewController
+@interface ViewControllerManuel : UIViewController <ViewDimensionViewControllerDelegate>
 
 -(void) goToDimensionChoice:(UIButton*)send;
 

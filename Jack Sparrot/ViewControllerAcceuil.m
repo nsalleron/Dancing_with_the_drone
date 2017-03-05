@@ -35,6 +35,30 @@ ViewEcranAccueil *ecranAccueil;
     
 }
 
+//ROTATION
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (BOOL)shouldAutorotate  // iOS 6 autorotation fix
+{
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations // iOS 6 autorotation fix
+{
+    
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation // iOS 6 autorotation fix
+{
+    return UIInterfaceOrientationPortrait;
+}
+
 
 
 

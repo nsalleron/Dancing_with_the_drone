@@ -10,7 +10,7 @@
 #import "ViewControllerAcceuil.h"
 #import "ViewDimensionViewController.h"
 #import "ViewControllerManuel.h"
-#import "CustomNavigationViewController.h"
+#import "CustomNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -30,7 +30,7 @@
     
     ViewControllerAccueil *myVC = [[ViewControllerAccueil alloc ] init ];
     
-    myNVC = [[CustomNavigationViewController alloc]
+    myNVC = [[CustomNavigationController alloc]
                             initWithRootViewController:myVC]; // iOS 6 autorotation fix
     [myNVC setNavigationBarHidden:YES animated:YES];
     
@@ -45,8 +45,9 @@
     
 }
 
-- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window  // iOS 6 autorotation fix
 {
+    NSLog(@"Passage : supportedInterfaceOrientationsForWindows");
     return UIInterfaceOrientationMaskAll;
 }
 
