@@ -10,9 +10,11 @@
 #import "ViewControllerManuel.h"
 #import "ViewDimensionViewController.h"
 #import "ViewEcranAccueil.h"
-
+#import "BebopDrone.h"
 
 @interface ViewControllerAccueil()
+
+@property (nonatomic, strong) BebopDrone *bebopDrone;
 
 @end
 
@@ -30,6 +32,8 @@ ViewEcranAccueil *ecranAccueil;
         //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setView: ecranAccueil];
     [self setTitle:@"Accueil"];
+    
+    _bebopDrone = [[BebopDrone alloc] initWithService:_service];
     
     
     
