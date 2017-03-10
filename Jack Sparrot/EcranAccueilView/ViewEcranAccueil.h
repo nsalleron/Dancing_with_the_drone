@@ -27,6 +27,8 @@
 
 - (void) setBattery:(NSString *) battery;
 
+-(double)battery;
+
 @end
 
 #endif

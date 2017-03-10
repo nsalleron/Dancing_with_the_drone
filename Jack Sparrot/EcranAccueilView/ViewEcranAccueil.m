@@ -52,8 +52,8 @@ UINavigationController *myVC;
         _labelBatteryDrone = [[UILabel alloc ]init];
         _labelBatterySmartphone = [[UILabel alloc ]init];
         
-        double batteryLevel = (float)[myDevice batteryLevel] * 100;
-        [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d",(int)batteryLevel]];
+        
+        [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d",0]];
         [_labelBatteryDrone setText:@"Batterie drone : ABS"];
         [_labelVersionApp setText:@"Version 0.01"];
         
@@ -106,12 +106,12 @@ UINavigationController *myVC;
         
         [_btnDrone setFrame:CGRectMake(format.width/9 + _tailleIcones*2 + 10,
                                        (format.height/4),
-                                       _tailleIcones*2, _tailleIcones/2)];
+                                       _tailleIcones*2.1, _tailleIcones/2)];
         
               
         [_btnOptions setFrame:CGRectMake(format.width/9 + _tailleIcones*2 + 10,
                                        format.height/4 + _tailleIcones/2 + 20,
-                                       _tailleIcones*2, _tailleIcones/2)];
+                                       _tailleIcones*2.1, _tailleIcones/2)];
         
         /* Mise en place des labels */
             /* LabelBatterySmartphone */
@@ -124,6 +124,8 @@ UINavigationController *myVC;
             /* LabelVersionApp*/
         [_labelVersionApp setFrame:CGRectMake(format.width - _tailleIcones + (_tailleIcones/3) ,format.height - _tailleIcones/2 + 10,_tailleIcones,_tailleIcones/2)];
         [_labelVersionApp setTextAlignment:NSTextAlignmentLeft];
+        
+        [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d",(int)[self battery]]];
         
     }else{
         
@@ -161,7 +163,17 @@ UINavigationController *myVC;
 }
 
 
-
+-(double)battery{
+    UIDevice *myDevice = [UIDevice currentDevice];
+    [myDevice setBatteryMonitoringEnabled:YES];
+    
+    int state = [myDevice batteryState];
+    NSLog(@"battery status: %d",state); // 0 unknown, 1 unplegged, 2 charging, 3 full
+    
+    double batLeft = (float)[myDevice batteryLevel] * 100;
+    NSLog(@"battery left: %f", batLeft);
+    return batLeft;
+}
 
 
 -(void) drawRect:(CGRect)rect{
