@@ -21,6 +21,7 @@
 @property (assign, nonatomic) ViewControllerManuel *vc;
 
 - (void) updateView:(CGSize) format;
+- (void)update2D3D:(CGSize)format;
 - (void) updateBtnDimensions:(NSString*) item;
 - (void) updateBtnChangementMode:(NSString*) item;
 - (void) updateBtnStatioDecoAttr:(NSString*) item;

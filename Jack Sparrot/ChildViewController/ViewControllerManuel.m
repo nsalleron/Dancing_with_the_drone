@@ -139,7 +139,13 @@ ViewManuel *ecran;
 
 - (void)addItemViewController:(ViewDimensionViewController *)controller didFinishEnteringItem:(NSString *)item
 {
+    
     [ecran updateBtnDimensions:item];
+    if([item  isEqual: @"1D"])
+        [ecran updateView:[[UIScreen mainScreen] bounds].size];
+    else
+        [ecran update2D3D:[[UIScreen mainScreen] bounds].size];
+    
 }
 
 - (void)didReceiveMemoryWarning {

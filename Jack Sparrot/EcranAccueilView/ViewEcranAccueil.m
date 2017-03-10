@@ -165,6 +165,10 @@ UINavigationController *myVC;
     }
 }
 
+
+
+
+
 -(void) drawRect:(CGRect)rect{
     [self updateView:rect.size];
 }

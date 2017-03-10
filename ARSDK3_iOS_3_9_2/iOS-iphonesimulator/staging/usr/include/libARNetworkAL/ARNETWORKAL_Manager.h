@@ -145,7 +145,7 @@ typedef eARNETWORKAL_ERROR (*ARNETWORKAL_Manager_Unlock_t) (ARNETWORKAL_Manager_
  * @brief gets the network bandwidth.
  * @param manager The manager.
  * @param[out] uploadBw which will hold the upload bandwidth, in bytes per second (optionnal, can be NULL)
- * @param[out] pointer which will hold the download bandwidth, in bytes per second (optionnal, can be NULL)
+ * @param[out] downloadBw which will hold the download bandwidth, in bytes per second (optionnal, can be NULL)
  * @return error see ::eARNETWORKAL_ERROR
  */
 typedef eARNETWORKAL_ERROR (*ARNETWORKAL_Manager_GetBandwidth_t) (ARNETWORKAL_Manager_t *manager, uint32_t *uploadBw, uint32_t *downloadBw);
@@ -240,8 +240,8 @@ void ARNETWORKAL_Manager_Delete(ARNETWORKAL_Manager_t **manager);
 /**
  * @brief gets the network bandwidth.
  * @param manager The manager.
- * @param[out] pointer which will hold the upload bandwidth, in bytes per second (optionnal, can be NULL)
- * @param[out] pointer which will hold the download bandwidth, in bytes per second (optionnal, can be NULL)
+ * @param[out] uploadBw which will hold the upload bandwidth, in bytes per second (optionnal, can be NULL)
+ * @param[out] downloadBw which will hold the download bandwidth, in bytes per second (optionnal, can be NULL)
  * @return error see ::eARNETWORKAL_ERROR
  */
 eARNETWORKAL_ERROR ARNETWORKAL_Manager_GetBandwidth (ARNETWORKAL_Manager_t *manager, uint32_t *uploadBw, uint32_t *downloadBw);
@@ -321,7 +321,7 @@ eARNETWORKAL_ERROR ARNETWORKAL_Manager_CloseBLENetwork(ARNETWORKAL_Manager_t *ma
  * @brief set the OnDisconnect Callback
  * @warning Only call by the ARNetworkManager
  * @param manager pointer on the Manager
- * @param onDisconnectCallbak function called on disconnect
+ * @param onDisconnectCallback function called on disconnect
  * @param customData custom data sent to the onDisconnectCallback
  */
 eARNETWORKAL_ERROR ARNETWORKAL_Manager_SetOnDisconnectCallback(ARNETWORKAL_Manager_t *manager, ARNETWORKAL_Manager_OnDisconnect_t onDisconnectCallback, void *customData);

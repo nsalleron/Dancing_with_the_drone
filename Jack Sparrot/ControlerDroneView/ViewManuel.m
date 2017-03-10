@@ -88,33 +88,33 @@
     
     NSLog(@"Width : %f Height : %f ",format.width,format.height);
     _tailleIcones = format.height/4;
+    [_btnChangementMode setHidden:FALSE];
+
+    /* Mise en place des labels */
+    [_btnDimensions setFrame:CGRectMake(0,0,format.width,_tailleIcones)];
+    [_btnChangementMode setFrame:CGRectMake(0,_tailleIcones,format.width, 2*_tailleIcones)];
+    [_btnStatioDecoAttr setFrame:CGRectMake(0,_tailleIcones*2+_tailleIcones, format.width/2,_tailleIcones)];
+    [_btnHome setFrame:CGRectMake(format.width/2,_tailleIcones*2+_tailleIcones,format.width/2, _tailleIcones)];
     
+}
+
+- (void)update2D3D:(CGSize)format{
     
-    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
-    {
-        /* Mise en place des labels */
-        [_btnDimensions setFrame:CGRectMake(0,0,format.width,32+_tailleIcones/2)];
+    NSLog(@"Width : %f Height : %f ",format.width,format.height);
+    _tailleIcones = format.height/4;
+    
+    [_btnChangementMode setHidden:TRUE];
+    /* Mise en place des labels */
+    [_btnDimensions setFrame:CGRectMake(0,0,format.width,_tailleIcones)];
+    [_btnStatioDecoAttr setFrame:CGRectMake(0,_tailleIcones, format.width/2,3*_tailleIcones)];
+    [_btnHome setFrame:CGRectMake(format.width/2,_tailleIcones,format.width/2, 3*_tailleIcones)];
         
-        [_btnChangementMode setFrame:CGRectMake(0,32+_tailleIcones/2,format.width, _tailleIcones/2+_tailleIcones+_tailleIcones/2)];
-        
-        [_btnStatioDecoAttr setFrame:CGRectMake(0,32+_tailleIcones*2+_tailleIcones/2, format.width/2,_tailleIcones+6)];
-        
-        [_btnHome setFrame:CGRectMake(format.width/2,32+_tailleIcones*2+_tailleIcones/2,format.width/2, _tailleIcones +6)];
-        
-    }else{
-        
-        /* Mise en place des labels */
-        [_btnDimensions setFrame:CGRectMake(0,0,format.width,32+_tailleIcones/2)];
-        
-        [_btnChangementMode setFrame:CGRectMake(0,32+_tailleIcones/2,format.width, _tailleIcones/2+_tailleIcones)];
-        
-        [_btnStatioDecoAttr setFrame:CGRectMake(0,32+_tailleIcones+_tailleIcones, format.width,_tailleIcones)];
-        
-        [_btnHome setFrame:CGRectMake(0,32+_tailleIcones*2+_tailleIcones,format.width, _tailleIcones/2+6)];
-    }
+    
     
     
 }
+
+
 
 - (void) updateBtnDimensions:(NSString*) item{
     [_btnDimensions setTitle:item forState:UIControlStateNormal];
