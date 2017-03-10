@@ -119,6 +119,26 @@ ViewManuel *ecran;
     [self.navigationController pushViewController:secondController animated:YES];
     
 }
+
+
+
+/* Gestion des toucher long par le viewController */
+- (void) quitView:(UILongPressGestureRecognizer*)gesture{
+    if ( gesture.state == UIGestureRecognizerStateBegan) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+}
+
+
+- (void) homeFunction:(UILongPressGestureRecognizer*)gesture{
+    if ( gesture.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"Fonction Home activé!");
+    }
+}
+
+
+
 -(void) changeStatio:(UIButton*)send{
     switch (_enStatio) {
         case TRUE:

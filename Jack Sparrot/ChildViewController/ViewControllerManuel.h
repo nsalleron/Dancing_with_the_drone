@@ -13,7 +13,9 @@
 
 - (void) goToDimensionChoice:(UIButton*)send;
 - (void) changeSatio:(UIButton*)send;
+- (void) homeFunction:(UILongPressGestureRecognizer*)gesture;
 - (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture;
+- (void) quitView:(UILongPressGestureRecognizer*)gesture;
 - (void) changeAxe:(UIButton*)send;
 
 @property (assign, nonatomic) NSInteger index;

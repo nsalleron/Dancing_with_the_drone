@@ -93,33 +93,33 @@ UINavigationController *myVC;
 
 - (void)updateView:(CGSize)format{
     
-    _tailleIcones = format.height/3 - 30;
+    _tailleIcones = format.height/3;
     
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
     {
         
         
         /* Mise en place du logo et des boutons */
-        [_imgLogo setFrame:CGRectMake (format.width/5.5,
-                            (format.height)/5, _tailleIcones*2, _tailleIcones*2)];
+        [_imgLogo setFrame:CGRectMake (format.width/9,
+                            (format.height)/7, _tailleIcones*2, _tailleIcones*2)];
         
         
-        [_btnDrone setFrame:CGRectMake(format.width/5.5 + _tailleIcones*2 + 10,
-                                       (format.height/5),
+        [_btnDrone setFrame:CGRectMake(format.width/9 + _tailleIcones*2 + 10,
+                                       (format.height/4),
                                        _tailleIcones*2, _tailleIcones/2)];
         
               
-        [_btnOptions setFrame:CGRectMake(format.width/5.5 + _tailleIcones*2 + 10,
-                                       format.height/5 + _tailleIcones/2 + 20,
+        [_btnOptions setFrame:CGRectMake(format.width/9 + _tailleIcones*2 + 10,
+                                       format.height/4 + _tailleIcones/2 + 20,
                                        _tailleIcones*2, _tailleIcones/2)];
         
         /* Mise en place des labels */
             /* LabelBatterySmartphone */
         [_labelBatterySmartphone setHidden:NO];
-        [_labelBatterySmartphone setFrame:CGRectMake(format.width - _tailleIcones*1.2-10,10,_tailleIcones*1.2,_tailleIcones/3)];
+        [_labelBatterySmartphone setFrame:CGRectMake(format.width - _tailleIcones*1.1,0,_tailleIcones*1.2,_tailleIcones/3)];
         
             /* LabelBatteryDrone */
-        [_labelBatteryDrone setFrame:CGRectMake(10,10,_tailleIcones*1.2,_tailleIcones/3)];
+        [_labelBatteryDrone setFrame:CGRectMake(5,0,_tailleIcones*1.2,_tailleIcones/3)];
         
             /* LabelVersionApp*/
         [_labelVersionApp setFrame:CGRectMake(format.width - _tailleIcones + (_tailleIcones/3) ,format.height - _tailleIcones/2 + 10,_tailleIcones,_tailleIcones/2)];
@@ -128,38 +128,33 @@ UINavigationController *myVC;
     }else{
         
         /* Mise en place du logo et des boutons */
-        [_imgLogo setFrame:CGRectMake (format.width/4.0,
-                                       (format.height)/6.0, _tailleIcones, _tailleIcones)];
+        [_imgLogo setFrame:CGRectMake (format.width/9.0,
+                                       (format.height)/9.0, _tailleIcones*1.3, _tailleIcones*1.3)];
         
         
-        [_btnDrone setFrame:CGRectMake(format.width/4.0 ,
-                                       (format.height/6.0) + _tailleIcones + 10,
-                                       _tailleIcones, _tailleIcones/5)];
+        [_btnDrone setFrame:CGRectMake(format.width/9.0 ,
+                                       (format.height/6.0) + _tailleIcones*1.2,
+                                       _tailleIcones*1.3, _tailleIcones/3)];
         
         
-        [_btnOptions setFrame:CGRectMake(format.width/4.0,
-                                         format.height/6.0 + _tailleIcones + 50 ,
-                                         _tailleIcones, _tailleIcones/5)];
-        
-        //[_btnOptions sizeToFit];
-        //[_btnDrone sizeToFit];
-        //[_btnChore sizeToFit];
+        [_btnOptions setFrame:CGRectMake(format.width/9.0,
+                                         format.height/6.0 + _tailleIcones*1.2 + 90 ,
+                                         _tailleIcones*1.3, _tailleIcones/3)];
         
         /* Mise en place des labels */
-            /* LabelBatterySmartphone */
+        /* LabelBatterySmartphone */
         [_labelBatterySmartphone setHidden:YES];
-            /* LabelBatteryDrone */
+        /* LabelBatteryDrone */
         [_labelBatteryDrone setFrame:CGRectMake(10,
                                                 format.height - _tailleIcones/3,
                                                 _tailleIcones,
                                                 _tailleIcones/2)];
-            /* LabelVersionApp */
+        /* LabelVersionApp */
         [_labelVersionApp setFrame:CGRectMake(format.width - _tailleIcones - 10 ,
                                               format.height -_tailleIcones/3,
                                               _tailleIcones,
                                               _tailleIcones/2)];
         [_labelVersionApp setTextAlignment:NSTextAlignmentRight];
-        
         
         
     }

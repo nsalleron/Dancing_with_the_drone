@@ -62,11 +62,22 @@
         [_btnStatioDecoAttr addTarget:self.superview action:@selector(changeSatio:) forControlEvents:UIControlEventTouchUpInside];
          [_btnChangementMode addTarget:self.superview action:@selector(changeAxe:) forControlEvents:UIControlEventTouchUpInside];
         
-        /* Gestion Pression longue btnStatioDecoAttr */
-        _longPress = [[UILongPressGestureRecognizer alloc] init];
-        [_longPress addTarget:self action:@selector(changeDecoAttr:)];
-        [_longPress setMinimumPressDuration:1];
-        [_btnStatioDecoAttr addGestureRecognizer:_longPress];
+        /* Gestion Pression longue btnStatioDecoAttr/Dimensions/Home */
+        _longPressDecoAttr = [[UILongPressGestureRecognizer alloc] init];
+        [_longPressDecoAttr addTarget:self action:@selector(changeDecoAttr:)];
+        [_longPressDecoAttr setMinimumPressDuration:1];
+        [_btnStatioDecoAttr addGestureRecognizer:_longPressDecoAttr];
+        
+        _longPressDim = [[UILongPressGestureRecognizer alloc] init];
+        [_longPressDim addTarget:self action:@selector(exit:)];
+        [_longPressDim setMinimumPressDuration:2];
+        [_btnDimensions addGestureRecognizer:_longPressDim];
+        
+        _longPressHome = [[UILongPressGestureRecognizer alloc] init];
+        [_longPressHome addTarget:self action:@selector(homeFunction:)];
+        [_longPressHome setMinimumPressDuration:1];
+        [_btnHome addGestureRecognizer:_longPressHome];
+        
         
         
         [self addSubview:_btnChangementMode];
@@ -86,7 +97,6 @@
 
 - (void)updateView:(CGSize)format{
     
-    NSLog(@"Width : %f Height : %f ",format.width,format.height);
     _tailleIcones = format.height/4;
     [_btnChangementMode setHidden:FALSE];
 
@@ -100,7 +110,6 @@
 
 - (void)update2D3D:(CGSize)format{
     
-    NSLog(@"Width : %f Height : %f ",format.width,format.height);
     _tailleIcones = format.height/4;
     
     [_btnChangementMode setHidden:TRUE];
@@ -108,9 +117,6 @@
     [_btnDimensions setFrame:CGRectMake(0,0,format.width,_tailleIcones)];
     [_btnStatioDecoAttr setFrame:CGRectMake(0,_tailleIcones, format.width/2,3*_tailleIcones)];
     [_btnHome setFrame:CGRectMake(format.width/2,_tailleIcones,format.width/2, 3*_tailleIcones)];
-        
-    
-    
     
 }
 
@@ -136,6 +142,19 @@
         [_vc changeDecoAttr:gesture];
     }
 
+}
+
+- (void) exit:(UILongPressGestureRecognizer*)gesture{
+    if ( gesture.state == UIGestureRecognizerStateBegan) {
+        //Update du View Controller
+        [_vc quitView:gesture];
+    }
+}
+- (void) homeFunction:(UILongPressGestureRecognizer*)gesture{
+    if ( gesture.state == UIGestureRecognizerStateBegan) {
+        //Update du View Controller
+        [_vc homeFunction:gesture];
+    }
 }
 
 
