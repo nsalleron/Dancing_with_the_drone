@@ -64,7 +64,7 @@ UINavigationController *myVC;
         
         [_btnDrone addTarget:self.superview action:@selector(goToDroneControl:) forControlEvents:UIControlEventTouchUpInside];
         
-        
+         [_btnOptions addTarget:self.superview action:@selector(goToDroneOptions:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_imgLogo];
         [self addSubview:_btnOptions];
         [self addSubview:_btnDrone];
@@ -85,6 +85,10 @@ UINavigationController *myVC;
     }else{
         printf("NULL Inside view\n");
     }
+}
+
+- (void)setBattery:(NSString*) battery{
+    _labelBatteryDrone.text = battery;
 }
 
 - (void)updateView:(CGSize)format{

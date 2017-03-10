@@ -18,6 +18,7 @@
 
 
 - (void) goToDroneControl:(UIButton*)send;
+- (void) goToDroneOptions:(UIButton*)send;
 
 @end
 

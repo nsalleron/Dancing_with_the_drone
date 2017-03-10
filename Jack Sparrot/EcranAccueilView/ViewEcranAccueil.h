@@ -25,6 +25,8 @@
 
 - (void) setNavigationController:(UINavigationController*) nv;
 
+- (void) setBattery:(NSString *) battery;
+
 @end
 
 #endif

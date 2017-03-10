@@ -144,7 +144,7 @@ typedef eARNETWORKAL_ERROR (*ARNETWORKAL_Manager_Unlock_t) (ARNETWORKAL_Manager_
 /**
  * @brief gets the network bandwidth.
  * @param manager The manager.
- * @param[out] pointer which will hold the upload bandwidth, in bytes per second (optionnal, can be NULL)
+ * @param[out] uploadBw which will hold the upload bandwidth, in bytes per second (optionnal, can be NULL)
  * @param[out] pointer which will hold the download bandwidth, in bytes per second (optionnal, can be NULL)
  * @return error see ::eARNETWORKAL_ERROR
  */

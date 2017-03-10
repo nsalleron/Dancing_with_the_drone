@@ -96,7 +96,9 @@ NSString *selected;
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    //Appel du protocole
     [self.delegate addItemViewController:self didFinishEnteringItem:selected];
+                                                                        //^- String.
 }
 
 @end

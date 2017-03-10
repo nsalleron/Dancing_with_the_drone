@@ -10,12 +10,15 @@
 
 @class ViewDimensionViewController;
 
+// Nom du protocol
 @protocol ViewDimensionViewControllerDelegate <NSObject>
+//Méthode du protocol
 - (void)addItemViewController:(ViewDimensionViewController *)controller didFinishEnteringItem:(NSString *)item;
 @end
 
 @interface ViewDimensionViewController : UIViewController
 
+//Delegate du protocole, le viewcontroller accepte ce protocole.
 @property (nonatomic, weak) id <ViewDimensionViewControllerDelegate> delegate;
 
 @end

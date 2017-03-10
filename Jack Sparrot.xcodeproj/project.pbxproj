@@ -15,8 +15,12 @@
 		A61AEEE71E40978F00EDB53B /* Jack_SparrotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEEE61E40978F00EDB53B /* Jack_SparrotTests.m */; };
 		A61AEEF21E40978F00EDB53B /* Jack_SparrotUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEEF11E40978F00EDB53B /* Jack_SparrotUITests.m */; };
 		A61AEF011E409EEC00EDB53B /* ViewEcranAccueil.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */; };
+		A62504D41E7065C800288587 /* BebopDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = A62504D31E7065C800288587 /* BebopDrone.m */; };
 		A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */; };
 		A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1781E4333E500F08072 /* ViewManuel.m */; };
+		A6D4750F1E70754F00B57D3C /* DroneDiscoverer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D4750E1E70754F00B57D3C /* DroneDiscoverer.m */; };
+		A6D475151E72E32F00B57D3C /* ViewControllerOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D475121E72E32F00B57D3C /* ViewControllerOptions.m */; };
+		A6D475161E72E32F00B57D3C /* ViewOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D475141E72E32F00B57D3C /* ViewOptions.m */; };
 		A6E50DCB1E5E0A9800830EFD /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E50DC91E5E0A9800830EFD /* Interface.storyboard */; };
 		A6E50DCD1E5E0A9800830EFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E50DCC1E5E0A9800830EFD /* Assets.xcassets */; };
 		A6E50DD41E5E0A9800830EFD /* Jack Sparrot Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A6E50DD31E5E0A9800830EFD /* Jack Sparrot Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -106,10 +110,18 @@
 		A61AEEF31E40978F00EDB53B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A61AEEFF1E409ED800EDB53B /* ViewEcranAccueil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewEcranAccueil.h; path = EcranAccueilView/ViewEcranAccueil.h; sourceTree = "<group>"; };
 		A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewEcranAccueil.m; path = EcranAccueilView/ViewEcranAccueil.m; sourceTree = "<group>"; };
+		A62504D21E7065C800288587 /* BebopDrone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BebopDrone.h; sourceTree = "<group>"; };
+		A62504D31E7065C800288587 /* BebopDrone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BebopDrone.m; sourceTree = "<group>"; };
 		A6565ED31E49C1E900CC7621 /* ViewControllerManuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerManuel.h; path = ChildViewController/ViewControllerManuel.h; sourceTree = "<group>"; };
 		A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerManuel.m; path = ChildViewController/ViewControllerManuel.m; sourceTree = "<group>"; };
 		A67EC1771E4333E500F08072 /* ViewManuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewManuel.h; path = ControlerDroneView/ViewManuel.h; sourceTree = "<group>"; };
 		A67EC1781E4333E500F08072 /* ViewManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewManuel.m; path = ControlerDroneView/ViewManuel.m; sourceTree = "<group>"; };
+		A6D4750D1E70754F00B57D3C /* DroneDiscoverer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroneDiscoverer.h; sourceTree = "<group>"; };
+		A6D4750E1E70754F00B57D3C /* DroneDiscoverer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroneDiscoverer.m; sourceTree = "<group>"; };
+		A6D475111E72E32F00B57D3C /* ViewControllerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerOptions.h; sourceTree = "<group>"; };
+		A6D475121E72E32F00B57D3C /* ViewControllerOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerOptions.m; sourceTree = "<group>"; };
+		A6D475131E72E32F00B57D3C /* ViewOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewOptions.h; sourceTree = "<group>"; };
+		A6D475141E72E32F00B57D3C /* ViewOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewOptions.m; sourceTree = "<group>"; };
 		A6E50DC71E5E0A9800830EFD /* Jack Sparrot Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jack Sparrot Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E50DCA1E5E0A9800830EFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		A6E50DCC1E5E0A9800830EFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -176,6 +188,7 @@
 				A6E50DC81E5E0A9800830EFD /* Jack Sparrot Watch */,
 				A6E50DD71E5E0A9800830EFD /* Jack Sparrot Watch Extension */,
 				A61AEEC71E40978F00EDB53B /* Products */,
+				A62503F01E7061A900288587 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -194,12 +207,15 @@
 		A61AEEC81E40978F00EDB53B /* Jack Sparrot */ = {
 			isa = PBXGroup;
 			children = (
+				A6D4750C1E70753700B57D3C /* Discovery */,
+				A62504D11E7065B600288587 /* Drone */,
 				A61AEECC1E40978F00EDB53B /* AppDelegate.h */,
 				A61AEECD1E40978F00EDB53B /* AppDelegate.m */,
 				A61AEED81E40978F00EDB53B /* Assets.xcassets */,
 				A61AEEDA1E40978F00EDB53B /* LaunchScreen.storyboard */,
 				A61AEEDD1E40978F00EDB53B /* Info.plist */,
 				A61AEED51E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld */,
+				A6D475101E72E32F00B57D3C /* OptionsView */,
 				A61AEEC91E40978F00EDB53B /* EcranAccueilView */,
 				A67EC1761E4333BF00F08072 /* EcranDroneView */,
 			);
@@ -238,6 +254,22 @@
 			path = "Jack SparrotUITests";
 			sourceTree = "<group>";
 		};
+		A62503F01E7061A900288587 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A62504D11E7065B600288587 /* Drone */ = {
+			isa = PBXGroup;
+			children = (
+				A62504D21E7065C800288587 /* BebopDrone.h */,
+				A62504D31E7065C800288587 /* BebopDrone.m */,
+			);
+			name = Drone;
+			sourceTree = "<group>";
+		};
 		A67EC1761E4333BF00F08072 /* EcranDroneView */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +280,26 @@
 				A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */,
 			);
 			name = EcranDroneView;
+			sourceTree = "<group>";
+		};
+		A6D4750C1E70753700B57D3C /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				A6D4750D1E70754F00B57D3C /* DroneDiscoverer.h */,
+				A6D4750E1E70754F00B57D3C /* DroneDiscoverer.m */,
+			);
+			name = Discovery;
+			sourceTree = "<group>";
+		};
+		A6D475101E72E32F00B57D3C /* OptionsView */ = {
+			isa = PBXGroup;
+			children = (
+				A6D475111E72E32F00B57D3C /* ViewControllerOptions.h */,
+				A6D475121E72E32F00B57D3C /* ViewControllerOptions.m */,
+				A6D475131E72E32F00B57D3C /* ViewOptions.h */,
+				A6D475141E72E32F00B57D3C /* ViewOptions.m */,
+			);
+			path = OptionsView;
 			sourceTree = "<group>";
 		};
 		A6E50DC81E5E0A9800830EFD /* Jack Sparrot Watch */ = {
@@ -491,15 +543,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6F6EE6A1E64F05B0007B54D /* ViewDimensionViewController.m in Sources */,
+				A62504D41E7065C800288587 /* BebopDrone.m in Sources */,
 				A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */,
 				A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */,
 				A61AEED71E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld in Sources */,
+				A6D475161E72E32F00B57D3C /* ViewOptions.m in Sources */,
 				A61AEED11E40978F00EDB53B /* ViewControllerAcceuil.m in Sources */,
+				A6D4750F1E70754F00B57D3C /* DroneDiscoverer.m in Sources */,
 				A61AEECE1E40978F00EDB53B /* AppDelegate.m in Sources */,
 				A6F6EE731E6C26510007B54D /* CustomNavigationController.m in Sources */,
 				A6F6EE661E64EBB10007B54D /* main.m in Sources */,
 				A6F6EE6D1E64F0760007B54D /* ViewDimension.m in Sources */,
 				A61AEF011E409EEC00EDB53B /* ViewEcranAccueil.m in Sources */,
+				A6D475151E72E32F00B57D3C /* ViewControllerOptions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,32 +838,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "/Users/nicolassalleron/Desktop/PSAR-Project/application-ios/SDK/ios/include";
-				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "/Users/nicolassalleron/Desktop/PSAR-Project/application-ios/SDK/sim/include";
+				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "$(PROJECT_DIR)/SDK/ios/include";
+				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(PROJECT_DIR)/SDK/sim/include";
 				INFOPLIST_FILE = "Jack SparrotUITests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "/Users/nicolassalleron/Desktop/PSAR-Project/application-ios/SDK/ios/lib";
-				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "/Users/nicolassalleron/Desktop/PSAR-Project/application-ios/SDK/sim/lib";
-				OTHER_LDFLAGS = (
-					"-larcommands",
-					"-larcontroller",
-					"-lardiscovery",
-					"-larnetwork",
-					"-larnetworkal",
-					"-larsal",
-					"-larstream",
-					"-larstream2",
-					"-larmavlink",
-					"-ljson",
-					"-larmedia",
-					"-larutils",
-					"-lcurl",
-					"-lardatatransfer",
-					"-lcrypto",
-					"-lssl",
-					"-lz",
-				);
+				LIBRARY_SEARCH_PATHS = "";
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "$(PROJECT_DIR)/SDK/ios/lib";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(PROJECT_DIR)/SDK/sim/lib";
+				LINK_WITH_STANDARD_LIBRARIES = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "-larcommands -larcontroller -lardiscovery -larnetwork -larnetworkal -larstream -larstream2 -larmavlink -ljson -larmedia -larutils -lcurl -lardatatransfer -lssl -lz";
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-SparrotUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = "Jack Sparrot";
@@ -818,32 +859,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "/Users/nicolassalleron/Desktop/PSAR-Project/application-ios/SDK/ios/include";
-				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "/Users/nicolassalleron/Desktop/PSAR-Project/application-ios/SDK/sim/include";
+				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "$(PROJECT_DIR)/SDK/ios/include";
+				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(PROJECT_DIR)/SDK/sim/include";
 				INFOPLIST_FILE = "Jack SparrotUITests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "/Users/nicolassalleron/Desktop/PSAR-Project/application-ios/SDK/ios/lib";
-				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "/Users/nicolassalleron/Desktop/PSAR-Project/application-ios/SDK/sim/lib";
-				OTHER_LDFLAGS = (
-					"-larcommands",
-					"-larcontroller",
-					"-lardiscovery",
-					"-larnetwork",
-					"-larnetworkal",
-					"-larsal",
-					"-larstream",
-					"-larstream2",
-					"-larmavlink",
-					"-ljson",
-					"-larmedia",
-					"-larutils",
-					"-lcurl",
-					"-lardatatransfer",
-					"-lcrypto",
-					"-lssl",
-					"-lz",
-				);
+				LIBRARY_SEARCH_PATHS = "";
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "$(PROJECT_DIR)/SDK/ios/lib";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(PROJECT_DIR)/SDK/sim/lib";
+				LINK_WITH_STANDARD_LIBRARIES = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "-larcommands -larcontroller -lardiscovery -larnetwork -larnetworkal -larstream -larstream2 -larmavlink -ljson -larmedia -larutils -lcurl -lardatatransfer -lssl -lz";
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-SparrotUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = "Jack Sparrot";
