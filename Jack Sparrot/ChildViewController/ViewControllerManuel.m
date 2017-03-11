@@ -16,7 +16,7 @@
 
 
 ViewManuel *ecran;
-
+BOOL firstTime = TRUE;
 
 @implementation ViewControllerManuel
 
@@ -32,7 +32,7 @@ ViewManuel *ecran;
     ecran = [[ViewManuel alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecran setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
     [ecran setViewController:self];
-    [ecran updateBtnStatioDecoAttr:@"Decollage"];
+    [ecran updateBtnStatioDecoAttr:@"Décollage"];
     [ecran updateBtnDimensions:@"1D"];
     [ecran updateBtnChangementMode:@"Axe X"];
     [self setView: ecran];
@@ -53,20 +53,25 @@ ViewManuel *ecran;
 }
 
 - (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture{
+    NSString *statio = @"Mode Stationnaire : ON";
     switch (_enVol) {
         case TRUE:
             //Atterrissage;
             NSLog(@"Atterrissage");
             _enVol = FALSE;
+            _enStatio = FALSE;
+            statio = @"Mode Stationnaire : OFF";
             break;
             
         case FALSE:
             //Decollage;
             NSLog(@"Decollage");
             _enVol = TRUE;
+            _enStatio = TRUE;
         default:
             break;
     }
+    [ecran updateBtnStatioDecoAttr:statio];
 
     
 }
@@ -75,14 +80,14 @@ ViewManuel *ecran;
     NSString *axe = @"Axe X";
     switch (_axeX) {
         case TRUE:
-            //Atterrissage;
+            //Axe Y
             NSLog(@"Axe Y");
             axe = @"Axe Y";
             _axeX = FALSE;
             break;
             
         case FALSE:
-            //Decollage;
+            //Axe X
             NSLog(@"Axe X");
             _axeX = TRUE;
         default:
@@ -93,18 +98,24 @@ ViewManuel *ecran;
 }
 
 - (void) changeSatio:(UIButton*)send{
-    NSString *statio = @"Mode Stationnaire";
+    if(firstTime){
+        [self changeDecoAttr:NULL];
+        firstTime = FALSE;
+        return;
+    }
+        
+    NSString *statio = @"Mode Stationnaire : ON";
     switch (_enStatio) {
         case TRUE:
-            //Atterrissage;
-            NSLog(@"Non stationnaire");
+            //Mode non stationnaire;
+            NSLog(@"Mode stationnaire : OFF");
             _enStatio = FALSE;
-            statio = @"NON Stationnaire";
+            statio = @"Mode Stationnaire : OFF";
             break;
             
         case FALSE:
-            //Decollage;
-            NSLog(@"Mode Stationnaire");
+            //Mode stationnaire;
+            NSLog(@"Mode Stationnaire : ON");
              _enStatio  = TRUE;
         default:
             break;
@@ -133,7 +144,7 @@ ViewManuel *ecran;
 
 - (void) homeFunction:(UILongPressGestureRecognizer*)gesture{
     if ( gesture.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"Fonction Home activé!");
+        NSLog(@"Fonction Home activée!");
     }
 }
 

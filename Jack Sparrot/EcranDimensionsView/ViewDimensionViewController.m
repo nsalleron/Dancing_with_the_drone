@@ -37,7 +37,6 @@ NSString *selected;
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    NSLog(@"Passage shouldAutotoratote");
     return (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
