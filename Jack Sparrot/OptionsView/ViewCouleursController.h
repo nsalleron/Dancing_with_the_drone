@@ -16,7 +16,7 @@
 // Nom du protocol
 @protocol ViewCouleursControllerDelegate <NSObject>
 //Méthode du protocol
-- (void)addItemViewController:(ViewCouleursController *)controller didFinishEnteringItem:(NSString *)item;
+- (void)addCouleur:(ViewCouleursController *)controller didFinishEnteringItem:(UIColor *)item;
 @end
 
 

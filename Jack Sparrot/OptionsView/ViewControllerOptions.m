@@ -17,6 +17,8 @@
 
 //UIView *ecranOptions;
 ViewOptions *ecranOptions;
+BOOL choiceColor = false;
+UIColor *saveColor;
 
 @implementation ViewControllerOptions
 
@@ -40,9 +42,10 @@ ViewOptions *ecranOptions;
 }
 
 -(void) goToColorChoice:(UIButton*)send{
-    
+    choiceColor = true;
     ViewCouleursController *secondController = [[ViewCouleursController alloc] init];
-    //secondController.delegate = self;
+    secondController.delegate = self;
+    [[self navigationController] setNavigationBarHidden:YES];
     [self.navigationController pushViewController:secondController animated:YES];
     
 }
@@ -73,8 +76,22 @@ ViewOptions *ecranOptions;
 
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+    if(choiceColor)
+        [[self navigationController] setNavigationBarHidden:YES];
+    else
+        [[self navigationController] setNavigationBarHidden:NO];
+    
     [ecranOptions updateView:size];
 }
+
+- (void)addCouleur:(ViewDimensionViewController *)controller didFinishEnteringItem:(UIColor *)item
+{
+    saveColor = item;
+    NSLog(@"RETOUR ");
+}
+
+
+
 
 /*
 -(void) modeInOut:(UISwitch*) _swhInOut {

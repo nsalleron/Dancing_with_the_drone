@@ -13,6 +13,7 @@
 @end
 
 ViewCouleurs *ecranCouleurs;
+UIColor *valCouleur;
 //NSString *selected;
 
 @implementation ViewCouleursController
@@ -24,6 +25,20 @@ ViewCouleurs *ecranCouleurs;
     [ecranCouleurs setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
     [self setView: ecranCouleurs];
     [self setTitle:@"Couleurs"];
+    
+    
+}
+
+-(void) endColorChoice:(UIButton*)send{
+    
+    NSLog(@"Valeur :%@",send.titleLabel.text);
+    valCouleur = send.backgroundColor;
+    
+    [self.navigationController popViewControllerAnimated:YES];
+     [self.navigationController setNavigationBarHidden:NO];
+    //Reprise de la variable dans la globale puis fermeture fenetre
+    
+    
 }
 
 
@@ -61,6 +76,13 @@ ViewCouleurs *ecranCouleurs;
 {
     return UIInterfaceOrientationPortrait;
 }
+
+
+- (void) viewWillDisappear:(BOOL)animated{
+    NSLog(@"PASSAGE ICI ");
+     [self.delegate addCouleur:self didFinishEnteringItem:valCouleur];
+}
+
 
 
 @end

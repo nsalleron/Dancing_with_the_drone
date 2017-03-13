@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewDimensionViewController.h"
+#import "ViewCouleurs.h"
 
-@interface ViewControllerOptions : UIViewController
+@interface ViewControllerOptions : UIViewController <ViewCouleursControllerDelegate>
 
 -(void) goToColorChoice:(UIButton*) send;
 //-(void) modeInOut:(UISwitch*)send;
