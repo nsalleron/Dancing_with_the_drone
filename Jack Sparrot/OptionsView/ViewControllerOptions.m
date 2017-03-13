@@ -19,6 +19,9 @@
 ViewOptions *ecranOptions;
 BOOL choiceColor = false;
 UIColor *saveColor;
+// 1 = 1D, 2 = 2D, 3 = 3D, 4 = Axe X, 5 = Axe Y
+int btnColorID = 0;
+
 
 @implementation ViewControllerOptions
 
@@ -42,6 +45,19 @@ UIColor *saveColor;
 }
 
 -(void) goToColorChoice:(UIButton*)send{
+    NSString *tmp = [[send titleLabel]text];
+    if([tmp isEqualToString:@"1D"]){
+        btnColorID = 1;
+    }else if ([tmp isEqualToString:@"2D"]){
+        btnColorID = 2;
+    }else if ([tmp isEqualToString:@"3D"]){
+        btnColorID = 3;
+    }else if ([tmp isEqualToString:@"Axe X"]){
+        btnColorID = 4;
+    }else if ([tmp isEqualToString:@"Axe Y"]){
+        btnColorID = 5;
+    }
+    
     choiceColor = true;
     ViewCouleursController *secondController = [[ViewCouleursController alloc] init];
     secondController.delegate = self;
@@ -86,12 +102,45 @@ UIColor *saveColor;
 
 - (void)addCouleur:(ViewDimensionViewController *)controller didFinishEnteringItem:(UIColor *)item
 {
-    saveColor = item;
+    [ecranOptions updateBtn:btnColorID color:item];
+    choiceColor = false;
     NSLog(@"RETOUR ");
 }
 
+- (void) viewWillDisappear:(BOOL)animated{
+    [self saveData];
+}
 
-
+- (void) saveData {
+    
+    NSArray *color = ecranOptions.getBtnColors;
+    
+    if ([color objectAtIndex:0] != nil) {
+        NSLog(@"1D");
+        NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject:[color objectAtIndex:0]];
+        [[NSUserDefaults standardUserDefaults] setObject:colorData forKey:@"1D"];
+    }
+    if ([color objectAtIndex:1] != nil) {
+        NSLog(@"2D");
+        NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject:[color objectAtIndex:1]];
+        [[NSUserDefaults standardUserDefaults] setObject:colorData forKey:@"2D"];
+    }
+    if ([color objectAtIndex:2] != nil) {
+        NSLog(@"3D");
+        NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject:[color objectAtIndex:2]];
+        [[NSUserDefaults standardUserDefaults] setObject:colorData forKey:@"3D"];
+    }
+    if ([color objectAtIndex:3] != nil) {
+        NSLog(@"Axe X");
+        NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject:[color objectAtIndex:3]];
+        [[NSUserDefaults standardUserDefaults] setObject:colorData forKey:@"Axe X"];
+    }
+    if ([color objectAtIndex:4] != nil) {
+        NSLog(@"Axe Y");
+        NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject:[color objectAtIndex:4]];
+        [[NSUserDefaults standardUserDefaults] setObject:colorData forKey:@"Axe Y"];
+    }
+}
 
 /*
 -(void) modeInOut:(UISwitch*) _swhInOut {

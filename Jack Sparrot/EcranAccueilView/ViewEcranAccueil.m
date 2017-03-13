@@ -19,6 +19,7 @@ UIDevice *myDevice;
 UINavigationController *myVC;
 
 
+
 - (id) initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if(self){

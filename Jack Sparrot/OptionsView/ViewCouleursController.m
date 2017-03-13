@@ -36,7 +36,7 @@ UIColor *valCouleur;
     
     [self.navigationController popViewControllerAnimated:YES];
      [self.navigationController setNavigationBarHidden:NO];
-    //Reprise de la variable dans la globale puis fermeture fenetre
+    
     
     
 }

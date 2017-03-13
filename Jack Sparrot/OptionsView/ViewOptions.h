@@ -19,8 +19,11 @@
 @property (readonly,nonatomic,retain) UITextField *txtHauteurMax;
 @property (readonly,nonatomic,retain) UITextField *txtCoeffAccel;
 
-//@property (readonly,nonatomic,retain) UIButton *btnInterieur;
-//@property (readonly,nonatomic,retain) UIButton *btnExterieur;
+@property (readwrite,nonatomic,retain) UIColor *color1D;
+@property (readwrite,nonatomic,retain) UIColor *color2D;
+@property (readwrite,nonatomic,retain) UIColor *color3D;
+@property (readwrite,nonatomic,retain) UIColor *colorX;
+@property (readwrite,nonatomic,retain) UIColor *colorY;
 
 @property (readwrite, nonatomic, retain) UISwitch *swhInOut;
 
@@ -34,6 +37,8 @@
 @property (assign, nonatomic) ViewControllerOptions *vc;
 
 - (void) updateView:(CGSize) format;
+- (void) updateBtn:(int)btn color: (UIColor*) color;
+- (NSArray *) getBtnColors;
 
 
 @end

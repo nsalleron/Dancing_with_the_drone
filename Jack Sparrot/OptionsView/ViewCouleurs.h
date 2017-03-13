@@ -22,6 +22,7 @@
 
 - (void) updateView:(CGSize) format;
 
+
 @end
 
 #endif

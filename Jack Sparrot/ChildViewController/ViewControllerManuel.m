@@ -25,6 +25,7 @@ BOOL firstTime = TRUE;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     _enStatio = FALSE;
     _enVol = FALSE;
     _axeX = TRUE;

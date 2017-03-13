@@ -11,6 +11,47 @@
 
 @implementation ViewDimension
 
+- (void) colors{
+    
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"1D"];
+    
+    if (colorData != nil) {
+        
+        self.color1D = [NSKeyedUnarchiver unarchiveObjectWithData:colorData];
+        colorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"2D"];
+        if (colorData != nil) {
+            self.color2D = [NSKeyedUnarchiver unarchiveObjectWithData:colorData];
+        }
+        colorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"3D"];
+        if (colorData != nil) {
+            self.color3D = [NSKeyedUnarchiver unarchiveObjectWithData:colorData];
+        }
+    }else{ // Mise en place des couleurs par défaut.
+        
+        self.color1D = [[UIColor alloc] initWithRed:26/255.0 green:188/255.0 blue:156/255.0 alpha:1.0];
+        self.color2D = [[UIColor alloc] initWithRed:46/255.0 green:204/255.0 blue:113/255.0 alpha:1.0];
+        self.color3D = [[UIColor alloc] initWithRed:52/255.0 green:152/255.0 blue:219/255.0 alpha:1.0];
+    }
+    
+    /* Mise en place des couleurs par défaut + changement couleur texte */
+    CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha =0.0;
+    [_color1D getRed:&red green:&green blue:&blue alpha:&alpha];
+    if((red*255+green*255+blue*255) < 380){ //Somble
+        [_btn1D setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    [_btn1D setBackgroundColor:_color1D];
+    [_color2D getRed:&red green:&green blue:&blue alpha:&alpha];
+    if((red*255+green*255+blue*255) < 380){ //Somble
+        [_btn2D setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    [_btn2D setBackgroundColor:_color2D];
+    [_color3D getRed:&red green:&green blue:&blue alpha:&alpha];
+    if((red*255+green*255+blue*255) < 380){ //Somble
+        [_btn3D setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    [_btn3D setBackgroundColor:_color3D];
+}
+
 - (id) initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     
@@ -34,18 +75,18 @@
         
         [[_btn1D layer] setBorderWidth:1.0f];
         [[_btn1D layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
-        [[_btn1D layer] setCornerRadius:8.0f];
-        [[_btn1D layer] setBorderWidth:2.0f];
+        [[_btn1D layer] setCornerRadius:1.0f];
+        [[_btn1D layer] setBorderWidth:1.0f];
         
         [[_btn2D layer] setBorderWidth:1.0f];
         [[_btn2D layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
-        [[_btn2D layer] setCornerRadius:8.0f];
-        [[_btn2D layer] setBorderWidth:2.0f];
+        [[_btn2D layer] setCornerRadius:1.0f];
+        [[_btn2D layer] setBorderWidth:1.0f];
         
         [[_btn3D layer] setBorderWidth:1.0f];
         [[_btn3D layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
-        [[_btn3D layer] setCornerRadius:8.0f];
-        [[_btn3D layer] setBorderWidth:2.0f];
+        [[_btn3D layer] setCornerRadius:1.0f];
+        [[_btn3D layer] setBorderWidth:1.0f];
         
         #pragma clang diagnostic push
         #pragma clang diagnostic ignored "-Wundeclared-selector"
@@ -53,6 +94,8 @@
         [_btn2D addTarget:self.superview action:@selector(endDimensionChoice:) forControlEvents:UIControlEventTouchUpInside];
         [_btn3D addTarget:self.superview action:@selector(endDimensionChoice:) forControlEvents:UIControlEventTouchUpInside];
         #pragma clang diagnostic pop
+        
+        [self colors];
         
         [self addSubview:_btn1D];
         [self addSubview:_btn2D];

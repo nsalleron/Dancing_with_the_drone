@@ -19,6 +19,11 @@
 @property (readwrite,nonatomic,retain) UILongPressGestureRecognizer *longPressDecoAttr ;
 @property (readwrite,nonatomic,retain) UILongPressGestureRecognizer *longPressDim ;
 @property (readwrite,nonatomic,retain) UILongPressGestureRecognizer *longPressHome ;
+@property (readwrite,nonatomic,retain) UIColor *color1D;
+@property (readwrite,nonatomic,retain) UIColor *color2D;
+@property (readwrite,nonatomic,retain) UIColor *color3D;
+@property (readwrite,nonatomic,retain) UIColor *colorX;
+@property (readwrite,nonatomic,retain) UIColor *colorY;
 @property (assign, nonatomic) CGFloat tailleIcones;
 @property (assign, nonatomic) ViewControllerManuel *vc;
 

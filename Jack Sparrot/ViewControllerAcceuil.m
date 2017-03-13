@@ -43,6 +43,16 @@ ViewEcranAccueil *ecranAccueil;
                                                      delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     _dataSource = [NSArray array];
     _droneDiscoverer = [[DroneDiscoverer alloc] init];
     [_droneDiscoverer setDelegate:self];
