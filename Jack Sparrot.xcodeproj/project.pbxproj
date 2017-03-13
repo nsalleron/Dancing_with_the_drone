@@ -21,6 +21,8 @@
 		A6D4750F1E70754F00B57D3C /* DroneDiscoverer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D4750E1E70754F00B57D3C /* DroneDiscoverer.m */; };
 		A6D475151E72E32F00B57D3C /* ViewControllerOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D475121E72E32F00B57D3C /* ViewControllerOptions.m */; };
 		A6D475161E72E32F00B57D3C /* ViewOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D475141E72E32F00B57D3C /* ViewOptions.m */; };
+		A6D4751B1E76F58E00B57D3C /* ViewCouleurs.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D475181E76F58E00B57D3C /* ViewCouleurs.m */; };
+		A6D4751C1E76F58E00B57D3C /* ViewCouleursController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D4751A1E76F58E00B57D3C /* ViewCouleursController.m */; };
 		A6E50DCB1E5E0A9800830EFD /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6E50DC91E5E0A9800830EFD /* Interface.storyboard */; };
 		A6E50DCD1E5E0A9800830EFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E50DCC1E5E0A9800830EFD /* Assets.xcassets */; };
 		A6E50DD41E5E0A9800830EFD /* Jack Sparrot Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A6E50DD31E5E0A9800830EFD /* Jack Sparrot Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -122,6 +124,10 @@
 		A6D475121E72E32F00B57D3C /* ViewControllerOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerOptions.m; sourceTree = "<group>"; };
 		A6D475131E72E32F00B57D3C /* ViewOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewOptions.h; sourceTree = "<group>"; };
 		A6D475141E72E32F00B57D3C /* ViewOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewOptions.m; sourceTree = "<group>"; };
+		A6D475171E76F58E00B57D3C /* ViewCouleurs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewCouleurs.h; sourceTree = "<group>"; };
+		A6D475181E76F58E00B57D3C /* ViewCouleurs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewCouleurs.m; sourceTree = "<group>"; };
+		A6D475191E76F58E00B57D3C /* ViewCouleursController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewCouleursController.h; sourceTree = "<group>"; };
+		A6D4751A1E76F58E00B57D3C /* ViewCouleursController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewCouleursController.m; sourceTree = "<group>"; };
 		A6E50DC71E5E0A9800830EFD /* Jack Sparrot Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Jack Sparrot Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E50DCA1E5E0A9800830EFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		A6E50DCC1E5E0A9800830EFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -294,12 +300,24 @@
 		A6D475101E72E32F00B57D3C /* OptionsView */ = {
 			isa = PBXGroup;
 			children = (
+				A6D4751D1E76F5CE00B57D3C /* ViewCouleurs */,
 				A6D475111E72E32F00B57D3C /* ViewControllerOptions.h */,
 				A6D475121E72E32F00B57D3C /* ViewControllerOptions.m */,
 				A6D475131E72E32F00B57D3C /* ViewOptions.h */,
 				A6D475141E72E32F00B57D3C /* ViewOptions.m */,
 			);
 			path = OptionsView;
+			sourceTree = "<group>";
+		};
+		A6D4751D1E76F5CE00B57D3C /* ViewCouleurs */ = {
+			isa = PBXGroup;
+			children = (
+				A6D475171E76F58E00B57D3C /* ViewCouleurs.h */,
+				A6D475181E76F58E00B57D3C /* ViewCouleurs.m */,
+				A6D475191E76F58E00B57D3C /* ViewCouleursController.h */,
+				A6D4751A1E76F58E00B57D3C /* ViewCouleursController.m */,
+			);
+			name = ViewCouleurs;
 			sourceTree = "<group>";
 		};
 		A6E50DC81E5E0A9800830EFD /* Jack Sparrot Watch */ = {
@@ -546,6 +564,8 @@
 				A62504D41E7065C800288587 /* BebopDrone.m in Sources */,
 				A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */,
 				A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */,
+				A6D4751C1E76F58E00B57D3C /* ViewCouleursController.m in Sources */,
+				A6D4751B1E76F58E00B57D3C /* ViewCouleurs.m in Sources */,
 				A61AEED71E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld in Sources */,
 				A6D475161E72E32F00B57D3C /* ViewOptions.m in Sources */,
 				A61AEED11E40978F00EDB53B /* ViewControllerAcceuil.m in Sources */,
