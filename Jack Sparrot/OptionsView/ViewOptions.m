@@ -144,10 +144,10 @@
         [_swhInOut setFrame:CGRectMake(5+format.width/2, 64+_tailleIcones/3, format.width/2, _tailleIcones)];
         
         [_lblHauteurMax setFrame:CGRectMake(5, 64+_tailleIcones, (format.width/2)-5, _tailleIcones)];
-        [_txtHauteurMax setFrame:CGRectMake(format.width/2, 64+_tailleIcones+2, format.width/2-5, _tailleIcones-4)];
+        [_txtHauteurMax setFrame:CGRectMake(format.width/2+10, 84+_tailleIcones+2, format.width/2-20, _tailleIcones-44)];
         
         [_lblCoeffAccel setFrame:CGRectMake(5, 64+2*_tailleIcones, (format.width/2)-5, _tailleIcones)];
-        [_txtCoeffAccel setFrame:CGRectMake(format.width/2, 64+2*_tailleIcones+2, format.width/2-5, _tailleIcones-4)];
+        [_txtCoeffAccel setFrame:CGRectMake(format.width/2+10, 84+2*_tailleIcones+2, format.width/2-20, _tailleIcones-44)];
         
         [_lblCouleurDim setFrame:CGRectMake(5, 64+3*_tailleIcones, (format.width/2)-5, _tailleIcones)];
         [_btnColor1D setFrame:CGRectMake(format.width/2, 64+3*_tailleIcones, format.width/2, _tailleIcones)];
