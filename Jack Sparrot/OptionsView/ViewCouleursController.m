@@ -31,14 +31,9 @@ UIColor *valCouleur;
 
 -(void) endColorChoice:(UIButton*)send{
     
-    NSLog(@"Valeur :%@",send.titleLabel.text);
     valCouleur = send.backgroundColor;
-    
     [self.navigationController popViewControllerAnimated:YES];
-     [self.navigationController setNavigationBarHidden:NO];
-    
-    
-    
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 
@@ -79,7 +74,6 @@ UIColor *valCouleur;
 
 
 - (void) viewWillDisappear:(BOOL)animated{
-    NSLog(@"PASSAGE ICI ");
      [self.delegate addCouleur:self didFinishEnteringItem:valCouleur];
 }
 

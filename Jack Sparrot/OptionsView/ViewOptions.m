@@ -18,10 +18,6 @@
  */
 - (void) colors{
     
-   
-
-    
-    
     NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"1D"];
         
     if (colorData != nil) {

@@ -53,7 +53,7 @@
             [TmpBtn addTarget:self.superview action:@selector(endColorChoice:) forControlEvents:UIControlEventTouchUpInside];
             #pragma clang diagnostic pop
             
-            NSLog(@"Ajout de : %@",[TmpBtn titleLabel].text);
+            //NSLog(@"Ajout de : %@",[TmpBtn titleLabel].text);
             [_tmp addObject:TmpBtn];
             [self addSubview:TmpBtn];
         }
@@ -100,10 +100,10 @@
         
         for (UIButton *boutton in _tmp) {
             if(i<8){
-                NSLog(@"btn %d X = %d Y = %f width : %f height : %f",i,0,i*width, width,height);
+                //NSLog(@"btn %d X = %d Y = %f width : %f height : %f",i,0,i*width, width,height);
                 [boutton setFrame:CGRectMake(0,20+i*height  , width, height)];
             }else{
-                NSLog(@"btn %d X = %d Y = %f width : %f height : %f",i,0,i*width, width,height);
+                //NSLog(@"btn %d X = %d Y = %f width : %f height : %f",i,0,i*width, width,height);
                 [boutton setFrame:CGRectMake(width, 20+(i-8)*height,width, height)];
             }
             i++;

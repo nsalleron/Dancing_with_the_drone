@@ -104,7 +104,6 @@ int btnColorID = 0;
 {
     [ecranOptions updateBtn:btnColorID color:item];
     choiceColor = false;
-    NSLog(@"RETOUR ");
 }
 
 - (void) viewWillDisappear:(BOOL)animated{
