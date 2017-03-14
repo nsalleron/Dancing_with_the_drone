@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ViewCouleurs.h"
 #import "ViewCouleursController.h"
+#define rgb(R,G,B) ([[UIColor alloc] initWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1.0])
 
 @implementation ViewCouleurs
 
@@ -18,24 +19,25 @@
     self = [super initWithFrame:frame];
     
     if(self){
-
+        
+        /* Couleurs disponibles ici : https://www.materialui.co/colors */
         _couleurs = [[NSArray alloc] initWithObjects:
-                      [[UIColor alloc] initWithRed:26/255.0 green:188/255.0 blue:156/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:46/255.0 green:204/255.0 blue:113/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:52/255.0 green:152/255.0 blue:219/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:155/255.0 green:89/255.0 blue:182/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:22/255.0 green:160/255.0 blue:133/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:39/255.0 green:174/255.0 blue:96/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:41/255.0 green:128/255.0 blue:185/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:142/255.0 green:68/255.0 blue:173/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:127/255.0 green:140/255.0 blue:141/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:241/255.0 green:196/255.0 blue:15/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:230/255.0 green:126/255.0 blue:34/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:231/255.0 green:76/255.0 blue:60/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:236/255.0 green:240/255.0 blue:241/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:149/255.0 green:165/255.0 blue:166/255.0 alpha:1.0]
-                     ,[[UIColor alloc] initWithRed:243/255.0 green:156/255.0 blue:18/255.0 alpha:1.0]
+                      rgb(213,0,0)
+                     ,rgb(197,17,98)
+                     ,rgb(170,0,255)
+                     ,rgb(98,0,234)
+                     ,rgb(48,79,254)
+                     ,rgb(41,98,255)
+                     ,rgb(0,145,234)
+                     ,rgb(0,184,212)
+                     ,rgb(0,191,165)
+                     ,rgb(0,200,83)
+                     ,rgb(100,221,23)
+                     ,rgb(174,234,0)
+                     ,rgb(255,214,0)
+                     ,rgb(255,171,0)
+                     ,rgb(255,109,0)
+                     ,rgb(221,44,0)
                      , nil ];
    
         

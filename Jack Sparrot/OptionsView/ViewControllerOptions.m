@@ -15,7 +15,6 @@
 @interface ViewControllerOptions ()
 @end
 
-//UIView *ecranOptions;
 ViewOptions *ecranOptions;
 BOOL choiceColor = false;
 UIColor *saveColor;
@@ -27,10 +26,6 @@ int btnColorID = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
- 
-    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
     ecranOptions = [[ViewOptions alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecranOptions setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
     [self setView:ecranOptions];
