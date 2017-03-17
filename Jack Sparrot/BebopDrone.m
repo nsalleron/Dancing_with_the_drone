@@ -53,6 +53,8 @@
     } else {
         ARCONTROLLER_Device_Start (_deviceController);
     }
+    
+    
 }
 
 - (void)disconnect {
@@ -118,6 +120,8 @@
             [_delegate bebopDrone:self connectionDidChange:ARCONTROLLER_DEVICE_STATE_STOPPED];
         });
     }
+    
+    _deviceController->aRDrone3->sendMediaStreamingVideoEnable(_deviceController->aRDrone3, (uint8_t)0);
 }
 
 - (ARDISCOVERY_Device_t *)createDiscoveryDeviceWithService:(ARService*)service {
@@ -289,20 +293,13 @@ static void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTRO
     }
 }
 
+
 static eARCONTROLLER_ERROR configDecoderCallback (ARCONTROLLER_Stream_Codec_t codec, void *customData) {
-    BebopDrone *bebopDrone = (__bridge BebopDrone*)customData;
-    
-    BOOL success = [bebopDrone.delegate bebopDrone:bebopDrone configureDecoder:codec];
-    
-    return (success) ? ARCONTROLLER_OK : ARCONTROLLER_ERROR;
+    return ARCONTROLLER_OK;
 }
 
 static eARCONTROLLER_ERROR didReceiveFrameCallback (ARCONTROLLER_Frame_t *frame, void *customData) {
-    BebopDrone *bebopDrone = (__bridge BebopDrone*)customData;
-    
-    BOOL success = [bebopDrone.delegate bebopDrone:bebopDrone didReceiveFrame:frame];
-    
-    return (success) ? ARCONTROLLER_OK : ARCONTROLLER_ERROR;
+   return ARCONTROLLER_OK;
 }
 
 
