@@ -110,7 +110,6 @@
         
         
         /* Gestion des évènements */
-        [_btnDimensions addTarget:self.superview action:@selector(goToDimensionChoice:) forControlEvents:UIControlEventTouchUpInside];
         [_btnStatioDecoAttr addTarget:self.superview action:@selector(changeSatio:) forControlEvents:UIControlEventTouchUpInside];
          [_btnChangementMode addTarget:self.superview action:@selector(changeAxe:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -121,8 +120,8 @@
         [_btnStatioDecoAttr addGestureRecognizer:_longPressDecoAttr];
         
         _longPressDim = [[UILongPressGestureRecognizer alloc] init];
-        [_longPressDim addTarget:self action:@selector(exit:)];
-        [_longPressDim setMinimumPressDuration:2];
+        [_longPressDim addTarget:self action:@selector(goToDimension:)];
+        [_longPressDim setMinimumPressDuration:1];
         [_btnDimensions addGestureRecognizer:_longPressDim];
         
         _longPressHome = [[UILongPressGestureRecognizer alloc] init];
@@ -246,6 +245,15 @@
         //Update du View Controller
         [_vc homeFunction:gesture];
     }
+}
+
+- (void) goToDimension:(UILongPressGestureRecognizer*)gesture{
+    
+    if ( gesture.state == UIGestureRecognizerStateBegan) {
+        //Update du View Controller
+        [_vc goToDimensionChoice:gesture];
+    }
+    
 }
 
 
