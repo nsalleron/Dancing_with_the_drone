@@ -77,18 +77,16 @@
     
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
     {
-        
-        
-        height = height/2;
+        height = (height-32)/2;
         width = width /8;
         
         for (UIButton *boutton in _tmp) {
             if(i<8){
                 //NSLog(@"btn %d X = %d Y = %f width : %f height : %f",i,0,i*width, width,height);
-                [boutton setFrame:CGRectMake(i*width,0  , width, height)];
+                [boutton setFrame:CGRectMake(i*width,32  , width, height)];
             }else{
                 //NSLog(@"btn %d X = %d Y = %f width : %f height : %f",i,0,i*width, width,height);
-                [boutton setFrame:CGRectMake((i-8)*width,height  , width, height)];
+                [boutton setFrame:CGRectMake((i-8)*width,height+32  , width, height)];
             }
             i++;
         }
@@ -98,20 +96,21 @@
         
     }else{ //Vertical
         width = width /2;
-        height = (height-10) /8;
+        height = (height-64) /8;
         
         for (UIButton *boutton in _tmp) {
             if(i<8){
                 //NSLog(@"btn %d X = %d Y = %f width : %f height : %f",i,0,i*width, width,height);
-                [boutton setFrame:CGRectMake(0,20+i*height  , width, height)];
+                [boutton setFrame:CGRectMake(0,i*height+64  , width, height)];
+                //[boutton setFrame:CGRectMake(0,20+i*height  , width, height)];
             }else{
                 //NSLog(@"btn %d X = %d Y = %f width : %f height : %f",i,0,i*width, width,height);
-                [boutton setFrame:CGRectMake(width, 20+(i-8)*height,width, height)];
+                [boutton setFrame:CGRectMake(width, 64+(i-8)*height,width, height)];
+                //[boutton setFrame:CGRectMake(width, 20+(i-8)*height,width, height)];
             }
             i++;
         }
     }
-    
     
 }
 

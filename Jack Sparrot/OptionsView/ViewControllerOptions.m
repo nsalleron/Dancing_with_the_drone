@@ -56,7 +56,7 @@ int btnColorID = 0;
     choiceColor = true;
     ViewCouleursController *secondController = [[ViewCouleursController alloc] init];
     secondController.delegate = self;
-    [[self navigationController] setNavigationBarHidden:YES];
+    [[self navigationController] setNavigationBarHidden:NO];    //YES
     [self.navigationController pushViewController:secondController animated:YES];
     
 }
@@ -87,10 +87,10 @@ int btnColorID = 0;
 
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
-    if(choiceColor)
-        [[self navigationController] setNavigationBarHidden:YES];
-    else
+    //if(choiceColor)
         [[self navigationController] setNavigationBarHidden:NO];
+    //else
+    //    [[self navigationController] setNavigationBarHidden:NO];
     
     [ecranOptions updateView:size];
 }

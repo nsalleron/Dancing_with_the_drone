@@ -13,7 +13,7 @@
 @end
 
 ViewCouleurs *ecranCouleurs;
-UIColor *valCouleur;
+UIColor *valCouleur=nil;
 //NSString *selected;
 
 @implementation ViewCouleursController
@@ -30,7 +30,6 @@ UIColor *valCouleur;
 }
 
 -(void) endColorChoice:(UIButton*)send{
-    
     valCouleur = send.backgroundColor;
     [self.navigationController popViewControllerAnimated:YES];
     [self.navigationController setNavigationBarHidden:NO];
@@ -74,7 +73,8 @@ UIColor *valCouleur;
 
 
 - (void) viewWillDisappear:(BOOL)animated{
-     [self.delegate addCouleur:self didFinishEnteringItem:valCouleur];
+    [self.delegate addCouleur:self didFinishEnteringItem:valCouleur];
+    valCouleur = nil;
 }
 
 
