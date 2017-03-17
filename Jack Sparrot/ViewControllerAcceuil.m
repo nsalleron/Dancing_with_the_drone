@@ -234,13 +234,13 @@ boolean droneViewActif;
 
 -(void) goToDroneControl:(UIButton*)send{
     droneViewActif = true;
-    if(_bebopDrone != nil){
+    //if(_bebopDrone != nil){
         ViewControllerManuel *secondController = [[ViewControllerManuel alloc] init];
         [secondController setDrone:_bebopDrone];
         [self.navigationController pushViewController:secondController animated:YES];
-    }else{
-        NSLog(@"Pas de drone");
-    }
+    //}else{
+    //    NSLog(@"Pas de drone");
+    //}
    
 }
 
