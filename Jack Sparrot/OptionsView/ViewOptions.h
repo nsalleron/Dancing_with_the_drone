@@ -16,11 +16,6 @@
 @property (readonly,nonatomic,retain) UILabel *lblModeIntExt;
 @property (readonly,nonatomic,retain) UILabel *lblCouleurDim;
 
-/*
-@property (readonly,nonatomic,retain) UITextField *txtHauteurMax;
-@property (readonly,nonatomic,retain) UITextField *txtCoeffAccel;
-*/
-
 @property (readwrite,nonatomic,retain) UIColor *color1D;
 @property (readwrite,nonatomic,retain) UIColor *color2D;
 @property (readwrite,nonatomic,retain) UIColor *color3D;
@@ -35,24 +30,19 @@
 @property (readwrite,nonatomic,retain) UIButton *btnColorAxeX;
 @property (readwrite,nonatomic,retain) UIButton *btnColorAxeY;
 
-/* début Rajout*/
 @property (readonly,nonatomic,retain) UILabel *lblHauteurMaxInt;
 @property (readonly,nonatomic,retain) UILabel *lblCoeffAccelInt;
 
 @property (readwrite, nonatomic, retain) IBOutlet UIStepper *stpHauteurMax;
-//@property (weak, nonatomic) IBOutlet UIStepper *stpCoeffAccel;
 @property (readwrite, nonatomic, retain) IBOutlet UIStepper *stpCoeffAccel;
-
-- (IBAction)stepperHauteurMaxUpdate:(UIStepper *)sender;
-- (IBAction)stepperCoeffAccelUpdate:(UIStepper *)sender;
-/*Fin rajout*/
 
 @property (assign, nonatomic) CGFloat tailleIcones;
 @property (assign, nonatomic) ViewControllerOptions *vc;
 
 - (void) updateView:(CGSize) format;
 - (void) updateBtn:(int)btn color: (UIColor*) color;
+- (IBAction)stepperHauteurMaxUpdate:(UIStepper *)sender;
+- (IBAction)stepperCoeffAccelUpdate:(UIStepper *)sender;
 - (NSArray *) getBtnColors;
-
 
 @end
