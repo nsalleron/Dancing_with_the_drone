@@ -16,6 +16,8 @@
 #import "BebopVideoView.h"
 #import "DroneDiscoverer.h"
 #import <libARDiscovery/ARDiscovery.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 
 
 @interface ViewControllerAccueil()<BebopDroneDelegate,DroneDiscovererDelegate>
@@ -250,8 +252,15 @@ boolean droneViewActif;
 
 -(void) goToDroneOptions:(UIButton*)send{
     
-    ViewControllerOptions *secondController = [[ViewControllerOptions alloc] init];
-    [self.navigationController pushViewController:secondController animated:YES];
+    //ViewControllerOptions *secondController = [[ViewControllerOptions alloc] init];
+    //[self.navigationController pushViewController:secondController animated:YES];
+    
+    NSURL *path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mov"]];
+    AVPlayer *player = [AVPlayer playerWithURL:path];
+    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
+    playerLayer.frame = self.view.bounds;
+    [self.view.layer addSublayer:playerLayer];
+    [player play];
 }
 
 

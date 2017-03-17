@@ -18,6 +18,7 @@
 		A62504D41E7065C800288587 /* BebopDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = A62504D31E7065C800288587 /* BebopDrone.m */; };
 		A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */; };
 		A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1781E4333E500F08072 /* ViewManuel.m */; };
+		A692ACFC1E7BF16E00A58AEE /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = A692ACFB1E7BF16E00A58AEE /* test.mov */; };
 		A6D4750F1E70754F00B57D3C /* DroneDiscoverer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D4750E1E70754F00B57D3C /* DroneDiscoverer.m */; };
 		A6D475151E72E32F00B57D3C /* ViewControllerOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D475121E72E32F00B57D3C /* ViewControllerOptions.m */; };
 		A6D475161E72E32F00B57D3C /* ViewOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D475141E72E32F00B57D3C /* ViewOptions.m */; };
@@ -119,6 +120,7 @@
 		A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerManuel.m; path = ChildViewController/ViewControllerManuel.m; sourceTree = "<group>"; };
 		A67EC1771E4333E500F08072 /* ViewManuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewManuel.h; path = ControlerDroneView/ViewManuel.h; sourceTree = "<group>"; };
 		A67EC1781E4333E500F08072 /* ViewManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewManuel.m; path = ControlerDroneView/ViewManuel.m; sourceTree = "<group>"; };
+		A692ACFB1E7BF16E00A58AEE /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test.mov; sourceTree = "<group>"; };
 		A6D4750D1E70754F00B57D3C /* DroneDiscoverer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroneDiscoverer.h; sourceTree = "<group>"; };
 		A6D4750E1E70754F00B57D3C /* DroneDiscoverer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroneDiscoverer.m; sourceTree = "<group>"; };
 		A6D475111E72E32F00B57D3C /* ViewControllerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerOptions.h; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 		A61AEEBD1E40978F00EDB53B = {
 			isa = PBXGroup;
 			children = (
+				A692ACFB1E7BF16E00A58AEE /* test.mov */,
 				A6EC7A701E40A54D0075039E /* Main.storyboard */,
 				A61AEEC81E40978F00EDB53B /* Jack Sparrot */,
 				A61AEEE51E40978F00EDB53B /* Jack SparrotTests */,
@@ -522,6 +525,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A692ACFC1E7BF16E00A58AEE /* test.mov in Resources */,
 				A6EC7A721E40A54D0075039E /* Main.storyboard in Resources */,
 				A61AEEDC1E40978F00EDB53B /* LaunchScreen.storyboard in Resources */,
 				A61AEED91E40978F00EDB53B /* Assets.xcassets in Resources */,
