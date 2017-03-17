@@ -227,6 +227,7 @@
 				A6D475101E72E32F00B57D3C /* OptionsView */,
 				A61AEEC91E40978F00EDB53B /* EcranAccueilView */,
 				A67EC1761E4333BF00F08072 /* EcranDroneView */,
+				EC0C622F1E7BF40500413B9A /* EcranAide */,
 			);
 			path = "Jack Sparrot";
 			sourceTree = "<group>";
@@ -368,6 +369,13 @@
 				A6F6EE6C1E64F0760007B54D /* ViewDimension.m */,
 			);
 			name = EcranDimensionsView;
+			sourceTree = "<group>";
+		};
+		EC0C622F1E7BF40500413B9A /* EcranAide */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = EcranAide;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
