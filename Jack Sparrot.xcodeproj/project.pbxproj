@@ -18,7 +18,6 @@
 		A62504D41E7065C800288587 /* BebopDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = A62504D31E7065C800288587 /* BebopDrone.m */; };
 		A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */; };
 		A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1781E4333E500F08072 /* ViewManuel.m */; };
-		A692ACFC1E7BF16E00A58AEE /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = A692ACFB1E7BF16E00A58AEE /* test.mov */; };
 		A692AD5F1E7BF57800A58AEE /* ViewControllerAide.m in Sources */ = {isa = PBXBuildFile; fileRef = A692AD5D1E7BF57800A58AEE /* ViewControllerAide.m */; };
 		A692AD601E7BF57800A58AEE /* ViewAide.m in Sources */ = {isa = PBXBuildFile; fileRef = A692AD5E1E7BF57800A58AEE /* ViewAide.m */; };
 		A6D4750F1E70754F00B57D3C /* DroneDiscoverer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D4750E1E70754F00B57D3C /* DroneDiscoverer.m */; };
@@ -40,6 +39,10 @@
 		A6F6EE6A1E64F05B0007B54D /* ViewDimensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE691E64F05B0007B54D /* ViewDimensionViewController.m */; };
 		A6F6EE6D1E64F0760007B54D /* ViewDimension.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE6C1E64F0760007B54D /* ViewDimension.m */; };
 		A6F6EE731E6C26510007B54D /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE721E6C26510007B54D /* CustomNavigationController.m */; };
+		ECE9DCA81E7C02FB008F92F4 /* demoChangementAxes.mov in Resources */ = {isa = PBXBuildFile; fileRef = ECE9DCA41E7C02FB008F92F4 /* demoChangementAxes.mov */; };
+		ECE9DCA91E7C02FB008F92F4 /* demoChangementCouleur.mov in Resources */ = {isa = PBXBuildFile; fileRef = ECE9DCA51E7C02FB008F92F4 /* demoChangementCouleur.mov */; };
+		ECE9DCAA1E7C02FB008F92F4 /* demoChangementMode.mov in Resources */ = {isa = PBXBuildFile; fileRef = ECE9DCA61E7C02FB008F92F4 /* demoChangementMode.mov */; };
+		ECE9DCAB1E7C02FB008F92F4 /* demoRetourAccueil.mov in Resources */ = {isa = PBXBuildFile; fileRef = ECE9DCA71E7C02FB008F92F4 /* demoRetourAccueil.mov */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,7 +125,6 @@
 		A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerManuel.m; path = ChildViewController/ViewControllerManuel.m; sourceTree = "<group>"; };
 		A67EC1771E4333E500F08072 /* ViewManuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewManuel.h; path = ControlerDroneView/ViewManuel.h; sourceTree = "<group>"; };
 		A67EC1781E4333E500F08072 /* ViewManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewManuel.m; path = ControlerDroneView/ViewManuel.m; sourceTree = "<group>"; };
-		A692ACFB1E7BF16E00A58AEE /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test.mov; sourceTree = "<group>"; };
 		A692AD5B1E7BF57800A58AEE /* ViewAide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewAide.h; path = EcranAideView/ViewAide.h; sourceTree = "<group>"; };
 		A692AD5C1E7BF57800A58AEE /* ViewControllerAide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerAide.h; path = EcranAideView/ViewControllerAide.h; sourceTree = "<group>"; };
 		A692AD5D1E7BF57800A58AEE /* ViewControllerAide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerAide.m; path = EcranAideView/ViewControllerAide.m; sourceTree = "<group>"; };
@@ -161,6 +163,10 @@
 		A6F6EE6C1E64F0760007B54D /* ViewDimension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewDimension.m; path = EcranDimensionsView/ViewDimension.m; sourceTree = "<group>"; };
 		A6F6EE711E6C26510007B54D /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		A6F6EE721E6C26510007B54D /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
+		ECE9DCA41E7C02FB008F92F4 /* demoChangementAxes.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = demoChangementAxes.mov; path = Videos/demoChangementAxes.mov; sourceTree = "<group>"; };
+		ECE9DCA51E7C02FB008F92F4 /* demoChangementCouleur.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = demoChangementCouleur.mov; path = Videos/demoChangementCouleur.mov; sourceTree = "<group>"; };
+		ECE9DCA61E7C02FB008F92F4 /* demoChangementMode.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = demoChangementMode.mov; path = Videos/demoChangementMode.mov; sourceTree = "<group>"; };
+		ECE9DCA71E7C02FB008F92F4 /* demoRetourAccueil.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = demoRetourAccueil.mov; path = Videos/demoRetourAccueil.mov; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +204,6 @@
 		A61AEEBD1E40978F00EDB53B = {
 			isa = PBXGroup;
 			children = (
-				A692ACFB1E7BF16E00A58AEE /* test.mov */,
 				A6EC7A701E40A54D0075039E /* Main.storyboard */,
 				A61AEEC81E40978F00EDB53B /* Jack Sparrot */,
 				A61AEEE51E40978F00EDB53B /* Jack SparrotTests */,
@@ -225,6 +230,7 @@
 		A61AEEC81E40978F00EDB53B /* Jack Sparrot */ = {
 			isa = PBXGroup;
 			children = (
+				ECE9DCA31E7C02D2008F92F4 /* Videos */,
 				A6D4750C1E70753700B57D3C /* Discovery */,
 				A62504D11E7065B600288587 /* Drone */,
 				A61AEECC1E40978F00EDB53B /* AppDelegate.h */,
@@ -391,6 +397,17 @@
 			name = EcranAide;
 			sourceTree = "<group>";
 		};
+		ECE9DCA31E7C02D2008F92F4 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				ECE9DCA41E7C02FB008F92F4 /* demoChangementAxes.mov */,
+				ECE9DCA51E7C02FB008F92F4 /* demoChangementCouleur.mov */,
+				ECE9DCA61E7C02FB008F92F4 /* demoChangementMode.mov */,
+				ECE9DCA71E7C02FB008F92F4 /* demoRetourAccueil.mov */,
+			);
+			name = Videos;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -543,7 +560,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A692ACFC1E7BF16E00A58AEE /* test.mov in Resources */,
+				ECE9DCA81E7C02FB008F92F4 /* demoChangementAxes.mov in Resources */,
+				ECE9DCA91E7C02FB008F92F4 /* demoChangementCouleur.mov in Resources */,
+				ECE9DCAA1E7C02FB008F92F4 /* demoChangementMode.mov in Resources */,
+				ECE9DCAB1E7C02FB008F92F4 /* demoRetourAccueil.mov in Resources */,
 				A6EC7A721E40A54D0075039E /* Main.storyboard in Resources */,
 				A61AEEDC1E40978F00EDB53B /* LaunchScreen.storyboard in Resources */,
 				A61AEED91E40978F00EDB53B /* Assets.xcassets in Resources */,
