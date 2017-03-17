@@ -36,13 +36,13 @@ ViewAide *ecranAide;
     
     
     if([send.titleLabel.text isEqualToString:@"Changement des axes"]){
-        path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mov"]];
+        path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"demoChangementAxes" ofType:@"mov"]];
     }else if([send.titleLabel.text isEqualToString:@"Changement de mode"]){
-        path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mov"]];
+        path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"demoChangementMode" ofType:@"mov"]];
     }else if([send.titleLabel.text isEqualToString:@"Changement de couleurs"]){
-        path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mov"]];
+        path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"demoChangementCouleur" ofType:@"mov"]];
     }else if([send.titleLabel.text isEqualToString:@"Retour Accueil"]){
-        path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mov"]];
+        path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"demoRetourAccueil" ofType:@"mov"]];
     }
     
     
