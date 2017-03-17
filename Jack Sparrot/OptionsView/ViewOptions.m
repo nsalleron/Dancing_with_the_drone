@@ -213,7 +213,37 @@
         [self addSubview:_lblCouleurDim];
         [self addSubview:_lblModeIntExt];
         
-        /*TextFields*/
+        /*début rajout*/
+        _stpHauteurMax = [[UIStepper alloc] init];
+        [_stpHauteurMax setAutorepeat:YES];
+        [_stpCoeffAccel setValue:10.0];
+        [_stpHauteurMax setMinimumValue:4.0];
+        [_stpHauteurMax setMaximumValue:30];
+        [_stpHauteurMax setStepValue:0.5];
+        
+        _stpCoeffAccel = [[UIStepper alloc] init];
+        [_stpCoeffAccel setAutorepeat:YES];
+        [_stpCoeffAccel setValue:0.5];
+        [_stpCoeffAccel setMinimumValue:0.0];
+        [_stpCoeffAccel setMaximumValue:1.0];
+        [_stpCoeffAccel setStepValue:0.05];
+        
+        _lblHauteurMaxInt = [[UILabel alloc] init];
+        [_lblHauteurMaxInt setText:[NSString stringWithFormat:@"%.2f", _stpHauteurMax.value]];
+        
+        _lblCoeffAccelInt = [[UILabel alloc] init];
+        [_lblCoeffAccelInt setText:[NSString stringWithFormat:@"%.2f", _stpCoeffAccel.value]];
+        
+        [self addSubview:_lblHauteurMaxInt];
+        [self addSubview:_lblCoeffAccelInt];
+        [self addSubview:_stpHauteurMax];
+        [self addSubview:_stpCoeffAccel];
+        
+        [_stpHauteurMax addTarget:self action:@selector(stepperHauteurMaxUpdate:) forControlEvents:UIControlEventTouchUpInside];
+        [_stpCoeffAccel addTarget:self action:@selector(stepperCoeffAccelUpdate:) forControlEvents:UIControlEventTouchUpInside];
+        /*fin rajout*/
+        
+        /*TextFields
         _txtHauteurMax = [[UITextField alloc] init];
         _txtCoeffAccel = [[UITextField alloc] init];
         
@@ -227,6 +257,8 @@
         
         [self addSubview:_txtHauteurMax];
         [self addSubview:_txtCoeffAccel];
+         
+        */
     }
     
     return self;
@@ -246,10 +278,14 @@
         [_swhInOut setFrame:CGRectMake(format.width/6+format.width/3, 32+_tailleIcones/3, format.width/3, _tailleIcones)];
         
         [_lblHauteurMax setFrame:CGRectMake(format.width/6, 32+_tailleIcones, format.width/3, _tailleIcones)];
-        [_txtHauteurMax setFrame:CGRectMake(format.width/6+format.width/3, 32+_tailleIcones+2, format.width/3, _tailleIcones-4)];
+        //[_txtHauteurMax setFrame:CGRectMake(format.width/6+format.width/3, 32+_tailleIcones+2, format.width/3, _tailleIcones-4)];
+        [_lblHauteurMaxInt setFrame:CGRectMake(format.width/6+format.width/3, 32+_tailleIcones+2, format.width/6, _tailleIcones-4)];
+        [_stpHauteurMax setFrame:CGRectMake(2*format.width/3, 32+_tailleIcones+5, format.width/6, _tailleIcones-4)];
         
         [_lblCoeffAccel setFrame:CGRectMake(format.width/6, 32+2*_tailleIcones, format.width/3, _tailleIcones)];
-        [_txtCoeffAccel setFrame:CGRectMake(format.width/6+format.width/3, 32+2*_tailleIcones+2, format.width/3, _tailleIcones-4)];
+        //[_txtCoeffAccel setFrame:CGRectMake(format.width/6+format.width/3, 32+2*_tailleIcones+2, format.width/3, _tailleIcones-4)];
+        [_lblCoeffAccelInt setFrame:CGRectMake(format.width/6+format.width/3, 32+2*_tailleIcones+2, format.width/3, _tailleIcones-4)];
+        [_stpCoeffAccel setFrame:CGRectMake(2*format.width/3, 32+2*_tailleIcones+5, format.width/3, _tailleIcones-4)];
         
         [_lblCouleurDim setFrame:CGRectMake(format.width/6, 32+3*_tailleIcones, format.width/3, _tailleIcones)];
         
@@ -267,10 +303,14 @@
         [_swhInOut setFrame:CGRectMake(5+format.width/2, 64+_tailleIcones/3, format.width/2, _tailleIcones)];
         
         [_lblHauteurMax setFrame:CGRectMake(5, 64+_tailleIcones, (format.width/2)-5, _tailleIcones)];
-        [_txtHauteurMax setFrame:CGRectMake(format.width/2+10, 84+_tailleIcones+2, format.width/2-20, _tailleIcones-44)];
+        //[_txtHauteurMax setFrame:CGRectMake(format.width/2+10, 84+_tailleIcones+2, format.width/2-20, _tailleIcones-44)];
+        [_lblHauteurMaxInt setFrame:CGRectMake(format.width/2, 64+_tailleIcones, format.width/4, _tailleIcones)];
+        [_stpHauteurMax setFrame:CGRectMake(format.width/2+format.width/4-20, 64+_tailleIcones+30, format.width/4, _tailleIcones)];
         
         [_lblCoeffAccel setFrame:CGRectMake(5, 64+2*_tailleIcones, (format.width/2)-5, _tailleIcones)];
-        [_txtCoeffAccel setFrame:CGRectMake(format.width/2+10, 84+2*_tailleIcones+2, format.width/2-20, _tailleIcones-44)];
+        //[_txtCoeffAccel setFrame:CGRectMake(format.width/2+10, 84+2*_tailleIcones+2, format.width/2-20, _tailleIcones-44)];
+        [_lblCoeffAccelInt setFrame:CGRectMake(format.width/2, 64+2*_tailleIcones, format.width/4, _tailleIcones)];
+        [_stpCoeffAccel setFrame:CGRectMake(format.width/2+format.width/4-20, 64+2*_tailleIcones+30, format.width/4, _tailleIcones)];
         
         [_lblCouleurDim setFrame:CGRectMake(5, 64+3*_tailleIcones, (format.width/2)-5, _tailleIcones)];
         [_btnColor1D setFrame:CGRectMake(format.width/2, 64+3*_tailleIcones, format.width/2, _tailleIcones)];
@@ -301,5 +341,12 @@
 }
 
 
+-(IBAction)stepperHauteurMaxUpdate:(UIStepper *)sender{
+    [_lblHauteurMaxInt setText:[NSString stringWithFormat:@"%.2f", _stpHauteurMax.value]];
+}
+
+-(IBAction)stepperCoeffAccelUpdate:(UIStepper *)sender{
+    [_lblCoeffAccelInt setText:[NSString stringWithFormat:@"%.2f", _stpCoeffAccel.value]];
+}
 
 @end
