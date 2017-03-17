@@ -16,5 +16,5 @@
 @property (readwrite,nonatomic,retain) UIButton *btnChangementAxes;
 @property (readwrite,nonatomic,retain) UIButton *btnRetourAccueil;
 @property (assign, nonatomic) CGFloat tailleIcones;
-
+- (void) updateView:(CGSize) format;
 @end

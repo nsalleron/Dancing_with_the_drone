@@ -255,12 +255,6 @@ boolean droneViewActif;
     ViewControllerOptions *secondController = [[ViewControllerOptions alloc] init];
     [self.navigationController pushViewController:secondController animated:YES];
     
-    NSURL *path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mov"]];
-    AVPlayer *player = [AVPlayer playerWithURL:path];
-    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
-    playerLayer.frame = self.view.bounds;
-    [self.view.layer addSublayer:playerLayer];
-    [player play];
 }
 
 -(void) goToDroneHelp:(UIButton*)send{

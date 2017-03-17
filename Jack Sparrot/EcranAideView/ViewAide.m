@@ -11,6 +11,7 @@
 #import "ViewControllerAide.h"
 
 
+
 @implementation ViewAide
 
 - (id) initWithFrame:(CGRect)frame{
@@ -25,10 +26,10 @@
         _btnRetourAccueil = [[UIButton alloc] init];
        
         
-        [_btnChangementAxes setTitle:@"1D" forState:UIControlStateNormal];
-        [_btnChangementMode setTitle:@"2D" forState:UIControlStateNormal];
-        [_btnChangementCouleur setTitle:@"3D" forState:UIControlStateNormal];
-        [_btnRetourAccueil setTitle:@"Axe X" forState:UIControlStateNormal];
+        [_btnChangementAxes setTitle:@"Changement des axes" forState:UIControlStateNormal];
+        [_btnChangementMode setTitle:@"Changement de mode" forState:UIControlStateNormal];
+        [_btnChangementCouleur setTitle:@"Changement de couleurs" forState:UIControlStateNormal];
+        [_btnRetourAccueil setTitle:@"Retour Accueil" forState:UIControlStateNormal];
        
         
         [_btnChangementAxes setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -59,10 +60,10 @@
         
 
         
-        [_btnChangementAxes addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
-        [_btnChangementMode addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
-        [_btnChangementCouleur addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
-        [_btnRetourAccueil addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
+        [_btnChangementAxes addTarget:self.superview action:@selector(launchVideo:) forControlEvents:UIControlEventTouchUpInside];
+        [_btnChangementMode addTarget:self.superview action:@selector(launchVideo:) forControlEvents:UIControlEventTouchUpInside];
+        [_btnChangementCouleur addTarget:self.superview action:@selector(launchVideo:) forControlEvents:UIControlEventTouchUpInside];
+        [_btnRetourAccueil addTarget:self.superview action:@selector(launchVideo:) forControlEvents:UIControlEventTouchUpInside];
         
         
         [self addSubview:_btnChangementAxes];
@@ -76,6 +77,8 @@
 }
 
 
+
+
 - (void)updateView:(CGSize)format{
     
     NSLog(@"Width : %f Height : %f ",format.width,format.height);
@@ -85,19 +88,19 @@
     {
         _tailleIcones = (format.height-32)/6;
         
-        [_btnChangementAxes setFrame:CGRectMake(0, 32+4*_tailleIcones, format.width/3, _tailleIcones)];
-        [_btnChangementMode setFrame:CGRectMake(format.width/3, 32+4*_tailleIcones, format.width/3, _tailleIcones)];
-        [_btnChangementCouleur setFrame:CGRectMake(2*format.width/3, 32+4*_tailleIcones, format.width/3, _tailleIcones)];
         
-        [_btnRetourAccueil setFrame:CGRectMake(format.width/6, 32+5*_tailleIcones, format.width/3, _tailleIcones)];
+        [_btnChangementAxes setFrame:CGRectMake(10, 32+10, format.width - 20 , _tailleIcones*1.2)];
+        [_btnChangementMode setFrame:CGRectMake(10, 32+20+_tailleIcones*1.2, format.width - 20, _tailleIcones*1.2)];
+        [_btnChangementCouleur setFrame:CGRectMake(10, 32+ 30 +2*_tailleIcones*1.2, format.width - 20, _tailleIcones*1.2)];
+        [_btnRetourAccueil setFrame:CGRectMake(10, 32+40+3*_tailleIcones*1.2, format.width -20 , _tailleIcones*1.2)];
         
     }else{
         _tailleIcones = (format.height-64)/6;
         
-        [_btnChangementAxes setFrame:CGRectMake(format.width/2, 64+3*_tailleIcones, format.width/2, _tailleIcones)];
-        [_btnChangementMode setFrame:CGRectMake(format.width/2, 64+4*_tailleIcones, format.width/2, _tailleIcones)];
-        [_btnChangementCouleur setFrame:CGRectMake(format.width/2, 64+5*_tailleIcones, format.width/2, _tailleIcones)];
-        [_btnRetourAccueil setFrame:CGRectMake(0, 64+4*_tailleIcones, format.width/2, _tailleIcones)];
+        [_btnChangementAxes setFrame:CGRectMake(10, 64+10, format.width - 20 , _tailleIcones)];
+        [_btnChangementMode setFrame:CGRectMake(10, 64+20+_tailleIcones, format.width - 20, _tailleIcones)];
+        [_btnChangementCouleur setFrame:CGRectMake(10, 64+ 30 +2*_tailleIcones, format.width - 20, _tailleIcones)];
+        [_btnRetourAccueil setFrame:CGRectMake(10, 64+40+3*_tailleIcones, format.width -20 , _tailleIcones)];
         
     }
     

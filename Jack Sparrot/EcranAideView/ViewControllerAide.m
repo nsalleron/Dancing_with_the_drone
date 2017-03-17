@@ -9,7 +9,8 @@
 
 #import "ViewControllerAide.h"
 #import "ViewAide.h"
-
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 
 @interface ViewControllerAide ()
 @end
@@ -29,11 +30,37 @@ ViewAide *ecranAide;
 
 }
 
+- (void) launchVideo:(UIButton*)send{
+    
+    NSURL *path;
+    
+    
+    if([send.titleLabel.text isEqualToString:@"Changement des axes"]){
+        path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mov"]];
+    }else if([send.titleLabel.text isEqualToString:@"Changement de mode"]){
+        path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mov"]];
+    }else if([send.titleLabel.text isEqualToString:@"Changement de couleurs"]){
+        path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mov"]];
+    }else if([send.titleLabel.text isEqualToString:@"Retour Accueil"]){
+        path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mov"]];
+    }
+    
+    
+    AVPlayer *player = [AVPlayer playerWithURL:path];
+    AVPlayerViewController *playerViewController = [AVPlayerViewController new];
+    playerViewController.player = player;
+    [playerViewController.player play];
+    [self.navigationController pushViewController:playerViewController animated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+    
+    [ecranAide updateView:size];
+}
 //ROTATION
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
