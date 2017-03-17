@@ -263,5 +263,10 @@ boolean droneViewActif;
     [player play];
 }
 
+-(void) goToDroneHelp:(UIButton*)send{
+    
+    ViewControllerOptions *secondController = [[ViewControllerAide alloc] init];
+    [self.navigationController pushViewController:secondController animated:YES];
+}
 
 @end
