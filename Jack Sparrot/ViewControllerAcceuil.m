@@ -11,7 +11,7 @@
 #import "ViewDimensionViewController.h"
 #import "ViewEcranAccueil.h"
 #import "ViewControllerOptions.h"
-
+#import "ViewControllerAide.h"
 #import "BebopDrone.h"
 #import "BebopVideoView.h"
 #import "DroneDiscoverer.h"
@@ -252,8 +252,8 @@ boolean droneViewActif;
 
 -(void) goToDroneOptions:(UIButton*)send{
     
-    //ViewControllerOptions *secondController = [[ViewControllerOptions alloc] init];
-    //[self.navigationController pushViewController:secondController animated:YES];
+    ViewControllerOptions *secondController = [[ViewControllerOptions alloc] init];
+    [self.navigationController pushViewController:secondController animated:YES];
     
     NSURL *path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mov"]];
     AVPlayer *player = [AVPlayer playerWithURL:path];

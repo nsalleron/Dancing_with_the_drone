@@ -19,6 +19,8 @@
 		A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */; };
 		A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1781E4333E500F08072 /* ViewManuel.m */; };
 		A692ACFC1E7BF16E00A58AEE /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = A692ACFB1E7BF16E00A58AEE /* test.mov */; };
+		A692AD5F1E7BF57800A58AEE /* ViewControllerAide.m in Sources */ = {isa = PBXBuildFile; fileRef = A692AD5D1E7BF57800A58AEE /* ViewControllerAide.m */; };
+		A692AD601E7BF57800A58AEE /* ViewAide.m in Sources */ = {isa = PBXBuildFile; fileRef = A692AD5E1E7BF57800A58AEE /* ViewAide.m */; };
 		A6D4750F1E70754F00B57D3C /* DroneDiscoverer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D4750E1E70754F00B57D3C /* DroneDiscoverer.m */; };
 		A6D475151E72E32F00B57D3C /* ViewControllerOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D475121E72E32F00B57D3C /* ViewControllerOptions.m */; };
 		A6D475161E72E32F00B57D3C /* ViewOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D475141E72E32F00B57D3C /* ViewOptions.m */; };
@@ -121,6 +123,10 @@
 		A67EC1771E4333E500F08072 /* ViewManuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewManuel.h; path = ControlerDroneView/ViewManuel.h; sourceTree = "<group>"; };
 		A67EC1781E4333E500F08072 /* ViewManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewManuel.m; path = ControlerDroneView/ViewManuel.m; sourceTree = "<group>"; };
 		A692ACFB1E7BF16E00A58AEE /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test.mov; sourceTree = "<group>"; };
+		A692AD5B1E7BF57800A58AEE /* ViewAide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewAide.h; path = EcranAideView/ViewAide.h; sourceTree = "<group>"; };
+		A692AD5C1E7BF57800A58AEE /* ViewControllerAide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerAide.h; path = EcranAideView/ViewControllerAide.h; sourceTree = "<group>"; };
+		A692AD5D1E7BF57800A58AEE /* ViewControllerAide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerAide.m; path = EcranAideView/ViewControllerAide.m; sourceTree = "<group>"; };
+		A692AD5E1E7BF57800A58AEE /* ViewAide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewAide.m; path = EcranAideView/ViewAide.m; sourceTree = "<group>"; };
 		A6D4750D1E70754F00B57D3C /* DroneDiscoverer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroneDiscoverer.h; sourceTree = "<group>"; };
 		A6D4750E1E70754F00B57D3C /* DroneDiscoverer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroneDiscoverer.m; sourceTree = "<group>"; };
 		A6D475111E72E32F00B57D3C /* ViewControllerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerOptions.h; sourceTree = "<group>"; };
@@ -377,6 +383,10 @@
 		EC0C622F1E7BF40500413B9A /* EcranAide */ = {
 			isa = PBXGroup;
 			children = (
+				A692AD5B1E7BF57800A58AEE /* ViewAide.h */,
+				A692AD5C1E7BF57800A58AEE /* ViewControllerAide.h */,
+				A692AD5D1E7BF57800A58AEE /* ViewControllerAide.m */,
+				A692AD5E1E7BF57800A58AEE /* ViewAide.m */,
 			);
 			name = EcranAide;
 			sourceTree = "<group>";
@@ -580,6 +590,7 @@
 			files = (
 				A6F6EE6A1E64F05B0007B54D /* ViewDimensionViewController.m in Sources */,
 				A62504D41E7065C800288587 /* BebopDrone.m in Sources */,
+				A692AD601E7BF57800A58AEE /* ViewAide.m in Sources */,
 				A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */,
 				A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */,
 				A6D4751C1E76F58E00B57D3C /* ViewCouleursController.m in Sources */,
@@ -595,6 +606,7 @@
 				A6F6EE6D1E64F0760007B54D /* ViewDimension.m in Sources */,
 				A61AEF011E409EEC00EDB53B /* ViewEcranAccueil.m in Sources */,
 				A6D475151E72E32F00B57D3C /* ViewControllerOptions.m in Sources */,
+				A692AD5F1E7BF57800A58AEE /* ViewControllerAide.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

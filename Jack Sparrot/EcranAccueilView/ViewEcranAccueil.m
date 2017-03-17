@@ -30,12 +30,15 @@ UINavigationController *myVC;
         
         _btnDrone = [UIButton buttonWithType:UIButtonTypeSystem];
         _btnOptions  = [UIButton buttonWithType:UIButtonTypeSystem];
+        _btnAide = [UIButton buttonWithType:UIButtonTypeSystem];
         
         [_btnDrone setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_btnOptions setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        [_btnAide setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         
         [_btnDrone setTitle:@"Contrôler drone" forState:UIControlStateNormal];
         [_btnOptions setTitle:@"Options" forState:UIControlStateNormal];
+        [_btnAide setTitle:@"Aide" forState:UIControlStateNormal];
         
         [[_btnDrone layer] setBorderWidth:1.0f];
         [[_btnDrone layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
@@ -47,6 +50,10 @@ UINavigationController *myVC;
         [[_btnOptions layer] setCornerRadius:8.0f];
         [[_btnOptions layer] setBorderWidth:2.0f];
         
+        [[_btnAide layer] setBorderWidth:1.0f];
+        [[_btnAide layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnAide layer] setCornerRadius:8.0f];
+        [[_btnAide layer] setBorderWidth:2.0f];
         
         
         _labelVersionApp = [[UILabel alloc] init];
@@ -64,11 +71,13 @@ UINavigationController *myVC;
         
         
         [_btnDrone addTarget:self.superview action:@selector(goToDroneControl:) forControlEvents:UIControlEventTouchUpInside];
-        
-         [_btnOptions addTarget:self.superview action:@selector(goToDroneOptions:) forControlEvents:UIControlEventTouchUpInside];
+        [_btnOptions addTarget:self.superview action:@selector(goToDroneOptions:) forControlEvents:UIControlEventTouchUpInside];
+        [_btnAide addTarget:self.superview action:@selector(goToDroneHelp:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_imgLogo];
         [self addSubview:_btnOptions];
         [self addSubview:_btnDrone];
+        [self addSubview:_btnAide];
+        
         [self addSubview:_labelVersionApp];
         [self addSubview:_labelBatteryDrone];
         [self addSubview:_labelBatterySmartphone];
@@ -106,13 +115,17 @@ UINavigationController *myVC;
         
         
         [_btnDrone setFrame:CGRectMake(format.width/9 + _tailleIcones*2 + 10,
-                                       (format.height/4),
+                                       (format.height/5),
                                        _tailleIcones*2.1, _tailleIcones/2)];
         
               
         [_btnOptions setFrame:CGRectMake(format.width/9 + _tailleIcones*2 + 10,
-                                       format.height/4 + _tailleIcones/2 + 20,
+                                       format.height/5 + _tailleIcones/2 + 10,
                                        _tailleIcones*2.1, _tailleIcones/2)];
+        
+        [_btnAide setFrame:CGRectMake(format.width/9 + _tailleIcones*2 + 10,
+                                         format.height/5 + _tailleIcones + 20,
+                                         _tailleIcones*2.1, _tailleIcones/2)];
         
         /* Mise en place des labels */
             /* LabelBatterySmartphone */
@@ -141,7 +154,11 @@ UINavigationController *myVC;
         
         
         [_btnOptions setFrame:CGRectMake(format.width/9.0,
-                                         format.height/6.0 + _tailleIcones*1.2 + 90 ,
+                                         format.height/6.0 + _tailleIcones*1.2 + 70 ,
+                                         _tailleIcones*1.3, _tailleIcones/3)];
+        
+        [_btnAide setFrame:CGRectMake(format.width/9.0,
+                                         format.height/6.0 + (_tailleIcones*1.2) + 140 ,
                                          _tailleIcones*1.3, _tailleIcones/3)];
         
         /* Mise en place des labels */
