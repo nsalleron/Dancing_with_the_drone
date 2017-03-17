@@ -124,25 +124,29 @@ boolean droneViewActif;
 }
 
 - (void) deconnexionDrone{
-    if (_connectionAlertView && !_connectionAlertView.isHidden) {
-        [_connectionAlertView dismissWithClickedButtonIndex:0 animated:NO];
-    }
-    _connectionAlertView = [[UIAlertView alloc] initWithTitle:[_service name] message:@"Disconnecting ..."
-                                                     delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-    [_connectionAlertView show];
     
-    // in background, disconnect from the drone
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [_bebopDrone disconnect];
-        // wait for the disconnection to appear
-        dispatch_semaphore_wait(_stateSem, DISPATCH_TIME_FOREVER);
-        _bebopDrone = nil;
+    if(_service != nil){
+        if (_connectionAlertView && !_connectionAlertView.isHidden) {
+            [_connectionAlertView dismissWithClickedButtonIndex:0 animated:NO];
+        }
+        _connectionAlertView = [[UIAlertView alloc] initWithTitle:[_service name] message:@"Disconnecting ..."
+                                                         delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [_connectionAlertView show];
         
-        // dismiss the alert view in main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [_connectionAlertView dismissWithClickedButtonIndex:0 animated:YES];
+        // in background, disconnect from the drone
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [_bebopDrone disconnect];
+            // wait for the disconnection to appear
+            dispatch_semaphore_wait(_stateSem, DISPATCH_TIME_FOREVER);
+            _bebopDrone = nil;
+            
+            // dismiss the alert view in main thread
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_connectionAlertView dismissWithClickedButtonIndex:0 animated:YES];
+            });
         });
-    });
+    }
+    
 }
 
 
