@@ -62,7 +62,7 @@ UINavigationController *myVC;
         
         
         [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d",0]];
-        [_labelBatteryDrone setText:@"Batterie drone : ABS"];
+        [_labelBatteryDrone setText:@"Batterie drone : —"];
         [_labelVersionApp setText:@"Version 0.01"];
         
         [_labelVersionApp setFont:[UIFont systemFontOfSize:9]];

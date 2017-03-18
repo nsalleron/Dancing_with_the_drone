@@ -100,11 +100,11 @@
 }
 
 - (void) updateBtn:(int)btn color: (UIColor*) color{
-   
+    if (color != nil){
     switch (btn) {
         case 1:
             _color1D = color;
-             [_btnColor1D setBackgroundColor:_color1D];
+            [_btnColor1D setBackgroundColor:_color1D];
             
             break;
         case 2:
@@ -124,7 +124,9 @@
             [_btnColorAxeY setBackgroundColor:_colorY];
             break;
         default:
+            
             break;
+    }
     }
     [self btnColorText];
 
@@ -241,24 +243,6 @@
         
         [_stpHauteurMax addTarget:self action:@selector(stepperHauteurMaxUpdate:) forControlEvents:UIControlEventTouchUpInside];
         [_stpCoeffAccel addTarget:self action:@selector(stepperCoeffAccelUpdate:) forControlEvents:UIControlEventTouchUpInside];
-        /*fin rajout*/
-        
-        /*TextFields
-        _txtHauteurMax = [[UITextField alloc] init];
-        _txtCoeffAccel = [[UITextField alloc] init];
-        
-        [[_txtHauteurMax layer] setBackgroundColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0].CGColor];
-        [[_txtHauteurMax layer] setBorderWidth:1.0f];
-        [[_txtHauteurMax layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
-        
-        [[_txtCoeffAccel layer] setBackgroundColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0].CGColor];
-        [[_txtCoeffAccel layer] setBorderWidth:1.0f];
-        [[_txtCoeffAccel layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
-        
-        [self addSubview:_txtHauteurMax];
-        [self addSubview:_txtCoeffAccel];
-         
-        */
     }
     
     return self;
