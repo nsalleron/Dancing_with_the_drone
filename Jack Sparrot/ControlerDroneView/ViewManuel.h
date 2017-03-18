@@ -16,6 +16,7 @@
 @property (readonly,nonatomic,retain) UIButton *btnChangementMode;
 @property (readonly,nonatomic,retain) UIButton *btnStatioDecoAttr;
 @property (readonly,nonatomic,retain) UIButton *btnHome;
+@property (readwrite,nonatomic,retain) UILongPressGestureRecognizer *longPressBackAccueil ;
 @property (readwrite,nonatomic,retain) UILongPressGestureRecognizer *longPressDecoAttr ;
 @property (readwrite,nonatomic,retain) UILongPressGestureRecognizer *longPressDim ;
 @property (readwrite,nonatomic,retain) UILongPressGestureRecognizer *longPressHome ;

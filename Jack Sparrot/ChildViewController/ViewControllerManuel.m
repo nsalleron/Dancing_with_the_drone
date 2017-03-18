@@ -17,8 +17,6 @@
 
 ViewManuel *ecran;
 BOOL firstTime = TRUE;
-int nbSwipeRight = 0;
-NSTimer * timerSwipeRight;
 BebopDrone * droneBebop;
 
 @implementation ViewControllerManuel
@@ -93,17 +91,13 @@ BebopDrone * droneBebop;
     swipeDown.direction=UISwipeGestureRecognizerDirectionDown;
     [self.view addGestureRecognizer:swipeDown];
     
-    //Swipe Right
-    UISwipeGestureRecognizer * swipeRight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight:)];
+    //Swipe Right et Left
+    UISwipeGestureRecognizer * swipeRight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(changeAxe:)];
     swipeRight.direction=UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:swipeRight];
-    
-    //Timer RAZ compteur swipe Right
-    timerSwipeRight = [NSTimer scheduledTimerWithTimeInterval:3.0
-                                                       target:self
-                                                       selector:@selector(razCpt)
-                                                       userInfo:nil
-                                                       repeats:YES];
+    UISwipeGestureRecognizer * swipeLeft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(changeAxe:)];
+    swipeRight.direction=UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeLeft];
     
 
     
@@ -198,16 +192,13 @@ BebopDrone * droneBebop;
 
 
 - (void) viewDidDisappear:(BOOL)animated{
-    [timerSwipeRight invalidate];
-    timerSwipeRight = nil;
     _motionManager = nil;
 }
 
 /* Gestion des toucher long par le viewController */
 - (void) quitView:(UILongPressGestureRecognizer*)gesture{
-    if ( gesture.state == UIGestureRecognizerStateBegan) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 
@@ -264,22 +255,6 @@ BebopDrone * droneBebop;
     NSLog(@"Down");
 }
 
--(void)swipeRight:(UISwipeGestureRecognizer*)gestureRecognizer
-{
-    if (nbSwipeRight != 2) {
-        nbSwipeRight++;
-        return;
-    }
-    nbSwipeRight = 0;
-    [timerSwipeRight invalidate];
-    timerSwipeRight = nil;
-    [[self navigationController] popViewControllerAnimated:true];
-}
-
-
-
-
-
 /* Rotation de l'écran */
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -303,9 +278,6 @@ BebopDrone * droneBebop;
 }
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
     [ecran updateView:size];
-}
-- (void) razCpt{
-    nbSwipeRight = 0;
 }
 
 -(void)outputAccelertionData:(CMAcceleration)acceleration

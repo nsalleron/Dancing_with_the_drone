@@ -34,7 +34,6 @@ ViewAide *ecranAide;
     
     NSURL *path;
     
-    
     if([send.titleLabel.text isEqualToString:@"Changement des axes"]){
         path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"demoChangementAxes" ofType:@"mov"]];
     }else if([send.titleLabel.text isEqualToString:@"Changement de mode"]){
@@ -44,7 +43,6 @@ ViewAide *ecranAide;
     }else if([send.titleLabel.text isEqualToString:@"Retour Accueil"]){
         path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"demoRetourAccueil" ofType:@"mov"]];
     }
-    
     
     AVPlayer *player = [AVPlayer playerWithURL:path];
     AVPlayerViewController *playerViewController = [AVPlayerViewController new];

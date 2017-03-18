@@ -111,25 +111,27 @@
         
         /* Gestion des évènements */
         [_btnStatioDecoAttr addTarget:self.superview action:@selector(changeSatio:) forControlEvents:UIControlEventTouchUpInside];
-         [_btnChangementMode addTarget:self.superview action:@selector(changeAxe:) forControlEvents:UIControlEventTouchUpInside];
         
-        /* Gestion Pression longue btnStatioDecoAttr/Dimensions/Home */
-        _longPressDecoAttr = [[UILongPressGestureRecognizer alloc] init];
+        /* Gestion Pression longue retour */
+        _longPressBackAccueil = [[UILongPressGestureRecognizer alloc] init];
+        [_longPressBackAccueil addTarget:self action:@selector(exit:)];
+        [_longPressBackAccueil setMinimumPressDuration:3];
+        
+        _longPressDecoAttr= [[UILongPressGestureRecognizer alloc] init];
         [_longPressDecoAttr addTarget:self action:@selector(changeDecoAttr:)];
-        [_longPressDecoAttr setMinimumPressDuration:1];
-        [_btnStatioDecoAttr addGestureRecognizer:_longPressDecoAttr];
+        [_longPressDecoAttr setMinimumPressDuration:3];
         
-        _longPressDim = [[UILongPressGestureRecognizer alloc] init];
-        [_longPressDim addTarget:self action:@selector(goToDimension:)];
-        [_longPressDim setMinimumPressDuration:1];
-        [_btnDimensions addGestureRecognizer:_longPressDim];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToDimension:)];
+        tapGesture.numberOfTapsRequired = 2;
+    
+        [self addGestureRecognizer:tapGesture];
+        [self addGestureRecognizer:_longPressBackAccueil];
+        [_btnStatioDecoAttr addGestureRecognizer:_longPressDecoAttr];
         
         _longPressHome = [[UILongPressGestureRecognizer alloc] init];
         [_longPressHome addTarget:self action:@selector(homeFunction:)];
         [_longPressHome setMinimumPressDuration:1];
         [_btnHome addGestureRecognizer:_longPressHome];
-        
-        
         
         [self colors];
         
@@ -249,7 +251,7 @@
 
 - (void) goToDimension:(UILongPressGestureRecognizer*)gesture{
     
-    if ( gesture.state == UIGestureRecognizerStateBegan) {
+    if ( gesture.state == UIGestureRecognizerStateRecognized) {
         //Update du View Controller
         [_vc goToDimensionChoice:gesture];
     }
