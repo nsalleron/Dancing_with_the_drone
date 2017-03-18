@@ -129,7 +129,7 @@ UINavigationController *myVC;
         
         /* Mise en place des labels */
             /* LabelBatterySmartphone */
-        [_labelBatterySmartphone setHidden:NO];
+        
         [_labelBatterySmartphone setFrame:CGRectMake(format.width - _tailleIcones*1.1,0,_tailleIcones*1.2,_tailleIcones/3)];
         
             /* LabelBatteryDrone */
@@ -163,12 +163,14 @@ UINavigationController *myVC;
         
         /* Mise en place des labels */
         /* LabelBatterySmartphone */
-        [_labelBatterySmartphone setHidden:YES];
+        
+        [_labelBatterySmartphone setFrame:CGRectMake(format.width - _tailleIcones/1.5,-10,_tailleIcones,_tailleIcones/3)];
+        [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d",(int)[self battery]]];
         /* LabelBatteryDrone */
         [_labelBatteryDrone setFrame:CGRectMake(10,
-                                                format.height - _tailleIcones/3,
+                                                -10,
                                                 _tailleIcones,
-                                                _tailleIcones/2)];
+                                                _tailleIcones/3)];
         /* LabelVersionApp */
         [_labelVersionApp setFrame:CGRectMake(format.width - _tailleIcones - 10 ,
                                               format.height -_tailleIcones/3,
