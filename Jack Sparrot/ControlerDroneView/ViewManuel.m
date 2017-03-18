@@ -88,22 +88,22 @@
         [_btnHome setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
         [[_btnStatioDecoAttr layer] setBorderWidth:1.0f];
-        [[_btnStatioDecoAttr layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnStatioDecoAttr layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnStatioDecoAttr layer] setCornerRadius:1.0f];
         [[_btnStatioDecoAttr layer] setBorderWidth:1.0f];
         
         [[_btnChangementMode layer] setBorderWidth:1.0f];
-        [[_btnChangementMode layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnChangementMode layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnChangementMode layer] setCornerRadius:1.0f];
         [[_btnChangementMode layer] setBorderWidth:1.0f];
         
         [[_btnHome layer] setBorderWidth:1.0f];
-        [[_btnHome layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnHome layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnHome layer] setCornerRadius:1.0f];
         [[_btnHome layer] setBorderWidth:1.0f];
         
         [[_btnDimensions layer] setBorderWidth:1.0f];
-        [[_btnDimensions layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnDimensions layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnDimensions layer] setCornerRadius:1.0f];
         [[_btnDimensions layer] setBorderWidth:1.0f];
         

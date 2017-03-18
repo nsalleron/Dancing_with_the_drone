@@ -74,17 +74,17 @@
         [_btn3D setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
         [[_btn1D layer] setBorderWidth:1.0f];
-        [[_btn1D layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btn1D layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btn1D layer] setCornerRadius:1.0f];
         [[_btn1D layer] setBorderWidth:1.0f];
         
         [[_btn2D layer] setBorderWidth:1.0f];
-        [[_btn2D layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btn2D layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btn2D layer] setCornerRadius:1.0f];
         [[_btn2D layer] setBorderWidth:1.0f];
         
         [[_btn3D layer] setBorderWidth:1.0f];
-        [[_btn3D layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btn3D layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btn3D layer] setCornerRadius:1.0f];
         [[_btn3D layer] setBorderWidth:1.0f];
         

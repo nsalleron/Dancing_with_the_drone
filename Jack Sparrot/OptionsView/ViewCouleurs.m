@@ -38,13 +38,34 @@
                      ,rgb(255,171,0)
                      ,rgb(255,109,0)
                      ,rgb(221,44,0)
+                     
+                     
+                     
+                     ,rgb(84,110,122)
+                     ,rgb(117,117,117)
+                     ,rgb(109,76,65)
+                     ,rgb(30,136,229)
+                     ,rgb(57,73,171)
+                     ,rgb(94,53,177)
+                     ,rgb(244,81,30)
+                     ,rgb(251,140,0)
+                     ,rgb(255,179,0)
+                     ,rgb(253,216,53)
+                     ,rgb(192,202,51)
+                     ,rgb(124,179,66)
+                     ,rgb(67,160,71)
+                     ,rgb(0,137,123)
+                     ,rgb(0,172,193)
+                     ,rgb(3,155,229)
+                     
                      , nil ];
+   
    
         
         
         _tmp = [NSMutableArray new];
         
-        for (int i = 0; i < 16; ++i) {
+        for (int i = 0; i < 32; ++i) {
             UIButton *TmpBtn = [[UIButton alloc] init];
             TmpBtn = [[UIButton alloc] init ];
             [TmpBtn setBackgroundColor:[_couleurs objectAtIndex:i]];
@@ -77,7 +98,7 @@
     
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
     {
-        height = (height-32)/2;
+        height = (height-32)/4;
         width = width /8;
         
         for (UIButton *boutton in _tmp) {
@@ -88,6 +109,19 @@
                 //NSLog(@"btn %d X = %d Y = %f width : %f height : %f",i,0,i*width, width,height);
                 [boutton setFrame:CGRectMake((i-8)*width,height+32  , width, height)];
             }
+            
+            if(i<8){
+                [boutton setFrame:CGRectMake(i*width,32, width, height)];
+            }else if (i<16){
+                [boutton setFrame:CGRectMake((i-8)*width,height+32  , width, height)];
+            }else if (i<24){
+                [boutton setFrame:CGRectMake((i-16)*width,2*height+32  , width, height)];
+            }else{
+                [boutton setFrame:CGRectMake((i-24)*width,3*height+32  , width, height)];
+            }
+            
+            
+            
             i++;
         }
         
@@ -95,18 +129,18 @@
         
         
     }else{ //Vertical
-        width = width /2;
-        height = (height-64) /8;
+        width = width /4;
+        height = (height-32) /8;
         
         for (UIButton *boutton in _tmp) {
             if(i<8){
-                //NSLog(@"btn %d X = %d Y = %f width : %f height : %f",i,0,i*width, width,height);
-                [boutton setFrame:CGRectMake(0,i*height+64  , width, height)];
-                //[boutton setFrame:CGRectMake(0,20+i*height  , width, height)];
+                [boutton setFrame:CGRectMake(0,i*height+32  , width, height)];
+            }else if (i<16){
+                [boutton setFrame:CGRectMake(width, 32+(i-8)*height,width, height)];
+            }else if (i<24){
+                [boutton setFrame:CGRectMake(2*width, 32+(i-16)*height,width, height)];
             }else{
-                //NSLog(@"btn %d X = %d Y = %f width : %f height : %f",i,0,i*width, width,height);
-                [boutton setFrame:CGRectMake(width, 64+(i-8)*height,width, height)];
-                //[boutton setFrame:CGRectMake(width, 20+(i-8)*height,width, height)];
+                [boutton setFrame:CGRectMake(3*width, 32+(i-24)*height,width, height)];
             }
             i++;
         }
