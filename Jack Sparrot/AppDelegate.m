@@ -40,6 +40,9 @@
     [self.window setRootViewController:myNVC];
     [self.window makeKeyAndVisible];
     
+    application.statusBarHidden = YES;
+    
+    
     return YES;
 
     

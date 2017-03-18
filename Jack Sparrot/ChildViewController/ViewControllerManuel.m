@@ -26,8 +26,6 @@ BebopDrone * droneBebop;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
     /* Accelerometre */
     
     
@@ -102,6 +100,11 @@ BebopDrone * droneBebop;
 
     
 }
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 - (void) setDrone:(BebopDrone *) drone{
     droneBebop = drone;
 }

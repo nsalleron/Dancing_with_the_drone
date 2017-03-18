@@ -217,7 +217,9 @@ boolean droneViewActif;
 }
 
 
-
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
 
 
 - (void)didReceiveMemoryWarning {
