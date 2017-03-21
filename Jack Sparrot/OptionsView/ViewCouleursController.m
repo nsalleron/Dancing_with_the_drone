@@ -60,6 +60,10 @@ UIColor *valCouleur=nil;
     return YES;
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations // iOS 6 autorotation fix
 {
     
