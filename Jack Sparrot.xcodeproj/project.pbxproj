@@ -510,6 +510,7 @@
 				TargetAttributes = {
 					A61AEEC51E40978F00EDB53B = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = L99GSY552M;
 						ProvisioningStyle = Automatic;
 					};
 					A61AEEE11E40978F00EDB53B = {
@@ -525,10 +526,12 @@
 					};
 					A6E50DC61E5E0A9800830EFD = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = L99GSY552M;
 						ProvisioningStyle = Automatic;
 					};
 					A6E50DD21E5E0A9800830EFD = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = L99GSY552M;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -803,7 +806,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L99GSY552M;
 				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "./ARSDK3_iOS_3_9_2/iOS-iphoneos/staging/usr/include";
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "./ARSDK3_iOS_3_9_2/iOS-iphonesimulator/staging/usr/include";
 				"HEADER_SEARCH_PATHS[sdk=watchos3.1]" = "./ARSDK3_iOS_3_9_2/iOS-iphoneos/staging/usr/include";
@@ -844,7 +847,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L99GSY552M;
 				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "./ARSDK3_iOS_3_9_2/iOS-iphoneos/staging/usr/include";
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "./ARSDK3_iOS_3_9_2/iOS-iphonesimulator/staging/usr/include";
 				"HEADER_SEARCH_PATHS[sdk=watchos3.1]" = "./ARSDK3_iOS_3_9_2/iOS-iphoneos/staging/usr/include";
@@ -957,7 +960,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L99GSY552M;
 				IBSC_MODULE = Jack_Sparrot_Watch_Extension;
 				INFOPLIST_FILE = "Jack Sparrot Watch/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot.watchkitapp";
@@ -973,7 +976,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L99GSY552M;
 				IBSC_MODULE = Jack_Sparrot_Watch_Extension;
 				INFOPLIST_FILE = "Jack Sparrot Watch/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot.watchkitapp";
@@ -989,7 +992,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L99GSY552M;
 				INFOPLIST_FILE = "Jack Sparrot Watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot.watchkitapp.watchkitextension";
@@ -1005,7 +1008,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = L99GSY552M;
 				INFOPLIST_FILE = "Jack Sparrot Watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "fr.upmc.sar.projet.Jack-Sparrot.watchkitapp.watchkitextension";

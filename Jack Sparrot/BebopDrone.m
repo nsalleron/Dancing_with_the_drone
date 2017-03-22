@@ -179,12 +179,6 @@
     }
 }
 
-- (void)takePicture {
-    if (_deviceController && (_connectionState == ARCONTROLLER_DEVICE_STATE_RUNNING)) {
-        _deviceController->aRDrone3->sendMediaRecordPictureV2(_deviceController->aRDrone3);
-    }
-}
-
 - (void)setPitch:(uint8_t)pitch {
     if (_deviceController && (_connectionState == ARCONTROLLER_DEVICE_STATE_RUNNING)) {
         _deviceController->aRDrone3->setPilotingPCMDPitch(_deviceController->aRDrone3, pitch);

@@ -19,12 +19,23 @@ ViewManuel *ecran;
 BOOL firstTime = TRUE;
 BebopDrone * droneBebop;
 
-@implementation ViewControllerManuel
+double accX;
+double accY;
+double accZ;
+double rotX;
+double rotY;
+double rotZ;
 
+@implementation ViewControllerManuel
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+  
+    
+  
+   
     
     /* Accelerometre */
     
@@ -38,27 +49,41 @@ BebopDrone * droneBebop;
     _currentMaxRotZ = 0;
     
     self.motionManager = [[CMMotionManager alloc] init];
-    self.motionManager.accelerometerUpdateInterval = .2;
-    self.motionManager.gyroUpdateInterval = .2;
     
-    [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
-        withHandler:^(CMAccelerometerData  *accelerometerData, NSError *error) {
-                [self outputAccelertionData:accelerometerData.acceleration];
-                        if(error){
-                              NSLog(@"%@", error);
-                        }
-                }];
+    if(self.motionManager.isGyroAvailable && self.motionManager.isAccelerometerAvailable){
+        
+        self.motionManager.accelerometerUpdateInterval = .2;
+        self.motionManager.gyroUpdateInterval = .2;
+
+        
+        
+        [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
+                                                 withHandler:^(CMAccelerometerData  *accelerometerData, NSError *error) {
+                                                     [self outputAccelertionData:accelerometerData.acceleration];
+                                                     if(error){
+                                                         NSLog(@"%@", error);
+                                                     }
+                                                 }];
+        
+        [self.motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue]
+                                        withHandler:^(CMGyroData *gyroData, NSError *error) {
+                                            [self outputRotationData:gyroData.rotationRate];
+                                        }];
+        
+        self.motionManager.deviceMotionUpdateInterval = 0.2;
+        
+        [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue]
+                                                withHandler:^(CMDeviceMotion *deviceData, NSError *error){
+                                                    [self outputDeviceMotionData:deviceData.userAcceleration];
+                                                    if (error) {
+                                                        NSLog(@"%@", error);
+                                                    }
+                                                }];
+        
+
+        
+    }
     
-    [self.motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue]
-                                    withHandler:^(CMGyroData *gyroData, NSError *error) {
-                                        [self outputRotationData:gyroData.rotationRate];
-                                    }];
-    
-    CMAltimeter *cm = [[CMAltimeter alloc] init];
-    
-    [cm startRelativeAltitudeUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMAltitudeData *altitudeData, NSError *error) {
-        [self outputAltitudeData:altitudeData.relativeAltitude];
-    }];
 
     
 
@@ -118,8 +143,7 @@ BebopDrone * droneBebop;
             NSLog(@"Atterrissage");
             _enVol = FALSE;
             _enStatio = FALSE;
-            
-            [droneBebop takeOff];
+            [droneBebop land];
             
             statio = @"Mode Stationnaire : OFF";
             break;
@@ -129,7 +153,8 @@ BebopDrone * droneBebop;
             NSLog(@"Decollage");
             _enVol = TRUE;
             _enStatio = TRUE;
-            [droneBebop land];
+            [droneBebop takeOff];
+           
         default:
             break;
     }
@@ -195,7 +220,7 @@ BebopDrone * droneBebop;
 
 
 - (void) viewDidDisappear:(BOOL)animated{
-    _motionManager = nil;
+   
 }
 
 /* Gestion des toucher long par le viewController */
@@ -285,23 +310,81 @@ BebopDrone * droneBebop;
 
 -(void)outputAccelertionData:(CMAcceleration)acceleration
 {
-    
-    //NSLog(@"X: %.2fg",acceleration.x);
-    if(fabs(acceleration.x) > fabs(_currentMaxAccelX))
-    {
-        _currentMaxAccelX = acceleration.x;
+    /*
+    double const kThreshold = 0.2;
+    [ecran updateBtnStatioDecoAttr:[[NSString alloc] initWithFormat:@"%2fg",acceleration.x]];
+    if(acceleration.x < kThreshold * -1){
+        [ecran updateBtnDimensions:@"++++"];
+         _currentMaxAccelX = acceleration.x;
+        [ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX : %2fg",_currentMaxAccelX]];
+        NSLog(@"++++");
+    }else if(acceleration.x > kThreshold){
+        NSLog(@"---");
+         _currentMaxAccelX = acceleration.x;
+        [ecran updateBtnDimensions:@"----"];
+        [ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX : %2fg",_currentMaxAccelX]];
     }
-    //NSLog(@"Y: %.2fg",acceleration.y);
+    
+    */
+    
+    
+    
+    /*//NSLog(@"Y: %.2fg",acceleration.y);
     if(fabs(acceleration.y) > fabs(_currentMaxAccelY))
     {
         _currentMaxAccelY = acceleration.y;
     }
-   //NSLog(@"Z: %.2fg",acceleration.z);
+    //NSLog(@"Z: %.2fg",acceleration.z);
     if(fabs(acceleration.z) > fabs(_currentMaxAccelZ))
     {
         _currentMaxAccelZ = acceleration.z;
     }
-
+    
+    accX = acceleration.x;
+    accY = acceleration.y;
+    accZ = acceleration.z;
+    
+    
+    double pitch = atan(accX / sqrt(accY*accY + accZ*accZ));
+    double roll = atan(accY / sqrt(accX*accX + accZ*accZ));
+    
+    int pitchI = (pitch *180) / 3.14;
+    int rollI = (roll*180)/3.14;
+    NSLog(@" pitch %d roll %d",pitchI,rollI);
+    
+    if(_enVol == TRUE && _enStatio == FALSE){
+        [droneBebop setFlag:1];
+        [droneBebop setPitch:pitchI];
+        [droneBebop setFlag:0];
+        [droneBebop setRoll:rollI];
+        NSLog(@"PASSAGE");
+    }
+     */
+    
+    
+    
+    
+    
+    
+    
+    
+}
+-(void) outputDeviceMotionData:(CMAcceleration) acceleration{
+    
+    double const kThreshold = 0.3;
+    
+    [ecran updateBtnStatioDecoAttr:[[NSString alloc] initWithFormat:@"%2fg",acceleration.x]];
+    if(acceleration.x < kThreshold * -1){
+        [ecran updateBtnDimensions:@"----"];
+        _currentMaxAccelX = acceleration.x;
+        [ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX - : %2fg",_currentMaxAccelX]];
+        NSLog(@"----");
+    }else if(acceleration.x > kThreshold){
+        NSLog(@"++++");
+        _currentMaxAccelX = acceleration.x;
+        [ecran updateBtnDimensions:@"++++"];
+        [ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX + : %2fg",_currentMaxAccelX]];
+    }
     
 }
 -(void)outputRotationData:(CMRotationRate)rotation
@@ -323,12 +406,12 @@ BebopDrone * droneBebop;
         _currentMaxRotZ = rotation.z;
     }
     
+    rotX = rotation.x;
+    rotY = rotation.y;
+    rotZ = rotation.z;
+    
 }
 
--(void)outputAltitudeData:(NSNumber * )alt
-{
-    NSLog(@"Passage : %f",alt.floatValue);
-   
-}
+
 
 @end
