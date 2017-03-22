@@ -37,6 +37,7 @@
 @property (readwrite, nonatomic, retain) IBOutlet UIStepper *stpCoeffAccel;
 
 @property (assign, nonatomic) CGFloat tailleIcones;
+@property (assign, nonatomic) CGFloat tailleMarges;
 @property (assign, nonatomic) ViewControllerOptions *vc;
 
 - (void) updateView:(CGSize) format;

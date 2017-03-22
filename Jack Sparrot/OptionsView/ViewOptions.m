@@ -101,35 +101,35 @@
 
 - (void) updateBtn:(int)btn color: (UIColor*) color{
     if (color != nil){
-    switch (btn) {
-        case 1:
-            _color1D = color;
-            [_btnColor1D setBackgroundColor:_color1D];
-            
-            break;
-        case 2:
-            _color2D = color;
-            [_btnColor2D setBackgroundColor:_color2D];
-            break;
-        case 3:
-            _color3D = color;
-            [_btnColor3D setBackgroundColor:_color3D];
-            break;
-        case 4:
-            _colorX = color;
-            [_btnColorAxeX setBackgroundColor:_colorX];
-            break;
-        case 5:
-            _colorY = color;
-            [_btnColorAxeY setBackgroundColor:_colorY];
-            break;
-        default:
-            
-            break;
-    }
+        switch (btn) {
+            case 1:
+                _color1D = color;
+                [_btnColor1D setBackgroundColor:_color1D];
+                
+                break;
+            case 2:
+                _color2D = color;
+                [_btnColor2D setBackgroundColor:_color2D];
+                break;
+            case 3:
+                _color3D = color;
+                [_btnColor3D setBackgroundColor:_color3D];
+                break;
+            case 4:
+                _colorX = color;
+                [_btnColorAxeX setBackgroundColor:_colorX];
+                break;
+            case 5:
+                _colorY = color;
+                [_btnColorAxeY setBackgroundColor:_colorY];
+                break;
+            default:
+                
+                break;
+        }
     }
     [self btnColorText];
-
+    
 }
 
 - (id) initWithFrame:(CGRect)frame{
@@ -157,27 +157,27 @@
         [_btnColorAxeY setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
         [[_btnColor1D layer] setBorderWidth:1.0f];
-        [[_btnColor1D layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnColor1D layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnColor1D layer] setCornerRadius:1.0f];
         [[_btnColor1D layer] setBorderWidth:1.0f];
         
         [[_btnColor2D layer] setBorderWidth:1.0f];
-        [[_btnColor2D layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnColor2D layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnColor2D layer] setCornerRadius:1.0f];
         [[_btnColor2D layer] setBorderWidth:1.0f];
         
         [[_btnColor3D layer] setBorderWidth:1.0f];
-        [[_btnColor3D layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnColor3D layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnColor3D layer] setCornerRadius:1.0f];
         [[_btnColor3D layer] setBorderWidth:1.0f];
         
         [[_btnColorAxeX layer] setBorderWidth:1.0f];
-        [[_btnColorAxeX layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnColorAxeX layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnColorAxeX layer] setCornerRadius:1.0f];
         [[_btnColorAxeX layer] setBorderWidth:1.0f];
         
         [[_btnColorAxeY layer] setBorderWidth:1.0f];
-        [[_btnColorAxeY layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        [[_btnColorAxeY layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnColorAxeY layer] setCornerRadius:1.0f];
         [[_btnColorAxeY layer] setBorderWidth:1.0f];
         
@@ -252,7 +252,7 @@
 - (void)updateView:(CGSize)format{
     
     NSLog(@"Width : %f Height : %f ",format.width,format.height);
-    
+    _tailleMarges = 6;
     /*Mise en place des boutons et labels */
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
     {
@@ -283,27 +283,25 @@
         
     }else{
         _tailleIcones = (format.height-64)/6;
-        [_lblModeIntExt setFrame:CGRectMake(5, 64, (format.width/2)-5, _tailleIcones)];
-        [_swhInOut setFrame:CGRectMake(5+format.width/2, 64+_tailleIcones/3, format.width/2, _tailleIcones)];
+        [_lblModeIntExt setFrame:CGRectMake(_tailleMarges, 64, (format.width/2)-_tailleMarges, _tailleIcones)];
+        [_swhInOut setFrame:CGRectMake(_tailleMarges+format.width/2, 64+_tailleIcones/3, format.width/2, _tailleIcones)];
         
-        [_lblHauteurMax setFrame:CGRectMake(5, 64+_tailleIcones, (format.width/2)-5, _tailleIcones)];
-        //[_txtHauteurMax setFrame:CGRectMake(format.width/2+10, 84+_tailleIcones+2, format.width/2-20, _tailleIcones-44)];
+        [_lblHauteurMax setFrame:CGRectMake(_tailleMarges, 64+_tailleIcones, (format.width/2)-_tailleMarges, _tailleIcones)];
         [_lblHauteurMaxInt setFrame:CGRectMake(format.width/2, 64+_tailleIcones, format.width/4, _tailleIcones)];
         [_stpHauteurMax setFrame:CGRectMake(format.width/2+format.width/4-20, 64+_tailleIcones+30, format.width/4, _tailleIcones)];
         
-        [_lblCoeffAccel setFrame:CGRectMake(5, 64+2*_tailleIcones, (format.width/2)-5, _tailleIcones)];
-        //[_txtCoeffAccel setFrame:CGRectMake(format.width/2+10, 84+2*_tailleIcones+2, format.width/2-20, _tailleIcones-44)];
-        [_lblCoeffAccelInt setFrame:CGRectMake(format.width/2, 64+2*_tailleIcones, format.width/4, _tailleIcones)];
+        [_lblCoeffAccel setFrame:CGRectMake(_tailleMarges, 64+2*_tailleIcones, (format.width/2)-5, _tailleIcones)];
+        [_lblCoeffAccelInt setFrame:CGRectMake(_tailleMarges+format.width/2, 64+2*_tailleIcones, format.width/4, _tailleIcones)];
         [_stpCoeffAccel setFrame:CGRectMake(format.width/2+format.width/4-20, 64+2*_tailleIcones+30, format.width/4, _tailleIcones)];
         
-        [_lblCouleurDim setFrame:CGRectMake(5, 64+3*_tailleIcones, (format.width/2)-5, _tailleIcones)];
-        [_btnColor1D setFrame:CGRectMake(format.width/2, 64+3*_tailleIcones, format.width/2, _tailleIcones)];
+        [_lblCouleurDim setFrame:CGRectMake(_tailleMarges, 64+3*_tailleIcones, (format.width/2)-_tailleMarges, _tailleIcones)];
+        [_btnColor1D setFrame:CGRectMake(format.width/2, 64+3*_tailleIcones, (format.width/2)-_tailleMarges, _tailleIcones-2)];
         
-        [_btnColor2D setFrame:CGRectMake(format.width/2, 64+4*_tailleIcones, format.width/2, _tailleIcones)];
-        [_btnColor3D setFrame:CGRectMake(format.width/2, 64+5*_tailleIcones, format.width/2, _tailleIcones)];
+        [_btnColor2D setFrame:CGRectMake(format.width/2, (64+4*_tailleIcones)-2, (format.width/2)-_tailleMarges, _tailleIcones-2)];
+        [_btnColor3D setFrame:CGRectMake(format.width/2, (64+5*_tailleIcones)-4, (format.width/2)-_tailleMarges, _tailleIcones-2)];
         
-        [_btnColorAxeX setFrame:CGRectMake(0, 64+4*_tailleIcones, format.width/2, _tailleIcones)];
-        [_btnColorAxeY setFrame:CGRectMake(0, 64+5*_tailleIcones, format.width/2, _tailleIcones)];
+        [_btnColorAxeX setFrame:CGRectMake(_tailleMarges, (64+4*_tailleIcones)-2, (format.width/2)-_tailleMarges, _tailleIcones-2)];
+        [_btnColorAxeY setFrame:CGRectMake(_tailleMarges, (64+5*_tailleIcones)-4, (format.width/2)-_tailleMarges, _tailleIcones-2)];
         
     }
     
