@@ -87,5 +87,9 @@ ViewAide *ecranAide;
     return UIInterfaceOrientationPortrait;
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    
+}
+
 
 @end

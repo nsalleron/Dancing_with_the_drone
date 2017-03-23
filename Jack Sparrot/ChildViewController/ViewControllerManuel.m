@@ -32,14 +32,7 @@ double rotZ;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-  
-    
-  
-   
-    
-    /* Accelerometre */
-    
-    
+    /* Acceleration + Gyroscope */
     _currentMaxAccelX = 0;
     _currentMaxAccelY = 0;
     _currentMaxAccelZ = 0;
@@ -50,44 +43,25 @@ double rotZ;
     
     self.motionManager = [[CMMotionManager alloc] init];
     
-    if(self.motionManager.isGyroAvailable && self.motionManager.isAccelerometerAvailable){
-        
-        self.motionManager.accelerometerUpdateInterval = .2;
+    if(self.motionManager.isGyroAvailable && self.motionManager.isDeviceMotionAvailable){
+        //Mise en place du gyroscope
         self.motionManager.gyroUpdateInterval = .2;
-
-        
-        
-        [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
-                                                 withHandler:^(CMAccelerometerData  *accelerometerData, NSError *error) {
-                                                     [self outputAccelertionData:accelerometerData.acceleration];
-                                                     if(error){
-                                                         NSLog(@"%@", error);
-                                                     }
-                                                 }];
-        
-        [self.motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue]
-                                        withHandler:^(CMGyroData *gyroData, NSError *error) {
-                                            [self outputRotationData:gyroData.rotationRate];
-                                        }];
-        
-        self.motionManager.deviceMotionUpdateInterval = 0.2;
-        
+        //Mise en place du DeviceMotion
+        self.motionManager.deviceMotionUpdateInterval = 0.1;
         [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue]
                                                 withHandler:^(CMDeviceMotion *deviceData, NSError *error){
                                                     [self outputDeviceMotionData:deviceData.userAcceleration];
+                                                    [self outputRotationData:deviceData.gravity];
                                                     if (error) {
                                                         NSLog(@"%@", error);
                                                     }
                                                 }];
         
-
+        
+        
         
     }
-    
-
-    
-
-    /* Fin accelerometre */
+    /* Fin acceleration */
     
     
     _enStatio = FALSE;
@@ -121,6 +95,12 @@ double rotZ;
     UISwipeGestureRecognizer * swipeLeft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(changeAxe:)];
     swipeRight.direction=UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:swipeLeft];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.5
+                                     target:self
+                                   selector:@selector(sendToDrone)
+                                   userInfo:nil
+                                    repeats:YES];
     
 
     
@@ -308,108 +288,107 @@ double rotZ;
     [ecran updateView:size];
 }
 
--(void)outputAccelertionData:(CMAcceleration)acceleration
-{
-    /*
-    double const kThreshold = 0.2;
-    [ecran updateBtnStatioDecoAttr:[[NSString alloc] initWithFormat:@"%2fg",acceleration.x]];
-    if(acceleration.x < kThreshold * -1){
-        [ecran updateBtnDimensions:@"++++"];
-         _currentMaxAccelX = acceleration.x;
-        [ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX : %2fg",_currentMaxAccelX]];
-        NSLog(@"++++");
-    }else if(acceleration.x > kThreshold){
-        NSLog(@"---");
-         _currentMaxAccelX = acceleration.x;
-        [ecran updateBtnDimensions:@"----"];
-        [ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX : %2fg",_currentMaxAccelX]];
-    }
-    
-    */
-    
-    
-    
-    /*//NSLog(@"Y: %.2fg",acceleration.y);
-    if(fabs(acceleration.y) > fabs(_currentMaxAccelY))
-    {
-        _currentMaxAccelY = acceleration.y;
-    }
-    //NSLog(@"Z: %.2fg",acceleration.z);
-    if(fabs(acceleration.z) > fabs(_currentMaxAccelZ))
-    {
-        _currentMaxAccelZ = acceleration.z;
-    }
-    
-    accX = acceleration.x;
-    accY = acceleration.y;
-    accZ = acceleration.z;
-    
-    
-    double pitch = atan(accX / sqrt(accY*accY + accZ*accZ));
-    double roll = atan(accY / sqrt(accX*accX + accZ*accZ));
-    
-    int pitchI = (pitch *180) / 3.14;
-    int rollI = (roll*180)/3.14;
-    NSLog(@" pitch %d roll %d",pitchI,rollI);
-    
-    if(_enVol == TRUE && _enStatio == FALSE){
-        [droneBebop setFlag:1];
-        [droneBebop setPitch:pitchI];
-        [droneBebop setFlag:0];
-        [droneBebop setRoll:rollI];
-        NSLog(@"PASSAGE");
-    }
-     */
-    
-    
-    
-    
-    
-    
-    
-    
-}
+/*
+ *  @param acceleration : Acceleration en m/s^2 retourné par le téléphone.
+ *
+ */
 -(void) outputDeviceMotionData:(CMAcceleration) acceleration{
     
-    double const kThreshold = 0.3;
+    double const kThreshold = 0.05;
     
-    [ecran updateBtnStatioDecoAttr:[[NSString alloc] initWithFormat:@"%2fg",acceleration.x]];
-    if(acceleration.x < kThreshold * -1){
-        [ecran updateBtnDimensions:@"----"];
+    [ecran updateBtnDimensions:[[NSString alloc] initWithFormat:@"X : %.2f\t Y : %.2f\t Z : %.2f",
+                                    acceleration.x,acceleration.y,acceleration.z]];
+    //[ecran updateBtnStatioDecoAttr:[[NSString alloc] initWithFormat:@"%2fg",acceleration.x]];
+    if(acceleration.x < kThreshold * -1){ // -0.3 < -0.2
+        //[ecran updateBtnDimensions:@"----"];
         _currentMaxAccelX = acceleration.x;
-        [ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX - : %2fg",_currentMaxAccelX]];
+        //[ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX - : %2fm/s",_currentMaxAccelX]];
         NSLog(@"----");
-    }else if(acceleration.x > kThreshold){
+    }else if(acceleration.x > kThreshold){ // 0.3 > 0.2
         NSLog(@"++++");
         _currentMaxAccelX = acceleration.x;
-        [ecran updateBtnDimensions:@"++++"];
-        [ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX + : %2fg",_currentMaxAccelX]];
+        //[ecran updateBtnDimensions:@"++++"];
+        //[ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX + : %2fm/s",_currentMaxAccelX]];
+    }else{
+        //[ecran updateBtnDimensions:@"============="];
+        _currentMaxAccelX = 0;
     }
     
+    if(acceleration.y < kThreshold * -1){ // -0.3 < -0.2
+        //[ecran updateBtnDimensions:@"----"];
+        _currentMaxAccelY = acceleration.y;
+        //[ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX - : %2fm/s",_currentMaxAccelX]];
+        NSLog(@"----");
+    }else if(acceleration.y > kThreshold){ // 0.3 > 0.2
+        NSLog(@"++++");
+        _currentMaxAccelY = acceleration.y;
+        //[ecran updateBtnDimensions:@"++++"];
+        //[ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX + : %2fm/s",_currentMaxAccelX]];
+    }else{
+        //[ecran updateBtnDimensions:@"============="];
+        _currentMaxAccelY = 0;
+    }
+    
+    if(acceleration.z < kThreshold * -1){ // -0.3 < -0.2
+        //[ecran updateBtnDimensions:@"----"];
+        _currentMaxAccelZ = acceleration.z;
+        //[ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX - : %2fm/s",_currentMaxAccelX]];
+        NSLog(@"----");
+    }else if(acceleration.z > kThreshold){ // 0.3 > 0.2
+        NSLog(@"++++");
+        _currentMaxAccelZ = acceleration.z;
+        //[ecran updateBtnDimensions:@"++++"];
+        //[ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"MAX + : %2fm/s",_currentMaxAccelX]];
+    }else{
+        //[ecran updateBtnDimensions:@"============="];
+        _currentMaxAccelZ = 0;
+    }
 }
--(void)outputRotationData:(CMRotationRate)rotation
+//-(void)outputRotationData:(CMRotationRate)rotation
+-(void)outputRotationData:(CMAcceleration)rotation
 {
+    double rotationXY = atan2(rotation.x, rotation.y) - M_PI;
+    double rotationYZ = atan2(rotation.y, rotation.z) - M_PI;
+    double rotationZX = atan2(rotation.z, rotation.x) - M_PI;
     
-    //NSLog(@"RX: %.2fr/s",rotation.x);
-    if(fabs(rotation.x) > fabs(_currentMaxRotX))
-    {
-        _currentMaxRotX = rotation.x;
-    }
-    //NSLog(@"RY: %.2fr/s",rotation.y);
-    if(fabs(rotation.y) > fabs(_currentMaxRotY))
-    {
-        _currentMaxRotY = rotation.y;
-    }
-    //NSLog(@"RZ: %.2fr/s",rotation.z);
-    if(fabs(rotation.z) > fabs(_currentMaxRotZ))
-    {
-        _currentMaxRotZ = rotation.z;
-    }
-    
+    [ecran updateBtnStatioDecoAttr:[[NSString alloc] initWithFormat:@"X : %.2f\tY : %.2f\tZ : %.2f",rotationXY,rotationYZ,rotationZX
+                                    ]];
+    //[ecran updateBtnStatioDecoAttr:[[NSString alloc] initWithFormat:@"X : %.2f\t Y : %.2f\t Z : %.2f",
+                                //    rotation.x,rotation.y,rotation.z]];
     rotX = rotation.x;
     rotY = rotation.y;
     rotZ = rotation.z;
     
+}
+
+-(void)sendToDrone{
+    
+    
+    /* Si le drone est en vol et n'est pas en mode stationnaire */
+    if(droneBebop != nil && _enVol && !_enStatio){
+        //On balance les ordres
+        if(![ecran.btnChangementMode isHidden]){
+            if([[ecran.btnChangementMode.titleLabel text] isEqualToString:@"Axe X"]){
+                if(_currentMaxAccelX != 0){
+                    [droneBebop setFlag:0];
+                    [droneBebop setPitch:50];   //Le coefficient doit être appliqué
+                }
+                
+            }else{
+                if(_currentMaxAccelY != 0){
+                    [droneBebop setFlag:1];
+                    [droneBebop setPitch:50];   //Le coefficient doit être appliqué
+                }
+            }
+            //Mode X ou Y
+        } else if(![[ecran.btnDimensions.titleLabel text] isEqualToString:@"2D"]){
+            //Mode X ET Y
+        } else if(![[ecran.btnDimensions.titleLabel text] isEqualToString:@"3D"]){
+            //Mode X ET Y ET Z
+        }
+    }else{
+        //Nothing?
+    }
 }
 
 
