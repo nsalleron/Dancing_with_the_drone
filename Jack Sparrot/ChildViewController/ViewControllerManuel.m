@@ -363,12 +363,11 @@ double rotZ;
 
 -(void)sendToDrone{
     
-    
     /* Si le drone est en vol et n'est pas en mode stationnaire */
     if(droneBebop != nil && _enVol && !_enStatio){
         //On balance les ordres
         if(![ecran.btnChangementMode isHidden]){
-            if([[ecran.btnChangementMode.titleLabel text] isEqualToString:@"Axe X"]){
+            if([[ecran.btnChangementMode.titleLabel text] isEqualToString:@"Axe X"]){   //Mode X ou Y
                 if(_currentMaxAccelX != 0){
                     [droneBebop setFlag:0];
                     [droneBebop setPitch:50];   //Le coefficient doit être appliqué
@@ -377,14 +376,14 @@ double rotZ;
             }else{
                 if(_currentMaxAccelY != 0){
                     [droneBebop setFlag:1];
-                    [droneBebop setPitch:50];   //Le coefficient doit être appliqué
+                    [droneBebop setRoll:50];   //Le coefficient doit être appliqué
                 }
             }
-            //Mode X ou Y
-        } else if(![[ecran.btnDimensions.titleLabel text] isEqualToString:@"2D"]){
-            //Mode X ET Y
-        } else if(![[ecran.btnDimensions.titleLabel text] isEqualToString:@"3D"]){
-            //Mode X ET Y ET Z
+            
+        } else if(![[ecran.btnDimensions.titleLabel text] isEqualToString:@"2D"]){      //Mode X ET Y
+            
+        } else if(![[ecran.btnDimensions.titleLabel text] isEqualToString:@"3D"]){       //Mode X ET Y ET Z
+           
         }
     }else{
         //Nothing?
