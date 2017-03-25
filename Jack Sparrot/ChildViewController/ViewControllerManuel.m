@@ -257,6 +257,10 @@ const static float nearlyVertical   = 0.9;
     
     [self deconnexionDrone];
     
+    if(_service == nil){
+         [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 
@@ -363,17 +367,13 @@ const static float nearlyVertical   = 0.9;
     }
     
     if (ABS(z) >= tiltSensitivity) {
-        newZ = y * -GRAVITY_SCALE;
+        newZ = (z * GRAVITY_SCALE) + GRAVITY_SCALE;
     }
     
     
     
     [ecran updateBtnDimensions:[[NSString alloc] initWithFormat:@" X : %.2f, Y : %.2f, Z : %.2f",newX,newY,newZ]];
     
-    
-    //if(bFinMouvementX){
-        
-        //[ecran updateBtnChangementMode:@"MOUVEMENT"];
         if(newX < -1){
             
             if(_bebopDrone != nil && _enVol && !_enStatio){
@@ -427,15 +427,6 @@ const static float nearlyVertical   = 0.9;
             }
             
         }
-    //}
-   
-    //NSLog(@"\nx: %f, y: %f\n", newX,newY);
-
-    //NSLog(@"newX: %f, newY: %f", newX, newY);
-    //NSLog(@"horizontal boundary:: %f:%f:: %f  center:: %f: %f",leftBoundary,rightBoundary,newY+dot.center.x, dot.center.x,dot.center.y);
-    
-    
-    
 }
 
 /*

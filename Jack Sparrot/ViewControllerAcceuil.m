@@ -38,13 +38,9 @@ ViewControllerManuel *controllerDrone;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-
-    if(_bebopDrone == nil) {
-        _dataSource = [NSArray array];
-        _droneDiscoverer = [[DroneDiscoverer alloc] init];
-        [_droneDiscoverer setDelegate:self];
-    }
-   
+    
+    NSLog(@"ACCUEIL");
+    
     ecranAccueil = [[ViewEcranAccueil alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecranAccueil setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
     [self setView: ecranAccueil];
@@ -54,10 +50,13 @@ ViewControllerManuel *controllerDrone;
 
 - (void)viewDidAppear:(BOOL)animated {
     
+    NSLog(@"VIEW DID APPEAR");
+    
     if(_bebopDrone == nil) {
         NSLog(@"DRONE = NULL");
-        //_dataSource = [NSArray array];
-        //_droneDiscoverer = [[DroneDiscoverer alloc] init];
+        _dataSource = [NSArray array];
+        _droneDiscoverer = [[DroneDiscoverer alloc] init];
+        [_droneDiscoverer setDelegate:self];
         
         [self registerNotifications];
         [_droneDiscoverer startDiscovering];
@@ -157,6 +156,8 @@ ViewControllerManuel *controllerDrone;
                 NSLog(@"FIN CONNEXION ALERT VIEW");
                 [_connectionAlertView dismissWithClickedButtonIndex:0 animated:YES];
                 if(droneViewActif){
+                    _service = nil;
+                    _bebopDrone = nil;
                     controllerDrone = [[ViewControllerManuel alloc] init];
                     [self.navigationController pushViewController:controllerDrone animated:YES];
 
