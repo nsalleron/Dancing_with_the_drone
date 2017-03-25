@@ -31,6 +31,7 @@
 
 ViewEcranAccueil *ecranAccueil;
 boolean droneViewActif;
+ViewControllerManuel *controllerDrone;
 
 @implementation ViewControllerAccueil
 
@@ -54,13 +55,26 @@ boolean droneViewActif;
 - (void)viewDidAppear:(BOOL)animated {
     
     if(_bebopDrone == nil) {
+        NSLog(@"DRONE = NULL");
+        //_dataSource = [NSArray array];
+        //_droneDiscoverer = [[DroneDiscoverer alloc] init];
+        
         [self registerNotifications];
         [_droneDiscoverer startDiscovering];
    
         if ([_bebopDrone connectionState] != ARCONTROLLER_DEVICE_STATE_RUNNING) {
+            NSLog(@"NULL SHOW");
             [_connectionAlertView show];
         }
     }
+    
+    
+    
+    
+    
+   
+    
+    
     
 }
 
@@ -80,6 +94,7 @@ boolean droneViewActif;
         _connectionAlertView = [[UIAlertView alloc] initWithTitle:[_service name] message:@"Connexion ..."
                                                          delegate:self cancelButtonTitle:@"Annulation" otherButtonTitles:nil, nil];
         if ([_bebopDrone connectionState] != ARCONTROLLER_DEVICE_STATE_RUNNING) {
+            NSLog(@"CONNEXION SHOW");
             [_connectionAlertView show];
         }
     }
@@ -116,13 +131,7 @@ boolean droneViewActif;
 
 - (void) viewDidDisappear:(BOOL)animated
 {
-    
-    [self unregisterNotifications];
-    [_droneDiscoverer stopDiscovering];
-    
-    if(!droneViewActif){
-        [self deconnexionDrone];
-    }
+
 }
 
 - (void) deconnexionDrone{
@@ -134,6 +143,7 @@ boolean droneViewActif;
         _connectionAlertView = [[UIAlertView alloc] initWithTitle:[_service name] message:@"Disconnecting ..."
                                                          delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
         [_connectionAlertView show];
+        NSLog(@"DECONNEXION SHOW");
         
         // in background, disconnect from the drone
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -141,33 +151,44 @@ boolean droneViewActif;
             // wait for the disconnection to appear
             dispatch_semaphore_wait(_stateSem, DISPATCH_TIME_FOREVER);
             _bebopDrone = nil;
-            
+        
             // dismiss the alert view in main thread
             dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"FIN CONNEXION ALERT VIEW");
                 [_connectionAlertView dismissWithClickedButtonIndex:0 animated:YES];
+                if(droneViewActif){
+                    controllerDrone = [[ViewControllerManuel alloc] init];
+                    [self.navigationController pushViewController:controllerDrone animated:YES];
+
+                }
             });
         });
+    }else{
+        controllerDrone = [[ViewControllerManuel alloc] init];
+        [self.navigationController pushViewController:controllerDrone animated:YES];
     }
     
 }
 
 
 -(void)bebopDrone:(BebopDrone *)bebopDrone connectionDidChange:(eARCONTROLLER_DEVICE_STATE)state {
+    
+    
     NSLog(@"CHANGEMENT ETAT");
     switch (state) {
         case ARCONTROLLER_DEVICE_STATE_RUNNING:
             NSLog(@"STATE RUNNING");
+            
             [_connectionAlertView dismissWithClickedButtonIndex:0 animated:YES];
+            
             break;
         case ARCONTROLLER_DEVICE_STATE_STOPPED:
             NSLog(@"STATE STOPPED");
             dispatch_semaphore_signal(_stateSem);
-            
-            [self deconnexionDrone];
-            
             break;
             
         default:
+            [_connectionAlertView dismissWithClickedButtonIndex:0 animated:YES];
             break;
     }
 }
@@ -183,11 +204,15 @@ boolean droneViewActif;
             NSLog(@"Take Off");
             break;
         case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_FLYING:
+            
+            [controllerDrone finCommande];
+            break;
         case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_HOVERING:
             NSLog(@"Land");
             break;
         default:
             NSLog(@"Default");
+            break;
     }
 }
 
@@ -242,13 +267,10 @@ boolean droneViewActif;
 
 -(void) goToDroneControl:(UIButton*)send{
     droneViewActif = true;
-    //if(_bebopDrone != nil){
-        ViewControllerManuel *secondController = [[ViewControllerManuel alloc] init];
-        [secondController setDrone:_bebopDrone];
-        [self.navigationController pushViewController:secondController animated:YES];
-    //}else{
-    //    NSLog(@"Pas de drone");
-    //}
+    [self unregisterNotifications];
+    [_droneDiscoverer stopDiscovering];
+    [self deconnexionDrone];
+    
    
 }
 

@@ -119,7 +119,7 @@
         
         _longPressDecoAttr= [[UILongPressGestureRecognizer alloc] init];
         [_longPressDecoAttr addTarget:self action:@selector(changeDecoAttr:)];
-        [_longPressDecoAttr setMinimumPressDuration:3];
+        [_longPressDecoAttr setMinimumPressDuration:1];
         
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToDimension:)];
         tapGesture.numberOfTapsRequired = 2;

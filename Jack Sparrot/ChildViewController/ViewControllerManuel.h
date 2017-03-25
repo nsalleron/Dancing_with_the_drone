@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreMotion/CoreMotion.h>
-#import "ViewDimensionViewController.h"
-#import "BebopDrone.h"
+#import <libARDiscovery/ARDISCOVERY_BonjourDiscovery.h>
 
-@interface ViewControllerManuel : UIViewController <ViewDimensionViewControllerDelegate,UIAccelerometerDelegate>
+@interface ViewControllerManuel : UIViewController
 
 - (void) goToDimensionChoice:(UILongPressGestureRecognizer*)gesture;
 - (void) changeSatio:(UIButton*)send;
@@ -19,7 +18,7 @@
 - (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture;
 - (void) quitView:(UILongPressGestureRecognizer*)gesture;
 - (void) changeAxe:(UIButton*)send;
-- (void) setDrone:(BebopDrone *) drone;
+- (void) finCommande;
 
 @property (assign, nonatomic) NSInteger index;
 @property (readwrite, nonatomic) Boolean enVol;
@@ -33,6 +32,8 @@
 @property (readwrite, nonatomic) double currentMaxRotX;
 @property (readwrite, nonatomic) double currentMaxRotY;
 @property (readwrite, nonatomic) double currentMaxRotZ;
+
+@property (nonatomic, strong) ARService *service;
 
 @property (strong, nonatomic) CMMotionManager *motionManager;
 
