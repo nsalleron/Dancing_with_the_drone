@@ -130,17 +130,17 @@
         
     }else{ //Vertical
         width = width /4;
-        height = (height-32) /8;
+        height = (height-44) /8;
         
         for (UIButton *boutton in _tmp) {
             if(i<8){
-                [boutton setFrame:CGRectMake(0,i*height+32  , width, height)];
+                [boutton setFrame:CGRectMake(0,i*height+44  , width, height)];
             }else if (i<16){
-                [boutton setFrame:CGRectMake(width, 32+(i-8)*height,width, height)];
+                [boutton setFrame:CGRectMake(width, 44+(i-8)*height,width, height)];
             }else if (i<24){
-                [boutton setFrame:CGRectMake(2*width, 32+(i-16)*height,width, height)];
+                [boutton setFrame:CGRectMake(2*width, 44+(i-16)*height,width, height)];
             }else{
-                [boutton setFrame:CGRectMake(3*width, 32+(i-24)*height,width, height)];
+                [boutton setFrame:CGRectMake(3*width, 44+(i-24)*height,width, height)];
             }
             i++;
         }
