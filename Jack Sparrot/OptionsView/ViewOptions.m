@@ -202,6 +202,10 @@
         [[_btnColorAxeY layer] setBorderWidth:1.0f];
         [_btnColorAxeY addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
         
+        //[_swhInOut setBackgroundColor:
+        //[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        
+        
         [self colors];
         
         [self addSubview:_btnColor1D];
@@ -240,6 +244,11 @@
         _lblCoeffAccelInt = [[UILabel alloc] init];
         [_lblCoeffAccelInt setText:[NSString stringWithFormat:@"%.2f", _stpCoeffAccel.value]];
         
+        if ([_swhInOut isOn])
+            [_lblModeIntExtBool setText:[NSString stringWithFormat:@"Intérieur"]];
+        else
+            [_lblModeIntExtBool setText:[NSString stringWithFormat:@"Extérieur"]];
+        
         [self addSubview:_lblHauteurMaxInt];
         [self addSubview:_lblCoeffAccelInt];
         [self addSubview:_stpHauteurMax];
@@ -247,6 +256,7 @@
         
         [_stpHauteurMax addTarget:self action:@selector(stepperHauteurMaxUpdate:) forControlEvents:UIControlEventTouchUpInside];
         [_stpCoeffAccel addTarget:self action:@selector(stepperCoeffAccelUpdate:) forControlEvents:UIControlEventTouchUpInside];
+        [_swhInOut addTarget:self action:@selector(switchModeIntExt:) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:_lblModeIntExtBool];
         
@@ -316,7 +326,6 @@
         
     }
     
-    
 }
 
 -(void) drawRect:(CGRect)rect{
@@ -343,13 +352,10 @@
 }
 
 - (IBAction)switchModeIntExt:(UISwitch *)sender{
-    if ([_swhInOut isOn]){
-        [_lblModeIntExtBool setText:@"Intérieur"];
-        NSLog(@"int");
-    }else{
-        [_lblModeIntExtBool setText:@"Extérieur"];
-        NSLog(@"ext");
-    }
+    if ([_swhInOut isOn])
+        [_lblModeIntExtBool setText:[NSString stringWithFormat: @"Intérieur"]];
+    else
+        [_lblModeIntExtBool setText:[NSString stringWithFormat:@"Extérieur"]];
 }
 
 -(double) getStepperValueCoefAcce{

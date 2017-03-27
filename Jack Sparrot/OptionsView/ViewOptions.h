@@ -34,7 +34,6 @@
 
 @property (readwrite, nonatomic, retain) IBOutlet UIStepper *stpHauteurMax;
 @property (readwrite, nonatomic, retain) IBOutlet UIStepper *stpCoeffAccel;
-
 @property (readwrite, nonatomic, retain) IBOutlet UISwitch *swhInOut;
 
 @property (assign, nonatomic) CGFloat tailleIcones;
