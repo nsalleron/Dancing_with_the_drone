@@ -51,6 +51,12 @@
     double tmp = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Acceleration"];
     [_stpCoeffAccel setValue:tmp];
     
+    tmp = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Hauteur"];
+    [_stpHauteurMax setValue:tmp];
+    
+    BOOL tmpB = [[NSUserDefaults standardUserDefaults] boolForKey:@"InOut"];
+    [_swhInOut setOn:tmpB];
+    
     /* Mise en place des couleurs par défaut */
     NSLog(@"Colorisation...");
     /* Mise en place des couleurs par défaut + changement couleur texte */
@@ -140,7 +146,6 @@
     
     if(self){
         
-        /* Boutons */
         _btnColor1D = [[UIButton alloc] init];
         _btnColor2D = [[UIButton alloc] init];
         _btnColor3D = [[UIButton alloc] init];
@@ -148,6 +153,7 @@
         _btnColorAxeY = [[UIButton alloc] init];
         _stpHauteurMax = [[UIStepper alloc] init];
         _stpCoeffAccel = [[UIStepper alloc] init];
+        _swhInOut = [[UISwitch alloc] init];
         
         [_btnColor1D setTitle:@"1D" forState:UIControlStateNormal];
         [_btnColor2D setTitle:@"2D" forState:UIControlStateNormal];
@@ -201,7 +207,6 @@
         [self addSubview:_btnColorAxeY];
         
         /*Switch*/
-        _swhInOut = [[UISwitch alloc] init];
         [self addSubview:_swhInOut];
         
         /*Labels*/
@@ -226,7 +231,6 @@
         [_stpHauteurMax setMinimumValue:4.0];
         [_stpHauteurMax setMaximumValue:30];
         [_stpHauteurMax setStepValue:0.5];
-        
         
         [_stpCoeffAccel setAutorepeat:YES];
         [_stpCoeffAccel setMinimumValue:0.0];
@@ -336,6 +340,14 @@
 
 -(double) getStepperValueCoefAcce{
     return [_stpCoeffAccel value];
+}
+
+- (double) getStepperValueMax{
+    return [_stpHauteurMax value];
+}
+
+- (BOOL) getSwitchValueInOut{
+    return [_swhInOut isOn];
 }
 
 @end

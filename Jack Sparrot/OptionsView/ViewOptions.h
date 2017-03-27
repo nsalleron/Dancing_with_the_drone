@@ -47,5 +47,6 @@
 - (NSArray *) getBtnColors;
 - (double) getStepperValueCoefAcce;
 - (double) getStepperValueMax;
+- (BOOL) getSwitchValueInOut;
 
 @end
