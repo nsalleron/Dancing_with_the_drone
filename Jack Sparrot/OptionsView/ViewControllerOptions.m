@@ -134,6 +134,8 @@ int btnColorID = 0;
         NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject:[color objectAtIndex:4]];
         [[NSUserDefaults standardUserDefaults] setObject:colorData forKey:@"Axe Y"];
     }
+    [[NSUserDefaults standardUserDefaults] setDouble:[ecranOptions getStepperValueCoefAcce] forKey:@"Acceleration"];
+    
 }
 
 /*

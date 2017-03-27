@@ -48,6 +48,9 @@
         self.colorY = [[UIColor alloc] initWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
     }
     
+    double tmp = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Acceleration"];
+    [_stpCoeffAccel setValue:tmp];
+    
     /* Mise en place des couleurs par défaut */
     NSLog(@"Colorisation...");
     /* Mise en place des couleurs par défaut + changement couleur texte */
@@ -143,6 +146,8 @@
         _btnColor3D = [[UIButton alloc] init];
         _btnColorAxeX = [[UIButton alloc] init];
         _btnColorAxeY = [[UIButton alloc] init];
+        _stpHauteurMax = [[UIStepper alloc] init];
+        _stpCoeffAccel = [[UIStepper alloc] init];
         
         [_btnColor1D setTitle:@"1D" forState:UIControlStateNormal];
         [_btnColor2D setTitle:@"2D" forState:UIControlStateNormal];
@@ -216,16 +221,14 @@
         [self addSubview:_lblModeIntExt];
         
         /*début rajout*/
-        _stpHauteurMax = [[UIStepper alloc] init];
+        
         [_stpHauteurMax setAutorepeat:YES];
-        [_stpCoeffAccel setValue:10.0];
         [_stpHauteurMax setMinimumValue:4.0];
         [_stpHauteurMax setMaximumValue:30];
         [_stpHauteurMax setStepValue:0.5];
         
-        _stpCoeffAccel = [[UIStepper alloc] init];
+        
         [_stpCoeffAccel setAutorepeat:YES];
-        [_stpCoeffAccel setValue:0.5];
         [_stpCoeffAccel setMinimumValue:0.0];
         [_stpCoeffAccel setMaximumValue:1.0];
         [_stpCoeffAccel setStepValue:0.05];
@@ -329,6 +332,10 @@
 
 -(IBAction)stepperCoeffAccelUpdate:(UIStepper *)sender{
     [_lblCoeffAccelInt setText:[NSString stringWithFormat:@"%.2f", _stpCoeffAccel.value]];
+}
+
+-(double) getStepperValueCoefAcce{
+    return [_stpCoeffAccel value];
 }
 
 @end

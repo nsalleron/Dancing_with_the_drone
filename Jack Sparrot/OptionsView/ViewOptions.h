@@ -45,5 +45,7 @@
 - (IBAction)stepperHauteurMaxUpdate:(UIStepper *)sender;
 - (IBAction)stepperCoeffAccelUpdate:(UIStepper *)sender;
 - (NSArray *) getBtnColors;
+- (double) getStepperValueCoefAcce;
+- (double) getStepperValueMax;
 
 @end
