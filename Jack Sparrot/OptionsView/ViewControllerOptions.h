@@ -13,7 +13,6 @@
 @interface ViewControllerOptions : UIViewController <ViewCouleursControllerDelegate>
 
 -(void) goToColorChoice:(UIButton*) send;
-//-(void) modeInOut:(UISwitch*)send;
 
 @end
 

@@ -48,6 +48,15 @@
         self.colorY = [[UIColor alloc] initWithRed:52/255.0 green:73/255.0 blue:94/255.0 alpha:1.0];
     }
     
+    double tmp = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Acceleration"];
+    [_stpCoeffAccel setValue:tmp];
+    
+    tmp = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Hauteur"];
+    [_stpHauteurMax setValue:tmp];
+    
+    BOOL tmpB = [[NSUserDefaults standardUserDefaults] boolForKey:@"InOut"];
+    [_swhInOut setOn:tmpB];
+    
     /* Mise en place des couleurs par défaut */
     NSLog(@"Colorisation...");
     /* Mise en place des couleurs par défaut + changement couleur texte */
@@ -137,55 +146,65 @@
     
     if(self){
         
-        /* Boutons */
+        /* INITIALSATIONS */
         _btnColor1D = [[UIButton alloc] init];
         _btnColor2D = [[UIButton alloc] init];
         _btnColor3D = [[UIButton alloc] init];
         _btnColorAxeX = [[UIButton alloc] init];
         _btnColorAxeY = [[UIButton alloc] init];
+        _stpHauteurMax = [[UIStepper alloc] init];
+        _stpCoeffAccel = [[UIStepper alloc] init];
+        _swhInOut = [[UISwitch alloc] init];
+        _lblHauteurMax = [[UILabel alloc] init];
+        _lblCoeffAccel = [[UILabel alloc] init];
+        _lblCouleurDim = [[UILabel alloc] init];
+        _lblModeIntExt = [[UILabel alloc] init];
+        _lblModeIntExtBool = [[UILabel alloc] init];
         
+        /* BOUTONS */
         [_btnColor1D setTitle:@"1D" forState:UIControlStateNormal];
-        [_btnColor2D setTitle:@"2D" forState:UIControlStateNormal];
-        [_btnColor3D setTitle:@"3D" forState:UIControlStateNormal];
-        [_btnColorAxeX setTitle:@"Axe X" forState:UIControlStateNormal];
-        [_btnColorAxeY setTitle:@"Axe Y" forState:UIControlStateNormal];
-        
         [_btnColor1D setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_btnColor2D setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_btnColor3D setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_btnColorAxeX setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_btnColorAxeY setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        
         [[_btnColor1D layer] setBorderWidth:1.0f];
         [[_btnColor1D layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnColor1D layer] setCornerRadius:1.0f];
         [[_btnColor1D layer] setBorderWidth:1.0f];
+        [_btnColor1D addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
         
+        [_btnColor2D setTitle:@"2D" forState:UIControlStateNormal];
+        [_btnColor2D setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [[_btnColor2D layer] setBorderWidth:1.0f];
         [[_btnColor2D layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnColor2D layer] setCornerRadius:1.0f];
         [[_btnColor2D layer] setBorderWidth:1.0f];
+        [_btnColor2D addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
         
+        [_btnColor3D setTitle:@"3D" forState:UIControlStateNormal];
+        [_btnColor3D setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [[_btnColor3D layer] setBorderWidth:1.0f];
         [[_btnColor3D layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnColor3D layer] setCornerRadius:1.0f];
         [[_btnColor3D layer] setBorderWidth:1.0f];
+        [_btnColor3D addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
         
+        [_btnColorAxeX setTitle:@"Axe X" forState:UIControlStateNormal];
+        [_btnColorAxeX setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [[_btnColorAxeX layer] setBorderWidth:1.0f];
         [[_btnColorAxeX layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnColorAxeX layer] setCornerRadius:1.0f];
         [[_btnColorAxeX layer] setBorderWidth:1.0f];
+        [_btnColorAxeX addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
         
+        [_btnColorAxeY setTitle:@"Axe Y" forState:UIControlStateNormal];
+        [_btnColorAxeY setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [[_btnColorAxeY layer] setBorderWidth:1.0f];
         [[_btnColorAxeY layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnColorAxeY layer] setCornerRadius:1.0f];
         [[_btnColorAxeY layer] setBorderWidth:1.0f];
-        
-        [_btnColor1D addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
-        [_btnColor2D addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
-        [_btnColor3D addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
-        [_btnColorAxeX addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
         [_btnColorAxeY addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
+        
+        //[_swhInOut setBackgroundColor:
+        //[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
+        
         
         [self colors];
         
@@ -194,38 +213,27 @@
         [self addSubview:_btnColor3D];
         [self addSubview:_btnColorAxeX];
         [self addSubview:_btnColorAxeY];
-        
-        /*Switch*/
-        _swhInOut = [[UISwitch alloc] init];
         [self addSubview:_swhInOut];
-        
-        /*Labels*/
-        _lblHauteurMax = [[UILabel alloc] init];
-        _lblCoeffAccel = [[UILabel alloc] init];
-        _lblCouleurDim = [[UILabel alloc] init];
-        _lblModeIntExt = [[UILabel alloc] init];
-        
-        [_lblHauteurMax setText:@"Hauteur max. (m) :"];
-        [_lblCoeffAccel setText:@"Coeff. acceleration :"];
-        [_lblCouleurDim setText:@"Couleurs boutons :"];
-        [_lblModeIntExt setText:@"Mode intérieur :"];
         
         [self addSubview:_lblHauteurMax];
         [self addSubview:_lblCoeffAccel];
         [self addSubview:_lblCouleurDim];
         [self addSubview:_lblModeIntExt];
+        [self addSubview:_lblModeIntExtBool];
         
-        /*début rajout*/
-        _stpHauteurMax = [[UIStepper alloc] init];
+        /* LABELS */
+        [_lblHauteurMax setText:@"Hauteur max. (m) :"];
+        [_lblCoeffAccel setText:@"Coeff. acceleration :"];
+        [_lblCouleurDim setText:@"Couleurs boutons :"];
+        [_lblModeIntExt setText:@"Fonction HOME :"];
+        [_lblModeIntExtBool setText:@"Intérieur"];
+        
         [_stpHauteurMax setAutorepeat:YES];
-        [_stpCoeffAccel setValue:10.0];
         [_stpHauteurMax setMinimumValue:4.0];
         [_stpHauteurMax setMaximumValue:30];
         [_stpHauteurMax setStepValue:0.5];
         
-        _stpCoeffAccel = [[UIStepper alloc] init];
         [_stpCoeffAccel setAutorepeat:YES];
-        [_stpCoeffAccel setValue:0.5];
         [_stpCoeffAccel setMinimumValue:0.0];
         [_stpCoeffAccel setMaximumValue:1.0];
         [_stpCoeffAccel setStepValue:0.05];
@@ -236,13 +244,23 @@
         _lblCoeffAccelInt = [[UILabel alloc] init];
         [_lblCoeffAccelInt setText:[NSString stringWithFormat:@"%.2f", _stpCoeffAccel.value]];
         
+        if ([_swhInOut isOn])
+            [_lblModeIntExtBool setText:[NSString stringWithFormat:@"Intérieur"]];
+        else
+            [_lblModeIntExtBool setText:[NSString stringWithFormat:@"Extérieur"]];
+        
         [self addSubview:_lblHauteurMaxInt];
         [self addSubview:_lblCoeffAccelInt];
         [self addSubview:_stpHauteurMax];
         [self addSubview:_stpCoeffAccel];
         
-        [_stpHauteurMax addTarget:self action:@selector(stepperHauteurMaxUpdate:) forControlEvents:UIControlEventTouchUpInside];
-        [_stpCoeffAccel addTarget:self action:@selector(stepperCoeffAccelUpdate:) forControlEvents:UIControlEventTouchUpInside];
+        [_stpHauteurMax addTarget:self action:@selector(stepperHauteurMaxUpdate:) forControlEvents:UIControlEventValueChanged];
+        [_stpCoeffAccel addTarget:self action:@selector(stepperCoeffAccelUpdate:) forControlEvents:UIControlEventValueChanged];
+        [_swhInOut addTarget:self action:@selector(switchModeIntExt:) forControlEvents:UIControlEventValueChanged];
+        
+        [self addSubview:_lblModeIntExtBool];
+        
+        
     }
     
     return self;
@@ -259,7 +277,9 @@
         _tailleIcones = (format.height-32)/6;
         
         [_lblModeIntExt setFrame:CGRectMake(format.width/6, 32, format.width/3, _tailleIcones)];
-        [_swhInOut setFrame:CGRectMake(format.width/6+format.width/3, 32+_tailleIcones/3, format.width/3, _tailleIcones)];
+        [_lblModeIntExtBool setFrame:CGRectMake(format.width/6+format.width/3, 32, format.width/3, _tailleIcones)];
+        //[_swhInOut setFrame:CGRectMake(format.width/6+format.width/3, 32+_tailleIcones/3, format.width/3, _tailleIcones)];
+        [_swhInOut setFrame:CGRectMake(2*format.width/3, 40, format.width/6, _tailleIcones)];
         
         [_lblHauteurMax setFrame:CGRectMake(format.width/6, 32+_tailleIcones, format.width/3, _tailleIcones)];
         //[_txtHauteurMax setFrame:CGRectMake(format.width/6+format.width/3, 32+_tailleIcones+2, format.width/3, _tailleIcones-4)];
@@ -280,11 +300,12 @@
         [_btnColorAxeX setFrame:CGRectMake(format.width/6, 32+5*_tailleIcones, format.width/3, _tailleIcones)];
         [_btnColorAxeY setFrame:CGRectMake(format.width/6+format.width/3, 32+5*_tailleIcones, format.width/3, _tailleIcones)];
         
-        
     }else{
         _tailleIcones = (format.height-64)/6;
         [_lblModeIntExt setFrame:CGRectMake(_tailleMarges, 64, (format.width/2)-_tailleMarges, _tailleIcones)];
-        [_swhInOut setFrame:CGRectMake(_tailleMarges+format.width/2, 64+_tailleIcones/3, format.width/2, _tailleIcones)];
+        [_lblModeIntExtBool setFrame:CGRectMake(_tailleMarges+format.width/2, 64, format.width/2, _tailleIcones)];
+        //[_swhInOut setFrame:CGRectMake(_tailleMarges+format.width/2, 64+_tailleIcones/3, format.width/2, _tailleIcones)];
+        [_swhInOut setFrame:CGRectMake(format.width/2+format.width/4, 64+_tailleIcones/3, format.width/4, _tailleIcones)];
         
         [_lblHauteurMax setFrame:CGRectMake(_tailleMarges, 64+_tailleIcones, (format.width/2)-_tailleMarges, _tailleIcones)];
         [_lblHauteurMaxInt setFrame:CGRectMake(format.width/2, 64+_tailleIcones, format.width/4, _tailleIcones)];
@@ -304,7 +325,6 @@
         [_btnColorAxeY setFrame:CGRectMake(_tailleMarges, (64+5*_tailleIcones)-4, (format.width/2)-_tailleMarges, _tailleIcones-2)];
         
     }
-    
     
 }
 
@@ -329,6 +349,25 @@
 
 -(IBAction)stepperCoeffAccelUpdate:(UIStepper *)sender{
     [_lblCoeffAccelInt setText:[NSString stringWithFormat:@"%.2f", _stpCoeffAccel.value]];
+}
+
+- (IBAction)switchModeIntExt:(UISwitch *)sender{
+    if ([_swhInOut isOn])
+        [_lblModeIntExtBool setText:[NSString stringWithFormat: @"Intérieur"]];
+    else
+        [_lblModeIntExtBool setText:[NSString stringWithFormat:@"Extérieur"]];
+}
+
+-(double) getStepperValueCoefAcce{
+    return [_stpCoeffAccel value];
+}
+
+- (double) getStepperValueMax{
+    return [_stpHauteurMax value];
+}
+
+- (BOOL) getSwitchValueInOut{
+    return [_swhInOut isOn];
 }
 
 @end

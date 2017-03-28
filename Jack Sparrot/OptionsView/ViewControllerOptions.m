@@ -134,16 +134,10 @@ int btnColorID = 0;
         NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject:[color objectAtIndex:4]];
         [[NSUserDefaults standardUserDefaults] setObject:colorData forKey:@"Axe Y"];
     }
+    
+    [[NSUserDefaults standardUserDefaults] setDouble:[ecranOptions getStepperValueCoefAcce] forKey:@"Acceleration"];
+    [[NSUserDefaults standardUserDefaults] setDouble:[ecranOptions getStepperValueMax] forKey:@"Hauteur"];
+    [[NSUserDefaults standardUserDefaults] setBool:[ecranOptions getSwitchValueInOut] forKey:@"InOut"];
 }
-
-/*
--(void) modeInOut:(UISwitch*) _swhInOut {
-    if (_swhInOut.isset) {
-        NSLog(@"bonjour");
-    }else{
-        NSLog(@"Au revoir");
-    }
-}
-*/
 
 @end

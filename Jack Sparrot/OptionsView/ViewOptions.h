@@ -22,8 +22,6 @@
 @property (readwrite,nonatomic,retain) UIColor *colorX;
 @property (readwrite,nonatomic,retain) UIColor *colorY;
 
-@property (readwrite, nonatomic, retain) UISwitch *swhInOut;
-
 @property (readwrite,nonatomic,retain) UIButton *btnColor1D;
 @property (readwrite,nonatomic,retain) UIButton *btnColor2D;
 @property (readwrite,nonatomic,retain) UIButton *btnColor3D;
@@ -32,9 +30,11 @@
 
 @property (readonly,nonatomic,retain) UILabel *lblHauteurMaxInt;
 @property (readonly,nonatomic,retain) UILabel *lblCoeffAccelInt;
+@property (readonly,nonatomic,retain) UILabel *lblModeIntExtBool;
 
 @property (readwrite, nonatomic, retain) IBOutlet UIStepper *stpHauteurMax;
 @property (readwrite, nonatomic, retain) IBOutlet UIStepper *stpCoeffAccel;
+@property (readwrite, nonatomic, retain) IBOutlet UISwitch *swhInOut;
 
 @property (assign, nonatomic) CGFloat tailleIcones;
 @property (assign, nonatomic) CGFloat tailleMarges;
@@ -44,6 +44,10 @@
 - (void) updateBtn:(int)btn color: (UIColor*) color;
 - (IBAction)stepperHauteurMaxUpdate:(UIStepper *)sender;
 - (IBAction)stepperCoeffAccelUpdate:(UIStepper *)sender;
+- (IBAction)switchModeIntExt:(UISwitch *)sender;
 - (NSArray *) getBtnColors;
+- (double) getStepperValueCoefAcce;
+- (double) getStepperValueMax;
+- (BOOL) getSwitchValueInOut;
 
 @end
