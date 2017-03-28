@@ -33,6 +33,7 @@
 - (void) updateBtnDimensions:(NSString*) item;
 - (void) updateBtnChangementMode:(NSString*) item;
 - (void) updateBtnStatioDecoAttr:(NSString*) item;
+- (void) updateBtnHome:(NSString*) item;
 - (void) setViewController:(ViewControllerManuel *) me;
 - (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture;
 - (void) homeFunction:(UILongPressGestureRecognizer*)gesture;

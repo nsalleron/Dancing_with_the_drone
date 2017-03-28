@@ -25,29 +25,21 @@
 
 ViewManuel *ecran;
 BOOL firstTime = TRUE;
+int currentDimensions = 0;
 
-double accX;
-double accY;
-double accZ;
-double rotX;
-double rotY;
-double rotZ;
-
-double xPlus;
-double xMoins;
-double xEgal;
-boolean bFinMouvementX = false;
-boolean firstTimeX = false;
-int sample = 50;
-double sampleX = 0;
-double velocityX;
-double positionX;
+double currentX = 0;
+double currentY = 0;
+double currentZ = 0;
+double threshAccelerometer = 4.00f;
+boolean bFinMouvementX = true, bFinMouvementY = true;
 
 //  some behavior and view constants.
 const static float GRAVITY_SCALE    = 9.81f;
 const static float FRAME_RATE       = 60.0f;
 const static float tiltSensitivity  = 0.02f;
 const static float nearlyVertical   = 0.9;
+
+int i;
 
 @implementation ViewControllerManuel
 
@@ -64,20 +56,13 @@ const static float nearlyVertical   = 0.9;
     
     
     /* Acceleration + Gyroscope */
-    _currentMaxAccelX = 0;
-    _currentMaxAccelY = 0;
-    _currentMaxAccelZ = 0;
-    
-    _currentMaxRotX = 0;
-    _currentMaxRotY = 0;
-    _currentMaxRotZ = 0;
-    
     self.motionManager = [[CMMotionManager alloc] init];
     
     if(self.motionManager.isDeviceMotionAvailable){
         
-        //self.motionManager.deviceMotionUpdateInterval = .1;
-        self.motionManager.accelerometerUpdateInterval = 0.1;
+        self.motionManager.accelerometerUpdateInterval = 0.3;
+        /* Pas d'usage du gyroscope pour le moment
+        
         self.motionManager.gyroUpdateInterval = 0.5;
         [self.motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMGyroData *gyroData, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -94,6 +79,8 @@ const static float nearlyVertical   = 0.9;
             });
             
         }];
+         
+        */
         
         [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMAccelerometerData *data, NSError *error){
             [self movement:data.acceleration];
@@ -102,16 +89,6 @@ const static float nearlyVertical   = 0.9;
                 NSLog(@"%@", error);
             }
         }];
-        /*
-        [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue]
-                                                withHandler:^(CMDeviceMotion *deviceData, NSError *error){
-                                                    [self outputDeviceMotionData:deviceData.userAcceleration];
-                                                    
-                                                    if (error) {
-                                                        NSLog(@"%@", error);
-                                                    }
-                                                }];
-        */
     }
     /* Fin acceleration */
     
@@ -125,6 +102,7 @@ const static float nearlyVertical   = 0.9;
     [ecran setViewController:self];
     [ecran updateBtnStatioDecoAttr:@"Décollage"];
     [ecran updateBtnDimensions:@"1D"];
+    currentDimensions = 1;
     [ecran updateBtnChangementMode:@"Axe X"];
     [self setView: ecran];
     [self setTitle:@"Manuel"];
@@ -148,11 +126,11 @@ const static float nearlyVertical   = 0.9;
     swipeRight.direction=UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:swipeLeft];
     
-    [NSTimer scheduledTimerWithTimeInterval:0.1
+    /*[NSTimer scheduledTimerWithTimeInterval:0.1
                                      target:self
                                    selector:@selector(sendToDrone)
                                    userInfo:nil
-                                    repeats:YES];
+                                    repeats:YES];*/
     
 
     
@@ -197,12 +175,16 @@ const static float nearlyVertical   = 0.9;
             //Axe Y
             NSLog(@"Axe Y");
             axe = @"Axe Y";
+            [_bebopDrone setFlag:0];
+            [_bebopDrone setPitch:0];
             _axeX = FALSE;
             break;
             
         case FALSE:
             //Axe X
             NSLog(@"Axe X");
+            [_bebopDrone setFlag:0];
+            [_bebopDrone setRoll:0];
             _axeX = TRUE;
         default:
             break;
@@ -239,6 +221,11 @@ const static float nearlyVertical   = 0.9;
 
 -(void) goToDimensionChoice:(UILongPressGestureRecognizer*)gesture{
     
+    /* On met le drone en mode stationnaire */
+    [_bebopDrone setFlag:0];
+    [_bebopDrone setRoll:0];
+    [_bebopDrone setPitch:0];
+    
     ViewDimensionViewController *secondController = [[ViewDimensionViewController alloc] init];
     secondController.delegate = self;
     [self.navigationController pushViewController:secondController animated:YES];
@@ -246,20 +233,19 @@ const static float nearlyVertical   = 0.9;
 }
 
 
-- (void) viewDidDisappear:(BOOL)animated{
-}
-
 /* Gestion des toucher long par le viewController */
 - (void) quitView:(UILongPressGestureRecognizer*)gesture{
 
+    if(_service == nil){
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
     [self unregisterNotifications];
     [_droneDiscoverer stopDiscovering];
     
     [self deconnexionDrone];
     
-    if(_service == nil){
-         [self.navigationController popViewControllerAnimated:YES];
-    }
+    
     
 }
 
@@ -289,15 +275,23 @@ const static float nearlyVertical   = 0.9;
     }
 }
 
+/* Changement de dimensions et redimensionnement des écrans */
 
 - (void)addItemViewController:(ViewDimensionViewController *)controller didFinishEnteringItem:(NSString *)item
 {
     
     [ecran updateBtnDimensions:item];
-    if([item  isEqual: @"1D"])
+    if([item  isEqual: @"1D"]){
         [ecran updateView:[[UIScreen mainScreen] bounds].size];
-    else
+        currentDimensions = 1;
+    }else if([item  isEqual: @"2D"]){
+        currentDimensions = 2;
         [ecran update2D3D:[[UIScreen mainScreen] bounds].size];
+    }else if([item  isEqual: @"3D"]){
+        currentDimensions = 3;
+        [ecran update2D3D:[[UIScreen mainScreen] bounds].size];
+    }
+    
     
 }
 
@@ -347,6 +341,18 @@ const static float nearlyVertical   = 0.9;
  */
 
 -(void)movement:(CMAcceleration)data {
+    
+    /*
+    if(_bebopDrone != nil){
+        [_bebopDrone setYaw:-100];
+        [ecran updateBtnChangementMode:[[NSString alloc] initWithFormat:@"NB : %d",i]];
+        i++;
+    }
+    
+    
+    return;
+    */
+    
     //  get current frame location:
     float x = data.x;
     float y = data.y;
@@ -366,184 +372,133 @@ const static float nearlyVertical   = 0.9;
         newY = y * -GRAVITY_SCALE;
     }
     
-    if (ABS(z) >= tiltSensitivity) {
+    /*if (ABS(z) >= tiltSensitivity) {
         newZ = (z * GRAVITY_SCALE) + GRAVITY_SCALE;
+    }*/
+    
+    
+    
+    
+    
+    //if(_bebopDrone == nil || !_enVol || _enStatio) return;
+    
+    
+    /* à partir d'ici on traite les mouvements */
+    if(newX < -threshAccelerometer || threshAccelerometer < newX){
+        currentX = newX;
+    }
+    if(newY < -threshAccelerometer || threshAccelerometer < newY){
+        currentY = newY;
+    }
+    if( -threshAccelerometer < newX && newX < threshAccelerometer ){
+        currentX = 0;
+    }
+    if( -threshAccelerometer < newY && newY < threshAccelerometer ){
+        currentY = 0;
     }
     
     
     
-    [ecran updateBtnDimensions:[[NSString alloc] initWithFormat:@" X : %.2f, Y : %.2f, Z : %.2f",newX,newY,newZ]];
+  
     
-        if(newX < -1){
+    /* Début algo vitesse
+     *  (X * vitesseMax/AccelerationMAX)
+     */
+    
+    int vitesseXFinal = (currentX*10);
+    if (vitesseXFinal > 90) {
+        vitesseXFinal = 90;
+    }else if (vitesseXFinal < -90){
+        vitesseXFinal = -90;
+    }
+    if(vitesseXFinal > 1)
+        vitesseXFinal = vitesseXFinal - 40;
+    else if (vitesseXFinal < -1)
+        vitesseXFinal = vitesseXFinal + 40;
+    
+    /* Début algo vitesse
+     *  (X * vitesseMax/AccelerationMAX)
+     */
+    
+    int vitesseYFinal = (currentY*10);
+    if (vitesseYFinal > 90) {
+        vitesseYFinal = 90;
+    }else if (vitesseYFinal < -90){
+        vitesseYFinal = -90;
+    }
+    if(vitesseYFinal > 1)
+        vitesseYFinal = vitesseYFinal - 40;
+    else if (vitesseYFinal < -1)
+        vitesseYFinal = vitesseYFinal + 40;
+    
+    
+    
+    //[ecran updateBtnDimensions:[[NSString alloc] initWithFormat:@"vitesseFinale X : %d, Y : %d",vitesseXFinal,vitesseYFinal]];
+    [ecran updateBtnDimensions:[[NSString alloc] initWithFormat:@"tresh X : %.2f, Y : %.2f",currentX,currentY]];
+    
+    /* Dans le cas 1D : On s'occupe de X et Y séparément*/
+    
+    
+    if(currentDimensions == 1){
+        
+        NSString *label = [[[ecran btnChangementMode] titleLabel ] text];
+        
+        
+        if(_axeX){
+            if(currentX < - threshAccelerometer || currentX > threshAccelerometer ){
+                [_bebopDrone setFlag:1];
+                [_bebopDrone setPitch:vitesseXFinal]; // Si non fonctionnel remplacer par -50
+            }
             
-            if(_bebopDrone != nil && _enVol && !_enStatio){
-                [ecran updateBtnStatioDecoAttr:@"GAUCHE"];
+            if(currentX == 0 ){
+                [_bebopDrone setFlag:0];
+                [_bebopDrone setPitch:0];
+             
+            }
+        }else{
+            if(currentY < -threshAccelerometer || currentY > threshAccelerometer){
                 
                 [_bebopDrone setFlag:1];
-                [_bebopDrone setPitch:10];
-                bFinMouvementX = false;
+                [_bebopDrone setRoll:vitesseYFinal]; // -50
+                
             }
-            NSLog(@"GAUCHE \t %.2f",newX);
-        }
-        if(newX > 1 ){
             
-            NSLog(@"DROITE \t %.2f",newX);
-            if(_bebopDrone != nil && _enVol && !_enStatio){
-                [ecran updateBtnStatioDecoAttr:@"DROITE"];
-                [_bebopDrone setFlag:1];
-                [_bebopDrone setPitch:-10];
-                bFinMouvementX = false;
-            }
-        }
-        
-        
-        if (newY > 1) {
-            
-            if(_bebopDrone != nil && _enVol && !_enStatio){
-                [ecran updateBtnStatioDecoAttr:@"BAS"];
-                [_bebopDrone setFlag:1];
-                [_bebopDrone setRoll:-10];
-                bFinMouvementX = false;
-            }
-            NSLog(@"BAS\t %.2f",newY);
-        }
-        if( newY < -1 ){
-            if(_bebopDrone != nil && _enVol && !_enStatio){
-                [ecran updateBtnStatioDecoAttr:@"HAUT"];
-                [_bebopDrone setFlag:1];
-                [_bebopDrone setRoll:10];
-                bFinMouvementX = false;
-            }
-            NSLog(@"HAUT\t %.2f",newY);
-        }
-        
-        if(-1 < newX  && newX < 1){
-            if(_bebopDrone != nil && _enVol && !_enStatio){
-                [ecran updateBtnStatioDecoAttr:@"X OK"];
-                [_bebopDrone setFlag:1];
-                [_bebopDrone setPitch:0];
+            if(currentY == 0){
+                [_bebopDrone setFlag:0];
                 [_bebopDrone setRoll:0];
-                bFinMouvementX = false;
             }
-            
         }
-}
-
-/*
-
--(void) outputDeviceMotionData:(CMAcceleration) acceleration{
-    
-    
-    double const kThreshold = 0.2 ;
-    double const nbMouvement = 1;
-    
-    NSLog(@"Acceleration : %.2f",acceleration.x);
-    
-    if ([[[[ecran btnChangementMode] titleLabel]text] isEqualToString:@"Axe X"]) {
         
-        if(acceleration.x < kThreshold * -1){ // x < -0.2
-            _currentMaxAccelX = acceleration.x;
-            xMoins++;
-            //NSLog(@"%.2f",acceleration.x);
-        }else if(acceleration.x > kThreshold){ // x > 0.2
-            _currentMaxAccelX = acceleration.x;
-            xPlus++;
-            //NSLog(@"%.2f",acceleration.x);
+    /* Dans le cas 2D et 3D : On s'occupe de X et Y ensemble */
+    }else if(currentDimensions == 2 || currentDimensions == 3){
+        
+        if(currentX == 0 && currentY == 0){
+            [_bebopDrone setFlag:0];
+            [_bebopDrone setRoll:0];
+            [_bebopDrone setPitch:0];
+            return;
+        }
+        
+        [_bebopDrone setFlag:1];
+        if(currentX == 0){
+            [_bebopDrone setPitch:0];
         }else{
-            _currentMaxAccelX = 0;
-            //NSLog(@"FIN MOUVEMENT");
-            xPlus = 0;
-            xMoins = 0;
+            [_bebopDrone setPitch:vitesseXFinal];
         }
-        if(xPlus > nbMouvement){
-            NSLog(@"DROITE");
-            xPlus = 0; // ACTION
-            bFinMouvementX = true;
-            
-        }else if(xMoins > nbMouvement){
-            NSLog(@"GAUCHE");
-            xMoins = 0;
-            bFinMouvementX = true;
+        if(currentY == 0){
+            [_bebopDrone setRoll:0];
+        }else{
+            [_bebopDrone setRoll:vitesseYFinal];
         }
+    
     }
     
     
+        
     
-    if(acceleration.y < kThreshold * -1){ // -0.3 < -0.2
-        _currentMaxAccelY = acceleration.y;
-    }else if(acceleration.y > kThreshold){ // 0.3 > 0.2
-        _currentMaxAccelY = acceleration.y;
-    }else{
-        _currentMaxAccelY = 0;
-    }
-    
-    if(acceleration.z < kThreshold * -1){ // -0.3 < -0.2
-        _currentMaxAccelZ = acceleration.z;
-    }else if(acceleration.z > kThreshold){ // 0.3 > 0.2
-        _currentMaxAccelZ = acceleration.z;
-    }else{
-        _currentMaxAccelZ = 0;
-    }
-}
-//-(void)outputRotationData:(CMRotationRate)rotation
--(void)outputRotationData:(CMAcceleration)rotation
-{
-    double rotationXY = atan2(rotation.x, rotation.y) - M_PI;
-    double rotationYZ = atan2(rotation.y, rotation.z) - M_PI;
-    double rotationZX = atan2(rotation.z, rotation.x) - M_PI;
-    //NSLog(@"X : %.2f\tY : %.2f\tZ : %.2f",rotationXY,rotationYZ,rotationZX);
-    //[ecran updateBtnStatioDecoAttr:[[NSString alloc] initWithFormat:@"X : %.2f\tY : %.2f\tZ : %.2f",rotationXY,rotationYZ,rotationZX
-    //                                ]];
-    //[ecran updateBtnStatioDecoAttr:[[NSString alloc] initWithFormat:@"X : %.2f\t Y : %.2f\t Z : %.2f",
-                                //    rotation.x,rotation.y,rotation.z]];
-    rotX = rotation.x;
-    rotY = rotation.y;
-    rotZ = rotation.z;
-    
-}
-
- */
-
--(void)sendToDrone{
-   
-    /* Si le drone est en vol et n'est pas en mode stationnaire */
-    if( _enVol && !_enStatio){
-         //[ecran updateBtnDimensions:@"UPDATE"];
-        //On balance les ordres
-        if(![ecran.btnChangementMode isHidden]){
-            if([[ecran.btnChangementMode.titleLabel text] isEqualToString:@"Axe X"]){   //Mode X ou Y
-                if(_currentMaxAccelX != 0){
-                    [ecran updateBtnDimensions:@"UPDATE DIFF"];
-                    [_bebopDrone setFlag:1];
-                    if(_currentMaxAccelX > 0){
-                        [_bebopDrone setPitch:1];   //Le coefficient doit être appliqué
-                    }else{
-                        [ecran updateBtnDimensions:@"UPDATE"];
-                        [_bebopDrone setPitch:-1];
-                    }
-                }else{
-                    [_bebopDrone setFlag:1];
-                    [_bebopDrone setPitch:0];
-                }
-            }else{
-                if(_currentMaxAccelY != 0){
-                    [_bebopDrone setFlag:1];
-                    [_bebopDrone setRoll:10];   //Le coefficient doit être appliqué
-                }
-            }
-            
-        } else if(![[ecran.btnDimensions.titleLabel text] isEqualToString:@"2D"]){      //Mode X ET Y
-            
-        } else if(![[ecran.btnDimensions.titleLabel text] isEqualToString:@"3D"]){       //Mode X ET Y ET Z
-           
-        }
-    }else{
-        //Nothing?
-    }
 }
 
 - (void) finCommande{
-    bFinMouvementX = true;
     [ecran updateBtnChangementMode:@"FIN MOUVEMENT"];
 }
 
@@ -609,6 +564,9 @@ const static float nearlyVertical   = 0.9;
                                                          delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
         [_connectionAlertView show];
         
+        
+        NSLog(@"DECONNEXION SHOW MANUEL");
+        
         // in background, disconnect from the drone
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [_bebopDrone disconnect];
@@ -619,8 +577,11 @@ const static float nearlyVertical   = 0.9;
             // dismiss the alert view in main thread
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_connectionAlertView dismissWithClickedButtonIndex:0 animated:YES];
-                
+                 NSLog(@"FIN CONNEXION ALERT VIEW MANUEL");
+                _service = nil;
+                _bebopDrone = nil;
                 [self.navigationController popViewControllerAnimated:YES];
+                
                 
             });
         });
@@ -659,16 +620,14 @@ const static float nearlyVertical   = 0.9;
     
     switch (state) {
         case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_LANDED:
-            NSLog(@"Take Off");
+            [ecran updateBtnStatioDecoAttr:@"TAKE OFF"];
             break;
         case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_FLYING:
-            [ecran updateBtnChangementMode:@"FIN CMD"];
-            //bFinMouvementX = true;
-            
+            //[ecran updateBtnChangementMode:@"FIN CMD"];
             break;
         case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_HOVERING:
-            [ecran updateBtnChangementMode:@"HOVERING "];
-            NSLog(@"Land");
+            //[ecran updateBtnChangementMode:@"HOVERING "];
+            [ecran updateBtnStatioDecoAttr:@"LAND"];
             break;
         default:
             NSLog(@"Default");

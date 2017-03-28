@@ -164,9 +164,7 @@
 }
 
 - (void)update2D3D:(CGSize)format{
-    
     _tailleIcones = format.height/4;
-    
     [_btnChangementMode setHidden:TRUE];
     /* Mise en place des labels */
     [_btnDimensions setFrame:CGRectMake(0,0,format.width,_tailleIcones)];
@@ -175,7 +173,13 @@
     
 }
 
+-(void) updateBtnHome:(NSString *)item{
+    [_btnHome setTitle:item forState:UIControlStateNormal];
+}
 
+- (void) updateBtnStatioDecoAttr:(NSString*) item{
+    [_btnStatioDecoAttr setTitle:item forState:UIControlStateNormal];
+}
 
 - (void) updateBtnDimensions:(NSString*) item{
     
@@ -220,9 +224,7 @@
     
     [_btnChangementMode setTitle:item forState:UIControlStateNormal];
 }
-- (void) updateBtnStatioDecoAttr:(NSString*) item{
-    [_btnStatioDecoAttr setTitle:item forState:UIControlStateNormal];
-}
+
 
 -(void) drawRect:(CGRect)rect{
     [self updateView:rect.size];
@@ -242,6 +244,7 @@
         [_vc quitView:gesture];
     }
 }
+
 - (void) homeFunction:(UILongPressGestureRecognizer*)gesture{
     if ( gesture.state == UIGestureRecognizerStateBegan) {
         //Update du View Controller

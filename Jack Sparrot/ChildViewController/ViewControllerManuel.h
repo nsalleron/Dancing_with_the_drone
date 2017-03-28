@@ -25,14 +25,6 @@
 @property (readwrite, nonatomic) Boolean enStatio;
 @property (readwrite, nonatomic) Boolean axeX;
 
-
-@property (readwrite, nonatomic) double currentMaxAccelX;
-@property (readwrite, nonatomic) double currentMaxAccelY;
-@property (readwrite, nonatomic) double currentMaxAccelZ;
-@property (readwrite, nonatomic) double currentMaxRotX;
-@property (readwrite, nonatomic) double currentMaxRotY;
-@property (readwrite, nonatomic) double currentMaxRotZ;
-
 @property (nonatomic, strong) ARService *service;
 
 @property (strong, nonatomic) CMMotionManager *motionManager;
