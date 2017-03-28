@@ -254,9 +254,9 @@
         [self addSubview:_stpHauteurMax];
         [self addSubview:_stpCoeffAccel];
         
-        [_stpHauteurMax addTarget:self action:@selector(stepperHauteurMaxUpdate:) forControlEvents:UIControlEventTouchUpInside];
-        [_stpCoeffAccel addTarget:self action:@selector(stepperCoeffAccelUpdate:) forControlEvents:UIControlEventTouchUpInside];
-        [_swhInOut addTarget:self action:@selector(switchModeIntExt:) forControlEvents:UIControlEventTouchUpInside];
+        [_stpHauteurMax addTarget:self action:@selector(stepperHauteurMaxUpdate:) forControlEvents:UIControlEventValueChanged];
+        [_stpCoeffAccel addTarget:self action:@selector(stepperCoeffAccelUpdate:) forControlEvents:UIControlEventValueChanged];
+        [_swhInOut addTarget:self action:@selector(switchModeIntExt:) forControlEvents:UIControlEventValueChanged];
         
         [self addSubview:_lblModeIntExtBool];
         
