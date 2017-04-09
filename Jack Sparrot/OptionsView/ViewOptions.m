@@ -54,8 +54,8 @@
     tmp = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Hauteur"];
     [_stpHauteurMax setValue:tmp];
     
-    BOOL tmpB = [[NSUserDefaults standardUserDefaults] boolForKey:@"InOut"];
-    [_swhInOut setOn:tmpB];
+    bool tmpB = [[NSUserDefaults standardUserDefaults] boolForKey:@"InOut"];
+    [_swhInOut setOn:(!tmpB)];
     
     /* Mise en place des couleurs par défaut */
     NSLog(@"Colorisation...");

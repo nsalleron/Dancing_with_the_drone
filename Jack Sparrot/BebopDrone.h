@@ -98,5 +98,10 @@
 - (void)setYaw:(uint8_t)yaw;
 - (void)setGaz:(uint8_t)gaz;
 - (void)setFlag:(uint8_t)flag;
+- (void)downloadMedias;
+- (void)cancelDownloadMedias;
+- (void)cancelReturnHome;
+- (void)returnHomeInterieur;
+- (void)returnHomeExterieur;
 
 @end

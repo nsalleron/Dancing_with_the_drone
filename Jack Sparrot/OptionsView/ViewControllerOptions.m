@@ -137,7 +137,9 @@ int btnColorID = 0;
     
     [[NSUserDefaults standardUserDefaults] setDouble:[ecranOptions getStepperValueCoefAcce] forKey:@"Acceleration"];
     [[NSUserDefaults standardUserDefaults] setDouble:[ecranOptions getStepperValueMax] forKey:@"Hauteur"];
-    [[NSUserDefaults standardUserDefaults] setBool:[ecranOptions getSwitchValueInOut] forKey:@"InOut"];
+    bool tmp =[ecranOptions getSwitchValueInOut];
+    NSLog(@"Valeur de tmp : %d",tmp);
+    [[NSUserDefaults standardUserDefaults] setBool:(!tmp) forKey:@"InOut"];  //Pour correspondance InOutviewManuel
 }
 
 @end
