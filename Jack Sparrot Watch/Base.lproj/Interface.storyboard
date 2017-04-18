@@ -12,10 +12,10 @@
                     <items>
                         <picker height="42" alignment="left" id="0aq-hl-6an">
                             <connections>
-                                <action selector="picker:" destination="AgC-eL-Hgc" id="CZl-fA-Z4V"/>
+                                <action selector="pickerAction:" destination="AgC-eL-Hgc" id="2ub-Jz-I04"/>
                             </connections>
                         </picker>
-                        <button width="156" height="62" alignment="left" title="btnChangementMode" id="iwq-kp-4e2">
+                        <button width="156" height="62" alignment="left" title="Axe X" id="iwq-kp-4e2">
                             <gestureRecognizers>
                                 <swipeGestureRecognizer id="F1S-0k-zH9">
                                     <connections>
@@ -29,10 +29,14 @@
                                 </swipeGestureRecognizer>
                             </gestureRecognizers>
                             <connections>
-                                <action selector="btnClick" destination="AgC-eL-Hgc" id="pva-Wh-adu"/>
+                                <action selector="btnClick" destination="AgC-eL-Hgc" id="YnU-46-JU9"/>
                             </connections>
                         </button>
-                        <switch width="1" alignment="left" value="YES" title="Statio." id="q0T-uv-1Dv"/>
+                        <switch width="1" alignment="left" value="YES" title="Statio." id="q0T-uv-1Dv">
+                            <connections>
+                                <action selector="chgModeStationnaire:" destination="AgC-eL-Hgc" id="BCP-lv-hmK"/>
+                            </connections>
+                        </switch>
                     </items>
                     <menu key="menu" id="YrS-fp-ANw">
                         <items>
@@ -43,6 +47,7 @@
                         </items>
                     </menu>
                     <connections>
+                        <outlet property="btnChgMode" destination="iwq-kp-4e2" id="fch-R3-TAX"/>
                         <outlet property="swipeCtrl" destination="F1S-0k-zH9" id="ycX-Fn-uA7"/>
                         <outlet property="tp" destination="0aq-hl-6an" id="SkT-DN-FPK"/>
                     </connections>

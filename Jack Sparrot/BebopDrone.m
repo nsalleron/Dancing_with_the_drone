@@ -5,6 +5,7 @@
 
 #import "BebopDrone.h"
 #import "BebopDroneRecord.h"
+#import "ViewControllerManuel.h"
 #import <UIKit/UIKit.h>
 
 #define FTP_PORT 21
@@ -29,12 +30,25 @@
 @property (nonatomic) int8_t oldPitch;
 @property (nonatomic) int8_t oldRoll;
 @property (nonatomic) int8_t oldGaz;
+@property (nonatomic) int    nbPitch;
+@property (nonatomic) int    nbRoll;
+@property (nonatomic) int    nbGaz;
 
 //Retour
 @property (nonatomic, strong) UIAlertView *returnHomeAlert;
+@property (nonatomic) boolean homeExterieur;
 @property (nonatomic) boolean returnHome;
-@property (nonatomic) dispatch_semaphore_t stateSem;
+@property (nonatomic) int nbMouvement;
+@property (nonatomic) int oldValue;
+@property (nonatomic) int sumValueX;
+@property (nonatomic) int sumValueY;
+@property (nonatomic) int sumValueZ;
+@property (nonatomic) float interval;
+@property (nonatomic) NSString *oldDirection;
+@property (nonatomic) float timeForThisMouvement;
 
+@property (nonatomic) dispatch_semaphore_t stateSem;
+@property (nonatomic) ViewControllerManuel* manuel;
 @end
 
 @implementation BebopDrone
@@ -43,6 +57,10 @@
 
 -(id)initWithService:(ARService *)service {
     self = [super init];
+    if (self) {
+        _service = service;
+        _flyingState = ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_LANDED;
+    }
     _oldDateX = nil;
     _oldDateY = nil;
     _oldDateZ = nil;
@@ -51,11 +69,36 @@
     _oldGaz = 0;
     _timeIntervalArray = [[NSMutableArray alloc] init];
     _returnHome = false;
+    _homeExterieur = false;
+    _nbMouvement = 0;
+    _oldValue = 0;
+    _sumValueX = 0;
+    _oldDirection = nil;
+    _timeForThisMouvement = 0;
+    return self;
+}
+
+- (id) init{
+    
+    self = [super init];
     if (self) {
-        _service = service;
-        _flyingState = ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_LANDED;
+        _oldDateX = nil;
+        _oldDateY = nil;
+        _oldDateZ = nil;
+        _oldPitch = 0;
+        _oldRoll = 0;
+        _oldGaz = 0;
+        _timeIntervalArray = [[NSMutableArray alloc] init];
+        _returnHome = false;
+        _homeExterieur = false;
+        _nbMouvement = 0;
+        _oldValue = 0;
+        _sumValueX = 0;
+        _oldDirection = nil;
+        _timeForThisMouvement = 0;
     }
     return self;
+    
 }
 
 - (void)dealloc
@@ -147,6 +190,8 @@
             [_delegate bebopDrone:self connectionDidChange:ARCONTROLLER_DEVICE_STATE_STOPPED];
         });
     }
+    
+    _deviceController->aRDrone3->sendMediaStreamingVideoEnable(_deviceController->aRDrone3, (uint8_t)0);
 }
 
 - (ARDISCOVERY_Device_t *)createDiscoveryDeviceWithService:(ARService*)service {
@@ -209,16 +254,44 @@
     }
 }
 
+- (void)setMaxHauteur:(uint8_t)attitude{
+    _deviceController->aRDrone3->sendPilotingSettingsMaxAltitude(_deviceController->aRDrone3,attitude);
+    //deviceController->aRDrone3->sendPilotingSettingsMaxAltitude(deviceController->aRDrone3, (float)current);
+}
+
+- (void)setDefaultSetting{
+    _deviceController->aRDrone3->sendSpeedSettingsMaxRotationSpeed(_deviceController->aRDrone3, 10);
+    _deviceController->aRDrone3->sendSpeedSettingsMaxVerticalSpeed(_deviceController->aRDrone3, 0.5);
+    _deviceController->aRDrone3->sendSpeedSettingsMaxPitchRollRotationSpeed(_deviceController->aRDrone3, 80);
+    _deviceController->aRDrone3->sendPilotingSettingsMaxTilt(_deviceController->aRDrone3, 5);
+}
+
 - (void) cancelReturnHome{
     NSLog(@"ANNULATION DU RETOUR HOME");
-    [self setFlag:0];
-    [self setRoll:0];
-    [self setPitch:0];
-    [self setGaz:0];
+    if(_homeExterieur) {
+        //Annulation
+        _deviceController->aRDrone3->sendPilotingNavigateHome(_deviceController->aRDrone3,0);
+        _homeExterieur = false;
+    }else{
+        [self setFlag:0];
+        [self setRoll:0];
+        [self setPitch:0];
+        [self setGaz:0];
+    }
     _returnHome = false;
 }
 
 - (void) returnHomeExterieur{
+    _returnHomeAlert = [[UIAlertView alloc] initWithTitle:[_service name] message:@"Home Exterieur..."
+                                                 delegate:self cancelButtonTitle:@"Annuler" otherButtonTitles:nil, nil];
+    [_returnHomeAlert show];
+    
+    
+    _returnHome = true;
+    _homeExterieur = true;
+    _deviceController->aRDrone3->sendPilotingNavigateHome(_deviceController->aRDrone3,1);
+    
+    
     
 }
 
@@ -230,7 +303,7 @@
 
 - (void) returnHomeInterieur{
     
-    _returnHomeAlert = [[UIAlertView alloc] initWithTitle:[_service name] message:@"Home ..."
+    _returnHomeAlert = [[UIAlertView alloc] initWithTitle:[_service name] message:@"Home interieur..."
                                                  delegate:self cancelButtonTitle:@"Annuler" otherButtonTitles:nil, nil];
     
     [_returnHomeAlert show];
@@ -272,7 +345,7 @@
         }
         _returnHome = false;
         _timeIntervalArray = [[NSMutableArray alloc] init];
-        
+        _manuel.homeActivate = false;
         //dismiss AlertView in main thread
         dispatch_async(dispatch_get_main_queue(),^{
             [_returnHomeAlert dismissWithClickedButtonIndex:0 animated:YES];
@@ -284,61 +357,94 @@
 }
 
 
-- (void)setPitch:(uint8_t)pitch {
+- (void)setPitch:(int)pitch {
+    
     
     if(_returnHome == false){
         _currentDateX = [NSDate date];
-        if(pitch != _oldPitch && _oldDateX != nil){
+        if( (pitch > 0 && _oldPitch < 0) || (pitch < 0 && _oldPitch > 0) || (pitch == 0 && _oldPitch != 0) ){ //Changement de mouvement;
             float f = [_currentDateX timeIntervalSinceDate:_oldDateX];
             BebopDroneRecord *tmp = [[BebopDroneRecord alloc] init];
             [tmp setTimeInterval:f];
-            [tmp setDroneDirectionValue:[[NSString alloc] initWithFormat:@"P;%i",_oldPitch]];
+            [tmp setDroneDirectionValue:[[NSString alloc] initWithFormat:@"P;%d", _sumValueX/_nbPitch]];
             @synchronized(_timeIntervalArray)
             {
                 [_timeIntervalArray addObject:tmp];
+                NSLog(@"Ajout de %@  de valeur %d et d'une durée de %0.2f",[tmp getDirection],[tmp getValue],[tmp getTimeInterval]);
             }
             
-            NSLog(@"Temps en seconde depuis le dernier pitch : %0.2f COUNT:%ld",f,_timeIntervalArray.count);
+            //NSLog(@"Temps en seconde depuis le dernier pitch : %0.2f COUNT:%ld",f,_timeIntervalArray.count);
             _oldDateX = nil;
+            _oldPitch = 0;
+            _nbPitch = 0;
+            _sumValueX = 0;
+        }else{                                                                                         // Meme mouvement;
+            if(_oldDateX == nil){
+                _oldDateX = [NSDate date];
+            }
+            if(pitch != 0){
+                //NSLog(@"AJOUT %d, NB ACTUEL %d",pitch,_nbPitch);
+                _sumValueX +=  pitch;
+                _oldPitch = pitch;
+                _nbPitch++;
+            }else{
+                _oldDateX = [NSDate date]; 
+            }
+            
         }
-        if(pitch != 0){
-            _oldDateX = _currentDateX;
-            _oldPitch = pitch;
-        }
+        
     }
-    
-    
-    
     if (_deviceController && (_connectionState == ARCONTROLLER_DEVICE_STATE_RUNNING)) {
-        _deviceController->aRDrone3->setPilotingPCMDPitch(_deviceController->aRDrone3, pitch);
+           _deviceController->aRDrone3->setPilotingPCMDPitch(_deviceController->aRDrone3, (uint8_t) pitch);
     }
 }
 
+- (void)setViewCall:(id)view{
+    _manuel = (ViewControllerManuel*) view;
+}
+
 - (void)setRoll:(uint8_t)roll {
+    
+    
     if(_returnHome == false){
         _currentDateY = [NSDate date];
-        if(roll != _oldRoll && _oldDateY != nil){
+        if( (roll > 0 && _oldRoll < 0) || (roll < 0 && _oldRoll > 0) || (roll == 0 && _oldRoll != 0) ){ //Changement de mouvement;
             float f = [_currentDateY timeIntervalSinceDate:_oldDateY];
             BebopDroneRecord *tmp = [[BebopDroneRecord alloc] init];
             [tmp setTimeInterval:f];
-            [tmp setDroneDirectionValue:[[NSString alloc] initWithFormat:@"R;%i",_oldRoll]];
+            [tmp setDroneDirectionValue:[[NSString alloc] initWithFormat:@"P;%d", _sumValueY/_nbRoll]];
             @synchronized(_timeIntervalArray)
             {
                 [_timeIntervalArray addObject:tmp];
+                NSLog(@"Ajout de %@  de valeur %d et d'une durée de %0.2f",[tmp getDirection],[tmp getValue],[tmp getTimeInterval]);
             }
             
-            NSLog(@"Temps en seconde depuis le dernier roll : %0.2f COUNT:%ld",f,_timeIntervalArray.count);
+            //NSLog(@"Temps en seconde depuis le dernier pitch : %0.2f COUNT:%ld",f,_timeIntervalArray.count);
             _oldDateY = nil;
+            _oldRoll = 0;
+            _nbRoll = 0;
+            _sumValueY = 0;
+        }else{                                                                                         // Meme mouvement;
+            if(_oldDateY == nil){
+                _oldDateY = [NSDate date];
+            }
+            if(roll != 0){
+                //NSLog(@"AJOUT %d, NB ACTUEL %d",pitch,_nbPitch);
+                _sumValueY +=  roll;
+                _oldRoll = roll;
+                _nbRoll++;
+            }else{
+                _oldDateY = [NSDate date];
+            }
+            
         }
-        if(roll != 0){
-            _oldDateY = _currentDateY;
-            _oldRoll = roll;
-        }
+        
+    }
+    if (_deviceController && (_connectionState == ARCONTROLLER_DEVICE_STATE_RUNNING)) {
+        _deviceController->aRDrone3->setPilotingPCMDRoll(_deviceController->aRDrone3, (uint8_t) roll);
     }
     
-    if (_deviceController && (_connectionState == ARCONTROLLER_DEVICE_STATE_RUNNING)) {
-        _deviceController->aRDrone3->setPilotingPCMDRoll(_deviceController->aRDrone3, roll);
-    }
+    
 }
 
 - (void)setYaw:(uint8_t)yaw {
@@ -348,25 +454,41 @@
 }
 
 - (void)setGaz:(uint8_t)gaz {
+    
+    
     if(_returnHome == false){
         _currentDateZ = [NSDate date];
-        if(gaz != _oldGaz && _oldDateZ != nil){
+        if( (gaz > 0 && _oldGaz < 0) || (gaz < 0 && _oldGaz > 0) || (gaz == 0 && _oldGaz != 0) ){ //Changement de mouvement;
             float f = [_currentDateZ timeIntervalSinceDate:_oldDateZ];
             BebopDroneRecord *tmp = [[BebopDroneRecord alloc] init];
             [tmp setTimeInterval:f];
-            [tmp setDroneDirectionValue:[[NSString alloc] initWithFormat:@"G;%i",_oldGaz]];
+            [tmp setDroneDirectionValue:[[NSString alloc] initWithFormat:@"P;%d", _sumValueZ/_nbGaz]];
             @synchronized(_timeIntervalArray)
             {
                 [_timeIntervalArray addObject:tmp];
+                NSLog(@"Ajout de %@  de valeur %d et d'une durée de %0.2f",[tmp getDirection],[tmp getValue],[tmp getTimeInterval]);
             }
             
-            NSLog(@"Temps en seconde depuis le dernier gaz : %0.2f COUNT:%ld",f,_timeIntervalArray.count);
+            //NSLog(@"Temps en seconde depuis le dernier pitch : %0.2f COUNT:%ld",f,_timeIntervalArray.count);
             _oldDateZ = nil;
+            _oldGaz = 0;
+            _nbGaz = 0;
+            _sumValueZ = 0;
+        }else{                                                                                         // Meme mouvement;
+            if(_oldDateZ == nil){
+                _oldDateZ = [NSDate date];
+            }
+            if(gaz != 0){
+                //NSLog(@"AJOUT %d, NB ACTUEL %d",pitch,_nbPitch);
+                _sumValueZ +=  gaz;
+                _oldGaz = gaz;
+                _nbGaz++;
+            }else{
+                _oldDateZ = [NSDate date];
+            }
+            
         }
-        if(gaz != 0){
-            _oldDateZ = _currentDateZ;
-            _oldGaz = gaz;
-        }
+        
     }
     if (_deviceController && (_connectionState == ARCONTROLLER_DEVICE_STATE_RUNNING)) {
         _deviceController->aRDrone3->setPilotingPCMDGaz(_deviceController->aRDrone3, gaz);
@@ -457,20 +579,13 @@ static void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTRO
     }
 }
 
+
 static eARCONTROLLER_ERROR configDecoderCallback (ARCONTROLLER_Stream_Codec_t codec, void *customData) {
-    BebopDrone *bebopDrone = (__bridge BebopDrone*)customData;
-    
-    BOOL success = [bebopDrone.delegate bebopDrone:bebopDrone configureDecoder:codec];
-    
-    return (success) ? ARCONTROLLER_OK : ARCONTROLLER_ERROR;
+    return ARCONTROLLER_OK;
 }
 
 static eARCONTROLLER_ERROR didReceiveFrameCallback (ARCONTROLLER_Frame_t *frame, void *customData) {
-    BebopDrone *bebopDrone = (__bridge BebopDrone*)customData;
-    
-    BOOL success = [bebopDrone.delegate bebopDrone:bebopDrone didReceiveFrame:frame];
-    
-    return (success) ? ARCONTROLLER_OK : ARCONTROLLER_ERROR;
+    return ARCONTROLLER_OK;
 }
 
 
@@ -506,5 +621,6 @@ static eARCONTROLLER_ERROR didReceiveFrameCallback (ARCONTROLLER_Frame_t *frame,
     NSLog(@"Resolve failed");
     dispatch_semaphore_signal(_resolveSemaphore);
 }
+
 
 @end

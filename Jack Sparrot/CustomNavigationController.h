@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  Permet l'empilement des vues.
+ */
 @interface CustomNavigationController : UINavigationController
 
 @end

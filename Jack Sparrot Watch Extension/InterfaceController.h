@@ -11,11 +11,13 @@
 
 @interface InterfaceController : WKInterfaceController
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfacePicker *tp;
-
 @property (assign, nonatomic)  NSArray <WKPickerItem *> *pickerItems;
-
 @property (unsafe_unretained, nonatomic) IBOutlet WKSwipeGestureRecognizer *swipeCtrl;
-
 @property (strong, nonatomic) WKPickerItem *selectedItem;
+@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceButton *btnChgMode;
+
+- (IBAction)pickerAction:(NSInteger)value;
+
+- (void) updateBtnChgMode:(NSString*) item;
 
 @end

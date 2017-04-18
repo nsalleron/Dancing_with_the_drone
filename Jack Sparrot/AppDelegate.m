@@ -15,7 +15,8 @@
 @interface AppDelegate ()
 
 @end
-
+static NSString *sharedUserActivityType = @"fr.upmc.sar.project.Jack-Sparrot";
+static NSString *sharedIdentifierKey = @"SALLERONGASC";
 @implementation AppDelegate
 
 
@@ -47,6 +48,24 @@
 
     
 }
+- (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType{
+    if ([userActivityType isEqualToString:sharedUserActivityType]) {
+        return true;
+    }
+    return false;
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler{
+    if (userActivity.activityType == sharedUserActivityType){
+        if ([[userActivity.userInfo objectForKey:@"123456"] isEqualToString:sharedIdentifierKey]) {
+            NSLog(@"MISE AU PREMIER PLAN");
+            return true;
+        }
+    }
+    return false;
+}
+
+
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
     return UIInterfaceOrientationMaskAll;

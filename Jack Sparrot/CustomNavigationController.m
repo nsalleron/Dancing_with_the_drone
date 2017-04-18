@@ -14,10 +14,16 @@
 
 @implementation CustomNavigationController
 
+/**
+ * Redéfinition de ces deux méthodes pour forcer la rotation de l'écran ou non.
+ */
 - (BOOL)shouldAutorotate
 {
     return self.topViewController.shouldAutorotate;
 }
+/**
+ * Redéfinition de ces deux méthodes pour forcer la rotation de l'écran ou non.
+ */
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return self.topViewController.supportedInterfaceOrientations;

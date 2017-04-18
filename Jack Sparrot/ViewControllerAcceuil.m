@@ -18,15 +18,16 @@
 #import <libARDiscovery/ARDiscovery.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
+#import <WatchConnectivity/WatchConnectivity.h>
 
 
-
-@interface ViewControllerAccueil()<BebopDroneDelegate,DroneDiscovererDelegate>
+@interface ViewControllerAccueil()<BebopDroneDelegate,DroneDiscovererDelegate,WCSessionDelegate>
 
 @property (nonatomic, strong) BebopDrone *bebopDrone;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) DroneDiscoverer *droneDiscoverer;
 @property (nonatomic) dispatch_semaphore_t stateSem;
+@property (nonatomic, strong) WCSession* session;
 
 @end
 
@@ -47,7 +48,43 @@ ViewControllerManuel *controllerDrone;
     [self setView: ecranAccueil];
     [self setTitle:@"Accueil"];
     
+    if ([WCSession isSupported]) {
+        _session = [WCSession defaultSession];
+        _session.delegate = self;
+        [_session activateSession];
+    }
+    
+    if ([[WCSession defaultSession] isReachable]) {
+        // Do something
+    }
+    
 }
+
+
+
+
+//A FAIRE INTERPRETATION DES DONN2ES
+
+- (void) session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message replyHandler:(void (^)(NSDictionary<NSString *,id> * _Nonnull))replyHandler{
+        NSLog(@"MESSAGE : %@",[message objectForKey:@"CMD"]);
+    
+    
+    
+    [[ecranAccueil btnAide] setTitle:[message objectForKey:@"CMD"] forState:UIControlStateNormal];
+   
+        //Do something
+}
+
+
+
+
+
+
+
+
+
+
+
 
 - (void)viewDidAppear:(BOOL)animated {
     
@@ -61,7 +98,7 @@ ViewControllerManuel *controllerDrone;
         
         [self registerNotifications];
         [_droneDiscoverer startDiscovering];
-   
+        
         if ([_bebopDrone connectionState] != ARCONTROLLER_DEVICE_STATE_RUNNING) {
             NSLog(@"NULL SHOW ACCUEIL");
         }
@@ -71,7 +108,7 @@ ViewControllerManuel *controllerDrone;
     
     
     
-   
+    
     
     
     
@@ -124,7 +161,7 @@ ViewControllerManuel *controllerDrone;
 
 - (void) viewDidDisappear:(BOOL)animated
 {
-
+    
 }
 
 - (void) deconnexionDrone{
@@ -138,7 +175,7 @@ ViewControllerManuel *controllerDrone;
             // wait for the disconnection to appear
             dispatch_semaphore_wait(_stateSem, DISPATCH_TIME_FOREVER);
             _bebopDrone = nil;
-        
+            
             // dismiss the alert view in main thread
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"FIN CONNEXION ALERT VIEW ACCUEIL");
@@ -147,7 +184,7 @@ ViewControllerManuel *controllerDrone;
                     _bebopDrone = nil;
                     controllerDrone = [[ViewControllerManuel alloc] init];
                     [self.navigationController pushViewController:controllerDrone animated:YES];
-
+                    
                 }
             });
         });
@@ -181,7 +218,7 @@ ViewControllerManuel *controllerDrone;
 
 - (void)bebopDrone:(BebopDrone*)bebopDrone batteryDidChange:(int)batteryPercentage {
     [ecranAccueil setBattery:[NSString stringWithFormat:@"Drone %d%%", batteryPercentage]];
-   
+    
 }
 
 - (void)bebopDrone:(BebopDrone*)bebopDrone flyingStateDidChange:(eARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE)state {
@@ -257,7 +294,7 @@ ViewControllerManuel *controllerDrone;
     [_droneDiscoverer stopDiscovering];
     [self deconnexionDrone];
     
-   
+    
 }
 
 -(void) goToDroneOptions:(UIButton*)send{

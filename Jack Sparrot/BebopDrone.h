@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 #import <libARController/ARController.h>
 #import <libARDiscovery/ARDISCOVERY_BonjourDiscovery.h>
+#import "ViewControllerManuel.h"
 
 @class BebopDrone;
 
@@ -93,7 +94,7 @@
 - (void)takeOff;
 - (void)land;
 - (void)takePicture;
-- (void)setPitch:(uint8_t)pitch;
+- (void)setPitch:(int)pitch;
 - (void)setRoll:(uint8_t)roll;
 - (void)setYaw:(uint8_t)yaw;
 - (void)setGaz:(uint8_t)gaz;
@@ -103,5 +104,8 @@
 - (void)cancelReturnHome;
 - (void)returnHomeInterieur;
 - (void)returnHomeExterieur;
+- (void)setMaxHauteur:(uint8_t)atitude;
+- (void)setDefaultSetting;
+- (void)setViewCall:(ViewControllerManuel*)view;
 
 @end
