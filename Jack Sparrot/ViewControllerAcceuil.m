@@ -92,7 +92,11 @@ ViewControllerManuel *controllerDrone;
     
     
     NSString *axe = [ArrayCommand objectAtIndex:0];
-    NSString *valeur = [ArrayCommand objectAtIndex:1];
+    NSString *valeur;
+    if([ArrayCommand count]>1){
+        valeur = [ArrayCommand objectAtIndex:1];
+    }
+    
     
     _dateOldCommand = [NSDate date];
     
@@ -101,7 +105,14 @@ ViewControllerManuel *controllerDrone;
     }else if([axe isEqualToString:@"Y"]){
         [_bebopDrone setRoll:[valeur intValue]];
     }else if([axe isEqualToString:@"Z"]){
-        [_bebopDrone setGaz:[valeur intValue]];
+        // in background, gaz the drone
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [_bebopDrone setGaz:[valeur intValue]];
+            NSLog(@"GAZ UP");
+            [NSThread sleepForTimeInterval:0.5f];
+            NSLog(@"GAZ DOWN");
+            [_bebopDrone setGaz:0];
+        });
     }else if([axe isEqualToString:@"D"]){
         [_bebopDrone takeOff];
     }else if([axe isEqualToString:@"A"]){
@@ -136,22 +147,6 @@ ViewControllerManuel *controllerDrone;
     
 }
 
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
 - (void)viewDidAppear:(BOOL)animated {
     
     NSLog(@"VIEW DID APPEAR ACCUEIL");
@@ -169,13 +164,6 @@ ViewControllerManuel *controllerDrone;
             NSLog(@"NULL SHOW ACCUEIL");
         }
     }
-    
-    
-    
-    
-    
-    
-    
     
     
 }
@@ -225,8 +213,7 @@ ViewControllerManuel *controllerDrone;
     [_droneDiscoverer stopDiscovering];
 }
 
-- (void) viewDidDisappear:(BOOL)animated
-{
+- (void) viewDidDisappear:(BOOL)animated {
     
 }
 

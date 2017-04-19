@@ -18,6 +18,4 @@
 
 - (IBAction)pickerAction:(NSInteger)value;
 
-- (void) updateBtnChgMode:(NSString*) item;
-
 @end

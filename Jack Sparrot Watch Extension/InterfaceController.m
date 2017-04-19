@@ -301,11 +301,29 @@ Boolean _enStatio = TRUE;
             if(_incY < -0.2){
                 if(_stabY){    //DROITE
                     if(!axeX && currentDimensions == 1){
+                        NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;100",@"CMD", nil];
+                        [_session sendMessage:applicationDict
+                                 replyHandler:^(NSDictionary *replyHandler) {
+                                     NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                                 }
+                                 errorHandler:^(NSError *error) {
+                                     NSLog(@"ERROR");
+                                 }
+                         ];
                         /*
                         [_bebopDrone setFlag:1];
                         [_bebopDrone setRoll:100];
                          */
                     }else if(currentDimensions == 2 || currentDimensions == 3){
+                        NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;100",@"CMD", nil];
+                        [_session sendMessage:applicationDict
+                                 replyHandler:^(NSDictionary *replyHandler) {
+                                     NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                                 }
+                                 errorHandler:^(NSError *error) {
+                                     NSLog(@"ERROR");
+                                 }
+                         ];
                         /*
                         [_bebopDrone setFlag:1];
                         [_bebopDrone setRoll:100];
@@ -317,11 +335,29 @@ Boolean _enStatio = TRUE;
             }else if(_incY > 0.2){
                 if(_stabY){    //GAUCHE
                     if(!axeX && currentDimensions == 1){
+                        NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;-100",@"CMD", nil];
+                        [_session sendMessage:applicationDict
+                                 replyHandler:^(NSDictionary *replyHandler) {
+                                     NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                                 }
+                                 errorHandler:^(NSError *error) {
+                                     NSLog(@"ERROR");
+                                 }
+                         ];
                         /*
                         [_bebopDrone setFlag:1];
                         [_bebopDrone setRoll:-100];
                          */
                     }else if(currentDimensions == 2 || currentDimensions == 3){
+                        NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;-100",@"CMD", nil];
+                        [_session sendMessage:applicationDict
+                                 replyHandler:^(NSDictionary *replyHandler) {
+                                     NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                                 }
+                                 errorHandler:^(NSError *error) {
+                                     NSLog(@"ERROR");
+                                 }
+                         ];
                         /*
                         [_bebopDrone setFlag:1];
                         [_bebopDrone setRoll:-100];
@@ -340,6 +376,15 @@ Boolean _enStatio = TRUE;
                 _incStabY++;
             }else{
                 if(_lastMoveY != 0){    // NOMOVE
+                    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;0",@"CMD", nil];
+                    [_session sendMessage:applicationDict
+                             replyHandler:^(NSDictionary *replyHandler) {
+                                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                             }
+                             errorHandler:^(NSError *error) {
+                                 NSLog(@"ERROR");
+                             }
+                     ];
                     /*
                     [_bebopDrone setFlag:0];
                     [_bebopDrone setRoll:0];
@@ -358,44 +403,53 @@ Boolean _enStatio = TRUE;
                 if(_incZ < -0.2){
                     if(_stabZ){
                         NSLog(@"HAUT");
-                        // in background, gaz the drone
-                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                            //[_bebopDrone setGaz:100];
-                            NSLog(@"GAZ UP");
-                            [NSThread sleepForTimeInterval:0.5f];
-                            NSLog(@"GAZ DOWN");
-                            //[_bebopDrone setGaz:0];
-                        });
+                        
+                        NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Z;100",@"CMD", nil];
+                        [_session sendMessage:applicationDict
+                                 replyHandler:^(NSDictionary *replyHandler) {
+                                     NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                                 }
+                                 errorHandler:^(NSError *error) {
+                                     NSLog(@"ERROR");
+                                 }
+                         ];
                         _lastMoveZ = 3;
                         _stabZ = NO;
-                    }else{
-                        NSLog(@"DECELERATION VERS LE BAS");
                     }
                 }else if(_incZ > 0.2){
                     if(_stabZ){
                         NSLog(@"BAS");
-                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                            //[_bebopDrone setGaz:-100];
-                            NSLog(@"GAZ UP");
-                            [NSThread sleepForTimeInterval:0.5f];
-                            NSLog(@"GAZ DOWN");
-                            //[_bebopDrone setGaz:0];
-                        });
+                        NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Z;-100",@"CMD", nil];
+                        [_session sendMessage:applicationDict
+                                 replyHandler:^(NSDictionary *replyHandler) {
+                                     NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                                 }
+                                 errorHandler:^(NSError *error) {
+                                     NSLog(@"ERROR");
+                                 }
+                         ];
                         _lastMoveZ = 4;
                         _stabZ = NO;
-                    }else{
-                        NSLog(@"DECELERATION VERS LE HAUT");
                     }
                 }
                 _incZ = 0;
             }else{
                 if(_incStabZ < 6){
-                    //NSLog(@"LE CPT : %d", _cptStables);
+                 
                     _incStabZ++;
                 }else{
                     if(_lastMoveZ != 0){
                         NSLog(@"STABLE Z");
-                        //[_bebopDrone setGaz:0];
+                        NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Z;0",@"CMD", nil];
+                        [_session sendMessage:applicationDict
+                                 replyHandler:^(NSDictionary *replyHandler) {
+                                     NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                                 }
+                                 errorHandler:^(NSError *error) {
+                                     NSLog(@"ERROR");
+                                 }
+                         ];
+                      
                     }
                     _stabZ = YES;
                     _lastMoveZ = 0;
@@ -439,13 +493,65 @@ Boolean _enStatio = TRUE;
 }
 
 - (IBAction)startTakeOff {
+    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"D",@"CMD", nil];
+    [_session sendMessage:applicationDict
+             replyHandler:^(NSDictionary *replyHandler) {
+                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+             }
+             errorHandler:^(NSError *error) {
+                 NSLog(@"ERROR");
+             }
+     ];
 }
 
 
 - (IBAction)startLanding {
+    
+    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"A",@"CMD", nil];
+    [_session sendMessage:applicationDict
+             replyHandler:^(NSDictionary *replyHandler) {
+                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+             }
+             errorHandler:^(NSError *error) {
+                 NSLog(@"ERROR");
+             }
+     ];
 }
 
 - (IBAction)startHome {
+    
+    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"H",@"CMD", nil];
+    [_session sendMessage:applicationDict
+             replyHandler:^(NSDictionary *replyHandler) {
+                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+             }
+             errorHandler:^(NSError *error) {
+                 NSLog(@"ERROR");
+             }
+    ];
+    
+    WKAlertAction *action =
+    [WKAlertAction actionWithTitle:@"Annuler"
+                             style:WKAlertActionStyleDefault
+     
+                           handler:^{
+                               [_session sendMessage:applicationDict
+                                        replyHandler:^(NSDictionary *replyHandler) {
+                                            NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                                        }
+                                        errorHandler:^(NSError *error) {
+                                            NSLog(@"ERROR");
+                                        }
+                                ];
+                           }];
+    
+    NSString *title = @"Home";
+    NSString *message = @"Fonction home en cours.";
+    
+    [self presentAlertControllerWithTitle:title
+     message:message
+     preferredStyle:WKAlertControllerStyleAlert
+     actions:@[ action ]];
 }
 
 @end

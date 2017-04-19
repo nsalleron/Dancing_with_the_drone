@@ -8,7 +8,8 @@
 
 #import <WatchKit/WatchKit.h>
 #import <Foundation/Foundation.h>
+#import <WatchConnectivity/WatchConnectivity.h>
 
 @interface InterfaceControllerOptions : WKInterfaceController
-
+@property (nonatomic, strong) WCSession* session;
 @end
