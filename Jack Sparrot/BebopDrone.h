@@ -109,5 +109,6 @@
 - (void)setDefaultSetting;
 - (void)setViewCall:(ViewControllerManuel*)view;
 - (void)setCustomSetting;
+- (int) isFlying;
 
 @end

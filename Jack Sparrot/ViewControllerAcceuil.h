@@ -16,11 +16,12 @@
 @property (readonly,nonatomic,retain) UIButton *btnAide;
 @property (assign, nonatomic) NSInteger index;
 @property (nonatomic, strong) ARService *service;
+@property (nonatomic) int *batteryDrone;
 
 
 - (void) goToDroneControl:(UIButton*)send;
 - (void) goToDroneOptions:(UIButton*)send;
 - (void) goToDroneHelp:(UIButton*)send;
-
+- (void) checkBattery;
 @end
 

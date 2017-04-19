@@ -49,6 +49,7 @@
 
 @property (nonatomic) dispatch_semaphore_t stateSem;
 @property (nonatomic) ViewControllerManuel* manuel;
+@property (nonatomic) int Flying;
 @end
 
 float altitudeDrone;
@@ -243,7 +244,12 @@ float acceleration;
 - (void)takeOff {
     if (_deviceController && (_connectionState == ARCONTROLLER_DEVICE_STATE_RUNNING)) {
         _deviceController->aRDrone3->sendPilotingTakeOff(_deviceController->aRDrone3);
+        _Flying = 1;
     }
+}
+
+- (int)isFlying{
+    return _Flying;
 }
 
 - (void)land {

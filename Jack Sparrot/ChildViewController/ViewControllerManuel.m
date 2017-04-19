@@ -28,7 +28,7 @@
 @interface ViewControllerManuel ()<BebopDroneDelegate,
                                     DroneDiscovererDelegate,
                                     ViewDimensionViewControllerDelegate,
-                                    UIAccelerometerDelegate>
+                                    UIAlertViewDelegate>
 
 @property (nonatomic, strong) UIAlertView *connectionAlertView;
 @property (nonatomic, strong) BebopDrone *bebopDrone;
@@ -320,49 +320,50 @@ ViewManuel *ecran;
     swipeRight.direction=UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:swipeLeft];
     
-    /*[NSTimer scheduledTimerWithTimeInterval:0.1
+    [NSTimer scheduledTimerWithTimeInterval:10.0
                                      target:self
-                                   selector:@selector(sendToDrone)
+                                   selector:@selector(checkBattery:)
                                    userInfo:nil
-                                    repeats:YES];*/
-    
-
-    
+                                    repeats:NO];
 }
 
-
-- (NSString *)stringFromOrientation:(UIDeviceOrientation) orientation {
+- (void) checkBattery{
     
-    NSString *orientationString;
-    switch (orientation) {
-        case UIDeviceOrientationPortrait:
-            orientationString =  @"Portrait";
-            break;
-        case UIDeviceOrientationPortraitUpsideDown:
-            orientationString =  @"Portrait Upside Down";
-            break;
-        case UIDeviceOrientationLandscapeLeft:
-            orientationString =  @"Landscape Left";
-            break;
-        case UIDeviceOrientationLandscapeRight:
-            orientationString =  @"Landscape Right";
-            break;
-        case UIDeviceOrientationFaceUp:
-            orientationString =  @"Face Up";
-            break;
-        case UIDeviceOrientationFaceDown:
-            orientationString =  @"Face Down";
-            break;
-        case UIDeviceOrientationUnknown:
-            orientationString = @"Unknown";
-            break;
-        default:
-            orientationString = @"Not Known";
-            break;
+    //Battery of the terminal
+    UIDevice *myDevice = [UIDevice currentDevice];
+    [myDevice setBatteryMonitoringEnabled:YES];
+    
+    int state = [myDevice batteryState];
+    double batTermin = (float)[myDevice batteryLevel] * 100;
+    
+    //Battery of the drone
+    
+    if(batTermin < 10 || _batteryDrone < 10){
+        
+        if([_bebopDrone isFlying]){
+            [timerAccueil invalidate];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention !"
+                                                            message:@"La batterie du terminal ou du drone est faible."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Arrêter le drone"
+                                                  otherButtonTitles:@"Continuer",nil];
+        }
+        [alert show];
+        
+        
+        
+        
     }
-    return orientationString;
+    
+    
 }
 
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [_bebopDrone land];
+    }
+}
 
 
 - (BOOL)prefersStatusBarHidden {
@@ -773,6 +774,9 @@ ViewManuel *ecran;
     return NO;
 }
 
+- (void)bebopDrone:(BebopDrone*)bebopDrone batteryDidChange:(int)batteryPercentage {
+    _batteryDroneManuel = batteryPercentage;
+}
 #pragma mark notification registration
 - (void)registerNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enteredBackground:) name: UIApplicationDidEnterBackgroundNotification object: nil];
@@ -850,10 +854,6 @@ ViewManuel *ecran;
         default:
             break;
     }
-}
-
-- (void)bebopDrone:(BebopDrone*)bebopDrone batteryDidChange:(int)batteryPercentage {
-
 }
 
 - (void)bebopDrone:(BebopDrone*)bebopDrone flyingStateDidChange:(eARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE)state {

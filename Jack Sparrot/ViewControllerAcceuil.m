@@ -21,7 +21,7 @@
 #import <WatchConnectivity/WatchConnectivity.h>
 
 
-@interface ViewControllerAccueil()<BebopDroneDelegate,DroneDiscovererDelegate,WCSessionDelegate>
+@interface ViewControllerAccueil()<BebopDroneDelegate,DroneDiscovererDelegate,WCSessionDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, strong) BebopDrone *bebopDrone;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -40,6 +40,7 @@ ViewControllerManuel *controllerDrone;
 double accelerationSettingAccueil;
 double hauteurMaxAccueil;
 bool interieur;
+NSTimer * timerAccueil;
 
 @implementation ViewControllerAccueil
 
@@ -65,8 +66,53 @@ bool interieur;
         _session.delegate = self;
         [_session activateSession];
     }
+    timerAccueil = [NSTimer scheduledTimerWithTimeInterval:10.0
+                                     target:self
+                                   selector:@selector(checkBattery)
+                                   userInfo:nil
+                                    repeats:NO];
     
 }
+
+- (void) checkBattery{
+    
+    NSLog(@"APPPPPPPPPPPPPPPPPPPPPPPPPPPPPEL %d",_batteryDrone);
+    //Battery of the terminal
+    UIDevice *myDevice = [UIDevice currentDevice];
+    [myDevice setBatteryMonitoringEnabled:YES];
+    
+    int state = [myDevice batteryState];
+    double batTermin = (float)[myDevice batteryLevel] * 100;
+    
+    //Battery of the drone
+    
+    if(batTermin < 10 || _batteryDrone < 10){
+        
+        if([_bebopDrone isFlying]){
+            [timerAccueil invalidate];
+        
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention !"
+                                                            message:@"La batterie du terminal ou du drone est faible."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Arrêter le drone"
+                                                  otherButtonTitles:@"Continuer",nil];
+        }
+        [alert show];
+       
+        
+        
+        
+    }
+    
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [_bebopDrone land];
+    }
+}
+
 
 /*!
  *  Il faut absoluement arrêter le drone quand la session est sur le point d'être désactivée.
@@ -297,6 +343,8 @@ bool interieur;
 
 - (void)bebopDrone:(BebopDrone*)bebopDrone batteryDidChange:(int)batteryPercentage {
     [ecranAccueil setBattery:[NSString stringWithFormat:@"Drone %d%%", batteryPercentage]];
+    _batteryDrone = batteryPercentage;
+    
     
 }
 

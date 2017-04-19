@@ -26,7 +26,7 @@
 @property (readwrite, nonatomic) Boolean axeX;
 @property (readwrite, nonatomic) Boolean homeActivate;
 @property (nonatomic, strong) ARService *service;
-
+@property (nonatomic) int *batteryDroneManuel;
 
 
 
