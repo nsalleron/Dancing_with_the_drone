@@ -61,6 +61,18 @@ ViewControllerManuel *controllerDrone;
     
 }
 
+/*!
+ *  Il faut absoluement arrêter le drone quand la session est sur le point d'être désactivée.
+ *
+ */
+- (void) sessionDidBecomeInactive:(WCSession *)session{
+    [_bebopDrone setFlag:0];
+    [_bebopDrone setPitch:0];
+    [_bebopDrone setRoll:0];
+    [_bebopDrone setGaz:0];
+    [_bebopDrone setYaw:0];
+}
+
 
 
 
@@ -82,7 +94,7 @@ ViewControllerManuel *controllerDrone;
     NSString *axe = [ArrayCommand objectAtIndex:0];
     NSString *valeur = [ArrayCommand objectAtIndex:1];
     
-    _dateOldCommand = [NSdate date];
+    _dateOldCommand = [NSDate date];
     
     if ([axe isEqualToString:@"X"]) {
         [_bebopDrone setPitch:[valeur intValue]];
@@ -107,7 +119,7 @@ ViewControllerManuel *controllerDrone;
             [_bebopDrone cancelReturnHome];
         }
     }
-    replyHandler
+
     //replyHandler = [[NSDictionary alloc] initWithObjectsAndKeys:@"DONE",@"reply", nil];
     
     

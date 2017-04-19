@@ -17,18 +17,19 @@ typedef enum {TROIS_D, SURPLACE} modes;
 @property (readonly, nonatomic) double incX;
 @property (readonly, nonatomic) double incY;
 @property (readonly, nonatomic) double incZ;
-@property (readonly, nonatomic) double absX;
-@property (readonly, nonatomic) double absY;
-@property (readonly, nonatomic) double absZ;
-@property (readonly, nonatomic) bool stabilisationX;
-@property (readonly, nonatomic) bool stabilisationY;
-@property (readonly, nonatomic) bool stabilisationZ;
-@property (readonly, nonatomic) moves lastMoveX;
-@property (readonly, nonatomic) moves lastMoveY;
-@property (readonly, nonatomic) moves lastMoveZ;
 @property (readonly, nonatomic) int incStabX;
 @property (readonly, nonatomic) int incStabY;
 @property (readonly, nonatomic) int incStabZ;
+@property (readonly, nonatomic) double absX;
+@property (readonly, nonatomic) double absY;
+@property (readonly, nonatomic) double absZ;
+@property (readonly, nonatomic) bool stabX;
+@property (readonly, nonatomic) bool stabY;
+@property (readonly, nonatomic) bool stabZ;
+@property (readonly, nonatomic) moves lastMoveX;
+@property (readonly, nonatomic) moves lastMoveY;
+@property (readonly, nonatomic) moves lastMoveZ;
+
 @property (readonly, nonatomic) modes flagMode;
 @property (strong, nonatomic) CMMotionManager *motionManager;
 
@@ -214,7 +215,7 @@ Boolean _enStatio = TRUE;
     /* Mouvement de FOWARD et BACKWARD */
     if(_absX > 0.2){
         if(_incX < -0.2){
-            if(_stabilisationX){    //FOWARD
+            if(_stabX){    //FOWARD
                 
                 if(axeX && currentDimensions == 1){
                     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;100",@"CMD", nil];
@@ -239,10 +240,10 @@ Boolean _enStatio = TRUE;
                      ];
                 }
                 _lastMoveX = 5;
-                _stabilisationX = NO;
+                _stabX = NO;
             }
         }else if(_incX > 0.2){
-            if(_stabilisationX){    //BACKWARD
+            if(_stabX){    //BACKWARD
                 NSLog(@"ARRIERE");
                
                 if(axeX && currentDimensions == 1){
@@ -268,7 +269,7 @@ Boolean _enStatio = TRUE;
                     
                 }
                 _lastMoveX = 6;
-                _stabilisationX = NO;
+                _stabX = NO;
             }
             _incX = 0;
         }else{
@@ -288,7 +289,7 @@ Boolean _enStatio = TRUE;
                              }
                     ];
                 }
-                _stabilisationX = YES;
+                _stabX = YES;
                 _lastMoveX = 0;
                 _incStabX = 0;
             }
@@ -298,7 +299,7 @@ Boolean _enStatio = TRUE;
         // DROITE / GAUCHE : OK
         if(_absY > 0.2){
             if(_incY < -0.2){
-                if(_stabilisationY){    //DROITE
+                if(_stabY){    //DROITE
                     if(!axeX && currentDimensions == 1){
                         /*
                         [_bebopDrone setFlag:1];
@@ -311,10 +312,10 @@ Boolean _enStatio = TRUE;
                          */
                     }
                     _lastMoveY = 2;
-                    _stabilisationY = NO;
+                    _stabY = NO;
                 }
             }else if(_incY > 0.2){
-                if(_stabilisationY){    //GAUCHE
+                if(_stabY){    //GAUCHE
                     if(!axeX && currentDimensions == 1){
                         /*
                         [_bebopDrone setFlag:1];
@@ -327,7 +328,7 @@ Boolean _enStatio = TRUE;
                         */
                     }
                     _lastMoveY = 1;
-                    _stabilisationY = NO;
+                    _stabY = NO;
                 }else{
                     NSLog(@"DECELERATION VERS LA DROITE");
                 }
@@ -344,7 +345,7 @@ Boolean _enStatio = TRUE;
                     [_bebopDrone setRoll:0];
                      */
                 }
-                _stabilisationY = YES;
+                _stabY = YES;
                 _lastMoveY = 0;
                 _incStabY = 0;
             }
@@ -355,7 +356,7 @@ Boolean _enStatio = TRUE;
         if(_flagMode != 0){
             if(_absZ > 0.2){
                 if(_incZ < -0.2){
-                    if(_stabilisationZ){
+                    if(_stabZ){
                         NSLog(@"HAUT");
                         // in background, gaz the drone
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -366,12 +367,12 @@ Boolean _enStatio = TRUE;
                             //[_bebopDrone setGaz:0];
                         });
                         _lastMoveZ = 3;
-                        _stabilisationZ = NO;
+                        _stabZ = NO;
                     }else{
                         NSLog(@"DECELERATION VERS LE BAS");
                     }
                 }else if(_incZ > 0.2){
-                    if(_stabilisationZ){
+                    if(_stabZ){
                         NSLog(@"BAS");
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                             //[_bebopDrone setGaz:-100];
@@ -381,7 +382,7 @@ Boolean _enStatio = TRUE;
                             //[_bebopDrone setGaz:0];
                         });
                         _lastMoveZ = 4;
-                        _stabilisationZ = NO;
+                        _stabZ = NO;
                     }else{
                         NSLog(@"DECELERATION VERS LE HAUT");
                     }
@@ -396,7 +397,7 @@ Boolean _enStatio = TRUE;
                         NSLog(@"STABLE Z");
                         //[_bebopDrone setGaz:0];
                     }
-                    _stabilisationZ = YES;
+                    _stabZ = YES;
                     _lastMoveZ = 0;
                     _incStabZ = 0;
                 }
@@ -432,7 +433,20 @@ Boolean _enStatio = TRUE;
     }
 }
 
+- (IBAction)goToOptions {
+    
+    [self presentControllerWithName:@"options" context:nil];
+}
 
+- (IBAction)startTakeOff {
+}
+
+
+- (IBAction)startLanding {
+}
+
+- (IBAction)startHome {
+}
 
 @end
 

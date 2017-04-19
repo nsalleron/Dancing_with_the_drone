@@ -17,6 +17,7 @@
 		A61AEF011E409EEC00EDB53B /* ViewEcranAccueil.m in Sources */ = {isa = PBXBuildFile; fileRef = A61AEF001E409EEC00EDB53B /* ViewEcranAccueil.m */; };
 		A62504D41E7065C800288587 /* BebopDrone.m in Sources */ = {isa = PBXBuildFile; fileRef = A62504D31E7065C800288587 /* BebopDrone.m */; };
 		A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */; };
+		A668E7E41EA7571900F82E3C /* InterfaceControllerOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = A668E7E31EA7571900F82E3C /* InterfaceControllerOptions.m */; };
 		A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */ = {isa = PBXBuildFile; fileRef = A67EC1781E4333E500F08072 /* ViewManuel.m */; };
 		A692AD5F1E7BF57800A58AEE /* ViewControllerAide.m in Sources */ = {isa = PBXBuildFile; fileRef = A692AD5D1E7BF57800A58AEE /* ViewControllerAide.m */; };
 		A692AD601E7BF57800A58AEE /* ViewAide.m in Sources */ = {isa = PBXBuildFile; fileRef = A692AD5E1E7BF57800A58AEE /* ViewAide.m */; };
@@ -123,6 +124,8 @@
 		A62504D31E7065C800288587 /* BebopDrone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BebopDrone.m; sourceTree = "<group>"; };
 		A6565ED31E49C1E900CC7621 /* ViewControllerManuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerManuel.h; path = ChildViewController/ViewControllerManuel.h; sourceTree = "<group>"; };
 		A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerManuel.m; path = ChildViewController/ViewControllerManuel.m; sourceTree = "<group>"; };
+		A668E7E21EA7571900F82E3C /* InterfaceControllerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceControllerOptions.h; sourceTree = "<group>"; };
+		A668E7E31EA7571900F82E3C /* InterfaceControllerOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceControllerOptions.m; sourceTree = "<group>"; };
 		A66C32861E9A29A40067D93A /* BebopDroneRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BebopDroneRecord.h; sourceTree = "<group>"; };
 		A67EC1771E4333E500F08072 /* ViewManuel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewManuel.h; path = ControlerDroneView/ViewManuel.h; sourceTree = "<group>"; };
 		A67EC1781E4333E500F08072 /* ViewManuel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewManuel.m; path = ControlerDroneView/ViewManuel.m; sourceTree = "<group>"; };
@@ -358,6 +361,8 @@
 			children = (
 				A6E50DDA1E5E0A9800830EFD /* InterfaceController.h */,
 				A6E50DDB1E5E0A9800830EFD /* InterfaceController.m */,
+				A668E7E21EA7571900F82E3C /* InterfaceControllerOptions.h */,
+				A668E7E31EA7571900F82E3C /* InterfaceControllerOptions.m */,
 				A6E50DDD1E5E0A9800830EFD /* ExtensionDelegate.h */,
 				A6E50DDE1E5E0A9800830EFD /* ExtensionDelegate.m */,
 				A6E50DE01E5E0A9800830EFD /* NotificationController.h */,
@@ -655,6 +660,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A668E7E41EA7571900F82E3C /* InterfaceControllerOptions.m in Sources */,
 				A6E50DDF1E5E0A9800830EFD /* ExtensionDelegate.m in Sources */,
 				A6E50DDC1E5E0A9800830EFD /* InterfaceController.m in Sources */,
 				A6E50DE21E5E0A9800830EFD /* NotificationController.m in Sources */,

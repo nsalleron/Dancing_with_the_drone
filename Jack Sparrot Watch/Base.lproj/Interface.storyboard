@@ -40,10 +40,26 @@
                     </items>
                     <menu key="menu" id="YrS-fp-ANw">
                         <items>
-                            <menuItem title="Décollage" icon="play" id="lTs-aw-qL6"/>
-                            <menuItem title="Atterrissage" icon="block" id="YRA-mL-4PB"/>
-                            <menuItem title="Home" icon="maybe" id="A0K-sh-FSM"/>
-                            <menuItem title="Menu Item" id="5xB-OH-6fc" userLabel="Options"/>
+                            <menuItem title="Décollage" icon="play" id="lTs-aw-qL6">
+                                <connections>
+                                    <action selector="startTakeOff" destination="AgC-eL-Hgc" id="dcd-Mv-Ded"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Atterrissage" icon="block" id="YRA-mL-4PB">
+                                <connections>
+                                    <action selector="startLanding" destination="AgC-eL-Hgc" id="XhS-pp-FAA"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Home" icon="info" id="A0K-sh-FSM">
+                                <connections>
+                                    <action selector="startHome" destination="AgC-eL-Hgc" id="5Lf-gt-c7I"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Options" icon="maybe" id="MKX-mT-dJd">
+                                <connections>
+                                    <action selector="goToOptions" destination="AgC-eL-Hgc" id="5RT-rU-igN"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>
@@ -53,7 +69,22 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="219" y="334"/>
+            <point key="canvasLocation" x="212" y="334"/>
+        </scene>
+        <!--options-->
+        <scene sceneID="7fH-wF-Q6q">
+            <objects>
+                <controller identifier="options" id="x5r-gL-5pW">
+                    <items>
+                        <switch width="1" alignment="left" value="YES" title="Home Intr." id="wHs-q8-rZr"/>
+                        <label alignment="left" text="Hauteur Max : " id="cQz-w2-RTa"/>
+                        <slider width="1" alignment="left" value="1" maximum="3" steps="3" id="J67-na-fq9"/>
+                        <label alignment="left" text="Coeff Acc : " id="puC-ZH-8Gw"/>
+                        <slider width="1" alignment="left" value="1" maximum="3" steps="3" id="cq7-aE-Csn"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="650" y="334"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
