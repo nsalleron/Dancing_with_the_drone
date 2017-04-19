@@ -104,8 +104,10 @@
 - (void)cancelReturnHome;
 - (void)returnHomeInterieur;
 - (void)returnHomeExterieur;
-- (void)setMaxHauteur:(uint8_t)atitude;
+- (void)setMaxHauteur:(float)altitude;
+- (void)setAcceleration:(float)coef;
 - (void)setDefaultSetting;
 - (void)setViewCall:(ViewControllerManuel*)view;
+- (void)setCustomSetting;
 
 @end

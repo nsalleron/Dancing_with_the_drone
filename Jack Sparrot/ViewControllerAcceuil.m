@@ -37,6 +37,8 @@
 ViewEcranAccueil *ecranAccueil;
 boolean droneViewActif;
 ViewControllerManuel *controllerDrone;
+double accelerationSettingAccueil;
+double hauteurMaxAccueil;
 
 @implementation ViewControllerAccueil
 
@@ -45,6 +47,10 @@ ViewControllerManuel *controllerDrone;
     [super viewDidLoad];
     
     NSLog(@"ACCUEIL ACCUEIL");
+    
+    /* Récupération des options et mise en place des settings par defaut */
+    hauteurMaxAccueil = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Hauteur"];
+    accelerationSettingAccueil = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Acceleration"];
     
     ecranAccueil = [[ViewEcranAccueil alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecranAccueil setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];

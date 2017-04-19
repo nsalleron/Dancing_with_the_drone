@@ -74,17 +74,29 @@
         <!--options-->
         <scene sceneID="7fH-wF-Q6q">
             <objects>
-                <controller identifier="options" id="x5r-gL-5pW">
+                <controller identifier="options" id="x5r-gL-5pW" customClass="InterfaceControllerOptions">
                     <items>
-                        <switch width="1" alignment="left" value="YES" title="Home Intr." id="wHs-q8-rZr"/>
+                        <switch width="1" alignment="left" value="YES" title="Home Intr." id="wHs-q8-rZr">
+                            <connections>
+                                <action selector="changeHome:" destination="x5r-gL-5pW" id="BDR-vh-8tT"/>
+                            </connections>
+                        </switch>
                         <label alignment="left" text="Hauteur Max : " id="cQz-w2-RTa"/>
-                        <slider width="1" alignment="left" value="1" maximum="3" steps="3" id="J67-na-fq9"/>
+                        <slider width="1" alignment="left" value="1" maximum="3" steps="3" id="J67-na-fq9">
+                            <connections>
+                                <action selector="changeHauteurMax:" destination="x5r-gL-5pW" id="VrE-yJ-Etf"/>
+                            </connections>
+                        </slider>
                         <label alignment="left" text="Coeff Acc : " id="puC-ZH-8Gw"/>
-                        <slider width="1" alignment="left" value="1" maximum="3" steps="3" id="cq7-aE-Csn"/>
+                        <slider width="1" alignment="left" value="1" maximum="3" steps="3" id="cq7-aE-Csn">
+                            <connections>
+                                <action selector="changeCoefAccel:" destination="x5r-gL-5pW" id="Hxr-wO-wl5"/>
+                            </connections>
+                        </slider>
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="650" y="334"/>
+            <point key="canvasLocation" x="568" y="334"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

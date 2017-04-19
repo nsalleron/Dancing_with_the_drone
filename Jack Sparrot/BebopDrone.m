@@ -51,6 +51,9 @@
 @property (nonatomic) ViewControllerManuel* manuel;
 @end
 
+float altitudeDrone;
+float acceleration;
+
 @implementation BebopDrone
 
 
@@ -177,7 +180,7 @@
         
         // we don't need the discovery device anymore
         ARDISCOVERY_Device_Delete (&discoveryDevice);
-        
+        [self setDefaultSetting];
         // if an error occured, inform the delegate that the state is stopped
         if (error != ARCONTROLLER_OK) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -192,6 +195,7 @@
     }
     
     _deviceController->aRDrone3->sendMediaStreamingVideoEnable(_deviceController->aRDrone3, (uint8_t)0);
+
 }
 
 - (ARDISCOVERY_Device_t *)createDiscoveryDeviceWithService:(ARService*)service {
@@ -254,16 +258,16 @@
     }
 }
 
-- (void)setMaxHauteur:(uint8_t)attitude{
-    _deviceController->aRDrone3->sendPilotingSettingsMaxAltitude(_deviceController->aRDrone3,attitude);
-    //deviceController->aRDrone3->sendPilotingSettingsMaxAltitude(deviceController->aRDrone3, (float)current);
+- (void)setMaxHauteur:(float)attitude{
+    altitudeDrone = attitude;
+}
+- (void)setAcceleration:(float)coef{
+    acceleration = coef;
 }
 
 - (void)setDefaultSetting{
-    _deviceController->aRDrone3->sendSpeedSettingsMaxRotationSpeed(_deviceController->aRDrone3, 10);
-    _deviceController->aRDrone3->sendSpeedSettingsMaxVerticalSpeed(_deviceController->aRDrone3, 0.5);
-    _deviceController->aRDrone3->sendSpeedSettingsMaxPitchRollRotationSpeed(_deviceController->aRDrone3, 80);
-    _deviceController->aRDrone3->sendPilotingSettingsMaxTilt(_deviceController->aRDrone3, 5);
+    NSLog(@"RAZ SETTING");
+    _deviceController->common->sendSettingsReset(_deviceController->common);
 }
 
 - (void) cancelReturnHome{
@@ -508,7 +512,55 @@ static void stateChanged (eARCONTROLLER_DEVICE_STATE newState, eARCONTROLLER_ERR
     if (bebopDrone != nil) {
         switch (newState) {
             case ARCONTROLLER_DEVICE_STATE_RUNNING:
-                bebopDrone.deviceController->aRDrone3->sendMediaStreamingVideoEnable(bebopDrone.deviceController->aRDrone3, 1);
+                //bebopDrone.deviceController->aRDrone3->sendMediaStreamingVideoEnable(bebopDrone.deviceController->aRDrone3, 0);
+                if(acceleration == 1){
+                    bebopDrone.deviceController->aRDrone3->sendSpeedSettingsMaxRotationSpeed(bebopDrone.deviceController->aRDrone3, (float)10);
+                    bebopDrone.deviceController->aRDrone3->sendSpeedSettingsMaxVerticalSpeed(bebopDrone.deviceController->aRDrone3, (float)0.5);
+                    bebopDrone.deviceController->aRDrone3->sendSpeedSettingsMaxPitchRollRotationSpeed(bebopDrone.deviceController->aRDrone3, (float)80);
+                    bebopDrone.deviceController->aRDrone3->sendPilotingSettingsMaxTilt(bebopDrone.deviceController->aRDrone3, (float)5);
+            
+                }else if(acceleration == 2){
+                    
+                    bebopDrone.deviceController->aRDrone3->sendSpeedSettingsMaxRotationSpeed(bebopDrone.deviceController->aRDrone3, (float)200);
+                    bebopDrone.deviceController->aRDrone3->sendSpeedSettingsMaxVerticalSpeed(bebopDrone.deviceController->aRDrone3, (float)6);
+                    bebopDrone.deviceController->aRDrone3->sendSpeedSettingsMaxPitchRollRotationSpeed(bebopDrone.deviceController->aRDrone3, (float)300);
+                    bebopDrone.deviceController->aRDrone3->sendPilotingSettingsMaxTilt(bebopDrone.deviceController->aRDrone3, (float)35);
+                    
+                    
+                }else{
+                    float tempRot, tempVert, tempPitch, tempTilt;
+                    if(acceleration>1 && acceleration <= 1.25){
+                        tempRot = 50;
+                        tempVert = 2;
+                        tempPitch = 120;
+                        tempTilt = 15;
+                    }
+                    if(acceleration>1.25 && acceleration <= 1.5){
+                        tempRot = 100;
+                        tempVert = 3;
+                        tempPitch = 180;
+                         tempTilt = 20;
+                    }
+                    if(acceleration>1.5 && acceleration <= 1.75){
+                        tempRot = 150;
+                        tempVert = 4;
+                        tempPitch = 230;
+                         tempTilt = 25;
+                    }
+                    if(acceleration> 1.75 && acceleration < 2){
+                        tempRot = 200;
+                        tempVert = 5;
+                        tempPitch = 260;
+                        tempTilt = 30;
+                    }
+                    bebopDrone.deviceController->aRDrone3->sendSpeedSettingsMaxRotationSpeed(bebopDrone.deviceController->aRDrone3, tempRot);
+                    bebopDrone.deviceController->aRDrone3->sendSpeedSettingsMaxVerticalSpeed(bebopDrone.deviceController->aRDrone3, tempVert);
+                    bebopDrone.deviceController->aRDrone3->sendSpeedSettingsMaxPitchRollRotationSpeed(bebopDrone.deviceController->aRDrone3,tempPitch);
+                    bebopDrone.deviceController->aRDrone3->sendPilotingSettingsMaxTilt(bebopDrone.deviceController->aRDrone3, tempTilt);
+                    
+                }
+                  bebopDrone.deviceController->aRDrone3->sendPilotingSettingsMaxAltitude(bebopDrone.deviceController->aRDrone3,(float) altitudeDrone);
+                NSLog(@"GROS PASSAGE %f acceleration %f",altitudeDrone,acceleration);
                 break;
             case ARCONTROLLER_DEVICE_STATE_STOPPED:
                 break;
@@ -521,6 +573,9 @@ static void stateChanged (eARCONTROLLER_DEVICE_STATE newState, eARCONTROLLER_ERR
         });
     }
 }
+
+
+
 
 // called when a command has been received from the drone
 static void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTROLLER_DICTIONARY_ELEMENT_t *elementDictionary, void *customData) {
@@ -576,6 +631,11 @@ static void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTRO
                 }
             }
         }
+    }
+    if ((commandKey == ARCONTROLLER_DICTIONARY_KEY_COMMON_SETTINGSSTATE_RESETCHANGED)
+              && (elementDictionary != NULL)){
+        NSLog(@"Fin passage");
+        [bebopDrone setCustomSetting];
     }
 }
 

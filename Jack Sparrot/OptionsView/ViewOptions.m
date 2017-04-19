@@ -234,8 +234,8 @@
         [_stpHauteurMax setStepValue:0.5];
         
         [_stpCoeffAccel setAutorepeat:YES];
-        [_stpCoeffAccel setMinimumValue:0.0];
-        [_stpCoeffAccel setMaximumValue:1.0];
+        [_stpCoeffAccel setMinimumValue:1.0];
+        [_stpCoeffAccel setMaximumValue:2.0];
         [_stpCoeffAccel setStepValue:0.05];
         
         _lblHauteurMaxInt = [[UILabel alloc] init];

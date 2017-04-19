@@ -54,7 +54,6 @@
 @property (readonly, nonatomic) int lastMoveY;
 @property (readonly, nonatomic) int lastMoveZ;
 
-@property (readonly, nonatomic) int flag;   /* 0 : NOMOVE / 1 : MOVE */
 
 /*  0 = STABLE
  1 = LEFT
