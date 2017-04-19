@@ -13,6 +13,8 @@
 #import "DroneDiscoverer.h"
 #import <CoreMotion/CoreMotion.h>
 #import <libARDiscovery/ARDiscovery.h>
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 #define GAUCHE 0
 #define DROITE 1
@@ -43,9 +45,9 @@ BOOL firstTime = TRUE;
 int currentDimensions = 0;
 double accelerationSetting;
 double hauteurMax;
+UIAlertView *alertManuel;
 
-
-NSTimer *timer;
+NSTimer * timerDrone;
 ViewManuel *ecran;
 @implementation ViewControllerManuel
 
@@ -320,11 +322,11 @@ ViewManuel *ecran;
     swipeRight.direction=UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:swipeLeft];
     
-    [NSTimer scheduledTimerWithTimeInterval:10.0
+    timerDrone = [NSTimer scheduledTimerWithTimeInterval:10.0
                                      target:self
                                    selector:@selector(checkBattery:)
                                    userInfo:nil
-                                    repeats:NO];
+                                    repeats:YES];
 }
 
 - (void) checkBattery{
@@ -338,20 +340,21 @@ ViewManuel *ecran;
     
     //Battery of the drone
     
-    if(batTermin < 10 || _batteryDrone < 10){
+    if([_bebopDrone isFlying]){
+        NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"alert" ofType:@"mp3"];
+        SystemSoundID soundID;
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundPath], &soundID);
+        AudioServicesPlaySystemSound(soundID);
         
-        if([_bebopDrone isFlying]){
-            [timerAccueil invalidate];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention !"
-                                                            message:@"La batterie du terminal ou du drone est faible."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Arrêter le drone"
-                                                  otherButtonTitles:@"Continuer",nil];
+        if(alertManuel == nil){
+            alertManuel = [[UIAlertView alloc] initWithTitle:@"Attention !"
+                                                      message:@"La batterie du terminal ou du drone est faible."
+                                                     delegate:self
+                                            cancelButtonTitle:@"Arrêter le drone"
+                                            otherButtonTitles:@"Continuer",nil];
+            [alertManuel show];
+            
         }
-        [alert show];
-        
-        
-        
         
     }
     
@@ -884,6 +887,10 @@ ViewManuel *ecran;
             [_connectionAlertView show];
         }
     }
+}
+
+- (void) viewDidDisappear:(BOOL)animated{
+    [timerDrone invalidate];
 }
 
 

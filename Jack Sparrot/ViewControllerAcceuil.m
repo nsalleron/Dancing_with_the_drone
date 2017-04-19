@@ -19,6 +19,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 #import <WatchConnectivity/WatchConnectivity.h>
+#import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
 
 @interface ViewControllerAccueil()<BebopDroneDelegate,DroneDiscovererDelegate,WCSessionDelegate,UIAlertViewDelegate>
@@ -41,13 +43,13 @@ double accelerationSettingAccueil;
 double hauteurMaxAccueil;
 bool interieur;
 NSTimer * timerAccueil;
+UIAlertView *alertAccueil;
 
 @implementation ViewControllerAccueil
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
     NSLog(@"ACCUEIL ACCUEIL");
     
     /* Récupération des options et mise en place des settings par defaut */
@@ -66,11 +68,7 @@ NSTimer * timerAccueil;
         _session.delegate = self;
         [_session activateSession];
     }
-    timerAccueil = [NSTimer scheduledTimerWithTimeInterval:10.0
-                                     target:self
-                                   selector:@selector(checkBattery)
-                                   userInfo:nil
-                                    repeats:NO];
+
     
 }
 
@@ -85,22 +83,27 @@ NSTimer * timerAccueil;
     double batTermin = (float)[myDevice batteryLevel] * 100;
     
     //Battery of the drone
-    
     if(batTermin < 10 || _batteryDrone < 10){
         
+        
         if([_bebopDrone isFlying]){
-            [timerAccueil invalidate];
+            NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"alert" ofType:@"mp3"];
+            SystemSoundID soundID;
+            AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundPath], &soundID);
+            AudioServicesPlaySystemSound(soundID);
         
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention !"
-                                                            message:@"La batterie du terminal ou du drone est faible."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Arrêter le drone"
-                                                  otherButtonTitles:@"Continuer",nil];
+            if(alertAccueil == nil){
+                alertAccueil = [[UIAlertView alloc] initWithTitle:@"Attention !"
+                                                          message:@"La batterie du terminal ou du drone est faible."
+                                                         delegate:self
+                                                cancelButtonTitle:@"Arrêter le drone"
+                                                otherButtonTitles:@"Continuer",nil];
+                [alertAccueil show];
+
+            }
+            
         }
-        [alert show];
-       
-        
-        
+
         
     }
     
@@ -237,6 +240,12 @@ NSTimer * timerAccueil;
         }
     }
     
+    timerAccueil = [NSTimer scheduledTimerWithTimeInterval:10.0
+                                                    target:self
+                                                  selector:@selector(checkBattery)
+                                                  userInfo:nil
+                                                   repeats:YES];
+    
     
 }
 
@@ -286,7 +295,7 @@ NSTimer * timerAccueil;
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
-    
+    [timerAccueil invalidate];
 }
 
 - (void) deconnexionDrone{
