@@ -28,6 +28,9 @@
 @property (nonatomic, strong) DroneDiscoverer *droneDiscoverer;
 @property (nonatomic) dispatch_semaphore_t stateSem;
 @property (nonatomic, strong) WCSession* session;
+@property (atomic, strong) NSDate *dateOldCommand;
+@property (nonatomic) bool bExterieur;
+@property (readwrite, nonatomic) Boolean homeActivate;
 
 @end
 
@@ -48,14 +51,12 @@ ViewControllerManuel *controllerDrone;
     [self setView: ecranAccueil];
     [self setTitle:@"Accueil"];
     
+    _bExterieur = ![[NSUserDefaults standardUserDefaults] objectForKey:@"InOut"];
+    
     if ([WCSession isSupported]) {
         _session = [WCSession defaultSession];
         _session.delegate = self;
         [_session activateSession];
-    }
-    
-    if ([[WCSession defaultSession] isReachable]) {
-        // Do something
     }
     
 }
@@ -66,14 +67,67 @@ ViewControllerManuel *controllerDrone;
 //A FAIRE INTERPRETATION DES DONN2ES
 
 - (void) session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message replyHandler:(void (^)(NSDictionary<NSString *,id> * _Nonnull))replyHandler{
-        NSLog(@"MESSAGE : %@",[message objectForKey:@"CMD"]);
+    NSArray * ArrayCommand = [[NSArray alloc] init];
+    NSLog(@"MESSAGE : %@",[message objectForKey:@"CMD"]);
+    NSString * string = [message objectForKey:@"CMD"];
+    [[ecranAccueil btnDrone] setTitle:string forState:UIControlStateNormal];
+    
+    ArrayCommand = [string componentsSeparatedByString:@";"];
     
     
+    [[ecranAccueil btnAide] setTitle:[ArrayCommand objectAtIndex:0] forState:UIControlStateNormal];
+    [[ecranAccueil btnDrone] setTitle:[ArrayCommand objectAtIndex:1] forState:UIControlStateNormal];
     
-    [[ecranAccueil btnAide] setTitle:[message objectForKey:@"CMD"] forState:UIControlStateNormal];
-   
-        //Do something
+    
+    NSString *axe = [ArrayCommand objectAtIndex:0];
+    NSString *valeur = [ArrayCommand objectAtIndex:1];
+    
+    _dateOldCommand = [NSdate date];
+    
+    if ([axe isEqualToString:@"X"]) {
+        [_bebopDrone setPitch:[valeur intValue]];
+    }else if([axe isEqualToString:@"Y"]){
+        [_bebopDrone setRoll:[valeur intValue]];
+    }else if([axe isEqualToString:@"Z"]){
+        [_bebopDrone setGaz:[valeur intValue]];
+    }else if([axe isEqualToString:@"D"]){
+        [_bebopDrone takeOff];
+    }else if([axe isEqualToString:@"A"]){
+        [_bebopDrone land];
+    }else if([axe isEqualToString:@"H"]){
+        if(_homeActivate == false){
+            _homeActivate = true;
+            [_bebopDrone setViewCall:self];
+            if(_bExterieur){
+                [_bebopDrone returnHomeExterieur];
+            }else{
+                [_bebopDrone returnHomeInterieur];
+            }
+        }else{
+            [_bebopDrone cancelReturnHome];
+        }
+    }
+    replyHandler
+    //replyHandler = [[NSDictionary alloc] initWithObjectsAndKeys:@"DONE",@"reply", nil];
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [NSThread sleepForTimeInterval:1.0f];
+        if([[NSDate date] timeIntervalSinceDate:_dateOldCommand] > 1.0){
+            [_bebopDrone setFlag:0];
+            [_bebopDrone setPitch:0];
+            [_bebopDrone setRoll:0];
+            [_bebopDrone setGaz:0];
+            [_bebopDrone setYaw:0];
+        }
+    });
+    
 }
+
+    
+    
+    
+
 
 
 

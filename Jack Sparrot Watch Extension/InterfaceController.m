@@ -14,9 +14,9 @@
 typedef enum {GAUCHE, DROITE, HAUT, BAS, AVANT, ARRIERE, STABLE} moves;
 typedef enum {TROIS_D, SURPLACE} modes;
 @property (nonatomic, strong) WCSession* session;
-@property (readonly, nonatomic) double cptX;
-@property (readonly, nonatomic) double cptY;
-@property (readonly, nonatomic) double cptZ;
+@property (readonly, nonatomic) double incX;
+@property (readonly, nonatomic) double incY;
+@property (readonly, nonatomic) double incZ;
 @property (readonly, nonatomic) double absX;
 @property (readonly, nonatomic) double absY;
 @property (readonly, nonatomic) double absZ;
@@ -26,9 +26,9 @@ typedef enum {TROIS_D, SURPLACE} modes;
 @property (readonly, nonatomic) moves lastMoveX;
 @property (readonly, nonatomic) moves lastMoveY;
 @property (readonly, nonatomic) moves lastMoveZ;
-@property (readonly, nonatomic) int cptStablesX;
-@property (readonly, nonatomic) int cptStablesY;
-@property (readonly, nonatomic) int cptStablesZ;
+@property (readonly, nonatomic) int incStabX;
+@property (readonly, nonatomic) int incStabY;
+@property (readonly, nonatomic) int incStabZ;
 @property (readonly, nonatomic) modes flagMode;
 @property (strong, nonatomic) CMMotionManager *motionManager;
 
@@ -192,14 +192,14 @@ Boolean _enStatio = TRUE;
     }
     
     /* Récupération de l'userAcceleration */
-    _cptX = motion.userAcceleration.x;
-    _cptY = motion.userAcceleration.y;
-    _cptZ = motion.userAcceleration.z;
+    _incX = motion.userAcceleration.x;
+    _incY = motion.userAcceleration.y;
+    _incZ = motion.userAcceleration.z;
     
     /* Vérification si mouvement */
-    _absX = fabs(_cptX);
-    _absY = fabs(_cptY);
-    _absZ = fabs(_cptZ);
+    _absX = fabs(_incX);
+    _absY = fabs(_incY);
+    _absZ = fabs(_incZ);
     
     
     /*  0 = STABLE
@@ -213,7 +213,7 @@ Boolean _enStatio = TRUE;
     
     /* Mouvement de FOWARD et BACKWARD */
     if(_absX > 0.2){
-        if(_cptX < -0.2){
+        if(_incX < -0.2){
             if(_stabilisationX){    //FOWARD
                 
                 if(axeX && currentDimensions == 1){
@@ -241,7 +241,7 @@ Boolean _enStatio = TRUE;
                 _lastMoveX = 5;
                 _stabilisationX = NO;
             }
-        }else if(_cptX > 0.2){
+        }else if(_incX > 0.2){
             if(_stabilisationX){    //BACKWARD
                 NSLog(@"ARRIERE");
                
@@ -270,10 +270,10 @@ Boolean _enStatio = TRUE;
                 _lastMoveX = 6;
                 _stabilisationX = NO;
             }
-            _cptX = 0;
+            _incX = 0;
         }else{
-            if(_cptStablesX < 40){
-                _cptStablesX++;
+            if(_incStabX < 40){
+                _incStabX++;
             }else{
                 if(_lastMoveX != 0){
                     NSLog(@"STABLE X");
@@ -290,14 +290,14 @@ Boolean _enStatio = TRUE;
                 }
                 _stabilisationX = YES;
                 _lastMoveX = 0;
-                _cptStablesX = 0;
+                _incStabX = 0;
             }
         }
         
         
         // DROITE / GAUCHE : OK
         if(_absY > 0.2){
-            if(_cptY < -0.2){
+            if(_incY < -0.2){
                 if(_stabilisationY){    //DROITE
                     if(!axeX && currentDimensions == 1){
                         /*
@@ -313,7 +313,7 @@ Boolean _enStatio = TRUE;
                     _lastMoveY = 2;
                     _stabilisationY = NO;
                 }
-            }else if(_cptY > 0.2){
+            }else if(_incY > 0.2){
                 if(_stabilisationY){    //GAUCHE
                     if(!axeX && currentDimensions == 1){
                         /*
@@ -332,11 +332,11 @@ Boolean _enStatio = TRUE;
                     NSLog(@"DECELERATION VERS LA DROITE");
                 }
             }
-            _cptY = 0;
+            _incY = 0;
         }else{
-            if(_cptStablesY < 6){
+            if(_incStabY < 6){
                 //NSLog(@"LE CPT : %d", _cptStables);
-                _cptStablesY++;
+                _incStabY++;
             }else{
                 if(_lastMoveY != 0){    // NOMOVE
                     /*
@@ -346,7 +346,7 @@ Boolean _enStatio = TRUE;
                 }
                 _stabilisationY = YES;
                 _lastMoveY = 0;
-                _cptStablesY = 0;
+                _incStabY = 0;
             }
         }
         
@@ -354,7 +354,7 @@ Boolean _enStatio = TRUE;
         // HAUT / BAS : OK
         if(_flagMode != 0){
             if(_absZ > 0.2){
-                if(_cptZ < -0.2){
+                if(_incZ < -0.2){
                     if(_stabilisationZ){
                         NSLog(@"HAUT");
                         // in background, gaz the drone
@@ -370,7 +370,7 @@ Boolean _enStatio = TRUE;
                     }else{
                         NSLog(@"DECELERATION VERS LE BAS");
                     }
-                }else if(_cptZ > 0.2){
+                }else if(_incZ > 0.2){
                     if(_stabilisationZ){
                         NSLog(@"BAS");
                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -386,11 +386,11 @@ Boolean _enStatio = TRUE;
                         NSLog(@"DECELERATION VERS LE HAUT");
                     }
                 }
-                _cptZ = 0;
+                _incZ = 0;
             }else{
-                if(_cptStablesZ < 6){
+                if(_incStabZ < 6){
                     //NSLog(@"LE CPT : %d", _cptStables);
-                    _cptStablesZ++;
+                    _incStabZ++;
                 }else{
                     if(_lastMoveZ != 0){
                         NSLog(@"STABLE Z");
@@ -398,7 +398,7 @@ Boolean _enStatio = TRUE;
                     }
                     _stabilisationZ = YES;
                     _lastMoveZ = 0;
-                    _cptStablesZ = 0;
+                    _incStabZ = 0;
                 }
             }
         }

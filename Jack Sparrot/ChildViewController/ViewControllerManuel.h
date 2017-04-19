@@ -38,22 +38,23 @@
 @property (nonatomic) dispatch_semaphore_t stateSem;
 @property (atomic, strong) NSMutableArray *arrayFloat;
 @property (nonatomic) bool bExterieur;
-@property (readonly, nonatomic) double cptX;
-@property (readonly, nonatomic) double cptY;
-@property (readonly, nonatomic) double cptZ;
+@property (readonly, nonatomic) double incX;
+@property (readonly, nonatomic) double incY;
+@property (readonly, nonatomic) double incZ;
+@property (readonly, nonatomic) int incStabX;
+@property (readonly, nonatomic) int incStabY;
+@property (readonly, nonatomic) int incStabZ;
 @property (readonly, nonatomic) double absX;
 @property (readonly, nonatomic) double absY;
 @property (readonly, nonatomic) double absZ;
-@property (readonly, nonatomic) bool stabilisationX;
-@property (readonly, nonatomic) bool stabilisationY;
-@property (readonly, nonatomic) bool stabilisationZ;
+@property (readonly, nonatomic) bool stabX;
+@property (readonly, nonatomic) bool stabY;
+@property (readonly, nonatomic) bool stabZ;
 @property (readonly, nonatomic) int lastMoveX;
 @property (readonly, nonatomic) int lastMoveY;
 @property (readonly, nonatomic) int lastMoveZ;
-@property (readonly, nonatomic) int cptStablesX;
-@property (readonly, nonatomic) int cptStablesY;
-@property (readonly, nonatomic) int cptStablesZ;
-@property (readonly, nonatomic) int flagMode;   /* 0 : NOMOVE / 1 : MOVE */
+
+@property (readonly, nonatomic) int flag;   /* 0 : NOMOVE / 1 : MOVE */
 
 /*  0 = STABLE
  1 = LEFT
