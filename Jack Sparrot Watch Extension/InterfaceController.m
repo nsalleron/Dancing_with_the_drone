@@ -510,7 +510,7 @@ Boolean _enStatio = TRUE;
                  NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
              }
              errorHandler:^(NSError *error) {
-                 NSLog(@"ERROR");
+                 NSLog(@"ERROR"); 
              }
      ];
 }
