@@ -21,8 +21,7 @@
 #define THRESH 0.5
 
 @interface InterfaceController()<WCSessionDelegate>
-typedef enum {GAUCHE, DROITE, HAUT, BAS, AVANT, ARRIERE, STABLE} moves;
-typedef enum {TROIS_D, SURPLACE} modes;
+
 @property (nonatomic, strong) WCSession* session;
 @property (readonly, nonatomic) double incX;
 @property (readonly, nonatomic) double incY;

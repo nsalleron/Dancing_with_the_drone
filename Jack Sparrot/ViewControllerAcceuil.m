@@ -39,6 +39,7 @@ boolean droneViewActif;
 ViewControllerManuel *controllerDrone;
 double accelerationSettingAccueil;
 double hauteurMaxAccueil;
+bool interieur;
 
 @implementation ViewControllerAccueil
 
@@ -86,6 +87,10 @@ double hauteurMaxAccueil;
 
 - (void) session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message replyHandler:(void (^)(NSDictionary<NSString *,id> * _Nonnull))replyHandler{
     NSArray * ArrayCommand = [[NSArray alloc] init];
+    NSString * axe;
+    NSString *valeur;
+    float accel, hauteur;
+    
     NSLog(@"MESSAGE : %@",[message objectForKey:@"CMD"]);
     NSString * string = [message objectForKey:@"CMD"];
     [[ecranAccueil btnDrone] setTitle:string forState:UIControlStateNormal];
@@ -97,13 +102,11 @@ double hauteurMaxAccueil;
     [[ecranAccueil btnDrone] setTitle:[ArrayCommand objectAtIndex:1] forState:UIControlStateNormal];
     
     
-    NSString *axe = [ArrayCommand objectAtIndex:0];
-    NSString *valeur;
+    axe = [ArrayCommand objectAtIndex:0];
+    
     if([ArrayCommand count]>1){
         valeur = [ArrayCommand objectAtIndex:1];
     }
-    
-    
     _dateOldCommand = [NSDate date];
     
     if ([axe isEqualToString:@"X"]) {
@@ -135,6 +138,22 @@ double hauteurMaxAccueil;
         }else{
             [_bebopDrone cancelReturnHome];
         }
+    }else if([axe isEqualToString:@"P"]){
+        accel = [valeur floatValue];
+        hauteur = [[ArrayCommand objectAtIndex:2] floatValue];
+        interieur = [[ArrayCommand objectAtIndex:3] floatValue];
+        
+        [[ecranAccueil btnDrone] setTitle:[[NSString alloc]initWithFormat:@"%f,%f",accel,hauteur ] forState:UIControlStateNormal];
+        [[ecranAccueil btnAide] setTitle:[[NSString alloc]initWithFormat:@"%d",interieur ] forState:UIControlStateNormal];
+        
+        [[NSUserDefaults standardUserDefaults] setDouble:accel forKey:@"Acceleration"];
+        [[NSUserDefaults standardUserDefaults] setDouble:hauteur forKey:@"Hauteur"];
+
+        [[NSUserDefaults standardUserDefaults] setDouble:hauteur forKey:@"InOut"];
+        
+        
+        
+        
     }
 
     //replyHandler = [[NSDictionary alloc] initWithObjectsAndKeys:@"DONE",@"reply", nil];

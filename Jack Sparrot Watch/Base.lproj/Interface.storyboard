@@ -40,12 +40,12 @@
                     </items>
                     <menu key="menu" id="YrS-fp-ANw">
                         <items>
-                            <menuItem title="Décollage" icon="play" id="lTs-aw-qL6">
+                            <menuItem title="Décol." icon="play" id="lTs-aw-qL6">
                                 <connections>
                                     <action selector="startTakeOff" destination="AgC-eL-Hgc" id="dcd-Mv-Ded"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Atterrissage" icon="block" id="YRA-mL-4PB">
+                            <menuItem title="Atterri." icon="block" id="YRA-mL-4PB">
                                 <connections>
                                     <action selector="startLanding" destination="AgC-eL-Hgc" id="XhS-pp-FAA"/>
                                 </connections>
@@ -81,19 +81,26 @@
                                 <action selector="changeHome:" destination="x5r-gL-5pW" id="BDR-vh-8tT"/>
                             </connections>
                         </switch>
-                        <label alignment="left" text="Hauteur Max : " id="cQz-w2-RTa"/>
-                        <slider width="1" alignment="left" value="1" maximum="3" steps="3" id="J67-na-fq9">
+                        <label alignment="left" text="Haut. Max : " id="cQz-w2-RTa"/>
+                        <slider width="1" alignment="left" value="4" minimum="4" maximum="30" steps="26" id="J67-na-fq9">
                             <connections>
                                 <action selector="changeHauteurMax:" destination="x5r-gL-5pW" id="VrE-yJ-Etf"/>
                             </connections>
                         </slider>
                         <label alignment="left" text="Coeff Acc : " id="puC-ZH-8Gw"/>
-                        <slider width="1" alignment="left" value="1" maximum="3" steps="3" id="cq7-aE-Csn">
+                        <slider width="1" alignment="left" value="1" minimum="1" maximum="2" steps="20" id="cq7-aE-Csn">
                             <connections>
                                 <action selector="changeCoefAccel:" destination="x5r-gL-5pW" id="Hxr-wO-wl5"/>
                             </connections>
                         </slider>
                     </items>
+                    <connections>
+                        <outlet property="labelAccel" destination="puC-ZH-8Gw" id="KY0-Zf-AZm"/>
+                        <outlet property="labelHauteur" destination="cQz-w2-RTa" id="6c3-eR-kFM"/>
+                        <outlet property="stepAcc" destination="cq7-aE-Csn" id="TGS-PF-oXB"/>
+                        <outlet property="stepHauteur" destination="J67-na-fq9" id="qgO-JS-t8v"/>
+                        <outlet property="switchBtn" destination="wHs-q8-rZr" id="4lD-fz-OcQ"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="568" y="334"/>
