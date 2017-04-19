@@ -71,10 +71,10 @@
             </objects>
             <point key="canvasLocation" x="212" y="334"/>
         </scene>
-        <!--options-->
+        <!--Options-->
         <scene sceneID="7fH-wF-Q6q">
             <objects>
-                <controller identifier="options" id="x5r-gL-5pW" customClass="InterfaceControllerOptions">
+                <controller identifier="options" title="Options" id="x5r-gL-5pW" customClass="InterfaceControllerOptions">
                     <items>
                         <switch width="1" alignment="left" value="YES" title="Home Intr." id="wHs-q8-rZr">
                             <connections>
@@ -94,6 +94,7 @@
                             </connections>
                         </slider>
                     </items>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="labelAccel" destination="puC-ZH-8Gw" id="KY0-Zf-AZm"/>
                         <outlet property="labelHauteur" destination="cQz-w2-RTa" id="6c3-eR-kFM"/>

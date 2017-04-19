@@ -151,8 +151,9 @@ bool interieur;
 
         [[NSUserDefaults standardUserDefaults] setDouble:hauteur forKey:@"InOut"];
         
-        
-        
+        //Rechargement du drone pour application des paramètres
+        _bebopDrone = nil;
+        [self viewDidAppear:FALSE];
         
     }
 

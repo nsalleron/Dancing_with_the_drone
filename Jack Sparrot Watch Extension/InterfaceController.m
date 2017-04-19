@@ -499,7 +499,7 @@ Boolean _enStatio = TRUE;
 
 - (IBAction)goToOptions {
     
-    [self presentControllerWithName:@"options" context:nil];
+    [self presentControllerWithName:@"options" context:@"Sortir"];
 }
 
 - (IBAction)startTakeOff {

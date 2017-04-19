@@ -18,7 +18,7 @@ bool home;
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
-    
+    [self setTitle:(NSString *) context];
     // Configure interface objects here.
 }
 
