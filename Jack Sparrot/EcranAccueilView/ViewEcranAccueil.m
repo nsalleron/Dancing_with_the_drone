@@ -26,12 +26,13 @@ UINavigationController *myVC;
         
         myDevice = [UIDevice currentDevice];
         
+        /* Allocation */
         _imgLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ParrotUniversal"]];
-        
         _btnDrone = [UIButton buttonWithType:UIButtonTypeSystem];
         _btnOptions  = [UIButton buttonWithType:UIButtonTypeSystem];
         _btnAide = [UIButton buttonWithType:UIButtonTypeSystem];
         
+        /* Personnalisation */
         [_btnDrone setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_btnOptions setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_btnAide setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
@@ -69,21 +70,22 @@ UINavigationController *myVC;
         [_labelBatteryDrone setFont:[UIFont systemFontOfSize:9]];
         [_labelBatterySmartphone setFont:[UIFont systemFontOfSize:9]];
         
-        
+        /* Selector */
         [_btnDrone addTarget:self.superview action:@selector(goToDroneControl:) forControlEvents:UIControlEventTouchUpInside];
         [_btnOptions addTarget:self.superview action:@selector(goToDroneOptions:) forControlEvents:UIControlEventTouchUpInside];
         [_btnAide addTarget:self.superview action:@selector(goToDroneHelp:) forControlEvents:UIControlEventTouchUpInside];
+        
+        /* Add to view */
         [self addSubview:_imgLogo];
         [self addSubview:_btnOptions];
         [self addSubview:_btnDrone];
         [self addSubview:_btnAide];
-        
         [self addSubview:_labelVersionApp];
         [self addSubview:_labelBatteryDrone];
         [self addSubview:_labelBatterySmartphone];
         
        
-        
+        /* Force MAJ */
         [self setNeedsDisplay];
     }
     return self;
@@ -92,15 +94,19 @@ UINavigationController *myVC;
 - (void)setNavigationController:(UINavigationController*) nv{
     if (nv != nil) {
         myVC = nv;
-    }else{
-        printf("NULL Inside view\n");
     }
 }
 
+/**
+ * @brief vers le controle du drone
+ */
 - (void)setBattery:(NSString*) battery{
     _labelBatteryDrone.text = battery;
 }
 
+/**
+ * @brief Update de la view
+ */
 - (void)updateView:(CGSize)format{
     
     _tailleIcones = format.height/3;
@@ -182,7 +188,9 @@ UINavigationController *myVC;
     }
 }
 
-
+/**
+ * @brief retourne le niveau actuel de batterie
+ */
 -(double)battery{
     UIDevice *myDevice = [UIDevice currentDevice];
     [myDevice setBatteryMonitoringEnabled:YES];

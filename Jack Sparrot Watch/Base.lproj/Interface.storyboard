@@ -10,11 +10,11 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController">
                     <items>
-                        <picker height="42" alignment="left" id="0aq-hl-6an">
+                        <button width="1" alignment="left" title="1 Dim." id="3vR-RN-jto">
                             <connections>
-                                <action selector="pickerAction:" destination="AgC-eL-Hgc" id="2ub-Jz-I04"/>
+                                <action selector="actionbtnClick" destination="AgC-eL-Hgc" id="Xa0-rz-LYi"/>
                             </connections>
-                        </picker>
+                        </button>
                         <button width="156" height="62" alignment="left" title="Axe X" id="iwq-kp-4e2">
                             <gestureRecognizers>
                                 <swipeGestureRecognizer id="F1S-0k-zH9">
@@ -64,8 +64,8 @@
                     </menu>
                     <connections>
                         <outlet property="btnChgMode" destination="iwq-kp-4e2" id="fch-R3-TAX"/>
+                        <outlet property="btnDim" destination="3vR-RN-jto" id="bKS-f6-iEg"/>
                         <outlet property="swipeCtrl" destination="F1S-0k-zH9" id="ycX-Fn-uA7"/>
-                        <outlet property="tp" destination="0aq-hl-6an" id="SkT-DN-FPK"/>
                     </connections>
                 </controller>
             </objects>

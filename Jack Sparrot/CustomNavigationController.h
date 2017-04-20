@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- *  Permet l'empilement des vues.
+ *  @brief Permet l'empilement des vues.
  */
 @interface CustomNavigationController : UINavigationController
 

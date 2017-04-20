@@ -38,9 +38,6 @@
                      ,rgb(255,171,0)
                      ,rgb(255,109,0)
                      ,rgb(221,44,0)
-                     
-                     
-                     
                      ,rgb(84,110,122)
                      ,rgb(117,117,117)
                      ,rgb(109,76,65)
@@ -57,14 +54,13 @@
                      ,rgb(0,137,123)
                      ,rgb(0,172,193)
                      ,rgb(3,155,229)
-                     
                      , nil ];
    
    
         
         
         _tmp = [NSMutableArray new];
-        
+        /* Mise en place des couleurs */
         for (int i = 0; i < 32; ++i) {
             UIButton *TmpBtn = [[UIButton alloc] init];
             TmpBtn = [[UIButton alloc] init ];
@@ -89,7 +85,8 @@
 
 
 
-
+/** @brief update de la view suivant l'orientation du terminal 
+ */
 - (void)updateView:(CGSize)format{
     
     CGFloat height = format.height;
@@ -119,15 +116,8 @@
             }else{
                 [boutton setFrame:CGRectMake((i-24)*width,3*height+32  , width, height)];
             }
-            
-            
-            
             i++;
         }
-        
-                                          
-        
-        
     }else{ //Vertical
         width = width /4;
         height = (height-44) /8;

@@ -12,28 +12,14 @@
 #import "ViewEcranAccueil.h"
 #import "ViewControllerOptions.h"
 #import "ViewControllerAide.h"
-#import "BebopDrone.h"
-#import "BebopVideoView.h"
-#import "DroneDiscoverer.h"
 #import <libARDiscovery/ARDiscovery.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
-#import <WatchConnectivity/WatchConnectivity.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
 
 @interface ViewControllerAccueil()<BebopDroneDelegate,DroneDiscovererDelegate,WCSessionDelegate,UIAlertViewDelegate>
-
-@property (nonatomic, strong) BebopDrone *bebopDrone;
-@property (nonatomic, strong) NSArray *dataSource;
-@property (nonatomic, strong) DroneDiscoverer *droneDiscoverer;
-@property (nonatomic) dispatch_semaphore_t stateSem;
-@property (nonatomic, strong) WCSession* session;
-@property (atomic, strong) NSDate *dateOldCommand;
-@property (nonatomic) bool bExterieur;
-@property (readwrite, nonatomic) Boolean homeActivate;
-
 @end
 
 ViewEcranAccueil *ecranAccueil;
@@ -47,21 +33,23 @@ UIAlertView *alertAccueil;
 
 @implementation ViewControllerAccueil
 
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    NSLog(@"ACCUEIL ACCUEIL");
     
     /* Récupération des options et mise en place des settings par defaut */
     hauteurMaxAccueil = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Hauteur"];
     accelerationSettingAccueil = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Acceleration"];
+    _bExterieur = ![[NSUserDefaults standardUserDefaults] objectForKey:@"InOut"];
     
     ecranAccueil = [[ViewEcranAccueil alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecranAccueil setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
     [self setView: ecranAccueil];
     [self setTitle:@"Accueil"];
     
-    _bExterieur = ![[NSUserDefaults standardUserDefaults] objectForKey:@"InOut"];
+
+
     
     if ([WCSession isSupported]) {
         _session = [WCSession defaultSession];
@@ -71,10 +59,11 @@ UIAlertView *alertAccueil;
 
     
 }
-
+/**
+ * @brief Check the level of the battery in order to prevent user from low battery
+ */
 - (void) checkBattery{
     
-    NSLog(@"APPPPPPPPPPPPPPPPPPPPPPPPPPPPPEL %d",_batteryDrone);
     //Battery of the terminal
     UIDevice *myDevice = [UIDevice currentDevice];
     [myDevice setBatteryMonitoringEnabled:YES];
@@ -110,6 +99,9 @@ UIAlertView *alertAccueil;
     
 }
 
+/**
+ * @brief Réponse à l'alertView
+ */
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
         [_bebopDrone land];
@@ -117,8 +109,8 @@ UIAlertView *alertAccueil;
 }
 
 
-/*!
- *  Il faut absoluement arrêter le drone quand la session est sur le point d'être désactivée.
+/**
+ *  @brief Il faut absoluement arrêter le drone quand la session est sur le point d'être désactivée.
  *
  */
 - (void) sessionDidBecomeInactive:(WCSession *)session{
@@ -131,33 +123,39 @@ UIAlertView *alertAccueil;
 
 
 
-
-//A FAIRE INTERPRETATION DES DONN2ES
-
+/**
+ * @brief Interprétation des données de la montre quand elle est disponible.
+ * Agit directement sur le drone avec un timer au cas ou la connexion n'est plus active.
+ */
 - (void) session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message replyHandler:(void (^)(NSDictionary<NSString *,id> * _Nonnull))replyHandler{
+    
+    
     NSArray * ArrayCommand = [[NSArray alloc] init];
     NSString * axe;
     NSString *valeur;
     float accel, hauteur;
     
-    NSLog(@"MESSAGE : %@",[message objectForKey:@"CMD"]);
-    NSString * string = [message objectForKey:@"CMD"];
-    [[ecranAccueil btnDrone] setTitle:string forState:UIControlStateNormal];
     
+    NSString * string = [message objectForKey:@"CMD"];
     ArrayCommand = [string componentsSeparatedByString:@";"];
     
+    //DEBUG
+    //NSLog(@"MESSAGE : %@",[message objectForKey:@"CMD"]);
+    //
+    //[[ecranAccueil btnDrone] setTitle:string forState:UIControlStateNormal];
+    //[[ecranAccueil btnAide] setTitle:[ArrayCommand objectAtIndex:0] forState:UIControlStateNormal];
     
-    [[ecranAccueil btnAide] setTitle:[ArrayCommand objectAtIndex:0] forState:UIControlStateNormal];
-    [[ecranAccueil btnDrone] setTitle:[ArrayCommand objectAtIndex:1] forState:UIControlStateNormal];
-    
-    
+    /* Détermination de l'axe */
     axe = [ArrayCommand objectAtIndex:0];
-    
     if([ArrayCommand count]>1){
         valeur = [ArrayCommand objectAtIndex:1];
+        //[[ecranAccueil btnDrone] setTitle:[ArrayCommand objectAtIndex:1] forState:UIControlStateNormal];
     }
+    
+    /*Récupération de la date courante */
     _dateOldCommand = [NSDate date];
     
+    /*Valeur vers drone*/
     if ([axe isEqualToString:@"X"]) {
         [_bebopDrone setPitch:[valeur intValue]];
     }else if([axe isEqualToString:@"Y"]){
@@ -168,7 +166,7 @@ UIAlertView *alertAccueil;
             [_bebopDrone setGaz:[valeur intValue]];
             NSLog(@"GAZ UP");
             [NSThread sleepForTimeInterval:0.5f];
-            NSLog(@"GAZ DOWN");
+            NSLog(@"GAZ END");
             [_bebopDrone setGaz:0];
         });
     }else if([axe isEqualToString:@"D"]){
@@ -187,7 +185,7 @@ UIAlertView *alertAccueil;
         }else{
             [_bebopDrone cancelReturnHome];
         }
-    }else if([axe isEqualToString:@"P"]){
+    }else if([axe isEqualToString:@"P"]){ /*Paramètres sur la montre */
         accel = [valeur floatValue];
         hauteur = [[ArrayCommand objectAtIndex:2] floatValue];
         interieur = [[ArrayCommand objectAtIndex:3] floatValue];
@@ -208,7 +206,7 @@ UIAlertView *alertAccueil;
 
     //replyHandler = [[NSDictionary alloc] initWithObjectsAndKeys:@"DONE",@"reply", nil];
     
-    
+    /*Vérification s'il n'y a pas de deconnexion */
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [NSThread sleepForTimeInterval:1.0f];
         if([[NSDate date] timeIntervalSinceDate:_dateOldCommand] > 1.0){
@@ -224,22 +222,15 @@ UIAlertView *alertAccueil;
 
 - (void)viewDidAppear:(BOOL)animated {
     
-    NSLog(@"VIEW DID APPEAR ACCUEIL");
-    
     if(_bebopDrone == nil) {
-        NSLog(@"DRONE = NULL ACCUEIL");
         _dataSource = [NSArray array];
         _droneDiscoverer = [[DroneDiscoverer alloc] init];
         [_droneDiscoverer setDelegate:self];
-        
         [self registerNotifications];
         [_droneDiscoverer startDiscovering];
-        
-        if ([_bebopDrone connectionState] != ARCONTROLLER_DEVICE_STATE_RUNNING) {
-            NSLog(@"NULL SHOW ACCUEIL");
-        }
     }
     
+    /* Timer pour check la batterie */
     timerAccueil = [NSTimer scheduledTimerWithTimeInterval:10.0
                                                     target:self
                                                   selector:@selector(checkBattery)
@@ -298,11 +289,12 @@ UIAlertView *alertAccueil;
     [timerAccueil invalidate];
 }
 
+/**
+ * @brief Deconnexion propre du drone
+ */
 - (void) deconnexionDrone{
     
     if(_service != nil){
-        NSLog(@"DECONNEXION SHOW ACCUEIL");
-        
         // in background, disconnect from the drone
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [_bebopDrone disconnect];
@@ -312,7 +304,6 @@ UIAlertView *alertAccueil;
             
             // dismiss the alert view in main thread
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"FIN CONNEXION ALERT VIEW ACCUEIL");
                 if(droneViewActif){
                     _service = nil;
                     _bebopDrone = nil;
@@ -332,15 +323,10 @@ UIAlertView *alertAccueil;
 
 -(void)bebopDrone:(BebopDrone *)bebopDrone connectionDidChange:(eARCONTROLLER_DEVICE_STATE)state {
     
-    
-    NSLog(@"CHANGEMENT ETAT ACCUEIL");
     switch (state) {
         case ARCONTROLLER_DEVICE_STATE_RUNNING:
-            NSLog(@"STATE RUNNING ACCUEIL");
-            
             break;
         case ARCONTROLLER_DEVICE_STATE_STOPPED:
-            NSLog(@"STATE STOPPEDACCUEIL");
             dispatch_semaphore_signal(_stateSem);
             break;
             
@@ -349,7 +335,9 @@ UIAlertView *alertAccueil;
             break;
     }
 }
-
+/**
+ * @brief Récupération du niveau de la batterie du drone
+ */
 - (void)bebopDrone:(BebopDrone*)bebopDrone batteryDidChange:(int)batteryPercentage {
     [ecranAccueil setBattery:[NSString stringWithFormat:@"Drone %d%%", batteryPercentage]];
     _batteryDrone = batteryPercentage;
@@ -376,31 +364,38 @@ UIAlertView *alertAccueil;
 }
 
 
-//ROTATION
-
+/**
+ * @brief Méthodes pour la rotation
+ */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
-- (BOOL)shouldAutorotate  // iOS 6 autorotation fix
-{
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (BOOL)shouldAutorotate{
     return YES;
 }
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     
     return UIInterfaceOrientationMaskAll;
 }
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     return UIInterfaceOrientationPortrait;
 }
 
-
+/**
+ * @brief Méthode pour retirer la status bar
+ */
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -415,7 +410,6 @@ UIAlertView *alertAccueil;
 }
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
-    
     [ecranAccueil updateView:size];
 }
 
@@ -424,6 +418,9 @@ UIAlertView *alertAccueil;
     [super viewWillAppear:animated];
 }
 
+/**
+ * @brief vers le controle du drone
+ */
 -(void) goToDroneControl:(UIButton*)send{
     droneViewActif = true;
     [self unregisterNotifications];
@@ -432,14 +429,18 @@ UIAlertView *alertAccueil;
     
     
 }
-
+/**
+ * @brief vers les options
+ */
 -(void) goToDroneOptions:(UIButton*)send{
     
     ViewControllerOptions *secondController = [[ViewControllerOptions alloc] init];
     [self.navigationController pushViewController:secondController animated:YES];
     
 }
-
+/**
+ * @brief vers l'aide
+ */
 -(void) goToDroneHelp:(UIButton*)send{
     
     ViewControllerOptions *secondController = [[ViewControllerAide alloc] init];

@@ -29,6 +29,9 @@ UIColor *valCouleur=nil;
     
 }
 
+/**
+ * @brief fin du choix de couleur; retour à la vue précédente avec la couleur.
+ */
 -(void) endColorChoice:(UIButton*)send{
     valCouleur = send.backgroundColor;
     [self.navigationController popViewControllerAnimated:YES];
@@ -47,19 +50,24 @@ UIColor *valCouleur=nil;
     [ecranCouleurs updateView:size];
 }
 
-//ROTATION
-
+/**
+ * @brief Méthodes pour la rotation
+ */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
+/**
+ * @brief Méthodes pour la rotation
+ */
 - (BOOL)shouldAutorotate  // iOS 6 autorotation fix
 {
     return YES;
 }
-
+/**
+ * @brief Méthodes pour la rotation
+ */
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -76,6 +84,9 @@ UIColor *valCouleur=nil;
 }
 
 
+/**
+ * @brief couleur vers delegate
+ */
 - (void) viewWillDisappear:(BOOL)animated{
     [self.delegate addCouleur:self didFinishEnteringItem:valCouleur];
     valCouleur = nil;

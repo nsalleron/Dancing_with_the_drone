@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * @brief Class pour les enregistrements des "mouvements" suivant les intervals de temps
+ */
 @interface BebopDroneRecord:NSObject
 {
     NSString *droneDirectionValue;   // Direction + Valeur sous format P;20 par exemple P = Pitch, R = Roll; G = Gaz
@@ -30,20 +33,40 @@
     return self;
 }
 
+/**
+ * @brief Mise en place de la directions
+ * @param Valeur de la direction : X, Y, Z
+ */
 -(void) setDroneDirectionValue:(NSString *)value
 {
     droneDirectionValue = [[NSString alloc] initWithString:value];
     NSLog(@"%@",droneDirectionValue);
 }
+/**
+ * @brief Interval de temps de la directions (avant remise à 0)
+ * @param le temps
+ */
 -(void) setTimeInterval:(float)value{
     droneTime = value;
 }
+/**
+ * @brief getter
+ * @return le temps
+ */
 -(float) getTimeInterval{
     return droneTime;
 }
+/**
+ * @brief getter
+ * @return la direction
+ */
 -(NSString*) getDirection{
     return [droneDirectionValue componentsSeparatedByString:@";"][0];
 }
+/**
+ * @brief getter
+ * @return la valeur à envoyer au drone.
+ */
 -(int) getValue{
     return [[droneDirectionValue componentsSeparatedByString:@";"][1] intValue];
 }

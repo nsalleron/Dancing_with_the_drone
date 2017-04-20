@@ -39,6 +39,9 @@ int btnColorID = 0;
     // Dispose of any resources that can be recreated.
 }
 
+/**
+ * @brief Permet le choix d'une couleur pour un bouton
+ */
 -(void) goToColorChoice:(UIButton*)send{
     NSString *tmp = [[send titleLabel]text];
     if([tmp isEqualToString:@"1D"]){
@@ -61,40 +64,45 @@ int btnColorID = 0;
     
 }
 
-
-//ROTATION
-
+/**
+ * @brief Méthodes pour la rotation
+ */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
-- (BOOL)shouldAutorotate  // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (BOOL)shouldAutorotate
 {
     return YES;
 }
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskAll;
 }
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     return UIInterfaceOrientationPortrait;
 }
 
 
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
-    //if(choiceColor)
-        [[self navigationController] setNavigationBarHidden:NO];
-    //else
-    //    [[self navigationController] setNavigationBarHidden:NO];
-    
+
+    [[self navigationController] setNavigationBarHidden:NO];
     [ecranOptions updateView:size];
 }
 
+/**
+ * @brief Mise à jour de la couleur du bouton (retour du choix des couleurs)
+ */
 - (void)addCouleur:(ViewDimensionViewController *)controller didFinishEnteringItem:(UIColor *)item
 {
     [ecranOptions updateBtn:btnColorID color:item];
@@ -104,7 +112,10 @@ int btnColorID = 0;
 - (void) viewWillDisappear:(BOOL)animated{
     [self saveData];
 }
-
+/**
+ * @brief Sauvegarde de l'ensemble des données de l'écran des options
+ *        Chaque valeur est associé à une clé qui peut ensuite être récupérer par l'application.
+ */
 - (void) saveData {
     
     NSArray *color = ecranOptions.getBtnColors;
@@ -138,7 +149,6 @@ int btnColorID = 0;
     [[NSUserDefaults standardUserDefaults] setDouble:[ecranOptions getStepperValueCoefAcce] forKey:@"Acceleration"];
     [[NSUserDefaults standardUserDefaults] setDouble:[ecranOptions getStepperValueMax] forKey:@"Hauteur"];
     bool tmp =[ecranOptions getSwitchValueInOut];
-    NSLog(@"Valeur de tmp : %d",tmp);
     [[NSUserDefaults standardUserDefaults] setBool:(!tmp) forKey:@"InOut"];  //Pour correspondance InOutviewManuel
 }
 

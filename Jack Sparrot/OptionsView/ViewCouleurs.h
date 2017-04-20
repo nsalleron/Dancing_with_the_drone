@@ -14,14 +14,12 @@
 
 @interface ViewCouleurs : UIView
 
-//@property (readonly,nonatomic,retain) UILabel *lblCouleurChoice;
 @property (readonly,nonatomic,retain) NSMutableArray * tmp;
 @property (readonly,nonatomic,retain) NSArray *couleurs;
 @property (assign, nonatomic) CGFloat tailleIcones;
 @property (assign, nonatomic) ViewCouleursController *vc;
 
 - (void) updateView:(CGSize) format;
-
 
 @end
 

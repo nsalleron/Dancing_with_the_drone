@@ -27,14 +27,7 @@
 @property (readwrite, nonatomic) Boolean homeActivate;
 @property (nonatomic, strong) ARService *service;
 @property (nonatomic) int *batteryDroneManuel;
-
-
-
-
-
-
 @property (strong, nonatomic) CMMotionManager *motionManager;
-
 @property (nonatomic) dispatch_semaphore_t stateSem;
 @property (atomic, strong) NSMutableArray *arrayFloat;
 @property (nonatomic) bool bExterieur;
@@ -53,16 +46,6 @@
 @property (readonly, nonatomic) int lastMoveX;
 @property (readonly, nonatomic) int lastMoveY;
 @property (readonly, nonatomic) int lastMoveZ;
-
-
-/*  0 = STABLE
- 1 = LEFT
- 2 = RIGHT
- 3 = UP
- 4 = DOWN
- 5 = FOWARD
- 6 = BACKWARD
- */
 @property (readonly, nonatomic) int MOUVEMENT;
 
 

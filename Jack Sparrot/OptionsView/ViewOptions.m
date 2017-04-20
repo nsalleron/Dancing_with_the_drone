@@ -13,8 +13,8 @@
 
 @implementation ViewOptions
 
-/*
- *  Mise en place des couleurs
+/**
+ *  @brief Mise en place des couleurs suivant les valeurs enregistrées.
  */
 - (void) colors{
     
@@ -69,6 +69,9 @@
     [_btnColorAxeY setBackgroundColor:_colorY];
 
 }
+/**
+ * @brief Méthode pour afficher le texte en clair ou non suivant la couleur de fond du bouton.
+ */
 - (void) btnColorText{
     CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha =0.0;
 
@@ -108,6 +111,9 @@
     }
 }
 
+/**
+ * @brief mise à jour de la couleur des boutons.
+ */
 - (void) updateBtn:(int)btn color: (UIColor*) color{
     if (color != nil){
         switch (btn) {
@@ -202,10 +208,7 @@
         [[_btnColorAxeY layer] setBorderWidth:1.0f];
         [_btnColorAxeY addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
         
-        //[_swhInOut setBackgroundColor:
-        //[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];
-        
-        
+        /* Colorisation des boutons */
         [self colors];
         
         [self addSubview:_btnColor1D];
@@ -221,7 +224,7 @@
         [self addSubview:_lblModeIntExt];
         [self addSubview:_lblModeIntExtBool];
         
-        /* LABELS */
+        /* Mise en place des labels */
         [_lblHauteurMax setText:@"Hauteur max. (m) :"];
         [_lblCoeffAccel setText:@"Coeff. acceleration :"];
         [_lblCouleurDim setText:@"Couleurs boutons :"];
@@ -278,16 +281,13 @@
         
         [_lblModeIntExt setFrame:CGRectMake(format.width/6, 32, format.width/3, _tailleIcones)];
         [_lblModeIntExtBool setFrame:CGRectMake(format.width/6+format.width/3, 32, format.width/3, _tailleIcones)];
-        //[_swhInOut setFrame:CGRectMake(format.width/6+format.width/3, 32+_tailleIcones/3, format.width/3, _tailleIcones)];
         [_swhInOut setFrame:CGRectMake(2*format.width/3, 40, format.width/6, _tailleIcones)];
         
         [_lblHauteurMax setFrame:CGRectMake(format.width/6, 32+_tailleIcones, format.width/3, _tailleIcones)];
-        //[_txtHauteurMax setFrame:CGRectMake(format.width/6+format.width/3, 32+_tailleIcones+2, format.width/3, _tailleIcones-4)];
         [_lblHauteurMaxInt setFrame:CGRectMake(format.width/6+format.width/3, 32+_tailleIcones+2, format.width/6, _tailleIcones-4)];
         [_stpHauteurMax setFrame:CGRectMake(2*format.width/3, 32+_tailleIcones+5, format.width/6, _tailleIcones-4)];
         
         [_lblCoeffAccel setFrame:CGRectMake(format.width/6, 32+2*_tailleIcones, format.width/3, _tailleIcones)];
-        //[_txtCoeffAccel setFrame:CGRectMake(format.width/6+format.width/3, 32+2*_tailleIcones+2, format.width/3, _tailleIcones-4)];
         [_lblCoeffAccelInt setFrame:CGRectMake(format.width/6+format.width/3, 32+2*_tailleIcones+2, format.width/3, _tailleIcones-4)];
         [_stpCoeffAccel setFrame:CGRectMake(2*format.width/3, 32+2*_tailleIcones+5, format.width/3, _tailleIcones-4)];
         
@@ -304,7 +304,6 @@
         _tailleIcones = (format.height-64)/6;
         [_lblModeIntExt setFrame:CGRectMake(_tailleMarges, 64, (format.width/2)-_tailleMarges, _tailleIcones)];
         [_lblModeIntExtBool setFrame:CGRectMake(_tailleMarges+format.width/2, 64, format.width/2, _tailleIcones)];
-        //[_swhInOut setFrame:CGRectMake(_tailleMarges+format.width/2, 64+_tailleIcones/3, format.width/2, _tailleIcones)];
         [_swhInOut setFrame:CGRectMake(format.width/2+format.width/4, 64+_tailleIcones/3, format.width/4, _tailleIcones)];
         
         [_lblHauteurMax setFrame:CGRectMake(_tailleMarges, 64+_tailleIcones, (format.width/2)-_tailleMarges, _tailleIcones)];
@@ -332,6 +331,10 @@
     [self updateView:rect.size];
 }
 
+/**
+ * @brief Réalise un tableau de couleurs
+ * @return tableau de couleurs
+ */
 - (NSArray *) getBtnColors{
     NSArray *tmp = [[NSArray alloc] initWithObjects:
                     [_btnColor1D backgroundColor],
@@ -342,7 +345,9 @@
     return tmp;
 }
 
-
+/**
+ * @brief Mise à jour des steppers
+ */
 -(IBAction)stepperHauteurMaxUpdate:(UIStepper *)sender{
     [_lblHauteurMaxInt setText:[NSString stringWithFormat:@"%.2f", _stpHauteurMax.value]];
 }
@@ -351,6 +356,9 @@
     [_lblCoeffAccelInt setText:[NSString stringWithFormat:@"%.2f", _stpCoeffAccel.value]];
 }
 
+/**
+ * @brief Mise à jour du switch
+ */
 - (IBAction)switchModeIntExt:(UISwitch *)sender{
     if ([_swhInOut isOn])
         [_lblModeIntExtBool setText:[NSString stringWithFormat: @"Intérieur"]];
@@ -358,14 +366,24 @@
         [_lblModeIntExtBool setText:[NSString stringWithFormat:@"Extérieur"]];
 }
 
+/**
+ * @brief getter pour stepper Acceleration
+ * @return valStepper
+ */
 -(double) getStepperValueCoefAcce{
     return [_stpCoeffAccel value];
 }
-
+/**
+ * @brief getter pour stepper Hauteur
+ * @return valStepper
+ */
 - (double) getStepperValueMax{
     return [_stpHauteurMax value];
 }
-
+/**
+ * @brief getter pour le switch
+ * @return true or false
+ */
 - (BOOL) getSwitchValueInOut{
     return [_swhInOut isOn];
 }

@@ -58,26 +58,6 @@ Boolean _enStatio = TRUE;
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
-
-    
-    
-    WKPickerItem *unD = [[WKPickerItem alloc] init];
-    unD.title = @"1 Dimension.";
-    
-    WKPickerItem *deuxD = [[WKPickerItem alloc] init];
-    deuxD.title = @"2 Dimensions.";
-    
-    WKPickerItem *troisD = [[WKPickerItem alloc] init];
-    troisD.title = @"3 Dimensions.";
-    
-    _pickerItems = @[unD, deuxD, troisD];
-    
-
-    // Connect data
-    [_tp setItems:self.pickerItems];
-    [_tp setSelectedItemIndex:0];
-
-    
 }
 
 - (IBAction)swipeAction:(id)sender {
@@ -120,7 +100,7 @@ Boolean _enStatio = TRUE;
     
 }
 - (IBAction)btnClick {
-    if (currentDimensions ==0){
+    if (currentDimensions ==1){
         if(axeX){
             [_btnChgMode setTitle:@"Axe X"];
             axeX = FALSE;
@@ -142,39 +122,27 @@ Boolean _enStatio = TRUE;
         _session = [WCSession defaultSession];
         _session.delegate = self;
         [_session activateSession];
-    }else{
-        //WKAlertAction *act = [WKAlertAction actionWithTitle:@"OK" style:WKAlertActionStyleCancel handler:^(void){
-            //exit(0);
-       // }];
-        
-       // NSArray *actions = @[act];
-        
-       // [self presentAlertControllerWithTitle:@"Attention !" message:@"La connexion au mobile est impossible." preferredStyle:WKAlertControllerStyleAlert actions:actions];
     }
     
-    if (![_session isReachable]) {
-        // Do something
-        /*
-        WKAlertAction *act = [WKAlertAction actionWithTitle:@"OK" style:WKAlertActionStyleCancel handler:^(void){
-            //exit(0);
-        }];
-        
-        NSArray *actions = @[act];
-        
-        [self presentAlertControllerWithTitle:@"Attention !" message:@"Le mobile n'est pas détecté." preferredStyle:WKAlertControllerStyleAlert actions:actions];
-        */
-        
-    }
+    self.motionManager = [[CMMotionManager alloc] init];
     
     if (self.motionManager.deviceMotionAvailable) {
         
-        _motionManager.deviceMotionUpdateInterval = 1.0/60.0F;
+        
+        _motionManager.deviceMotionUpdateInterval = 1.0/10.0F;
         [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
             [self mouvementDeviceMotion:motion];
         }];
         
         
+    }else{
+        [_btnDim setTitle:@"NON DISPONIBLE MOTIONMANAGER"];
     }
+    
+    
+    
+    
+    
 }
 
 
@@ -187,7 +155,7 @@ Boolean _enStatio = TRUE;
 
 - (void) mouvementDeviceMotion:(CMDeviceMotion *)motion{
     
-    /* Le mouvement est-il autorisé */
+       /* Le mouvement est-il autorisé */
     if( _enStatio ){
         
         NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"0",@"CMD", nil];
@@ -471,23 +439,35 @@ Boolean _enStatio = TRUE;
     }
     
 }
-
-- (IBAction)pickerAction:(NSInteger)value {
-    currentDimensions=value;
+- (IBAction)actionbtnClick {
+    if(currentDimensions == 3) currentDimensions = 0;
+    
+    currentDimensions = (currentDimensions+1);
+    
     switch (currentDimensions) {
-        case 0:
+        case 1:
             [_btnChgMode setTitle:@"Axe X"];
-            axeX = FALSE;
+            axeX = TRUE;
             break;
             
-        case 1:
         case 2:
+        case 3:
             [_btnChgMode setTitle:@"<- Axe Z ->"];
             break;
         default:
             break;
     }
+    if(currentDimensions == 1){
+        [_btnDim setTitle:@"1 Dim."];
+    }
+    if(currentDimensions == 2){
+        [_btnDim setTitle:@"2 Dim."];
+    }
+    if(currentDimensions == 3){
+        [_btnDim setTitle:@"3 Dim."];
+    }
 }
+
 
 - (IBAction)chgModeStationnaire:(BOOL)value {
     if(_enStatio){
@@ -503,6 +483,7 @@ Boolean _enStatio = TRUE;
 }
 
 - (IBAction)startTakeOff {
+    NSLog(@"TAKEOFF");
     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"D",@"CMD", nil];
     [_session sendMessage:applicationDict
              replyHandler:^(NSDictionary *replyHandler) {
@@ -516,7 +497,7 @@ Boolean _enStatio = TRUE;
 
 
 - (IBAction)startLanding {
-    
+    NSLog(@"LAND");
     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"A",@"CMD", nil];
     [_session sendMessage:applicationDict
              replyHandler:^(NSDictionary *replyHandler) {
@@ -529,7 +510,7 @@ Boolean _enStatio = TRUE;
 }
 
 - (IBAction)startHome {
-    
+    NSLog(@"HOME");
     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"H",@"CMD", nil];
     [_session sendMessage:applicationDict
              replyHandler:^(NSDictionary *replyHandler) {
