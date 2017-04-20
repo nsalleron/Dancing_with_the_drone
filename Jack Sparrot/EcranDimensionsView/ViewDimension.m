@@ -11,6 +11,9 @@
 
 @implementation ViewDimension
 
+/**
+ * @brief Affiche les couleurs voulu par l'utilisateur ou les couleurs par defaut
+ */
 - (void) colors{
     
     NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"1D"];
@@ -59,12 +62,12 @@
         NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
         [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
         
-        /* Boutons */
+        /* Boutons allocation */
         _btn1D = [[UIButton alloc] init];
         _btn2D  = [[UIButton alloc] init];
         _btn3D  = [[UIButton alloc] init];
    
-        
+        /* Personnalisation */
         [_btn1D setTitle:@"1D" forState:UIControlStateNormal];
         [_btn2D setTitle:@"2D" forState:UIControlStateNormal];
         [_btn3D setTitle:@"3D" forState:UIControlStateNormal];
@@ -88,6 +91,7 @@
         [[_btn3D layer] setCornerRadius:1.0f];
         [[_btn3D layer] setBorderWidth:1.0f];
         
+        /* Selectors */
         #pragma clang diagnostic push
         #pragma clang diagnostic ignored "-Wundeclared-selector"
         [_btn1D addTarget:self.superview action:@selector(endDimensionChoice:) forControlEvents:UIControlEventTouchUpInside];
@@ -96,7 +100,6 @@
         #pragma clang diagnostic pop
         
         [self colors];
-        
         [self addSubview:_btn1D];
         [self addSubview:_btn2D];
         [self addSubview:_btn3D];

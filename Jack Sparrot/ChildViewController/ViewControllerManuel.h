@@ -12,13 +12,7 @@
 
 @interface ViewControllerManuel : UIViewController
 
-- (void) goToDimensionChoice:(UILongPressGestureRecognizer*)gesture;
-- (void) changeSatio:(UIButton*)send;
-- (void) homeFunction:(UILongPressGestureRecognizer*)gesture;
-- (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture;
-- (void) quitView:(UILongPressGestureRecognizer*)gesture;
-- (void) changeAxe:(UIButton*)send;
-- (void) finCommande;
+
 
 @property (assign, nonatomic) NSInteger index;
 @property (readwrite, nonatomic) Boolean enVol;
@@ -47,6 +41,14 @@
 @property (readonly, nonatomic) int lastMoveY;
 @property (readonly, nonatomic) int lastMoveZ;
 @property (readonly, nonatomic) int MOUVEMENT;
+
+- (void) goToDimensionChoice:(UILongPressGestureRecognizer*)gesture;
+- (void) changeSatio:(UIButton*)send;
+- (void) homeFunction:(UILongPressGestureRecognizer*)gesture;
+- (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture;
+- (void) quitView:(UILongPressGestureRecognizer*)gesture;
+- (void) changeAxe:(UIButton*)send;
+- (void) finCommande;
 
 
 

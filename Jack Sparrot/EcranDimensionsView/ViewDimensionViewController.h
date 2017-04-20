@@ -10,15 +10,21 @@
 
 @class ViewDimensionViewController;
 
-// Nom du protocol
+/**
+ * @brief protocole pour récupérer la dimension actuel de l'utilisateur
+ */
 @protocol ViewDimensionViewControllerDelegate <NSObject>
-//Méthode du protocol
+/**
+ * @brief méthode pour récuperer et afficher la valeur
+ */
 - (void)addItemViewController:(ViewDimensionViewController *)controller didFinishEnteringItem:(NSString *)item;
 @end
 
 @interface ViewDimensionViewController : UIViewController
 
-//Delegate du protocole, le viewcontroller accepte ce protocole.
+/**
+ * @brief Delegate du protocole, le viewcontroller accepte ce protocole.
+ */
 @property (nonatomic, weak) id <ViewDimensionViewControllerDelegate> delegate;
 
 @end

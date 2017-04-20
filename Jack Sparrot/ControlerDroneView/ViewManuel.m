@@ -12,8 +12,8 @@
 
 @implementation ViewManuel
 
-/*
- *  Mise en place des couleurs
+/**
+ * @brief Mise en place des couleurs
  */
 - (void) colors{
     
@@ -77,6 +77,7 @@
         _btnHome  = [[UIButton alloc] init];
         _btnDimensions = [[UIButton alloc] init];
         
+        /* Personnalisation */
         [_btnDimensions setTitle:@"1D" forState:UIControlStateNormal];
         [_btnChangementMode setTitle:@"btnChangementDeMode" forState:UIControlStateNormal];
         [_btnStatioDecoAttr  setTitle:@"btnStatioDecoAttr" forState:UIControlStateNormal];
@@ -106,8 +107,6 @@
         [[_btnDimensions layer] setBorderColor:[UIColor blackColor].CGColor];
         [[_btnDimensions layer] setCornerRadius:1.0f];
         [[_btnDimensions layer] setBorderWidth:1.0f];
-        
-        
         
         /* Gestion des évènements */
         [_btnStatioDecoAttr addTarget:self.superview action:@selector(changeSatio:) forControlEvents:UIControlEventTouchUpInside];
@@ -162,7 +161,9 @@
     [_btnHome setFrame:CGRectMake(format.width/2,_tailleIcones*2+_tailleIcones,format.width/2, _tailleIcones)];
     
 }
-
+/**
+ * @brief Mise à jour de la vue quand l'utilisateur est en mode 2D ou 3D
+ */
 - (void)update2D3D:(CGSize)format{
     _tailleIcones = format.height/4;
     [_btnChangementMode setHidden:TRUE];
@@ -172,15 +173,24 @@
     [_btnHome setFrame:CGRectMake(format.width/2,_tailleIcones,format.width/2, 3*_tailleIcones)];
     
 }
-
+/**
+ * @brief mise à jour du texte du btnHome
+ * @param item le texte
+ */
 -(void) updateBtnHome:(NSString *)item{
     [_btnHome setTitle:item forState:UIControlStateNormal];
 }
-
+/**
+ * @brief mise à jour du texte du btnStatioDecoAttr
+ * @param item le texte
+ */
 - (void) updateBtnStatioDecoAttr:(NSString*) item{
     [_btnStatioDecoAttr setTitle:item forState:UIControlStateNormal];
 }
-
+/**
+ * @brief mise à jour du texte du btnDimensions
+ * @param item le texte
+ */
 - (void) updateBtnDimensions:(NSString*) item{
     
     CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha =0.0;
@@ -205,6 +215,10 @@
     
     [_btnDimensions setTitle:item forState:UIControlStateNormal];
 }
+/**
+ * @brief mise à jour du texte du btnChangementMode
+ * @param item le texte
+ */
 - (void) updateBtnChangementMode:(NSString *)item{
     CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha =0.0;
     
@@ -230,6 +244,10 @@
     [self updateView:rect.size];
 }
 
+/**
+ * @brief Handler pour le décollage et atterrisage
+ * @param gesture l'appuiLong
+ */
 - (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture{
     if ( gesture.state == UIGestureRecognizerStateBegan) {
         //Update du View Controller
@@ -237,21 +255,29 @@
     }
 
 }
-
+/**
+ * @brief sortir de la view
+ */
 - (void) exit:(UILongPressGestureRecognizer*)gesture{
     if ( gesture.state == UIGestureRecognizerStateBegan) {
         //Update du View Controller
         [_vc quitView:gesture];
     }
 }
-
+/**
+ * @brief Handler pour la fonction Home
+ * @param gesture l'appuiLong
+ */
 - (void) homeFunction:(UILongPressGestureRecognizer*)gesture{
     if ( gesture.state == UIGestureRecognizerStateBegan) {
         //Update du View Controller
         [_vc homeFunction:gesture];
     }
 }
-
+/**
+ * @brief Permet d'aller vers l'écran dimension
+ * @param gesture double tab
+ */
 - (void) goToDimension:(UILongPressGestureRecognizer*)gesture{
     
     if ( gesture.state == UIGestureRecognizerStateRecognized) {

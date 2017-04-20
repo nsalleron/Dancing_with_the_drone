@@ -18,59 +18,55 @@ NSString *selected;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    //Horizontal
-    //NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
-    //[[UIDevice currentDevice] setValue:value forKey:@"orientation"];
     
     ecranDimension = [[ViewDimension alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecranDimension setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
-    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setView: ecranDimension];
     [self setTitle:@"Dimensions"];
-    
-    // Do any additional setup after loading the view from its nib.
-    
-    
 }
-
+/**
+ * @brief Méthodes pour la rotation
+ */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
-
-- (BOOL)shouldAutorotate  // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (BOOL)shouldAutorotate
 {
     return YES;
 }
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        NSLog(@"LANDSCAPE");
+        //NSLog(@"LANDSCAPE");
         return UIInterfaceOrientationMaskLandscapeRight;
     } else {
         return UIInterfaceOrientationMaskAll;
     }
 }
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
-    NSLog(@"PREFERRED");
+    //NSLog(@"PREFERRED");
     return UIInterfaceOrientationLandscapeRight;
 }
 
-
+/**
+ * @brief Mise en place de la valeur vers la variable globale à la fenêtre
+ */
 -(void) endDimensionChoice:(UIButton*)send{
     
     selected = send.titleLabel.text;
-    NSLog(@"%@", selected);
+    //NSLog(@"%@", selected);
     [self.navigationController popViewControllerAnimated:YES];
-    
-    //Reprise de la variable dans la globale puis fermeture fenetre
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -92,7 +88,9 @@ NSString *selected;
 }
 */
 
-
+/**
+ * @brief Appel du protocole
+ */
 -(void)viewWillDisappear:(BOOL)animated
 {
     //Appel du protocole

@@ -52,9 +52,91 @@ ViewManuel *ecran;
 @implementation ViewControllerManuel
 
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    /*Récupération mode intérieur extérieur */
+    _bExterieur = ![[NSUserDefaults standardUserDefaults] objectForKey:@"InOut"];
+    
+    /* Récupération des options et mise en place des settings par defaut */
+    hauteurMax = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Hauteur"];
+    accelerationSetting = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Acceleration"];
+    
+    /*DRONE*/
+    if(_bebopDrone == nil) {
+        _dataSource = [NSArray array];
+        _droneDiscoverer = [[DroneDiscoverer alloc] init];
+        [_droneDiscoverer setDelegate:self];
+    }
+    
+    //_bebopDrone = [[BebopDrone alloc] init];
+    
+    /* Acceleration + Gyroscope */
+    self.motionManager = [[CMMotionManager alloc] init];
+    
+    
+    if (self.motionManager.deviceMotionAvailable) {
+        
+        _motionManager.deviceMotionUpdateInterval = 1.0/10.0F;
+        [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical];
+        [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
+                [self mouvementDeviceMotion:motion];
+        }];
+        
+    
+    }
+    
+    /* DEBUG
+    [self.motionManager setAccelerometerUpdateInterval:1.0/10];
+    [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMAccelerometerData *data, NSError *error){
+            [self movement:data.acceleration];
+    }];
+     */
+    
+    /* Fin acceleration */
+    _enStatio = FALSE;
+    _enVol = FALSE;
+    _axeX = TRUE;
+    _homeActivate = false;
+    
+    ecran = [[ViewManuel alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [ecran setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
+    [ecran setViewController:self];
+    [ecran updateBtnStatioDecoAttr:@"Décollage"];
+    [ecran updateBtnDimensions:@"1D"];
+    currentDimensions = 1;
+    [ecran updateBtnChangementMode:@"Axe X"];
+    [self setView: ecran];
+    [self setTitle:@"Manuel"];
+    
+    
+
+    //Swipe UP DOWN
+    UISwipeGestureRecognizer * swipeUp=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeUp:)];
+    swipeUp.direction=UISwipeGestureRecognizerDirectionUp;
+    [self.view addGestureRecognizer:swipeUp];
+    
+    UISwipeGestureRecognizer * swipeDown=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown:)];
+    swipeDown.direction=UISwipeGestureRecognizerDirectionDown;
+    [self.view addGestureRecognizer:swipeDown];
+    
+    //Swipe Right et Left
+    UISwipeGestureRecognizer * swipeRight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(changeAxe:)];
+    swipeRight.direction=UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeRight];
+    UISwipeGestureRecognizer * swipeLeft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(changeAxe:)];
+    swipeRight.direction=UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeLeft];
+    
+    timerDrone = [NSTimer scheduledTimerWithTimeInterval:10.0
+                                     target:self
+                                   selector:@selector(checkBattery:)
+                                   userInfo:nil
+                                    repeats:YES];
+}
 
 - (void) mouvementDeviceMotion:(CMDeviceMotion *)motion{
-
+    
     /* Le mouvement est-il autorisé */
     if(_bebopDrone == nil || !_enVol || _enStatio || _homeActivate){
         [_bebopDrone setFlag:0];
@@ -63,7 +145,7 @@ ViewManuel *ecran;
         [_bebopDrone setGaz:0];
         [_bebopDrone setYaw:0];
         return;
-     }
+    }
     
     
     
@@ -72,23 +154,13 @@ ViewManuel *ecran;
     _incY = motion.userAcceleration.y;
     _incZ = motion.userAcceleration.z;
     
-   
-          
+    
+    
     /* Vérification si mouvement */
     _absX = fabs(_incX);
     _absY = fabs(_incY);
     _absZ = fabs(_incZ);
     
-    //NSLog(@"PASSAGE inc %f  abs %f",_incX,_absX);
-    
-    /*  0 = STABLE
-        1 = LEFT
-        2 = RIGHT
-        3 = UP
-        4 = DOWN
-        5 = FOWARD
-        6 = BACKWARD
-    */
     
     /* Mouvement de FOWARD et BACKWARD */
     if(_absX > THRESH){
@@ -140,7 +212,7 @@ ViewManuel *ecran;
             _incStabX = 0;
         }
     }
-
+    
     // DROITE / GAUCHE : OK
     if(_absY > THRESH){
         if(_incY < -THRESH){
@@ -246,88 +318,6 @@ ViewManuel *ecran;
     
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    /*Récupération mode intérieur extérieur */
-    _bExterieur = ![[NSUserDefaults standardUserDefaults] objectForKey:@"InOut"];
-    
-    /* Récupération des options et mise en place des settings par defaut */
-    hauteurMax = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Hauteur"];
-    accelerationSetting = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Acceleration"];
-    
-    /*DRONE*/
-    if(_bebopDrone == nil) {
-        _dataSource = [NSArray array];
-        _droneDiscoverer = [[DroneDiscoverer alloc] init];
-        [_droneDiscoverer setDelegate:self];
-    }
-    
-    //_bebopDrone = [[BebopDrone alloc] init];
-    
-    /* Acceleration + Gyroscope */
-    self.motionManager = [[CMMotionManager alloc] init];
-    
-    
-    if (self.motionManager.deviceMotionAvailable) {
-        
-        _motionManager.deviceMotionUpdateInterval = 1.0/10.0F;
-        [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical];
-        [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
-                [self mouvementDeviceMotion:motion];
-        }];
-        
-    
-    }
-    
-    /* DEBUG
-    [self.motionManager setAccelerometerUpdateInterval:1.0/10];
-    [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMAccelerometerData *data, NSError *error){
-            [self movement:data.acceleration];
-    }];
-     */
-    
-    /* Fin acceleration */
-    _enStatio = FALSE;
-    _enVol = FALSE;
-    _axeX = TRUE;
-    _homeActivate = false;
-    
-    ecran = [[ViewManuel alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [ecran setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
-    [ecran setViewController:self];
-    [ecran updateBtnStatioDecoAttr:@"Décollage"];
-    [ecran updateBtnDimensions:@"1D"];
-    currentDimensions = 1;
-    [ecran updateBtnChangementMode:@"Axe X"];
-    [self setView: ecran];
-    [self setTitle:@"Manuel"];
-    
-    
-
-    //Swipe UP DOWN
-    UISwipeGestureRecognizer * swipeUp=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeUp:)];
-    swipeUp.direction=UISwipeGestureRecognizerDirectionUp;
-    [self.view addGestureRecognizer:swipeUp];
-    
-    UISwipeGestureRecognizer * swipeDown=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown:)];
-    swipeDown.direction=UISwipeGestureRecognizerDirectionDown;
-    [self.view addGestureRecognizer:swipeDown];
-    
-    //Swipe Right et Left
-    UISwipeGestureRecognizer * swipeRight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(changeAxe:)];
-    swipeRight.direction=UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:swipeRight];
-    UISwipeGestureRecognizer * swipeLeft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(changeAxe:)];
-    swipeRight.direction=UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:swipeLeft];
-    
-    timerDrone = [NSTimer scheduledTimerWithTimeInterval:10.0
-                                     target:self
-                                   selector:@selector(checkBattery:)
-                                   userInfo:nil
-                                    repeats:YES];
-}
 
 - (void) checkBattery{
     

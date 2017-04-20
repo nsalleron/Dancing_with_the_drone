@@ -29,12 +29,43 @@
 @property (assign, nonatomic) ViewControllerManuel *vc;
 
 - (void) updateView:(CGSize) format;
+/**
+ * @brief Mise à jour de la vue quand l'utilisateur est en mode 2D ou 3D
+ */
 - (void) update2D3D:(CGSize)format;
+/**
+ * @brief mise à jour du texte du btnDimensions
+ * @param item le texte
+ */
 - (void) updateBtnDimensions:(NSString*) item;
+/**
+ * @brief mise à jour du texte du btnChangementMode
+ * @param item le texte
+ */
 - (void) updateBtnChangementMode:(NSString*) item;
+/**
+ * @brief mise à jour du texte du btnStatioDecoAttr
+ * @param item le texte
+ */
 - (void) updateBtnStatioDecoAttr:(NSString*) item;
+/**
+ * @brief mise à jour du texte du btnHome
+ * @param item le texte
+ */
 - (void) updateBtnHome:(NSString*) item;
+/**
+ * @brief Référence vers le viewController
+ * @param me le viewController
+ */
 - (void) setViewController:(ViewControllerManuel *) me;
+/**
+ * @brief Handler pour le décollage et atterrisage
+ * @param gesture l'appuiLong
+ */
 - (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture;
+/**
+ * @brief Handler pour la fonction Home
+ * @param gesture l'appuiLong
+ */
 - (void) homeFunction:(UILongPressGestureRecognizer*)gesture;
 @end
