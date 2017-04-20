@@ -65,6 +65,7 @@ NSString *selected;
 -(void) endDimensionChoice:(UIButton*)send{
     
     selected = send.titleLabel.text;
+    //selected = [[NSString alloc] initWithFormat:@"      %@",selected];
     //NSLog(@"%@", selected);
     [self.navigationController popViewControllerAnimated:YES];
 }

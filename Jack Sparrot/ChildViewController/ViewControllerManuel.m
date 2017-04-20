@@ -105,7 +105,7 @@ ViewManuel *ecran;
     [ecran updateBtnStatioDecoAttr:@"        Décollage"];
     UIImage *btnImage = [UIImage imageNamed:@"ic_flight_takeoff.png"];
     [[ecran btnStatioDecoAttr] setImage:btnImage forState:UIControlStateNormal];
-    [ecran updateBtnDimensions:@"1D"];
+    [ecran updateBtnDimensions:@"      1D"];
     currentDimensions = 1;
     [ecran updateBtnChangementMode:@"Axe X"];
     [self setView: ecran];
@@ -542,13 +542,16 @@ ViewManuel *ecran;
     
     [ecran updateBtnDimensions:item];
     if([item  isEqual: @"1D"]){
+        NSLog(@"1D OK");
         [ecran updateView:[[UIScreen mainScreen] bounds].size];
         currentDimensions = 1;
     }else if([item  isEqual: @"2D"]){
         currentDimensions = 2;
+        NSLog(@"2D OK");
         [ecran update2D3D:[[UIScreen mainScreen] bounds].size];
     }else if([item  isEqual: @"3D"]){
         currentDimensions = 3;
+        NSLog(@"3D OK");
         [ecran update2D3D:[[UIScreen mainScreen] bounds].size];
     }
     

@@ -37,9 +37,18 @@ UINavigationController *myVC;
         [_btnOptions setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         [_btnAide setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
         
-        [_btnDrone setTitle:@"Contrôler drone" forState:UIControlStateNormal];
-        [_btnOptions setTitle:@"Options" forState:UIControlStateNormal];
-        [_btnAide setTitle:@"Aide" forState:UIControlStateNormal];
+        /* Alignement du pauvre */
+        [_btnDrone setTitle:@"   Contrôler drone" forState:UIControlStateNormal];
+        [_btnOptions setTitle:@"   Options             " forState:UIControlStateNormal];
+        [_btnAide setTitle:@"   Aide                    " forState:UIControlStateNormal];
+        
+        UIImage *btnImage = [UIImage imageNamed:@"ic_videogame_asset.png"];
+        [_btnDrone setImage:btnImage forState:UIControlStateNormal];
+        btnImage = [UIImage imageNamed:@"ic_settings.png"];
+        [_btnOptions setImage:btnImage forState:UIControlStateNormal];
+        btnImage = [UIImage imageNamed:@"ic_help.png"];
+        [_btnAide setImage:btnImage forState:UIControlStateNormal];
+        
         
         [[_btnDrone layer] setBorderWidth:1.0f];
         [[_btnDrone layer] setBorderColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor];

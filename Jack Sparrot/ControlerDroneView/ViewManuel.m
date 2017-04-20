@@ -79,10 +79,15 @@
         
         /* Personnalisation */
         [_btnDimensions setTitle:@"1D" forState:UIControlStateNormal];
+        UIImage *btnImage = [UIImage imageNamed:@"dim.png"];
+        [_btnDimensions setImage:btnImage forState:UIControlStateNormal];
+        
         [_btnChangementMode setTitle:@"btnChangementDeMode" forState:UIControlStateNormal];
         [_btnStatioDecoAttr  setTitle:@"btnStatioDecoAttr" forState:UIControlStateNormal];
+        
+        
         [_btnHome setTitle:@"      Home" forState:UIControlStateNormal];
-        UIImage *btnImage = [UIImage imageNamed:@"ic_home.png"];
+        btnImage = [UIImage imageNamed:@"ic_home.png"];
         [_btnHome setImage:btnImage forState:UIControlStateNormal];
        
         [_btnDimensions setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
