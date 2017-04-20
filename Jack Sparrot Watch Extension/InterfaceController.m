@@ -9,7 +9,7 @@
 #import "InterfaceController.h"
 #import <WatchConnectivity/WatchConnectivity.h>
 #import <CoreMotion/CoreMotion.h>
-
+#import <HealthKit/HealthKit.h>
 #define GAUCHE 0
 #define DROITE 1
 #define HAUT 2
@@ -18,7 +18,7 @@
 #define ARRIERE 5
 #define STABLE 6
 #define SURPLACE 7
-#define THRESH 0.5
+#define THRESH 0.2
 
 @interface InterfaceController()<WCSessionDelegate>
 
@@ -47,7 +47,9 @@ static NSString *sharedUserActivityType = @"fr.upmc.sar.project.Jack-Sparrot";
 static NSString *sharedIdentifierKey = @"SALLERONGASC";
 int currentDimensions = 1;
 Boolean axeX = TRUE;
+Boolean axeY = FALSE;
 Boolean _enStatio = TRUE;
+HKWorkoutSession *workoutSession;
 
 
 @implementation InterfaceController
@@ -58,6 +60,7 @@ Boolean _enStatio = TRUE;
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
+    
 }
 
 - (IBAction)swipeAction:(id)sender {
@@ -104,9 +107,11 @@ Boolean _enStatio = TRUE;
         if(axeX){
             [_btnChgMode setTitle:@"Axe X"];
             axeX = FALSE;
+            axeY = FALSE;
         }else{
             [_btnChgMode setTitle:@"Axe Y"];
             axeX = TRUE;
+            axeY = TRUE;
         }
     }
     
@@ -130,6 +135,7 @@ Boolean _enStatio = TRUE;
         
         
         _motionManager.deviceMotionUpdateInterval = 1.0/10.0F;
+        [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical];
         [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
             [self mouvementDeviceMotion:motion];
         }];
@@ -158,7 +164,7 @@ Boolean _enStatio = TRUE;
        /* Le mouvement est-il autorisé */
     if( _enStatio ){
         
-        NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"0",@"CMD", nil];
+        NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"0;",@"CMD", nil];
         [_session sendMessage:applicationDict
                  replyHandler:^(NSDictionary *replyHandler) {
                      NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
@@ -189,8 +195,9 @@ Boolean _enStatio = TRUE;
     if(_absX > THRESH){
         if(_incX < -THRESH){
             if(_stabX){
-                NSLog(@"ARRIERE");
-                if(axeX && currentDimensions == 1){
+                
+                if(!axeY && currentDimensions == 1){
+                    //[_btnDim setTitle:@"AVANT"];
                     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;100",@"CMD", nil];
                     [_session sendMessage:applicationDict
                              replyHandler:^(NSDictionary *replyHandler) {
@@ -215,12 +222,13 @@ Boolean _enStatio = TRUE;
                 _lastMoveX = ARRIERE;
                 _stabX = NO;
             }else{
-                NSLog(@"DECELERATION VERS L'AVANT");
+                
             }
         }else if(_incX > 0.2){
             if(_stabX){
-                NSLog(@"AVANT");
-                if(axeX && currentDimensions == 1){
+                
+                if(!axeY && currentDimensions == 1){
+                    //[_btnDim setTitle:@"ARRIERE"];
                     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;-100",@"CMD", nil];
                     [_session sendMessage:applicationDict
                              replyHandler:^(NSDictionary *replyHandler) {
@@ -255,7 +263,7 @@ Boolean _enStatio = TRUE;
             _incStabX++;
         }else{
             if(_lastMoveX != STABLE){
-                NSLog(@"STABLE X");
+                //[_btnDim setTitle:@"STABLE X"];
                 NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;0",@"CMD", nil];
                 [_session sendMessage:applicationDict
                          replyHandler:^(NSDictionary *replyHandler) {
@@ -274,10 +282,13 @@ Boolean _enStatio = TRUE;
     
     // DROITE / GAUCHE : OK
     if(_absY > THRESH){
+        [_btnChgMode setTitle:[[NSString alloc] initWithFormat:@"val %f",_incY]];
         if(_incY < -THRESH){
+            
             if(_stabY){
-                NSLog(@"DROITE");
-                if(!axeX && currentDimensions == 1){
+                
+                if(axeY && currentDimensions == 1){
+                    //[_btnDim setTitle:@"DROITE"];
                     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;100",@"CMD", nil];
                     [_session sendMessage:applicationDict
                              replyHandler:^(NSDictionary *replyHandler) {
@@ -293,6 +304,7 @@ Boolean _enStatio = TRUE;
                      */
                 }else if(currentDimensions == 2 || currentDimensions == 3){
                     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;100",@"CMD", nil];
+                    [_btnDim setTitle:@"DROITE"];
                     [_session sendMessage:applicationDict
                              replyHandler:^(NSDictionary *replyHandler) {
                                  NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
@@ -313,8 +325,9 @@ Boolean _enStatio = TRUE;
             }
         }else if(_incY > THRESH){
             if(_stabY){
-                NSLog(@"GAUCHE");
-                if(!axeX && currentDimensions == 1){
+                
+                if(axeY && currentDimensions == 1){
+                    [_btnDim setTitle:@"GAUCHE"];
                     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;-100",@"CMD", nil];
                     [_session sendMessage:applicationDict
                              replyHandler:^(NSDictionary *replyHandler) {
@@ -330,6 +343,7 @@ Boolean _enStatio = TRUE;
                      */
                 }else if(currentDimensions == 2 || currentDimensions == 3){
                     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;-100",@"CMD", nil];
+                    [_btnDim setTitle:@"GAUCHE"];
                     [_session sendMessage:applicationDict
                              replyHandler:^(NSDictionary *replyHandler) {
                                  NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
@@ -356,7 +370,7 @@ Boolean _enStatio = TRUE;
             _incStabY++;
         }else{
             if(_lastMoveY != STABLE){
-                NSLog(@"STABLE Y");
+                //[_btnDim setTitle:@"STABLE"];
                 NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;0",@"CMD", nil];
                 [_session sendMessage:applicationDict
                          replyHandler:^(NSDictionary *replyHandler) {
