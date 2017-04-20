@@ -156,7 +156,7 @@ UIAlertView *alertAccueil;
     _dateOldCommand = [NSDate date];
     
     /*Valeur vers drone*/
-    if([axe isEqualToString:"0"]){
+    if([axe isEqualToString:@"0"]){
         [_bebopDrone setFlag:0];
         [_bebopDrone setPitch:0];
         [_bebopDrone setRoll:0];

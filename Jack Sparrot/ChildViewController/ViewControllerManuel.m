@@ -102,7 +102,9 @@ ViewManuel *ecran;
     ecran = [[ViewManuel alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecran setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
     [ecran setViewController:self];
-    [ecran updateBtnStatioDecoAttr:@"Décollage"];
+    [ecran updateBtnStatioDecoAttr:@"        Décollage"];
+    UIImage *btnImage = [UIImage imageNamed:@"ic_flight_takeoff.png"];
+    [[ecran btnStatioDecoAttr] setImage:btnImage forState:UIControlStateNormal];
     [ecran updateBtnDimensions:@"1D"];
     currentDimensions = 1;
     [ecran updateBtnChangementMode:@"Axe X"];
@@ -130,7 +132,7 @@ ViewManuel *ecran;
     
     timerDrone = [NSTimer scheduledTimerWithTimeInterval:10.0
                                      target:self
-                                   selector:@selector(checkBattery:)
+                                   selector:@selector(checkBattery)
                                    userInfo:nil
                                     repeats:YES];
 }
@@ -362,7 +364,8 @@ ViewManuel *ecran;
  * @brief Passage du décollage à l'atterrissage
  */
 - (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture{
-    NSString *statio = @"Mode Stationnaire : ON";
+    NSString *statio = @"    ON";
+    UIImage *btnImage;
     switch (_enVol) {
         case TRUE:
             //Atterrissage;
@@ -370,17 +373,17 @@ ViewManuel *ecran;
             _enVol = FALSE;
             _enStatio = FALSE;
             [_bebopDrone land];
-            
-            statio = @"Decollage";
+            btnImage = [UIImage imageNamed:@"ic_flight_takeoff.png"];
+            [[ecran btnStatioDecoAttr] setImage:btnImage forState:UIControlStateNormal];
+            statio = @"        Decollage";
             break;
             
         case FALSE:
             //Decollage;
-            NSLog(@"Decollage");
+            NSLog(@"        Decollage");
             _enVol = TRUE;
             _enStatio = TRUE;
             [_bebopDrone takeOff];
-           
         default:
             break;
     }
@@ -421,26 +424,35 @@ ViewManuel *ecran;
 - (void) changeSatio:(UIButton*)send{
     if(firstTime){
         [self changeDecoAttr:NULL];
+        UIImage *btnImage = [UIImage imageNamed:@"ic_play_arrow.png"];
+        [[ecran btnStatioDecoAttr] setImage:btnImage forState:UIControlStateNormal];
         firstTime = FALSE;
         return;
-    }
         
-    NSString *statio = @"Mode Stationnaire : ON";
+    }
+    UIImage *btnImage;
+    
+    NSString *statio = @"    ON";
     switch (_enStatio) {
         case TRUE:
             //Mode non stationnaire;
-            NSLog(@"Mode stationnaire : OFF");
+            NSLog(@"    OFF");
             _enStatio = FALSE;
-            statio = @"Mode Stationnaire : OFF";
+            statio = @"    OFF";
+            btnImage = [UIImage imageNamed:@"ic_pause.png"];
+            [[ecran btnStatioDecoAttr] setImage:btnImage forState:UIControlStateNormal];
             break;
             
         case FALSE:
             //Mode stationnaire;
-            NSLog(@"Mode Stationnaire : ON");
+            NSLog(@"    ON");
              _enStatio  = TRUE;
             [_bebopDrone setFlag:0];
             [_bebopDrone setRoll:0];
             [_bebopDrone setPitch:0];
+            [_bebopDrone setGaz:0];
+            btnImage = [UIImage imageNamed:@"ic_play_arrow.png"];
+            [[ecran btnStatioDecoAttr] setImage:btnImage forState:UIControlStateNormal];
             break;
         default:
             break;
