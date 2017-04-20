@@ -63,6 +63,9 @@ HKWorkoutSession *workoutSession;
     
 }
 
+/**
+ * @brief Action sur l'axe Z pendant un swipe
+ */
 - (IBAction)swipeAction:(id)sender {
     
     
@@ -102,6 +105,9 @@ HKWorkoutSession *workoutSession;
     }
     
 }
+/**
+ * @brief Changement d'Axe X/Y
+ */
 - (IBAction)btnClick {
     if (currentDimensions ==1){
         if(axeX){
@@ -158,7 +164,11 @@ HKWorkoutSession *workoutSession;
 }
 
 
-
+/**
+ * @brief interprétation des mouvements via CoreMotion
+ * @param motion Object CMDeviceMotion possédant les données CoreMotion
+ * REM : Quasiment la même que la version mobile
+ */
 - (void) mouvementDeviceMotion:(CMDeviceMotion *)motion{
     
        /* Le mouvement est-il autorisé */
@@ -453,6 +463,10 @@ HKWorkoutSession *workoutSession;
     }
     
 }
+
+/**
+ * @brief Handler pour les action sur le bouton de changement de dimensions
+ */
 - (IBAction)actionbtnClick {
     if(currentDimensions == 3) currentDimensions = 0;
     
@@ -482,7 +496,9 @@ HKWorkoutSession *workoutSession;
     }
 }
 
-
+/**
+ * @brief Changement mode stationnaire
+ */
 - (IBAction)chgModeStationnaire:(BOOL)value {
     if(_enStatio){
         _enStatio = false;
@@ -490,12 +506,17 @@ HKWorkoutSession *workoutSession;
         _enStatio = true;
     }
 }
-
+/**
+ * @brief Lancement de la vue Options
+ */
 - (IBAction)goToOptions {
     
     [self presentControllerWithName:@"options" context:@"Sortir"];
 }
 
+/**
+ * @brief Lancement décollage
+ */
 - (IBAction)startTakeOff {
     NSLog(@"TAKEOFF");
     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"D",@"CMD", nil];
@@ -509,7 +530,9 @@ HKWorkoutSession *workoutSession;
      ];
 }
 
-
+/**
+ * @brief Lancement atterrissage
+ */
 - (IBAction)startLanding {
     NSLog(@"LAND");
     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"A",@"CMD", nil];
@@ -522,7 +545,9 @@ HKWorkoutSession *workoutSession;
              }
      ];
 }
-
+/**
+ * @brief Lancement retour home
+ */
 - (IBAction)startHome {
     NSLog(@"HOME");
     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"H",@"CMD", nil];
