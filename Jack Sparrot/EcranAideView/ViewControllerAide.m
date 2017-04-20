@@ -29,11 +29,13 @@ ViewAide *ecranAide;
     [self setTitle:@"Aide"];
 
 }
-
+/**
+ *  @brief Permet de lancer la video explicative
+ */
 - (void) launchVideo:(UIButton*)send{
     
     NSURL *path;
-    
+    /* Récupération du chemin de la vidéo */
     if([send.titleLabel.text isEqualToString:@"Changement des axes"]){
         path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"demoChangementAxes" ofType:@"mov"]];
     }else if([send.titleLabel.text isEqualToString:@"Changement de mode"]){
@@ -44,6 +46,7 @@ ViewAide *ecranAide;
         path = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"demoRetourAccueil" ofType:@"mov"]];
     }
     
+    /* Lancement de la vidéo */
     AVPlayer *player = [AVPlayer playerWithURL:path];
     AVPlayerViewController *playerViewController = [AVPlayerViewController new];
     playerViewController.player = player;
@@ -60,36 +63,39 @@ ViewAide *ecranAide;
     
     [ecranAide updateView:size];
 }
-//ROTATION
-
+/**
+ * @brief Méthodes pour la rotation
+ */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
-- (BOOL)shouldAutorotate  // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (BOOL)shouldAutorotate
 {
     return YES;
 }
-
+/**
+ * @brief Méthodes pour la rotation
+ */
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskAll;
 }
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     return UIInterfaceOrientationPortrait;
 }
-
--(void)viewDidAppear:(BOOL)animated{
-    
-}
-
 
 @end

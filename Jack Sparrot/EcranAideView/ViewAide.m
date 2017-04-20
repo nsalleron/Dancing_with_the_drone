@@ -59,12 +59,13 @@
         [[_btnRetourAccueil layer] setBorderWidth:1.0f];
         
 
-        
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Wundeclared-selector"
         [_btnChangementAxes addTarget:self.superview action:@selector(launchVideo:) forControlEvents:UIControlEventTouchUpInside];
         [_btnChangementMode addTarget:self.superview action:@selector(launchVideo:) forControlEvents:UIControlEventTouchUpInside];
         [_btnChangementCouleur addTarget:self.superview action:@selector(launchVideo:) forControlEvents:UIControlEventTouchUpInside];
         [_btnRetourAccueil addTarget:self.superview action:@selector(launchVideo:) forControlEvents:UIControlEventTouchUpInside];
-        
+        #pragma clang diagnostic pop
         
         [self addSubview:_btnChangementAxes];
         [self addSubview:_btnChangementMode];
