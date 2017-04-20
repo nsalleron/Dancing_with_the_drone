@@ -42,12 +42,33 @@
 @property (readonly, nonatomic) int lastMoveZ;
 @property (readonly, nonatomic) int MOUVEMENT;
 
+/**
+ * @brief lancement de la view dimension
+ */
 - (void) goToDimensionChoice:(UILongPressGestureRecognizer*)gesture;
+/**
+ * @brief changement mode stationnaire ou non
+ */
 - (void) changeSatio:(UIButton*)send;
+/**
+ * @brief activation de la fonction home
+ */
 - (void) homeFunction:(UILongPressGestureRecognizer*)gesture;
+/**
+ * @brief changement mode decollage / Atterrissage
+ */
 - (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture;
+/**
+ * @brief sortir de la view
+ */
 - (void) quitView:(UILongPressGestureRecognizer*)gesture;
+/**
+ * @brief changer axe X/Y/Z
+ */
 - (void) changeAxe:(UIButton*)send;
+/**
+ * @brief fin commande du drone
+ */
 - (void) finCommande;
 
 

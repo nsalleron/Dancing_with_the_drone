@@ -135,6 +135,10 @@ ViewManuel *ecran;
                                     repeats:YES];
 }
 
+/**
+ * @brief interprétation des mouvements via CoreMotion
+ * @param motion Object CMDeviceMotion possédant les données CoreMotion
+ */
 - (void) mouvementDeviceMotion:(CMDeviceMotion *)motion{
     
     /* Le mouvement est-il autorisé */
@@ -162,7 +166,7 @@ ViewManuel *ecran;
     _absZ = fabs(_incZ);
     
     
-    /* Mouvement de FOWARD et BACKWARD */
+    /* Mouvement de d'avant et d'arrière */
     if(_absX > THRESH){
         if(_incX < -THRESH){
             if(_stabX){
@@ -176,8 +180,6 @@ ViewManuel *ecran;
                 }
                 _lastMoveX = ARRIERE;
                 _stabX = NO;
-            }else{
-                NSLog(@"DECELERATION VERS L'AVANT");
             }
         }else if(_incX > 0.2){
             if(_stabX){
@@ -192,14 +194,11 @@ ViewManuel *ecran;
                 }
                 _lastMoveX = AVANT;
                 _stabX = NO;
-            }else{
-                NSLog(@"DECELERATION VERS L'ARRIERE");
             }
         }
         _incX = 0;
     }else{
         if(_incStabX < 6){
-            //NSLog(@"LE CPT : %d", _incStabX);
             _incStabX++;
         }else{
             if(_lastMoveX != STABLE){
@@ -213,7 +212,7 @@ ViewManuel *ecran;
         }
     }
     
-    // DROITE / GAUCHE : OK
+    /* Mouvement de gauche et droite */
     if(_absY > THRESH){
         if(_incY < -THRESH){
             if(_stabY){
@@ -227,8 +226,6 @@ ViewManuel *ecran;
                 }
                 _lastMoveY = DROITE;
                 _stabY = NO;
-            }else{
-                NSLog(@"DECELERATION VERS LA GAUCHE");
             }
         }else if(_incY > THRESH){
             if(_stabY){
@@ -242,14 +239,11 @@ ViewManuel *ecran;
                 }
                 _lastMoveY = GAUCHE;
                 _stabY = NO;
-            }else{
-                NSLog(@"DECELERATION VERS LA DROITE");
             }
         }
         _incY = 0;
     }else{
         if(_incStabY < 6){
-            //NSLog(@"LE CPT : %d", _cptStables);
             _incStabY++;
         }else{
             if(_lastMoveY != STABLE){
@@ -263,7 +257,7 @@ ViewManuel *ecran;
         }
     }
     
-    // HAUT / BAS : OK
+    /* Mouvement de haut et bas */
     if(_absZ > THRESH){
         if(_incZ < -THRESH){
             if(_stabZ){
@@ -279,8 +273,6 @@ ViewManuel *ecran;
                 }
                 _lastMoveZ = HAUT;
                 _stabZ = NO;
-            }else{
-                NSLog(@"DECELERATION VERS LE BAS");
             }
         }else if(_incZ > THRESH){
             if(_stabZ){
@@ -296,14 +288,11 @@ ViewManuel *ecran;
                 }
                 _lastMoveZ = BAS;
                 _stabZ = NO;
-            }else{
-                NSLog(@"DECELERATION VERS LE HAUT");
             }
         }
         _incZ = 0;
     }else{
         if(_incStabZ < 6){
-            //NSLog(@"LE CPT : %d", _cptStables);
             _incStabZ++;
         }else{
             if(_lastMoveZ != STABLE){
@@ -318,7 +307,9 @@ ViewManuel *ecran;
     
 }
 
-
+/**
+ * @brief Surveillance de la batterie du drone et mobile
+ */
 - (void) checkBattery{
     
     //Battery of the terminal
@@ -351,18 +342,25 @@ ViewManuel *ecran;
     
 }
 
-
+/**
+ * @brief handler pour quand la batterie est faible
+ */
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
         [_bebopDrone land];
     }
 }
 
-
+/**
+ * @brief Méthodes pour la rotation
+ */
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
 
+/**
+ * @brief Passage du décollage à l'atterrissage
+ */
 - (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture{
     NSString *statio = @"Mode Stationnaire : ON";
     switch (_enVol) {
@@ -373,7 +371,7 @@ ViewManuel *ecran;
             _enStatio = FALSE;
             [_bebopDrone land];
             
-            statio = @"Mode Stationnaire : OFF";
+            statio = @"Decollage";
             break;
             
         case FALSE:
@@ -390,7 +388,9 @@ ViewManuel *ecran;
 
     
 }
-
+/**
+ * @brief Changement de l'axe X / Y / Z
+ */
 - (void) changeAxe:(UIButton*)gesture{
     NSString *axe = @"Axe X";
     switch (_axeX) {
@@ -415,7 +415,9 @@ ViewManuel *ecran;
     [ecran updateBtnChangementMode:axe];
        
 }
-
+/**
+ * @brief Activation mode stationnaire ou non
+ */
 - (void) changeSatio:(UIButton*)send{
     if(firstTime){
         [self changeDecoAttr:NULL];
@@ -446,6 +448,9 @@ ViewManuel *ecran;
     [ecran updateBtnStatioDecoAttr:statio];
 }
 
+/**
+ * @brief Vers l'écran dimensions
+ */
 -(void) goToDimensionChoice:(UILongPressGestureRecognizer*)gesture{
     
     /* On met le drone en mode stationnaire */
@@ -460,7 +465,9 @@ ViewManuel *ecran;
 }
 
 
-/* Gestion des toucher long par le viewController */
+/**
+ * @brief Gestion des toucher long par le viewController 
+ */
 - (void) quitView:(UILongPressGestureRecognizer*)gesture{
 
     if(_service == nil){
@@ -476,7 +483,9 @@ ViewManuel *ecran;
     
 }
 
-
+/**
+ * @brief Activation de la fonction home
+ */
 - (void) homeFunction:(UILongPressGestureRecognizer*)gesture{
     if ( gesture.state == UIGestureRecognizerStateBegan) {
         NSLog(@"Fonction Home activée! bExterieur = %d",_bExterieur);
@@ -492,25 +501,29 @@ ViewManuel *ecran;
 }
 
 
-
+/**
+ * @brief Activation mode stationnaire ou non
+ */
 -(void) changeStatio:(UIButton*)send{
     switch (_enStatio) {
         case TRUE:
             //Atterrissage;
-            NSLog(@"Atterrissage");
+            //NSLog(@"Atterrissage");
             _enStatio = FALSE;
             break;
             
         case FALSE:
             //Decollage;
-            NSLog(@"Decollage");
+            //NSLog(@"Decollage");
             _enStatio = TRUE;
         default:
             break;
     }
 }
 
-/* Changement de dimensions et redimensionnement des écrans */
+/*
+ * @brief Changement de dimensions et redimensionnement des écrans 
+ */
 
 - (void)addItemViewController:(ViewDimensionViewController *)controller didFinishEnteringItem:(NSString *)item
 {
@@ -534,7 +547,9 @@ ViewManuel *ecran;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/**
+ * @brief gestion du swipe UP
+ */
 -(void)swipeUp:(UISwipeGestureRecognizer*)gestureRecognizer
 {
    
@@ -552,7 +567,9 @@ ViewManuel *ecran;
     
     
 }
-
+/**
+ * @brief gestion du swipe DOWN
+ */
 -(void)swipeDown:(UISwipeGestureRecognizer*)gestureRecognizer
 {
    
@@ -568,16 +585,24 @@ ViewManuel *ecran;
     });
 }
 
-/* Rotation de l'écran */
+/**
+ * @brief Méthodes pour la rotation
+ */
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
+/**
+ * @brief Méthodes pour la rotation
+ */
 - (BOOL)shouldAutorotate{
     return YES;
 }
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return UIInterfaceOrientationMaskLandscapeRight;
@@ -585,152 +610,16 @@ ViewManuel *ecran;
         return UIInterfaceOrientationMaskAll;
     }
 }
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     return UIInterfaceOrientationLandscapeRight;
 }
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
     [ecran updateView:size];
 }
-
-/*
- *  @param acceleration : Acceleration en m/s^2 retourné par le téléphone.
- *
- */
-
-/*
-
--(void)movement:(CMAcceleration)data {
-    
-    //  get current frame location:
-    float x = data.x;
-    float y = data.y;
-    float z = data.z;
-    
-    float newY = 0;
-    float newX = 0;
-    float newZ = 0;
-    
-    //left and right tilt
-    if (ABS(x) >= tiltSensitivity) {
-        newX = x * GRAVITY_SCALE;
-    }
-    
-    //up and down tilt
-    if (ABS(y) >= tiltSensitivity) {
-        newY = y * -GRAVITY_SCALE;
-    }
-
-    
-    if(_bebopDrone == nil || !_enVol || _enStatio || _homeActivate) return;
-    
-    
-    //à partir d'ici on traite les mouvements
-    if(newX < -threshAccelerometer || threshAccelerometer < newX){
-        currentX = newX;
-    }
-    if(newY < -threshAccelerometer || threshAccelerometer < newY){
-        currentY = newY;
-    }
-    if( -threshAccelerometer < newX && newX < threshAccelerometer ){
-        currentX = 0;
-    }
-    if( -threshAccelerometer < newY && newY < threshAccelerometer ){
-        currentY = 0;
-    }
-    
-    
-    // Début algo vitesse
-    //(X * vitesseMax/AccelerationMAX)
-    //
-    
-    int vitesseXFinal = (currentX*10);
-    if (vitesseXFinal > 90) {
-        vitesseXFinal = 90;
-    }else if (vitesseXFinal < -90){
-        vitesseXFinal = -90;
-    }
-    if(vitesseXFinal > 1)
-        vitesseXFinal = vitesseXFinal - 40;
-    else if (vitesseXFinal < -1)
-        vitesseXFinal = vitesseXFinal + 40;
-    
-    // Début algo vitesse
-    //(X * vitesseMax/AccelerationMAX)
-    //
-    
-    int vitesseYFinal = (currentY*10);
-    if (vitesseYFinal > 90) {
-        vitesseYFinal = 90;
-    }else if (vitesseYFinal < -90){
-        vitesseYFinal = -90;
-    }
-    if(vitesseYFinal > 1)
-        vitesseYFinal = vitesseYFinal - 40;
-    else if (vitesseYFinal < -1)
-        vitesseYFinal = vitesseYFinal + 40;
-    
-    
-    
-    [ecran updateBtnDimensions:[[NSString alloc] initWithFormat:@"vitesseFinale X : %d, Y : %d",vitesseXFinal,vitesseYFinal]];
-    //[ecran updateBtnDimensions:[[NSString alloc] initWithFormat:@"tresh X : %.2f, Y : %.2f",currentX,currentY]];
-    
-    // Dans le cas 1D : On s'occupe de X et Y séparément
-    
-    
-    if(currentDimensions == 1){
-        
-        if(_axeX){
-            if(currentX < - threshAccelerometer || currentX > threshAccelerometer ){
-                [_bebopDrone setFlag:1];
-                [_bebopDrone setPitch:vitesseXFinal]; // Si non fonctionnel remplacer par -50
-            }
-            
-            if(currentX == 0 ){
-                [_bebopDrone setFlag:0];
-                [_bebopDrone setPitch:0];
-                
-            }
-        }else{
-            if(currentY < -threshAccelerometer || currentY > threshAccelerometer){
-                
-                [_bebopDrone setFlag:1];
-                [_bebopDrone setRoll:vitesseYFinal]; // -50
-                
-            }
-            
-            if(currentY == 0){
-                [_bebopDrone setFlag:0];
-                [_bebopDrone setRoll:0];
-            }
-        }
-        
-        // Dans le cas 2D et 3D : On s'occupe de X et Y ensemble
-    }else if(currentDimensions == 2 || currentDimensions == 3){
-        
-        if(currentX == 0 && currentY == 0){
-            [_bebopDrone setFlag:0];
-            [_bebopDrone setRoll:0];
-            [_bebopDrone setPitch:0];
-            return;
-        }
-        
-        [_bebopDrone setFlag:1];
-        if(currentX == 0){
-            [_bebopDrone setPitch:0];
-        }else{
-            [_bebopDrone setPitch:vitesseXFinal];
-        }
-        if(currentY == 0){
-            [_bebopDrone setRoll:0];
-        }else{
-            [_bebopDrone setRoll:vitesseYFinal];
-        }
-        
-    }
-}
- 
-*/
 
 
 #pragma mark DroneDiscovererDelegate
@@ -853,14 +742,13 @@ ViewManuel *ecran;
     
     switch (state) {
         case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_LANDED:
-            //[ecran updateBtnStatioDecoAttr:@"TAKE OFF"];
+            
             break;
         case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_FLYING:
-            //[ecran updateBtnChangementMode:@"FIN CMD"];
+            
             break;
         case ARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE_HOVERING:
-            //[ecran updateBtnChangementMode:@"HOVERING "];
-            //[ecran updateBtnStatioDecoAttr:@"LAND"];
+
             break;
         default:
             NSLog(@"Default");
