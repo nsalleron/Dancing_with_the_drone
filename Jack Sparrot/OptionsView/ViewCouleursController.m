@@ -55,13 +55,12 @@ UIColor *valCouleur=nil;
  */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 /**
  * @brief Méthodes pour la rotation
  */
-- (BOOL)shouldAutorotate  // iOS 6 autorotation fix
+- (BOOL)shouldAutorotate
 {
     return YES;
 }
@@ -71,14 +70,18 @@ UIColor *valCouleur=nil;
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     
     return UIInterfaceOrientationMaskAll;
 }
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation // iOS 6 autorotation fix
+/**
+ * @brief Méthodes pour la rotation
+ */
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     return UIInterfaceOrientationPortrait;
 }

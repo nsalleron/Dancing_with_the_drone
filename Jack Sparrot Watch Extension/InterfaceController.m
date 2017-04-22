@@ -148,7 +148,7 @@ HKWorkoutSession *workoutSession;
         
         
     }else{
-        [_btnDim setTitle:@"NON DISPONIBLE MOTIONMANAGER"];
+        //[_btnDim setTitle:@"NON DISPONIBLE MOTIONMANAGER"];
     }
     
     

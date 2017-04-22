@@ -69,30 +69,6 @@ ViewManuel *ecran;
         [_droneDiscoverer setDelegate:self];
     }
     
-    //_bebopDrone = [[BebopDrone alloc] init];
-    
-    /* Acceleration + Gyroscope */
-    self.motionManager = [[CMMotionManager alloc] init];
-    
-    
-    if (self.motionManager.deviceMotionAvailable) {
-        
-        _motionManager.deviceMotionUpdateInterval = 1.0/10.0F;
-        [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical];
-        [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
-                [self mouvementDeviceMotion:motion];
-        }];
-        
-    
-    }
-    
-    /* DEBUG
-    [self.motionManager setAccelerometerUpdateInterval:1.0/10];
-    [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMAccelerometerData *data, NSError *error){
-            [self movement:data.acceleration];
-    }];
-     */
-    
     /* Fin acceleration */
     _enStatio = FALSE;
     _enVol = FALSE;
@@ -105,7 +81,7 @@ ViewManuel *ecran;
     [ecran updateBtnStatioDecoAttr:@"        Décollage"];
     UIImage *btnImage = [UIImage imageNamed:@"ic_flight_takeoff.png"];
     [[ecran btnStatioDecoAttr] setImage:btnImage forState:UIControlStateNormal];
-    [ecran updateBtnDimensions:@"      1D"];
+    [ecran updateBtnDimensions:@"1D"];
     currentDimensions = 1;
     [ecran updateBtnChangementMode:@"Axe X"];
     [self setView: ecran];
@@ -137,6 +113,8 @@ ViewManuel *ecran;
                                     repeats:YES];
 }
 
+
+
 /**
  * @brief interprétation des mouvements via CoreMotion
  * @param motion Object CMDeviceMotion possédant les données CoreMotion
@@ -152,8 +130,8 @@ ViewManuel *ecran;
         [_bebopDrone setYaw:0];
         return;
     }
-    
-    
+    NSLog(@"Val en station : %d",_enStatio);
+    //if(_enStatio) return;
     
     /* Récupération de l'userAcceleration */
     _incX = motion.userAcceleration.x;
@@ -172,6 +150,7 @@ ViewManuel *ecran;
     if(_absX > THRESH){
         if(_incX < -THRESH){
             if(_stabX){
+                [ecran updateBtnDimensions:@"ARRIERE"];
                 NSLog(@"ARRIERE");
                 if(_axeX && currentDimensions == 1){
                     [_bebopDrone setFlag:1];
@@ -185,6 +164,7 @@ ViewManuel *ecran;
             }
         }else if(_incX > 0.2){
             if(_stabX){
+                [ecran updateBtnDimensions:@"AVANT"];
                 NSLog(@"AVANT");
                 if(_axeX && currentDimensions == 1){
                     [_bebopDrone setFlag:1];
@@ -204,6 +184,7 @@ ViewManuel *ecran;
             _incStabX++;
         }else{
             if(_lastMoveX != STABLE){
+                [ecran updateBtnDimensions:@"STABLE"];
                 NSLog(@"STABLE X");
                 [_bebopDrone setFlag:0];
                 [_bebopDrone setPitch:0];
@@ -218,7 +199,8 @@ ViewManuel *ecran;
     if(_absY > THRESH){
         if(_incY < -THRESH){
             if(_stabY){
-                NSLog(@"DROITE");
+                [ecran updateBtnDimensions:@"DROITE"];
+                //NSLog(@"DROITE");
                 if(!_axeX && currentDimensions == 1){
                     [_bebopDrone setFlag:1];
                     [_bebopDrone setRoll:100];
@@ -231,7 +213,8 @@ ViewManuel *ecran;
             }
         }else if(_incY > THRESH){
             if(_stabY){
-                NSLog(@"GAUCHE");
+                [ecran updateBtnDimensions:@"GAUCHE"];
+                //NSLog(@"GAUCHE");
                 if(!_axeX && currentDimensions == 1){
                     [_bebopDrone setFlag:1];
                     [_bebopDrone setRoll:-100];
@@ -250,6 +233,7 @@ ViewManuel *ecran;
         }else{
             if(_lastMoveY != STABLE){
                 NSLog(@"STABLE Y");
+                [ecran updateBtnDimensions:@"STABLE"];
                 [_bebopDrone setFlag:0];
                 [_bebopDrone setRoll:0];
             }
@@ -263,7 +247,8 @@ ViewManuel *ecran;
     if(_absZ > THRESH){
         if(_incZ < -THRESH){
             if(_stabZ){
-                NSLog(@"HAUT");
+                [ecran updateBtnDimensions:@"HAUT"];
+                //NSLog(@"HAUT");
                 if(currentDimensions == 3){
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         [_bebopDrone setGaz:100];
@@ -278,7 +263,8 @@ ViewManuel *ecran;
             }
         }else if(_incZ > THRESH){
             if(_stabZ){
-                NSLog(@"BAS");
+                [ecran updateBtnDimensions:@"BAS"];
+                //NSLog(@"BAS");
                 if(currentDimensions == 3){
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         [_bebopDrone setGaz:-100];
@@ -469,6 +455,7 @@ ViewManuel *ecran;
     [_bebopDrone setFlag:0];
     [_bebopDrone setRoll:0];
     [_bebopDrone setPitch:0];
+    [_bebopDrone setGaz:0];
     
     ViewDimensionViewController *secondController = [[ViewDimensionViewController alloc] init];
     secondController.delegate = self;
@@ -780,10 +767,25 @@ ViewManuel *ecran;
             [_connectionAlertView show];
         }
     }
+    /* Acceleration + Gyroscope */
+    self.motionManager = [[CMMotionManager alloc] init];
+    
+    
+    if (self.motionManager.deviceMotionAvailable) {
+        
+        _motionManager.deviceMotionUpdateInterval = 1.0/10.0F;
+        [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical];
+        [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
+            [self mouvementDeviceMotion:motion];
+        }];
+        
+        
+    }
 }
 
 - (void) viewDidDisappear:(BOOL)animated{
     [timerDrone invalidate];
+    self.motionManager = nil;
 }
 
 

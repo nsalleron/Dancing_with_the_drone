@@ -43,7 +43,7 @@
  */
 - (void) goToDroneHelp:(UIButton*)send;
 /**
- * @brief check batterylevel
+ * @brief Check the level of the battery in order to prevent user from low battery
  */
 - (void) checkBattery;
 @end

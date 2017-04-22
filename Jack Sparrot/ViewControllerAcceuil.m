@@ -59,9 +59,7 @@ UIAlertView *alertAccueil;
 
     
 }
-/**
- * @brief Check the level of the battery in order to prevent user from low battery
- */
+
 - (void) checkBattery{
     
     //Battery of the terminal

@@ -12,14 +12,13 @@
 
 @interface BebopDrone ()<UIAlertViewDelegate>
 
-@property (nonatomic, assign) ARCONTROLLER_Device_t *deviceController;
+
+@property (nonatomic, assign) ARCONTROLLER_Device_t *deviceController; /* Objet controle drone */
 @property (nonatomic, assign) ARService *service;
 @property (nonatomic, assign) eARCONTROLLER_DEVICE_STATE connectionState;
 @property (nonatomic, assign) eARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE flyingState;
 @property (nonatomic, strong) NSString *currentRunId;
 @property (nonatomic) dispatch_semaphore_t resolveSemaphore;
-
-//Temps
 @property (nonatomic,strong) NSMutableArray *timeIntervalArray;
 @property (nonatomic, strong) NSDate *currentDateX;
 @property (nonatomic, strong) NSDate *oldDateX;
@@ -33,8 +32,6 @@
 @property (nonatomic) int    nbPitch;
 @property (nonatomic) int    nbRoll;
 @property (nonatomic) int    nbGaz;
-
-//Retour
 @property (nonatomic, strong) UIAlertView *returnHomeAlert;
 @property (nonatomic) boolean homeExterieur;
 @property (nonatomic) boolean returnHome;
@@ -46,7 +43,6 @@
 @property (nonatomic) float interval;
 @property (nonatomic) NSString *oldDirection;
 @property (nonatomic) float timeForThisMouvement;
-
 @property (nonatomic) dispatch_semaphore_t stateSem;
 @property (nonatomic) ViewControllerManuel* manuel;
 @property (nonatomic) int Flying;
@@ -56,7 +52,6 @@ float altitudeDrone;
 float acceleration;
 
 @implementation BebopDrone
-
 
 
 -(id)initWithService:(ARService *)service {
@@ -82,6 +77,9 @@ float acceleration;
     return self;
 }
 
+/**
+ * @brief NE PAS UTILISER. Uniquement pour le debug quand le drone n'est pas disponible
+ */
 - (id) init{
     
     self = [super init];
@@ -255,12 +253,6 @@ float acceleration;
 - (void)land {
     if (_deviceController && (_connectionState == ARCONTROLLER_DEVICE_STATE_RUNNING)) {
         _deviceController->aRDrone3->sendPilotingLanding(_deviceController->aRDrone3);
-    }
-}
-
-- (void)takePicture {
-    if (_deviceController && (_connectionState == ARCONTROLLER_DEVICE_STATE_RUNNING)) {
-        _deviceController->aRDrone3->sendMediaRecordPictureV2(_deviceController->aRDrone3);
     }
 }
 
