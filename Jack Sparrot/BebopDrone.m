@@ -363,12 +363,19 @@ float acceleration;
     
     
     if(_returnHome == false){
+        
+        /*Récupération de la date courante */
         _currentDateX = [NSDate date];
-        if( (pitch > 0 && _oldPitch < 0) || (pitch < 0 && _oldPitch > 0) || (pitch == 0 && _oldPitch != 0) ){ //Changement de mouvement;
+        if( (pitch != 0 && _oldPitch == 0)){ //MOUVEMENT;
+            _oldDateX = [NSDate date];
+            _oldPitch = pitch;
+            NSLog(@"MOUVEMENT PITCH");
+        }
+        if(pitch == 0 && _oldPitch != 0){ //FIN MOUVEMENT
             float f = [_currentDateX timeIntervalSinceDate:_oldDateX];
             BebopDroneRecord *tmp = [[BebopDroneRecord alloc] init];
             [tmp setTimeInterval:f];
-            [tmp setDroneDirectionValue:[[NSString alloc] initWithFormat:@"P;%d", _sumValueX/_nbPitch]];
+            [tmp setDroneDirectionValue:[[NSString alloc] initWithFormat:@"P;%d", _oldPitch]];
             @synchronized(_timeIntervalArray)
             {
                 [_timeIntervalArray addObject:tmp];
@@ -378,20 +385,6 @@ float acceleration;
             //NSLog(@"Temps en seconde depuis le dernier pitch : %0.2f COUNT:%ld",f,_timeIntervalArray.count);
             _oldDateX = nil;
             _oldPitch = 0;
-            _nbPitch = 0;
-            _sumValueX = 0;
-        }else{                                                                                         // Meme mouvement;
-            if(_oldDateX == nil){
-                _oldDateX = [NSDate date];
-            }
-            if(pitch != 0){
-                //NSLog(@"AJOUT %d, NB ACTUEL %d",pitch,_nbPitch);
-                _sumValueX +=  pitch;
-                _oldPitch = pitch;
-                _nbPitch++;
-            }else{
-                _oldDateX = [NSDate date]; 
-            }
             
         }
         
@@ -409,12 +402,18 @@ float acceleration;
     
     
     if(_returnHome == false){
+        /*Récupération de la date courante */
         _currentDateY = [NSDate date];
-        if( (roll > 0 && _oldRoll < 0) || (roll < 0 && _oldRoll > 0) || (roll == 0 && _oldRoll != 0) ){ //Changement de mouvement;
+        if( (roll != 0 && _oldRoll == 0)){ //MOUVEMENT;
+            _oldDateY = [NSDate date];
+            _oldRoll = roll;
+            NSLog(@"MOUVEMENT ROLL");
+        }
+        if(roll == 0 && _oldRoll != 0){ //FIN MOUVEMENT
             float f = [_currentDateY timeIntervalSinceDate:_oldDateY];
             BebopDroneRecord *tmp = [[BebopDroneRecord alloc] init];
             [tmp setTimeInterval:f];
-            [tmp setDroneDirectionValue:[[NSString alloc] initWithFormat:@"P;%d", _sumValueY/_nbRoll]];
+            [tmp setDroneDirectionValue:[[NSString alloc] initWithFormat:@"R;%d", _oldRoll]];
             @synchronized(_timeIntervalArray)
             {
                 [_timeIntervalArray addObject:tmp];
@@ -424,20 +423,6 @@ float acceleration;
             //NSLog(@"Temps en seconde depuis le dernier pitch : %0.2f COUNT:%ld",f,_timeIntervalArray.count);
             _oldDateY = nil;
             _oldRoll = 0;
-            _nbRoll = 0;
-            _sumValueY = 0;
-        }else{                                                                                         // Meme mouvement;
-            if(_oldDateY == nil){
-                _oldDateY = [NSDate date];
-            }
-            if(roll != 0){
-                //NSLog(@"AJOUT %d, NB ACTUEL %d",pitch,_nbPitch);
-                _sumValueY +=  roll;
-                _oldRoll = roll;
-                _nbRoll++;
-            }else{
-                _oldDateY = [NSDate date];
-            }
             
         }
         
@@ -459,12 +444,18 @@ float acceleration;
     
     
     if(_returnHome == false){
+        /*Récupération de la date courante */
         _currentDateZ = [NSDate date];
-        if( (gaz > 0 && _oldGaz < 0) || (gaz < 0 && _oldGaz > 0) || (gaz == 0 && _oldGaz != 0) ){ //Changement de mouvement;
+        if( (gaz != 0 && _oldGaz == 0)){ //MOUVEMENT;
+            _oldDateZ = [NSDate date];
+            _oldGaz = gaz;
+            NSLog(@"MOUVEMENT GAZ");
+        }
+        if(gaz == 0 && _oldGaz != 0){ //FIN MOUVEMENT
             float f = [_currentDateZ timeIntervalSinceDate:_oldDateZ];
             BebopDroneRecord *tmp = [[BebopDroneRecord alloc] init];
             [tmp setTimeInterval:f];
-            [tmp setDroneDirectionValue:[[NSString alloc] initWithFormat:@"P;%d", _sumValueZ/_nbGaz]];
+            [tmp setDroneDirectionValue:[[NSString alloc] initWithFormat:@"G;%d", _oldGaz]];
             @synchronized(_timeIntervalArray)
             {
                 [_timeIntervalArray addObject:tmp];
@@ -474,23 +465,8 @@ float acceleration;
             //NSLog(@"Temps en seconde depuis le dernier pitch : %0.2f COUNT:%ld",f,_timeIntervalArray.count);
             _oldDateZ = nil;
             _oldGaz = 0;
-            _nbGaz = 0;
-            _sumValueZ = 0;
-        }else{                                                                                         // Meme mouvement;
-            if(_oldDateZ == nil){
-                _oldDateZ = [NSDate date];
-            }
-            if(gaz != 0){
-                //NSLog(@"AJOUT %d, NB ACTUEL %d",pitch,_nbPitch);
-                _sumValueZ +=  gaz;
-                _oldGaz = gaz;
-                _nbGaz++;
-            }else{
-                _oldDateZ = [NSDate date];
-            }
             
         }
-        
     }
     if (_deviceController && (_connectionState == ARCONTROLLER_DEVICE_STATE_RUNNING)) {
         _deviceController->aRDrone3->setPilotingPCMDGaz(_deviceController->aRDrone3, gaz);

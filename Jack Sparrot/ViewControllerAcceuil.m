@@ -37,19 +37,12 @@ UIAlertView *alertAccueil;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
-    /* Récupération des options et mise en place des settings par defaut */
-    hauteurMaxAccueil = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Hauteur"];
-    accelerationSettingAccueil = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Acceleration"];
-    _bExterieur = ![[NSUserDefaults standardUserDefaults] objectForKey:@"InOut"];
-    
+
+    _bWatchActive = false;
     ecranAccueil = [[ViewEcranAccueil alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecranAccueil setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
     [self setView: ecranAccueil];
     [self setTitle:@"Accueil"];
-    
-
-
     
     if ([WCSession isSupported]) {
         _session = [WCSession defaultSession];
@@ -153,6 +146,38 @@ UIAlertView *alertAccueil;
     /*Récupération de la date courante */
     _dateOldCommand = [NSDate date];
     
+    if([axe isEqualToString:@"MONTRE"]){
+        NSLog(@"MONTRE");
+        
+        NSString* rep = [[NSString alloc] initWithFormat:@"%f;%f;%d;",accelerationSettingAccueil,hauteurMaxAccueil,_bInterieurAccueil];
+        NSDictionary* response = @{@"response" : rep} ;
+        if (replyHandler != nil) replyHandler(response);
+        
+        _bWatchActive = true;
+        _btnAide.enabled = NO;
+        _btnAide.alpha = 0.5;
+        _btnDrone.enabled = NO;
+        _btnDrone.alpha = 0.5;
+        _btnOptions.enabled = NO;
+        _btnOptions.alpha = 0.5;
+        return;
+        
+    }
+    
+    if([axe isEqualToString:@"END"]){
+        _bWatchActive = false;
+        _btnAide.enabled = YES;
+        _btnAide.alpha = 1;
+        _btnDrone.enabled = YES;
+        _btnDrone.alpha = 1;
+        _btnOptions.enabled = YES;
+        _btnOptions.alpha = 1;
+        NSDictionary* response = @{@"reply" : @"DONE"} ;
+        if (replyHandler != nil) replyHandler(response);
+
+    }
+    
+    
     /*Valeur vers drone*/
     if([axe isEqualToString:@"0"]){
         [_bebopDrone setFlag:0];
@@ -160,10 +185,16 @@ UIAlertView *alertAccueil;
         [_bebopDrone setRoll:0];
         [_bebopDrone setGaz:0];
         [_bebopDrone setYaw:0];
+        NSDictionary* response = @{@"reply" : @"DONE 0"} ;
+        if (replyHandler != nil) replyHandler(response);
     }else if([axe isEqualToString:@"X"]) {
         [_bebopDrone setPitch:[valeur intValue]];
+        NSDictionary* response = @{@"reply" : @"DONE X"} ;
+        if (replyHandler != nil) replyHandler(response);
     }else if([axe isEqualToString:@"Y"]){
         [_bebopDrone setRoll:[valeur intValue]];
+        NSDictionary* response = @{@"reply" : @"DONE Y"} ;
+        if (replyHandler != nil) replyHandler(response);
     }else if([axe isEqualToString:@"Z"]){
         // in background, gaz the drone
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -173,23 +204,31 @@ UIAlertView *alertAccueil;
             NSLog(@"GAZ END");
             [_bebopDrone setGaz:0];
         });
+        NSDictionary* response = @{@"reply" : @"DONE Z"} ;
+        if (replyHandler != nil) replyHandler(response);
     }else if([axe isEqualToString:@"D"]){
         [_bebopDrone takeOff];
+        NSDictionary* response = @{@"reply" : @"DONE D"} ;
+        if (replyHandler != nil) replyHandler(response);
     }else if([axe isEqualToString:@"A"]){
         [_bebopDrone land];
+        NSDictionary* response = @{@"reply" : @"DONE A"} ;
+        if (replyHandler != nil) replyHandler(response);
     }else if([axe isEqualToString:@"H"]){
         if(_homeActivate == false){
             _homeActivate = true;
             [_bebopDrone setViewCall:self];
-            if(_bExterieur){
-                [_bebopDrone returnHomeExterieur];
-            }else{
+            if(_bInterieurAccueil){
                 [_bebopDrone returnHomeInterieur];
+            }else{
+                [_bebopDrone returnHomeExterieur];
             }
         }else{
             [_bebopDrone cancelReturnHome];
         }
-    }else if([axe isEqualToString:@"P"]){ /*Paramètres sur la montre */
+        NSDictionary* response = @{@"reply" : @"DONE H"} ;
+        if (replyHandler != nil) replyHandler(response);
+    }else if([axe isEqualToString:@"P"]){ /*Paramètres depuis la montre */
         accel = [valeur floatValue];
         hauteur = [[ArrayCommand objectAtIndex:2] floatValue];
         interieur = [[ArrayCommand objectAtIndex:3] floatValue];
@@ -205,6 +244,8 @@ UIAlertView *alertAccueil;
         //Rechargement du drone pour application des paramètres
         _bebopDrone = nil;
         [self viewDidAppear:FALSE];
+        NSDictionary* response = @{@"reply" : @"DONE P"} ;
+        if (replyHandler != nil) replyHandler(response);
         
     }
 
@@ -225,7 +266,7 @@ UIAlertView *alertAccueil;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    
+    [super viewDidAppear:YES];
     if(_bebopDrone == nil) {
         _dataSource = [NSArray array];
         _droneDiscoverer = [[DroneDiscoverer alloc] init];
@@ -241,6 +282,11 @@ UIAlertView *alertAccueil;
                                                   userInfo:nil
                                                    repeats:YES];
     
+    /* Récupération des options et mise en place des settings par defaut */
+    hauteurMaxAccueil = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Hauteur"];
+    accelerationSettingAccueil = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Acceleration"];
+    _bInterieurAccueil = [[NSUserDefaults standardUserDefaults] boolForKey:@"InOut"];
+    NSLog(@"INTERIEUR ACCUEIL %d",_bInterieurAccueil);
     
 }
 
@@ -426,29 +472,30 @@ UIAlertView *alertAccueil;
  * @brief vers le controle du drone
  */
 -(void) goToDroneControl:(UIButton*)send{
-    droneViewActif = true;
-    [self unregisterNotifications];
-    [_droneDiscoverer stopDiscovering];
-    [self deconnexionDrone];
-    
-    
+    if(!_bWatchActive){
+        droneViewActif = true;
+        [self unregisterNotifications];
+        [_droneDiscoverer stopDiscovering];
+        [self deconnexionDrone];
+    }
 }
 /**
  * @brief vers les options
  */
 -(void) goToDroneOptions:(UIButton*)send{
-    
-    ViewControllerOptions *secondController = [[ViewControllerOptions alloc] init];
-    [self.navigationController pushViewController:secondController animated:YES];
-    
+    if(!_bWatchActive){
+        ViewControllerOptions *secondController = [[ViewControllerOptions alloc] init];
+        [self.navigationController pushViewController:secondController animated:YES];
+    }
 }
 /**
  * @brief vers l'aide
  */
 -(void) goToDroneHelp:(UIButton*)send{
-    
-    ViewControllerOptions *secondController = [[ViewControllerAide alloc] init];
-    [self.navigationController pushViewController:secondController animated:YES];
+    if(!_bWatchActive){
+        ViewControllerOptions *secondController = [[ViewControllerAide alloc] init];
+        [self.navigationController pushViewController:secondController animated:YES];
+    }
 }
 
 @end

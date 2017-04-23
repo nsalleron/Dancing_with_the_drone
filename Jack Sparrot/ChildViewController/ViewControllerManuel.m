@@ -20,11 +20,11 @@
 #define DROITE 1
 #define HAUT 2
 #define BAS 3
-#define AVANT 4
-#define ARRIERE 5
-#define STABLE 6
-#define SURPLACE 7
+#define ARRIERE 4
+#define AVANT 5
+#define STATIONNAIRE 6
 #define THRESH 0.5
+#define THRESHSTABILITE 30
 
 
 @interface ViewControllerManuel ()<BebopDroneDelegate,
@@ -45,7 +45,7 @@ BOOL firstTime = TRUE;
 int currentDimensions = 0;
 double accelerationSetting;
 double hauteurMax;
-UIAlertView *alertManuel;
+UIAlertView *alertControl;
 
 NSTimer * timerDrone;
 ViewManuel *ecran;
@@ -56,8 +56,8 @@ ViewManuel *ecran;
     [super viewDidLoad];
     
     /*Récupération mode intérieur extérieur */
-    _bExterieur = ![[NSUserDefaults standardUserDefaults] objectForKey:@"InOut"];
-    
+    _bInterieurManuel = [[NSUserDefaults standardUserDefaults] boolForKey:@"InOut"];
+    NSLog(@"INTERIEUR MANUEL %d",_bInterieurManuel);
     /* Récupération des options et mise en place des settings par defaut */
     hauteurMax = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Hauteur"];
     accelerationSetting = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Acceleration"];
@@ -68,6 +68,7 @@ ViewManuel *ecran;
         _droneDiscoverer = [[DroneDiscoverer alloc] init];
         [_droneDiscoverer setDelegate:self];
     }
+    _bebopDrone = [[BebopDrone alloc ] init];
     
     /* Fin acceleration */
     _enStatio = FALSE;
@@ -122,177 +123,171 @@ ViewManuel *ecran;
 - (void) mouvementDeviceMotion:(CMDeviceMotion *)motion{
     
     /* Le mouvement est-il autorisé */
-    if(_bebopDrone == nil || !_enVol || _enStatio || _homeActivate){
+    /*if(_bebopDrone == nil || !_enVol || _enStatio || _homeActivate){
         [_bebopDrone setFlag:0];
         [_bebopDrone setRoll:0];
         [_bebopDrone setPitch:0];
         [_bebopDrone setGaz:0];
         [_bebopDrone setYaw:0];
         return;
-    }
-    NSLog(@"Val en station : %d",_enStatio);
-    //if(_enStatio) return;
+    }*/
     
+    boolean MVTX = false,
+            MVTY = false,
+            MVTZ = false;
+     
     /* Récupération de l'userAcceleration */
     _incX = motion.userAcceleration.x;
     _incY = motion.userAcceleration.y;
     _incZ = motion.userAcceleration.z;
     
-    
-    
-    /* Vérification si mouvement */
+    /* Vérification si acceleration ou déceleration  */
     _absX = fabs(_incX);
     _absY = fabs(_incY);
     _absZ = fabs(_incZ);
     
-    
-    /* Mouvement de d'avant et d'arrière */
     if(_absX > THRESH){
-        if(_incX < -THRESH){
-            if(_stabX){
-                [ecran updateBtnDimensions:@"ARRIERE"];
-                NSLog(@"ARRIERE");
-                if(_axeX && currentDimensions == 1){
-                    [_bebopDrone setFlag:1];
-                    [_bebopDrone setPitch:100];
-                }else if(currentDimensions == 2 || currentDimensions == 3){
-                    [_bebopDrone setFlag:1];
-                    [_bebopDrone setPitch:100];
-                }
-                _lastMoveX = ARRIERE;
-                _stabX = NO;
-            }
-        }else if(_incX > 0.2){
-            if(_stabX){
-                [ecran updateBtnDimensions:@"AVANT"];
-                NSLog(@"AVANT");
-                if(_axeX && currentDimensions == 1){
-                    [_bebopDrone setFlag:1];
-                    [_bebopDrone setPitch:-100];
-                }else if(currentDimensions == 2 || currentDimensions == 3){
-                    [_bebopDrone setFlag:1];
-                    [_bebopDrone setPitch:-100];
-                    
-                }
-                _lastMoveX = AVANT;
-                _stabX = NO;
-            }
-        }
-        _incX = 0;
+        MVTX = true;
     }else{
-        if(_incStabX < 6){
+        if(_incStabX < THRESHSTABILITE){
             _incStabX++;
         }else{
-            if(_lastMoveX != STABLE){
-                [ecran updateBtnDimensions:@"STABLE"];
-                NSLog(@"STABLE X");
+            if(_lastMoveX != STATIONNAIRE){
+                NSLog(@"STATIONNAIRE X");
                 [_bebopDrone setFlag:0];
                 [_bebopDrone setPitch:0];
             }
             _stabX = YES;
-            _lastMoveX = STABLE;
+            _lastMoveX = STATIONNAIRE;
             _incStabX = 0;
         }
     }
     
-    /* Mouvement de gauche et droite */
     if(_absY > THRESH){
-        if(_incY < -THRESH){
-            if(_stabY){
-                [ecran updateBtnDimensions:@"DROITE"];
-                //NSLog(@"DROITE");
-                if(!_axeX && currentDimensions == 1){
-                    [_bebopDrone setFlag:1];
-                    [_bebopDrone setRoll:100];
-                }else if(currentDimensions == 2 || currentDimensions == 3){
-                    [_bebopDrone setFlag:1];
-                    [_bebopDrone setRoll:100];
-                }
-                _lastMoveY = DROITE;
-                _stabY = NO;
-            }
-        }else if(_incY > THRESH){
-            if(_stabY){
-                [ecran updateBtnDimensions:@"GAUCHE"];
-                //NSLog(@"GAUCHE");
-                if(!_axeX && currentDimensions == 1){
-                    [_bebopDrone setFlag:1];
-                    [_bebopDrone setRoll:-100];
-                }else if(currentDimensions == 2 || currentDimensions == 3){
-                    [_bebopDrone setFlag:1];
-                    [_bebopDrone setRoll:-100];
-                }
-                _lastMoveY = GAUCHE;
-                _stabY = NO;
-            }
-        }
-        _incY = 0;
+        MVTY = true;
     }else{
-        if(_incStabY < 6){
+        if(_incStabY < THRESHSTABILITE){
             _incStabY++;
         }else{
-            if(_lastMoveY != STABLE){
-                NSLog(@"STABLE Y");
-                [ecran updateBtnDimensions:@"STABLE"];
+            if(_lastMoveY != STATIONNAIRE){
+                NSLog(@"STATIONNAIRE Y");
+                [ecran updateBtnDimensions:@"STATIONNAIRE"];
                 [_bebopDrone setFlag:0];
                 [_bebopDrone setRoll:0];
             }
             _stabY = YES;
-            _lastMoveY = STABLE;
+            _lastMoveY = STATIONNAIRE;
             _incStabY = 0;
         }
     }
     
-    /* Mouvement de haut et bas */
     if(_absZ > THRESH){
-        if(_incZ < -THRESH){
-            if(_stabZ){
-                [ecran updateBtnDimensions:@"HAUT"];
-                //NSLog(@"HAUT");
+        MVTZ = true;
+    }else{
+        if(_incStabZ < THRESHSTABILITE){
+            _incStabZ++;
+        }else{
+            if(_lastMoveZ != STATIONNAIRE){
+                NSLog(@"STATIONNAIRE Z");
+                [_bebopDrone setGaz:0];
+            }
+            _stabZ = YES;
+            _lastMoveZ = STATIONNAIRE;
+            _incStabZ = 0;
+        }
+    }
+    
+    if(MVTX == false && MVTY == false && MVTZ == false) return; /* Pas besoin d'en faire plus */
+    
+    /* Si mouvement en X ou Y ou Z alors on applique suivant le sens*/
+    if(MVTX){
+        if(_incX < -THRESH && _stabX){
+            NSLog(@"AVANT");
+            if(_axeX && currentDimensions == 1){
+                [_bebopDrone setFlag:1];
+                [_bebopDrone setPitch:100];
+            }else if(currentDimensions == 2 || currentDimensions == 3){
+                [_bebopDrone setFlag:1];
+                [_bebopDrone setPitch:100];
+            }
+            _lastMoveX = AVANT;
+            _stabX = NO;
+        }else if(_incX > THRESH && _stabX){
+            NSLog(@"ARRIERE");
+            if(_axeX && currentDimensions == 1){
+                [_bebopDrone setFlag:1];
+                [_bebopDrone setPitch:-100];
+            }else if(currentDimensions == 2 || currentDimensions == 3){
+                [_bebopDrone setFlag:1];
+                [_bebopDrone setPitch:-100];
+            }
+            _lastMoveX = ARRIERE;
+            _stabX = NO;
+        }
+        _incX = 0;
+    }
+    
+    
+    if(MVTY){
+        if(_incY < -THRESH && _stabY){
+                NSLog(@"DROITE");
+                if(!_axeX && currentDimensions == 1){
+                    [_bebopDrone setFlag:1];
+                    [_bebopDrone setRoll:-100];
+                }else if(currentDimensions == 2 || currentDimensions == 3){
+                    [_bebopDrone setFlag:1];
+                    [_bebopDrone setRoll:-100];
+                }
+                _lastMoveY = DROITE;
+                _stabY = NO;
+        }else if(_incY > THRESH && _stabY){
+                NSLog(@"GAUCHE");
+                if(!_axeX && currentDimensions == 1){
+                    [_bebopDrone setFlag:1];
+                    [_bebopDrone setRoll:100];
+                }else if(currentDimensions == 2 || currentDimensions == 3){
+                    [_bebopDrone setFlag:1];
+                    [_bebopDrone setRoll:100];
+                }
+                _lastMoveY = GAUCHE;
+                _stabY = NO;
+            
+        }
+        _incY = 0;
+    }
+    
+    if(MVTZ){
+        if(_incZ < -THRESH && _stabZ){
+                NSLog(@"HAUT");
                 if(currentDimensions == 3){
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        [_bebopDrone setGaz:100];
+                        [_bebopDrone setGaz:50];
                         NSLog(@"GAZ UP");
-                        [NSThread sleepForTimeInterval:0.2f];
+                        [NSThread sleepForTimeInterval:0.5f];
                         NSLog(@"GAZ END");
                         [_bebopDrone setGaz:0];
                     });
                 }
                 _lastMoveZ = HAUT;
                 _stabZ = NO;
-            }
-        }else if(_incZ > THRESH){
-            if(_stabZ){
-                [ecran updateBtnDimensions:@"BAS"];
-                //NSLog(@"BAS");
+            
+        }else if(_incZ > THRESH && _stabZ){
+                NSLog(@"BAS");
                 if(currentDimensions == 3){
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        [_bebopDrone setGaz:-100];
+                        [_bebopDrone setGaz:-50];
                         NSLog(@"GAZ UP");
-                        [NSThread sleepForTimeInterval:0.2f];
+                        [NSThread sleepForTimeInterval:0.5f];
                         NSLog(@"GAZ END");
                         [_bebopDrone setGaz:0];
                     });
                 }
                 _lastMoveZ = BAS;
                 _stabZ = NO;
-            }
+            
         }
         _incZ = 0;
-    }else{
-        if(_incStabZ < 6){
-            _incStabZ++;
-        }else{
-            if(_lastMoveZ != STABLE){
-                NSLog(@"STABLE Z");
-                [_bebopDrone setGaz:0];
-            }
-            _stabZ = YES;
-            _lastMoveZ = STABLE;
-            _incStabZ = 0;
-        }
     }
-    
 }
 
 /**
@@ -308,25 +303,26 @@ ViewManuel *ecran;
     double batTermin = (float)[myDevice batteryLevel] * 100;
     
     //Battery of the drone
-    
-    if([_bebopDrone isFlying]){
-        NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"alert" ofType:@"mp3"];
-        SystemSoundID soundID;
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundPath], &soundID);
-        AudioServicesPlaySystemSound(soundID);
+    if(batTermin < 10 || _batteryDroneManuel < 10){
         
-        if(alertManuel == nil){
-            alertManuel = [[UIAlertView alloc] initWithTitle:@"Attention !"
-                                                      message:@"La batterie du terminal ou du drone est faible."
-                                                     delegate:self
-                                            cancelButtonTitle:@"Arrêter le drone"
-                                            otherButtonTitles:@"Continuer",nil];
-            [alertManuel show];
+        
+        if([_bebopDrone isFlying]){
+            NSString *soundPath = [[NSBundle mainBundle] pathForResource:@"alert" ofType:@"mp3"];
+            SystemSoundID soundID;
+            AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:soundPath], &soundID);
+            AudioServicesPlaySystemSound(soundID);
             
+            if(alertControl == nil){
+                alertControl = [[UIAlertView alloc] initWithTitle:@"Attention !"
+                                                          message:@"La batterie du terminal ou du drone est faible."
+                                                         delegate:self
+                                                cancelButtonTitle:@"Arrêter le drone"
+                                                otherButtonTitles:@"Continuer",nil];
+                [alertControl show];
+                
+            }
         }
-        
     }
-    
     
 }
 
@@ -370,6 +366,8 @@ ViewManuel *ecran;
             _enVol = TRUE;
             _enStatio = TRUE;
             [_bebopDrone takeOff];
+            btnImage = [UIImage imageNamed:@"ic_play_arrow.png"];
+            [[ecran btnStatioDecoAttr] setImage:btnImage forState:UIControlStateNormal];
         default:
             break;
     }
@@ -487,13 +485,14 @@ ViewManuel *ecran;
  */
 - (void) homeFunction:(UILongPressGestureRecognizer*)gesture{
     if ( gesture.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"Fonction Home activée! bExterieur = %d",_bExterieur);
+        NSLog(@"Fonction Home activée! bInteireur = %d",_bInterieurManuel);
         _homeActivate = true;
         [_bebopDrone setViewCall:self];
-        if(_bExterieur){
-            [_bebopDrone returnHomeExterieur];
-        }else{
+        if(_bInterieurManuel){
             [_bebopDrone returnHomeInterieur];
+
+        }else{
+            [_bebopDrone returnHomeExterieur];
         }
         
     }
@@ -555,7 +554,7 @@ ViewManuel *ecran;
 -(void)swipeUp:(UISwipeGestureRecognizer*)gestureRecognizer
 {
    
-    if(_bebopDrone == nil || !_enVol || _enStatio) return;
+    //if(_bebopDrone == nil || !_enVol || _enStatio) return;
     
     // in background, gaz the drone
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -575,7 +574,7 @@ ViewManuel *ecran;
 -(void)swipeDown:(UISwipeGestureRecognizer*)gestureRecognizer
 {
    
-    if(_bebopDrone == nil || !_enVol || _enStatio) return;
+    //if(_bebopDrone == nil || !_enVol || _enStatio) return;
     
     // in background, gaz the drone
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -773,7 +772,7 @@ ViewManuel *ecran;
     
     if (self.motionManager.deviceMotionAvailable) {
         
-        _motionManager.deviceMotionUpdateInterval = 1.0/10.0F;
+        _motionManager.deviceMotionUpdateInterval = 1.0/60.0F;
         [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical];
         [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
             [self mouvementDeviceMotion:motion];

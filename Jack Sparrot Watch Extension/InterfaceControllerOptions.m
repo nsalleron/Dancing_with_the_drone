@@ -31,6 +31,7 @@ bool home;
         [_session activateSession];
     }
     
+    
     /* Acceleration */
     coefAccel = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Acceleration"];
     [_labelAccel setText:[[NSString alloc] initWithFormat:@"Coef : %0.2f m.",coefAccel]];

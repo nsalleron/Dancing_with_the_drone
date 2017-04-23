@@ -98,6 +98,7 @@ int btnColorID = 0;
 
     [[self navigationController] setNavigationBarHidden:NO];
     [ecranOptions updateView:size];
+   
 }
 
 /**
@@ -107,6 +108,11 @@ int btnColorID = 0;
 {
     [ecranOptions updateBtn:btnColorID color:item];
     choiceColor = false;
+}
+
+- (void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:YES];
+    [ecranOptions updateView:[[UIScreen mainScreen] bounds].size];
 }
 
 - (void) viewWillDisappear:(BOOL)animated{
@@ -149,7 +155,8 @@ int btnColorID = 0;
     [[NSUserDefaults standardUserDefaults] setDouble:[ecranOptions getStepperValueCoefAcce] forKey:@"Acceleration"];
     [[NSUserDefaults standardUserDefaults] setDouble:[ecranOptions getStepperValueMax] forKey:@"Hauteur"];
     bool tmp =[ecranOptions getSwitchValueInOut];
-    [[NSUserDefaults standardUserDefaults] setBool:(!tmp) forKey:@"InOut"];  //Pour correspondance InOutviewManuel
+    NSLog(@"_BINTERIEUR %d",tmp);
+    [[NSUserDefaults standardUserDefaults] setBool:(tmp) forKey:@"InOut"];  //Pour correspondance InOutviewManuel
 }
 
 @end

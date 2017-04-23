@@ -19,12 +19,13 @@
 @property (readwrite, nonatomic) Boolean enStatio;
 @property (readwrite, nonatomic) Boolean axeX;
 @property (readwrite, nonatomic) Boolean homeActivate;
+@property (nonatomic) int *batteryDrone;
 @property (nonatomic, strong) ARService *service;
 @property (nonatomic) int *batteryDroneManuel;
 @property (strong, nonatomic) CMMotionManager *motionManager;
 @property (nonatomic) dispatch_semaphore_t stateSem;
 @property (atomic, strong) NSMutableArray *arrayFloat;
-@property (nonatomic) bool bExterieur;
+@property (nonatomic) bool bInterieurManuel;
 @property (readonly, nonatomic) double incX;
 @property (readonly, nonatomic) double incY;
 @property (readonly, nonatomic) double incZ;

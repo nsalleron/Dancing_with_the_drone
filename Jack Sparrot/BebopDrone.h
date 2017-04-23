@@ -102,6 +102,7 @@
 - (eARCONTROLLER_DEVICE_STATE)connectionState;
 /**
  * @brief Récupération de l'état de vol du drone
+ * @return L'etat du drone en cours. 
  */
 - (eARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE)flyingState;
 /**

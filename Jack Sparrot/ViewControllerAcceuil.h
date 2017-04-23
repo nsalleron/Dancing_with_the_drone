@@ -27,7 +27,8 @@
 @property (nonatomic) dispatch_semaphore_t stateSem;
 @property (nonatomic, strong) WCSession* session;
 @property (atomic, strong) NSDate *dateOldCommand;
-@property (nonatomic) bool bExterieur;
+@property (nonatomic) bool bInterieurAccueil;
+@property (nonatomic) bool bWatchActive;
 @property (readwrite, nonatomic) Boolean homeActivate;
 
 /**

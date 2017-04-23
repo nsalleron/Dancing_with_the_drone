@@ -71,7 +71,7 @@ UINavigationController *myVC;
         _labelBatterySmartphone = [[UILabel alloc ]init];
         
         
-        [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d",0]];
+        [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d%%",0]];
         [_labelBatteryDrone setText:@"Batterie drone : —"];
         [_labelVersionApp setText:@"Version 0.01"];
         
@@ -154,7 +154,7 @@ UINavigationController *myVC;
         [_labelVersionApp setFrame:CGRectMake(format.width - _tailleIcones + (_tailleIcones/3) ,format.height - _tailleIcones/2 + 10,_tailleIcones,_tailleIcones/2)];
         [_labelVersionApp setTextAlignment:NSTextAlignmentLeft];
         
-        [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d",(int)[self battery]]];
+        [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d%%",(int)[self battery]]];
         
     }else{
         
@@ -180,7 +180,7 @@ UINavigationController *myVC;
         /* LabelBatterySmartphone */
         
         [_labelBatterySmartphone setFrame:CGRectMake(format.width - _tailleIcones/1.5,-10,_tailleIcones,_tailleIcones/3)];
-        [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d",(int)[self battery]]];
+        [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d%%",(int)[self battery]]];
         /* LabelBatteryDrone */
         [_labelBatteryDrone setFrame:CGRectMake(10,
                                                 -10,

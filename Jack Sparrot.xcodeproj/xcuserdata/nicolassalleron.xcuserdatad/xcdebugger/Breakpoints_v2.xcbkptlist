@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Jack Sparrot/ViewControllerAcceuil.m"
-            timestampString = "514404646.518381"
+            timestampString = "514639493.60345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "-checkBattery"
             landmarkType = "7">
          </BreakpointContent>

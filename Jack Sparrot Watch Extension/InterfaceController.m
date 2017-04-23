@@ -16,8 +16,8 @@
 #define BAS 3
 #define AVANT 4
 #define ARRIERE 5
-#define STABLE 6
-#define SURPLACE 7
+#define STATIONNAIRE 6
+#define THRESHSTABILITE 30
 #define THRESH 0.2
 
 @interface InterfaceController()<WCSessionDelegate>
@@ -60,6 +60,30 @@ HKWorkoutSession *workoutSession;
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
+    [self updateUserActivity:sharedUserActivityType userInfo:[[NSDictionary alloc] initWithObjectsAndKeys:sharedIdentifierKey, @"123456", nil] webpageURL:nil];
+    
+    if ([WCSession isSupported]) {
+        _session = [WCSession defaultSession];
+        _session.delegate = self;
+        [_session activateSession];
+    }
+    
+    self.motionManager = [[CMMotionManager alloc] init];
+    
+    if (self.motionManager.deviceMotionAvailable) {
+        
+        
+        _motionManager.deviceMotionUpdateInterval = 1.0/10.0F;
+        [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical];
+        [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
+            [self mouvementDeviceMotion:motion];
+        }];
+        
+        
+    }else{
+        //[_btnDim setTitle:@"NON DISPONIBLE MOTIONMANAGER"];
+    }
+    
     
 }
 
@@ -127,30 +151,26 @@ HKWorkoutSession *workoutSession;
     // This method is called when watch view controller is about to be visible to user
     [super willActivate];
     
-    [self updateUserActivity:sharedUserActivityType userInfo:[[NSDictionary alloc] initWithObjectsAndKeys:sharedIdentifierKey, @"123456", nil] webpageURL:nil];
     
-    if ([WCSession isSupported]) {
-        _session = [WCSession defaultSession];
-        _session.delegate = self;
-        [_session activateSession];
-    }
-    
-    self.motionManager = [[CMMotionManager alloc] init];
-    
-    if (self.motionManager.deviceMotionAvailable) {
-        
-        
-        _motionManager.deviceMotionUpdateInterval = 1.0/10.0F;
-        [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical];
-        [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
-            [self mouvementDeviceMotion:motion];
-        }];
-        
-        
-    }else{
-        //[_btnDim setTitle:@"NON DISPONIBLE MOTIONMANAGER"];
-    }
-    
+    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"MONTRE;",@"CMD", nil];
+    [_session sendMessage:applicationDict
+     
+             replyHandler:^(NSDictionary *replyHandler) {
+                 
+                 NSLog(@"REPLY PARAMS: %@",[replyHandler valueForKey:@"response"]); //PARAMETRES DU MOBILE
+                 NSArray * ArrayCommand = [[NSArray alloc] init];
+                 ArrayCommand = [[replyHandler valueForKey:@"response"]componentsSeparatedByString:@";"];
+                 
+                 [[NSUserDefaults standardUserDefaults] setDouble:[ArrayCommand[0] doubleValue] forKey:@"Acceleration"];
+                 [[NSUserDefaults standardUserDefaults] setDouble:[ArrayCommand[1] doubleValue] forKey:@"Hauteur"];
+                 [[NSUserDefaults standardUserDefaults] setBool:[ArrayCommand[2] boolValue] forKey:@"InOut"];
+                 
+             }
+     
+             errorHandler:^(NSError *error) {
+                 NSLog(@"ERROR");
+             }
+     ];
     
     
     
@@ -161,6 +181,15 @@ HKWorkoutSession *workoutSession;
 - (void)didDeactivate {
     // This method is called when watch view controller is no longer visible
     [super didDeactivate];
+    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"END;",@"CMD", nil];
+    [_session sendMessage:applicationDict
+     
+             replyHandler:^(NSDictionary *replyHandler) {
+             }
+     
+             errorHandler:^(NSError *error) {
+             }
+     ];
 }
 
 
@@ -170,111 +199,48 @@ HKWorkoutSession *workoutSession;
  * REM : Quasiment la même que la version mobile
  */
 - (void) mouvementDeviceMotion:(CMDeviceMotion *)motion{
-    
-       /* Le mouvement est-il autorisé */
+    NSDictionary *applicationDict;
+    /* Le mouvement est-il autorisé */
     if( _enStatio ){
         
-        NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"0;",@"CMD", nil];
+        applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"0;",@"CMD", nil];
         [_session sendMessage:applicationDict
                  replyHandler:^(NSDictionary *replyHandler) {
-                     NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                     //NSLog(@"REPLY : %@",[replyHandler valueForKey:@"PARAMS"]);
+                     [_btnChgMode setTitle:[[NSString alloc ] initWithFormat:@"%@",[replyHandler valueForKey:@"PARAMS"]]];
                  }
                  errorHandler:^(NSError *error) {
-                     NSLog(@"ERROR");
+                     NSLog(@"ERROR REPLY");
                  }
          ];
         return;
     }
     
     
+    Boolean MVTX = false,
+            MVTY = false,
+            MVTZ = false;
     
     /* Récupération de l'userAcceleration */
     _incX = motion.userAcceleration.x;
     _incY = motion.userAcceleration.y;
     _incZ = motion.userAcceleration.z;
     
-    
-    
     /* Vérification si mouvement */
     _absX = fabs(_incX);
     _absY = fabs(_incY);
     _absZ = fabs(_incZ);
-
     
-    /* Mouvement de FOWARD et BACKWARD */
+    
+    
     if(_absX > THRESH){
-        if(_incX < -THRESH){
-            if(_stabX){
-                
-                if(!axeY && currentDimensions == 1){
-                    //[_btnDim setTitle:@"AVANT"];
-                    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;100",@"CMD", nil];
-                    [_session sendMessage:applicationDict
-                             replyHandler:^(NSDictionary *replyHandler) {
-                                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
-                             }
-                             errorHandler:^(NSError *error) {
-                                 NSLog(@"ERROR");
-                             }
-                     ];
-                    
-                }else if(currentDimensions == 2 || currentDimensions == 3){
-                    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;100",@"CMD", nil];
-                    [_session sendMessage:applicationDict
-                             replyHandler:^(NSDictionary *replyHandler) {
-                                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
-                             }
-                             errorHandler:^(NSError *error) {
-                                 NSLog(@"ERROR");
-                             }
-                     ];
-                }
-                _lastMoveX = ARRIERE;
-                _stabX = NO;
-            }else{
-                
-            }
-        }else if(_incX > 0.2){
-            if(_stabX){
-                
-                if(!axeY && currentDimensions == 1){
-                    //[_btnDim setTitle:@"ARRIERE"];
-                    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;-100",@"CMD", nil];
-                    [_session sendMessage:applicationDict
-                             replyHandler:^(NSDictionary *replyHandler) {
-                                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
-                             }
-                             errorHandler:^(NSError *error) {
-                                 NSLog(@"ERROR");
-                             }
-                     ];
-                }else if(currentDimensions == 2 || currentDimensions == 3){
-                    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;-100",@"CMD", nil];
-                    [_session sendMessage:applicationDict
-                             replyHandler:^(NSDictionary *replyHandler) {
-                                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
-                             }
-                             errorHandler:^(NSError *error) {
-                                 NSLog(@"ERROR");
-                             }
-                     ];
-                    
-                }
-                _lastMoveX = AVANT;
-                _stabX = NO;
-            }else{
-                NSLog(@"DECELERATION VERS L'ARRIERE");
-            }
-        }
-        _incX = 0;
+        MVTX = true;
     }else{
-        if(_incStabX < 6){
-            //NSLog(@"LE CPT : %d", _incStabX);
+        if(_incStabX < THRESHSTABILITE){
             _incStabX++;
         }else{
-            if(_lastMoveX != STABLE){
-                //[_btnDim setTitle:@"STABLE X"];
-                NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;0",@"CMD", nil];
+            if(_lastMoveX != STATIONNAIRE){
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;0",@"CMD", nil];
                 [_session sendMessage:applicationDict
                          replyHandler:^(NSDictionary *replyHandler) {
                              NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
@@ -285,103 +251,19 @@ HKWorkoutSession *workoutSession;
                  ];
             }
             _stabX = YES;
-            _lastMoveX = STABLE;
+            _lastMoveX = STATIONNAIRE;
             _incStabX = 0;
         }
     }
     
-    // DROITE / GAUCHE : OK
     if(_absY > THRESH){
-        [_btnChgMode setTitle:[[NSString alloc] initWithFormat:@"val %f",_incY]];
-        if(_incY < -THRESH){
-            
-            if(_stabY){
-                
-                if(axeY && currentDimensions == 1){
-                    //[_btnDim setTitle:@"DROITE"];
-                    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;100",@"CMD", nil];
-                    [_session sendMessage:applicationDict
-                             replyHandler:^(NSDictionary *replyHandler) {
-                                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
-                             }
-                             errorHandler:^(NSError *error) {
-                                 NSLog(@"ERROR");
-                             }
-                     ];
-                    /*
-                     [_bebopDrone setFlag:1];
-                     [_bebopDrone setRoll:100];
-                     */
-                }else if(currentDimensions == 2 || currentDimensions == 3){
-                    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;100",@"CMD", nil];
-                    [_btnDim setTitle:@"DROITE"];
-                    [_session sendMessage:applicationDict
-                             replyHandler:^(NSDictionary *replyHandler) {
-                                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
-                             }
-                             errorHandler:^(NSError *error) {
-                                 NSLog(@"ERROR");
-                             }
-                     ];
-                    /*
-                     [_bebopDrone setFlag:1];
-                     [_bebopDrone setRoll:100];
-                     */
-                }
-                _lastMoveY = DROITE;
-                _stabY = NO;
-            }else{
-                NSLog(@"DECELERATION VERS LA GAUCHE");
-            }
-        }else if(_incY > THRESH){
-            if(_stabY){
-                
-                if(axeY && currentDimensions == 1){
-                    [_btnDim setTitle:@"GAUCHE"];
-                    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;-100",@"CMD", nil];
-                    [_session sendMessage:applicationDict
-                             replyHandler:^(NSDictionary *replyHandler) {
-                                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
-                             }
-                             errorHandler:^(NSError *error) {
-                                 NSLog(@"ERROR");
-                             }
-                     ];
-                    /*
-                     [_bebopDrone setFlag:1];
-                     [_bebopDrone setRoll:-100];
-                     */
-                }else if(currentDimensions == 2 || currentDimensions == 3){
-                    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;-100",@"CMD", nil];
-                    [_btnDim setTitle:@"GAUCHE"];
-                    [_session sendMessage:applicationDict
-                             replyHandler:^(NSDictionary *replyHandler) {
-                                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
-                             }
-                             errorHandler:^(NSError *error) {
-                                 NSLog(@"ERROR");
-                             }
-                     ];
-                    /*
-                     [_bebopDrone setFlag:1];
-                     [_bebopDrone setRoll:-100];
-                     */
-                }
-                _lastMoveY = GAUCHE;
-                _stabY = NO;
-            }else{
-                NSLog(@"DECELERATION VERS LA DROITE");
-            }
-        }
-        _incY = 0;
+        MVTY = true;
     }else{
-        if(_incStabY < 6){
-            //NSLog(@"LE CPT : %d", _cptStables);
+        if(_incStabY < THRESHSTABILITE){
             _incStabY++;
         }else{
-            if(_lastMoveY != STABLE){
-                //[_btnDim setTitle:@"STABLE"];
-                NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;0",@"CMD", nil];
+            if(_lastMoveY != STATIONNAIRE){
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;0",@"CMD", nil];
                 [_session sendMessage:applicationDict
                          replyHandler:^(NSDictionary *replyHandler) {
                              NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
@@ -392,61 +274,19 @@ HKWorkoutSession *workoutSession;
                  ];
             }
             _stabY = YES;
-            _lastMoveY = STABLE;
+            _lastMoveY = STATIONNAIRE;
             _incStabY = 0;
         }
     }
     
-    // HAUT / BAS : OK
     if(_absZ > THRESH){
-        if(_incZ < -THRESH){
-            if(_stabZ){
-                NSLog(@"HAUT");
-                if(currentDimensions == 3){
-                    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Z;100",@"CMD", nil];
-                    [_session sendMessage:applicationDict
-                             replyHandler:^(NSDictionary *replyHandler) {
-                                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
-                             }
-                             errorHandler:^(NSError *error) {
-                                 NSLog(@"ERROR");
-                             }
-                     ];
-                }
-                _lastMoveZ = HAUT;
-                _stabZ = NO;
-            }else{
-                NSLog(@"DECELERATION VERS LE BAS");
-            }
-        }else if(_incZ > THRESH){
-            if(_stabZ){
-                NSLog(@"BAS");
-                if(currentDimensions == 3){
-                    NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Z;-100",@"CMD", nil];
-                    [_session sendMessage:applicationDict
-                             replyHandler:^(NSDictionary *replyHandler) {
-                                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
-                             }
-                             errorHandler:^(NSError *error) {
-                                 NSLog(@"ERROR");
-                             }
-                     ];
-                }
-                _lastMoveZ = BAS;
-                _stabZ = NO;
-            }else{
-                NSLog(@"DECELERATION VERS LE HAUT");
-            }
-        }
-        _incZ = 0;
+        MVTZ = true;
     }else{
-        if(_incStabZ < 6){
-            //NSLog(@"LE CPT : %d", _cptStables);
+        if(_incStabZ < THRESHSTABILITE){
             _incStabZ++;
         }else{
-            if(_lastMoveZ != STABLE){
-                NSLog(@"STABLE Z");
-                NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Z;0",@"CMD", nil];
+            if(_lastMoveZ != STATIONNAIRE){
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Z;0",@"CMD", nil];
                 [_session sendMessage:applicationDict
                          replyHandler:^(NSDictionary *replyHandler) {
                              NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
@@ -457,11 +297,183 @@ HKWorkoutSession *workoutSession;
                  ];
             }
             _stabZ = YES;
-            _lastMoveZ = STABLE;
+            _lastMoveZ = STATIONNAIRE;
             _incStabZ = 0;
         }
     }
     
+    if(MVTX == false && MVTY == false && MVTZ == false) return; /* Pas besoin d'en faire plus */
+    
+    
+    /* Si mouvement en X ou Y ou Z alors on applique suivant le sens*/
+    if(MVTX){
+        if(_incX < -THRESH && _stabX){
+            NSLog(@"AVANT");
+            if(!axeY && currentDimensions == 1){
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;100",@"CMD", nil];
+                [_session sendMessage:applicationDict
+                         replyHandler:^(NSDictionary *replyHandler) {
+                             NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                         }
+                         errorHandler:^(NSError *error) {
+                             NSLog(@"ERROR");
+                         }
+                 ];
+                
+            }else if(currentDimensions == 2 || currentDimensions == 3){
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;100",@"CMD", nil];
+                [_session sendMessage:applicationDict
+                         replyHandler:^(NSDictionary *replyHandler) {
+                             NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                         }
+                         errorHandler:^(NSError *error) {
+                             NSLog(@"ERROR");
+                         }
+                 ];
+            }
+            _lastMoveX = ARRIERE;
+            _stabX = NO;
+        }else if(_incX > THRESH && _stabX){
+            NSLog(@"ARRIERE");
+            if(!axeY && currentDimensions == 1){
+                //[_btnDim setTitle:@"ARRIERE"];
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;-100",@"CMD", nil];
+                [_session sendMessage:applicationDict
+                         replyHandler:^(NSDictionary *replyHandler) {
+                             NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                         }
+                         errorHandler:^(NSError *error) {
+                             NSLog(@"ERROR");
+                         }
+                 ];
+            }else if(currentDimensions == 2 || currentDimensions == 3){
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;-100",@"CMD", nil];
+                [_session sendMessage:applicationDict
+                         replyHandler:^(NSDictionary *replyHandler) {
+                             NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                         }
+                         errorHandler:^(NSError *error) {
+                             NSLog(@"ERROR");
+                         }
+                 ];
+                
+            }
+            _lastMoveX = AVANT;
+            _stabX = NO;
+        }
+        _incX = 0;
+    }
+    
+    
+    if(MVTY){
+        if(_incY < -THRESH && _stabY){
+            NSLog(@"DROITE");
+            if(axeY && currentDimensions == 1){
+                //[_btnDim setTitle:@"DROITE"];
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;100",@"CMD", nil];
+                [_session sendMessage:applicationDict
+                         replyHandler:^(NSDictionary *replyHandler) {
+                             NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                         }
+                         errorHandler:^(NSError *error) {
+                             NSLog(@"ERROR");
+                         }
+                 ];
+                /*
+                 [_bebopDrone setFlag:1];
+                 [_bebopDrone setRoll:100];
+                 */
+            }else if(currentDimensions == 2 || currentDimensions == 3){
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;100",@"CMD", nil];
+                [_btnDim setTitle:@"DROITE"];
+                [_session sendMessage:applicationDict
+                         replyHandler:^(NSDictionary *replyHandler) {
+                             NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                         }
+                         errorHandler:^(NSError *error) {
+                             NSLog(@"ERROR");
+                         }
+                 ];
+                /*
+                 [_bebopDrone setFlag:1];
+                 [_bebopDrone setRoll:100];
+                 */
+            }
+            _lastMoveY = DROITE;
+            _stabY = NO;
+        }else if(_incY > THRESH && _stabY){
+            if(axeY && currentDimensions == 1){
+                [_btnDim setTitle:@"GAUCHE"];
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;-100",@"CMD", nil];
+                [_session sendMessage:applicationDict
+                         replyHandler:^(NSDictionary *replyHandler) {
+                             NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                         }
+                         errorHandler:^(NSError *error) {
+                             NSLog(@"ERROR");
+                         }
+                 ];
+                /*
+                 [_bebopDrone setFlag:1];
+                 [_bebopDrone setRoll:-100];
+                 */
+            }else if(currentDimensions == 2 || currentDimensions == 3){
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;-100",@"CMD", nil];
+                [_btnDim setTitle:@"GAUCHE"];
+                [_session sendMessage:applicationDict
+                         replyHandler:^(NSDictionary *replyHandler) {
+                             NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                         }
+                         errorHandler:^(NSError *error) {
+                             NSLog(@"ERROR");
+                         }
+                 ];
+                /*
+                 [_bebopDrone setFlag:1];
+                 [_bebopDrone setRoll:-100];
+                 */
+            }
+            _lastMoveY = GAUCHE;
+            _stabY = NO;
+            
+        }
+        _incY = 0;
+    }
+    
+    if(MVTZ){
+        if(_incZ < -THRESH && _stabZ){
+            NSLog(@"HAUT");
+            if(currentDimensions == 3){
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Z;100",@"CMD", nil];
+                [_session sendMessage:applicationDict
+                         replyHandler:^(NSDictionary *replyHandler) {
+                             NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                         }
+                         errorHandler:^(NSError *error) {
+                             NSLog(@"ERROR");
+                         }
+                 ];
+            }
+            _lastMoveZ = HAUT;
+            _stabZ = NO;
+        }else if(_incZ > THRESH && _stabZ){
+            NSLog(@"BAS");
+            if(currentDimensions == 3){
+                applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Z;-100",@"CMD", nil];
+                [_session sendMessage:applicationDict
+                         replyHandler:^(NSDictionary *replyHandler) {
+                             NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+                         }
+                         errorHandler:^(NSError *error) {
+                             NSLog(@"ERROR");
+                         }
+                 ];
+            }
+            _lastMoveZ = BAS;
+            _stabZ = NO;
+        }
+        _incZ = 0;
+    }
 }
 
 /**
@@ -518,6 +530,7 @@ HKWorkoutSession *workoutSession;
  * @brief Lancement décollage
  */
 - (IBAction)startTakeOff {
+    
     NSLog(@"TAKEOFF");
     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"D",@"CMD", nil];
     [_session sendMessage:applicationDict

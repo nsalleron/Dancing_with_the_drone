@@ -55,7 +55,7 @@
     [_stpHauteurMax setValue:tmp];
     
     bool tmpB = [[NSUserDefaults standardUserDefaults] boolForKey:@"InOut"];
-    [_swhInOut setOn:(!tmpB)];
+    [_swhInOut setOn:(tmpB)];
     
     /* Mise en place des couleurs par défaut */
     NSLog(@"Colorisation...");
@@ -271,9 +271,9 @@
 
 
 - (void)updateView:(CGSize)format{
-    
-    NSLog(@"Width : %f Height : %f ",format.width,format.height);
+   
     _tailleMarges = 6;
+    
     /*Mise en place des boutons et labels */
     if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
     {
