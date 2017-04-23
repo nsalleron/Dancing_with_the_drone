@@ -69,11 +69,14 @@ UINavigationController *myVC;
         _labelVersionApp = [[UILabel alloc] init];
         _labelBatteryDrone = [[UILabel alloc ]init];
         _labelBatterySmartphone = [[UILabel alloc ]init];
+        _labelMontre = [[UILabel alloc ] init];
         
         
         [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d%%",0]];
         [_labelBatteryDrone setText:@"Batterie drone : —"];
         [_labelVersionApp setText:@"Version 0.01"];
+        [_labelMontre setText:@""];
+        [_labelMontre setTintColor:[UIColor redColor]];
         
         [_labelVersionApp setFont:[UIFont systemFontOfSize:9]];
         [_labelBatteryDrone setFont:[UIFont systemFontOfSize:9]];
@@ -92,7 +95,7 @@ UINavigationController *myVC;
         [self addSubview:_labelVersionApp];
         [self addSubview:_labelBatteryDrone];
         [self addSubview:_labelBatterySmartphone];
-        
+        [self addSubview:_labelMontre];
        
         /* Force MAJ */
         [self setNeedsDisplay];
@@ -154,6 +157,8 @@ UINavigationController *myVC;
         [_labelVersionApp setFrame:CGRectMake(format.width - _tailleIcones + (_tailleIcones/3) ,format.height - _tailleIcones/2 + 10,_tailleIcones,_tailleIcones/2)];
         [_labelVersionApp setTextAlignment:NSTextAlignmentLeft];
         
+        [_labelMontre setFrame:CGRectMake(5, format.height - _tailleIcones/2 + 10, _tailleIcones,_tailleIcones/2)];
+        
         [_labelBatterySmartphone setText:[NSString stringWithFormat:@"Niveau SmartPhone: %d%%",(int)[self battery]]];
         
     }else{
@@ -186,6 +191,9 @@ UINavigationController *myVC;
                                                 -10,
                                                 _tailleIcones,
                                                 _tailleIcones/3)];
+        /* Label montre */
+        [_labelMontre setFrame:CGRectMake(10,format.height -_tailleIcones/3, _tailleIcones,
+                                          _tailleIcones/2)];
         /* LabelVersionApp */
         [_labelVersionApp setFrame:CGRectMake(format.width - _tailleIcones - 10 ,
                                               format.height -_tailleIcones/3,

@@ -20,6 +20,7 @@
 @property (readonly,nonatomic,retain)   UILabel         *labelBatteryDrone;
 @property (readonly,nonatomic,retain)   UILabel         *labelBatterySmartphone;
 @property (readonly,nonatomic,retain)   UILabel         *labelVersionApp;
+@property (readonly,nonatomic,retain)   UILabel         *labelMontre;
 @property (nonatomic, assign)           CGFloat         tailleIcones;
 
 - (void) updateView:(CGSize) format;

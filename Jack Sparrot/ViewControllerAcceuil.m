@@ -110,6 +110,17 @@ UIAlertView *alertAccueil;
     [_bebopDrone setRoll:0];
     [_bebopDrone setGaz:0];
     [_bebopDrone setYaw:0];
+    _bWatchActive = false;
+    _btnAide.enabled = YES;
+    _btnAide.alpha = 1;
+    _btnDrone.enabled = YES;
+    _btnDrone.alpha = 1;
+    _btnOptions.enabled = YES;
+    _btnOptions.alpha = 1;
+    [[ecranAccueil labelMontre] setText:@""];
+    [[ecranAccueil labelMontre] setTextColor:[UIColor redColor]];
+    [ecranAccueil updateView:[[UIScreen mainScreen] bounds].size];
+
 }
 
 
@@ -160,6 +171,10 @@ UIAlertView *alertAccueil;
         _btnDrone.alpha = 0.5;
         _btnOptions.enabled = NO;
         _btnOptions.alpha = 0.5;
+        
+        [[ecranAccueil labelMontre] setText:@"Montre active !"];
+        [[ecranAccueil labelMontre] setTextColor:[UIColor redColor]];
+        [ecranAccueil updateView:[[UIScreen mainScreen] bounds].size];
         return;
         
     }
@@ -172,6 +187,9 @@ UIAlertView *alertAccueil;
         _btnDrone.alpha = 1;
         _btnOptions.enabled = YES;
         _btnOptions.alpha = 1;
+        [[ecranAccueil labelMontre] setText:@""];
+        [[ecranAccueil labelMontre] setTextColor:[UIColor redColor]];
+        [ecranAccueil updateView:[[UIScreen mainScreen] bounds].size];
         NSDictionary* response = @{@"reply" : @"DONE"} ;
         if (replyHandler != nil) replyHandler(response);
 
