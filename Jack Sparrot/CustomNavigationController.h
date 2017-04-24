@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- *  @brief Permet l'empilement des vues.
+ *  @brief CustomNavigationController pour pouvoir gérer manuellement la rotation de l'écran.
  */
 @interface CustomNavigationController : UINavigationController
 

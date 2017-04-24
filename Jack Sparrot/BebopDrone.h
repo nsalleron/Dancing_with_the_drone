@@ -85,7 +85,8 @@
 @property (nonatomic, weak) id<BebopDroneDelegate>delegate;
 
 /**
- * @brief Instanciation de la classe avec un service qui contient l'identificateur du drone.
+ *  @brief Instanciation de la classe avec un service qui contient l'identificateur du drone.
+ *  @param service notre service de découverte de drone.
  */
 - (id)initWithService:(ARService*)service;
 /**
@@ -98,6 +99,7 @@
 - (void)disconnect;
 /**
  * @brief Récupère l'état actuel du drone
+ * @return etat de connexion au drone
  */
 - (eARCONTROLLER_DEVICE_STATE)connectionState;
 /**
@@ -110,8 +112,8 @@
  */
 - (void)emergency;
 /**
- * @brief Décollage du drone, mise à une altitude gérée par l'API elle-même
- * L'évitement est actif par defaut
+ * @brief Décollage du drone, mise à une altitude gérée par l'API elle-même. L'évitement est actif par defaut.
+ *
  */
 - (void)takeOff;
 /**

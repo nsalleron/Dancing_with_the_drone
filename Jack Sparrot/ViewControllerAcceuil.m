@@ -102,7 +102,6 @@ UIAlertView *alertAccueil;
 
 /**
  *  @brief Il faut absoluement arrêter le drone quand la session est sur le point d'être désactivée.
- *
  */
 - (void) sessionDidBecomeInactive:(WCSession *)session{
     [_bebopDrone setFlag:0];

@@ -13,10 +13,8 @@
 
 @implementation ViewOptions
 
-/**
- *  @brief Mise en place des couleurs suivant les valeurs enregistrées.
- */
-- (void) colors{
+
+- (void) getUserSettings{
     
     NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"1D"];
         
@@ -69,9 +67,7 @@
     [_btnColorAxeY setBackgroundColor:_colorY];
 
 }
-/**
- * @brief Méthode pour afficher le texte en clair ou non suivant la couleur de fond du bouton.
- */
+
 - (void) btnColorText{
     CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha =0.0;
 
@@ -111,9 +107,7 @@
     }
 }
 
-/**
- * @brief mise à jour de la couleur des boutons.
- */
+
 - (void) updateBtn:(int)btn color: (UIColor*) color{
     if (color != nil){
         switch (btn) {
@@ -209,7 +203,7 @@
         [_btnColorAxeY addTarget:self.superview action:@selector(goToColorChoice:) forControlEvents:UIControlEventTouchUpInside];
         
         /* Colorisation des boutons */
-        [self colors];
+        [self getUserSettings];
         
         [self addSubview:_btnColor1D];
         [self addSubview:_btnColor2D];
@@ -331,10 +325,7 @@
     [self updateView:rect.size];
 }
 
-/**
- * @brief Réalise un tableau de couleurs
- * @return tableau de couleurs
- */
+
 - (NSArray *) getBtnColors{
     NSArray *tmp = [[NSArray alloc] initWithObjects:
                     [_btnColor1D backgroundColor],
@@ -345,9 +336,7 @@
     return tmp;
 }
 
-/**
- * @brief Mise à jour des steppers
- */
+
 -(IBAction)stepperHauteurMaxUpdate:(UIStepper *)sender{
     [_lblHauteurMaxInt setText:[NSString stringWithFormat:@"%.2f", _stpHauteurMax.value]];
 }
@@ -356,9 +345,7 @@
     [_lblCoeffAccelInt setText:[NSString stringWithFormat:@"%.2f", _stpCoeffAccel.value]];
 }
 
-/**
- * @brief Mise à jour du switch
- */
+
 - (IBAction)switchModeIntExt:(UISwitch *)sender{
     if ([_swhInOut isOn])
         [_lblModeIntExtBool setText:[NSString stringWithFormat: @"Intérieur"]];
@@ -366,24 +353,15 @@
         [_lblModeIntExtBool setText:[NSString stringWithFormat:@"Extérieur"]];
 }
 
-/**
- * @brief getter pour stepper Acceleration
- * @return valStepper
- */
+
 -(double) getStepperValueCoefAcce{
     return [_stpCoeffAccel value];
 }
-/**
- * @brief getter pour stepper Hauteur
- * @return valStepper
- */
+
 - (double) getStepperValueMax{
     return [_stpHauteurMax value];
 }
-/**
- * @brief getter pour le switch
- * @return true or false
- */
+
 - (BOOL) getSwitchValueInOut{
     return [_swhInOut isOn];
 }

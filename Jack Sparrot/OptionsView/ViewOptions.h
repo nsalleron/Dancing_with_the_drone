@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewControllerOptions.h"
-
+/// \brief Cette classe affiche les différentes options du client
+/// \code
+/// Cette classe se charge du chargement des options de l'utilisateur.
+/// Elle affichera les différentes options ainsi que les couleurs des différents bouttons.
+/// \endcode
+///
 @interface ViewOptions : UIView
 
 @property (readonly,nonatomic,retain) UILabel *lblHauteurMax;
@@ -41,13 +46,48 @@
 @property (assign, nonatomic) ViewControllerOptions *vc;
 
 - (void) updateView:(CGSize) format;
+/**
+ * @brief mise à jour de la couleur des boutons.
+ */
 - (void) updateBtn:(int)btn color: (UIColor*) color;
+/**
+ * @brief Mise à jour du stepper concernant la hauteurMax
+ */
 - (IBAction)stepperHauteurMaxUpdate:(UIStepper *)sender;
+/**
+ * @brief Mise à jour du stepper concernant l'acceleration
+ */
 - (IBAction)stepperCoeffAccelUpdate:(UIStepper *)sender;
+/**
+ * @brief Mise à jour du switch
+ */
 - (IBAction)switchModeIntExt:(UISwitch *)sender;
+/**
+ * @brief Réalise un tableau de couleurs
+ * @return tableau de couleurs
+ */
 - (NSArray *) getBtnColors;
+/**
+ * @brief getter pour stepper Acceleration
+ * @return valStepper
+ */
 - (double) getStepperValueCoefAcce;
+/**
+ * @brief getter pour stepper Hauteur
+ * @return valStepper
+ */
 - (double) getStepperValueMax;
+/**
+ * @brief getter pour le switch
+ * @return true or false
+ */
 - (BOOL) getSwitchValueInOut;
-
+/**
+ *  @brief Mise en place des couleurs suivant les valeurs enregistrées.
+ */
+- (void) getUserSettings;
+/**
+ * @brief Méthode pour afficher le texte en clair ou non suivant la couleur de fond du bouton.
+ */
+- (void) btnColorText;
 @end

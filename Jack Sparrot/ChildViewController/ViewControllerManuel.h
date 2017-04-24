@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <CoreMotion/CoreMotion.h>
 #import <libARDiscovery/ARDISCOVERY_BonjourDiscovery.h>
-
+/// \brief Cette classe est le view controller de l'écran ViewManuel.h
+/// \code
+/// Cette classe est également un handler des commandes du drone suivant l'acceleration
+/// C'est elle qui se charge d'interpréter les commandes et de transmettre au drone les différentes instructions
+/// Elle possède également un timer qui se charge de vérifier la batterie toute les dix secondes. 
+/// \endcode
+///
 @interface ViewControllerManuel : UIViewController
 
 
@@ -71,7 +77,27 @@
  * @brief fin commande du drone
  */
 - (void) finCommande;
+/**
+ * @brief Méthode pour la surveillance de la batterie du terminal et du drone
+ */
+- (void) checkBattery;
 
+/**
+ * @brief interprétation des mouvements via CoreMotion
+ * @param motion Object CMDeviceMotion possédant les données CoreMotion
+ */
+- (void) mouvementDeviceMotion:(CMDeviceMotion *)motion;
+/**
+ * @brief Deconnexion propre du drone
+ */
+- (void) deconnexionDrone;
+/**
+ * @brief gestion du swipe DOWN
+ */
+-(void)swipeDown:(UISwipeGestureRecognizer*)gestureRecognizer;
 
-
+/**
+ * @brief gestion du swipe UP
+ */
+-(void)swipeUp:(UISwipeGestureRecognizer*)gestureRecognizer;
 @end

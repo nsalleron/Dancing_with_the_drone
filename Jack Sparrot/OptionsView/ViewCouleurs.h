@@ -11,7 +11,8 @@
 #import <UIKit/UIKit.h>
 
 #import "ViewCouleursController.h"
-
+/// \brief Cette classe affiche les différentes couleurs disponible pour le client.
+///
 @interface ViewCouleurs : UIView
 
 @property (readonly,nonatomic,retain) NSMutableArray * tmp;

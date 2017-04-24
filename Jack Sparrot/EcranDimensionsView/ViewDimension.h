@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/// \brief Cette classe affiche les différentes dimensions.
+///
 @interface ViewDimension : UIView
 
 

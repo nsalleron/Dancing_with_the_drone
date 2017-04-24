@@ -103,22 +103,12 @@ UINavigationController *myVC;
     return self;
 }
 
-- (void)setNavigationController:(UINavigationController*) nv{
-    if (nv != nil) {
-        myVC = nv;
-    }
-}
 
-/**
- * @brief vers le controle du drone
- */
 - (void)setBattery:(NSString*) battery{
     _labelBatteryDrone.text = battery;
 }
 
-/**
- * @brief Update de la view
- */
+
 - (void)updateView:(CGSize)format{
     
     _tailleIcones = format.height/3;
@@ -205,9 +195,6 @@ UINavigationController *myVC;
     }
 }
 
-/**
- * @brief retourne le niveau actuel de batterie
- */
 -(double)battery{
     UIDevice *myDevice = [UIDevice currentDevice];
     [myDevice setBatteryMonitoringEnabled:YES];

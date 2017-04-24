@@ -59,9 +59,6 @@ NSString *selected;
     return UIInterfaceOrientationLandscapeRight;
 }
 
-/**
- * @brief Mise en place de la valeur vers la variable globale à la fenêtre
- */
 -(void) endDimensionChoice:(UIButton*)send{
     
     selected = send.titleLabel.text;
@@ -79,16 +76,6 @@ NSString *selected;
     
     [ecranDimension updateView:size];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 /**
  * @brief Appel du protocole
  */

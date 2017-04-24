@@ -114,12 +114,6 @@ ViewManuel *ecran;
                                     repeats:YES];
 }
 
-
-
-/**
- * @brief interprétation des mouvements via CoreMotion
- * @param motion Object CMDeviceMotion possédant les données CoreMotion
- */
 - (void) mouvementDeviceMotion:(CMDeviceMotion *)motion{
     
     /* Le mouvement est-il autorisé */
@@ -290,9 +284,7 @@ ViewManuel *ecran;
     }
 }
 
-/**
- * @brief Surveillance de la batterie du drone et mobile
- */
+
 - (void) checkBattery{
     
     //Battery of the terminal
@@ -475,9 +467,6 @@ ViewManuel *ecran;
     [_droneDiscoverer stopDiscovering];
     
     [self deconnexionDrone];
-    
-    
-    
 }
 
 /**
@@ -522,7 +511,6 @@ ViewManuel *ecran;
 /*
  * @brief Changement de dimensions et redimensionnement des écrans 
  */
-
 - (void)addItemViewController:(ViewDimensionViewController *)controller didFinishEnteringItem:(NSString *)item
 {
     
@@ -554,7 +542,7 @@ ViewManuel *ecran;
 -(void)swipeUp:(UISwipeGestureRecognizer*)gestureRecognizer
 {
    
-    //if(_bebopDrone == nil || !_enVol || _enStatio) return;
+    if(_bebopDrone == nil || !_enVol || _enStatio) return;
     
     // in background, gaz the drone
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -574,7 +562,7 @@ ViewManuel *ecran;
 -(void)swipeDown:(UISwipeGestureRecognizer*)gestureRecognizer
 {
    
-    //if(_bebopDrone == nil || !_enVol || _enStatio) return;
+    if(_bebopDrone == nil || !_enVol || _enStatio) return;
     
     // in background, gaz the drone
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

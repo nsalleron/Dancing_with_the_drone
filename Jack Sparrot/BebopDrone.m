@@ -77,9 +77,6 @@ float acceleration;
     return self;
 }
 
-/**
- * @brief NE PAS UTILISER. Uniquement pour le debug quand le drone n'est pas disponible
- */
 - (id) init{
     
     self = [super init];

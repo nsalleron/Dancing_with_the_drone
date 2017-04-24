@@ -39,9 +39,7 @@ int btnColorID = 0;
     // Dispose of any resources that can be recreated.
 }
 
-/**
- * @brief Permet le choix d'une couleur pour un bouton
- */
+
 -(void) goToColorChoice:(UIButton*)send{
     NSString *tmp = [[send titleLabel]text];
     if([tmp isEqualToString:@"1D"]){

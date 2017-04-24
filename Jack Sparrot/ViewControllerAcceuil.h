@@ -12,7 +12,13 @@
 #import "BebopVideoView.h"
 #import "DroneDiscoverer.h"
 #import <WatchConnectivity/WatchConnectivity.h>
-
+/// \brief Cette classe est le view controller de l'écran d'accueil
+/// \code
+/// Cette classe est également un handler des commandes de la montre.
+/// C'est elle qui se charge d'interpréter et de transmettre les commandes reçu par la montre au drone.
+/// Elle se charge également de récupérer la batterie du drone afin de mettre à jour l'interface de l'utilisateur.
+/// \endcode
+///
 @interface ViewControllerAccueil : UIViewController
 
 @property (readonly,nonatomic,retain) UIButton *btnDrone;
@@ -32,20 +38,33 @@
 @property (readwrite, nonatomic) Boolean homeActivate;
 
 /**
- * @brief push to DroneControl
+ * @brief Ouverture de la fenêtre de contrôle du drone
  */
 - (void) goToDroneControl:(UIButton*)send;
 /**
- * @brief push to Options
+ * @brief Ouverture de la fenêtre des options
  */
 - (void) goToDroneOptions:(UIButton*)send;
 /**
- * @brief push to Help
+ * @brief Ouverture de la fenêtre d'aide
  */
 - (void) goToDroneHelp:(UIButton*)send;
 /**
- * @brief Check the level of the battery in order to prevent user from low battery
+ * @brief Verification du niveau de batterie pour prévenir l'utilisateur d'une batterie faible.
  */
 - (void) checkBattery;
+/**
+ *  @brief Il faut absoluement arrêter le drone quand la session est sur le point d'être désactivée.
+ */
+- (void) sessionDidBecomeInactive:(WCSession *)session;
+/**
+ * @brief Interprétation des données de la montre quand elle est disponible.
+ * Agit directement sur le drone avec un timer au cas ou la connexion n'est plus active.
+ */
+- (void) session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message replyHandler:(void (^)(NSDictionary<NSString *,id> * _Nonnull))replyHandler;
+/**
+ * @brief Deconnexion propre du drone
+ */
+- (void) deconnexionDrone;
 @end
 
