@@ -9,6 +9,7 @@
 #import <WatchKit/WatchKit.h>
 #import <Foundation/Foundation.h>
 
+
 @interface InterfaceController : WKInterfaceController
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceButton *btnDim;
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceButton *btnChgMode;

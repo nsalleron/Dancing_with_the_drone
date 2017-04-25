@@ -122,22 +122,27 @@
 - (void)land;
 /**
  * @brief Pitch, ATTENTION le drone avance jusqu'à recevoir un pitch de 0
+ * @param Pitch La valeur du pitch comprise entre [-100;100]
  */
 - (void)setPitch:(int)pitch;
 /**
  * @brief Roll, ATTENTION le drone avance jusqu'à recevoir un roll de 0
+ * @param Roll La valeur du roll comprise entre [-100;100]
  */
 - (void)setRoll:(uint8_t)roll;
 /**
  * @brief Yaw, ATTENTION le drone fait une rotation jusqu'à recevoir un yaw de 0
+ * @param Yaw La valeur du yaw comprise entre [-100;100]
  */
 - (void)setYaw:(uint8_t)yaw;
 /**
- * @brief GAZ, ATTENTION le drone monte/descend jusqu'à recevoir un 0 ou hauteur max.
+ * @brief Gaz, ATTENTION le drone monte/descend jusqu'à recevoir un 0 ou hauteur max.
+ * @param Gaz La valeur du Gaz comprise entre [-100;100]
  */
 - (void)setGaz:(uint8_t)gaz;
 /**
  * @brief Flag pour l'activation des fonctions pitch/roll
+ * @param Flag Compris entre 0 ou 1; 1 active le pitch/roll.
  */
 - (void)setFlag:(uint8_t)flag;
 /**
@@ -154,10 +159,12 @@
 - (void)returnHomeExterieur;
 /**
  * @brief Mise en place de l'hauteur maximale pour le drone
+ * @param altitude L'altitude maximale du drone
  */
 - (void)setMaxHauteur:(float)altitude;
 /**
  * @brief Mise en place de l'acceleration maximale pour le drone
+ * @param coef Le coefficient d'acceleration du drone
  */
 - (void)setAcceleration:(float)coef;
 /**

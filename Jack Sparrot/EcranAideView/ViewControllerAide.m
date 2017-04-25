@@ -29,9 +29,7 @@ ViewAide *ecranAide;
     [self setTitle:@"Aide"];
 
 }
-/**
- *  @brief Permet de lancer la video explicative
- */
+
 - (void) launchVideo:(UIButton*)send{
     
     NSURL *path;

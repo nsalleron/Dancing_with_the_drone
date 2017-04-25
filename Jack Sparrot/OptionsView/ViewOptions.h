@@ -68,17 +68,17 @@
  */
 - (NSArray *) getBtnColors;
 /**
- * @brief getter pour stepper Acceleration
+ * @brief Getter pour stepper Acceleration
  * @return valStepper
  */
 - (double) getStepperValueCoefAcce;
 /**
- * @brief getter pour stepper Hauteur
+ * @brief Getter pour stepper Hauteur
  * @return valStepper
  */
 - (double) getStepperValueMax;
 /**
- * @brief getter pour le switch
+ * @brief Getter pour le switch
  * @return true or false
  */
 - (BOOL) getSwitchValueInOut;

@@ -10,6 +10,7 @@
 #import <WatchConnectivity/WatchConnectivity.h>
 #import <CoreMotion/CoreMotion.h>
 #import <HealthKit/HealthKit.h>
+
 #define GAUCHE 0
 #define DROITE 1
 #define HAUT 2
@@ -17,12 +18,13 @@
 #define AVANT 4
 #define ARRIERE 5
 #define STATIONNAIRE 6
-#define THRESHSTABILITE 30
-#define THRESH 0.2
+#define THRESHSTABILITE 6
+#define THRESH 0.3
+
 
 @interface InterfaceController()<WCSessionDelegate>
 
-@property (nonatomic, strong) WCSession* session;
+@property (readwrite,nonatomic, strong) WCSession* session;
 @property (readonly, nonatomic) double incX;
 @property (readonly, nonatomic) double incY;
 @property (readonly, nonatomic) double incZ;
@@ -54,9 +56,9 @@ HKWorkoutSession *workoutSession;
 
 @implementation InterfaceController
 
-- (void) session:(WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(NSError *)error{
-    
-}
+- (void) session:(WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(NSError *)error{}
+
+- (void)workoutSession:(HKWorkoutSession *)workoutSession didFailWithError:(NSError *)error{}
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
@@ -67,24 +69,7 @@ HKWorkoutSession *workoutSession;
         _session.delegate = self;
         [_session activateSession];
     }
-    
-    self.motionManager = [[CMMotionManager alloc] init];
-    
-    if (self.motionManager.deviceMotionAvailable) {
-        
-        
-        _motionManager.deviceMotionUpdateInterval = 1.0/10.0F;
-        [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical];
-        [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
-            [self mouvementDeviceMotion:motion];
-        }];
-        
-        
-    }else{
-        //[_btnDim setTitle:@"NON DISPONIBLE MOTIONMANAGER"];
-    }
-    
-    
+
 }
 
 /**
@@ -172,6 +157,19 @@ HKWorkoutSession *workoutSession;
              }
      ];
     
+    self.motionManager = [[CMMotionManager alloc] init];
+    
+    if (self.motionManager.deviceMotionAvailable) {
+        
+        
+        _motionManager.deviceMotionUpdateInterval = 1.0/5.0F;
+        [_motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical];
+        [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
+            [self mouvementDeviceMotion:motion];
+        }];
+        
+        
+    }
     
     
     
@@ -181,16 +179,21 @@ HKWorkoutSession *workoutSession;
 - (void)didDeactivate {
     // This method is called when watch view controller is no longer visible
     [super didDeactivate];
+    self.motionManager = nil;
     NSDictionary *applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"END;",@"CMD", nil];
     [_session sendMessage:applicationDict
      
              replyHandler:^(NSDictionary *replyHandler) {
+                 
              }
      
              errorHandler:^(NSError *error) {
              }
      ];
+    
+    
 }
+
 
 
 /**
@@ -207,7 +210,16 @@ HKWorkoutSession *workoutSession;
         [_session sendMessage:applicationDict
                  replyHandler:^(NSDictionary *replyHandler) {
                      //NSLog(@"REPLY : %@",[replyHandler valueForKey:@"PARAMS"]);
-                     [_btnChgMode setTitle:[[NSString alloc ] initWithFormat:@"%@",[replyHandler valueForKey:@"PARAMS"]]];
+                     //[_btnDim setTitle:@"PARAMS rep"];
+                     //[_btnChgMode setTitle:[[NSString alloc ] initWithFormat:@"%@",[replyHandler valueForKey:@"reply"]]];
+                     NSArray * ArrayCommand = [[NSArray alloc] init];
+                     ArrayCommand = [[replyHandler valueForKey:@"reply"]componentsSeparatedByString:@";"];
+                     
+                     [[NSUserDefaults standardUserDefaults] setDouble:[ArrayCommand[0] doubleValue] forKey:@"Acceleration"];
+                     [[NSUserDefaults standardUserDefaults] setDouble:[ArrayCommand[1] doubleValue] forKey:@"Hauteur"];
+                     [[NSUserDefaults standardUserDefaults] setBool:[ArrayCommand[2] boolValue] forKey:@"InOut"];
+                     return;
+
                  }
                  errorHandler:^(NSError *error) {
                      NSLog(@"ERROR REPLY");
@@ -230,8 +242,15 @@ HKWorkoutSession *workoutSession;
     _absX = fabs(_incX);
     _absY = fabs(_incY);
     _absZ = fabs(_incZ);
-    
-    
+    applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:[[NSString alloc] initWithFormat:@"X;%f",_incX],@"CMD", nil];
+    [_session sendMessage:applicationDict
+             replyHandler:^(NSDictionary *replyHandler) {
+                 NSLog(@"REPLY : %@",[replyHandler valueForKey:@"reply"]);
+             }
+             errorHandler:^(NSError *error) {
+                 NSLog(@"ERROR");
+             }
+     ];
     
     if(_absX > THRESH){
         MVTX = true;
@@ -253,6 +272,7 @@ HKWorkoutSession *workoutSession;
             _stabX = YES;
             _lastMoveX = STATIONNAIRE;
             _incStabX = 0;
+            //[_btnDim setTitle:@"STABLE"];
         }
     }
     
@@ -276,6 +296,7 @@ HKWorkoutSession *workoutSession;
             _stabY = YES;
             _lastMoveY = STATIONNAIRE;
             _incStabY = 0;
+            //[_btnDim setTitle:@"STABLE"];
         }
     }
     
@@ -299,6 +320,7 @@ HKWorkoutSession *workoutSession;
             _stabZ = YES;
             _lastMoveZ = STATIONNAIRE;
             _incStabZ = 0;
+            //[_btnDim setTitle:@"STABLE"];
         }
     }
     
@@ -307,9 +329,11 @@ HKWorkoutSession *workoutSession;
     
     /* Si mouvement en X ou Y ou Z alors on applique suivant le sens*/
     if(MVTX){
+        [_btnChgMode setTitle:[[NSString alloc] initWithFormat:@"X : %f",_incX]];
         if(_incX < -THRESH && _stabX){
-            NSLog(@"AVANT");
+            [_btnDim setTitle:@"AVANT"];
             if(!axeY && currentDimensions == 1){
+                
                 applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;100",@"CMD", nil];
                 [_session sendMessage:applicationDict
                          replyHandler:^(NSDictionary *replyHandler) {
@@ -334,9 +358,9 @@ HKWorkoutSession *workoutSession;
             _lastMoveX = ARRIERE;
             _stabX = NO;
         }else if(_incX > THRESH && _stabX){
-            NSLog(@"ARRIERE");
+            [_btnDim setTitle:@"ARRIERE"];
             if(!axeY && currentDimensions == 1){
-                //[_btnDim setTitle:@"ARRIERE"];
+                
                 applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"X;-100",@"CMD", nil];
                 [_session sendMessage:applicationDict
                          replyHandler:^(NSDictionary *replyHandler) {
@@ -366,10 +390,11 @@ HKWorkoutSession *workoutSession;
     
     
     if(MVTY){
+        //[_btnChgMode setTitle:[[NSString alloc] initWithFormat:@"Y : %f",_incY]];
         if(_incY < -THRESH && _stabY){
             NSLog(@"DROITE");
             if(axeY && currentDimensions == 1){
-                //[_btnDim setTitle:@"DROITE"];
+                [_btnDim setTitle:@"DROITE"];
                 applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Y;100",@"CMD", nil];
                 [_session sendMessage:applicationDict
                          replyHandler:^(NSDictionary *replyHandler) {
@@ -442,7 +467,7 @@ HKWorkoutSession *workoutSession;
     
     if(MVTZ){
         if(_incZ < -THRESH && _stabZ){
-            NSLog(@"HAUT");
+            [_btnDim setTitle:@"HAUT"];
             if(currentDimensions == 3){
                 applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Z;100",@"CMD", nil];
                 [_session sendMessage:applicationDict
@@ -457,7 +482,7 @@ HKWorkoutSession *workoutSession;
             _lastMoveZ = HAUT;
             _stabZ = NO;
         }else if(_incZ > THRESH && _stabZ){
-            NSLog(@"BAS");
+            [_btnDim setTitle:@"BAS"];
             if(currentDimensions == 3){
                 applicationDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Z;-100",@"CMD", nil];
                 [_session sendMessage:applicationDict

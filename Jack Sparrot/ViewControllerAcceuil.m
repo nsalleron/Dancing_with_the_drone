@@ -29,6 +29,7 @@ double accelerationSettingAccueil;
 double hauteurMaxAccueil;
 bool interieur;
 NSTimer * timerAccueil;
+NSTimer * timerWatch;
 UIAlertView *alertAccueil;
 
 @implementation ViewControllerAccueil
@@ -141,7 +142,7 @@ UIAlertView *alertAccueil;
     ArrayCommand = [string componentsSeparatedByString:@";"];
     
     //DEBUG
-    //NSLog(@"MESSAGE : %@",[message objectForKey:@"CMD"]);
+    NSLog(@"MESSAGE : %@",[message objectForKey:@"CMD"]);
     //
     //[[ecranAccueil btnDrone] setTitle:string forState:UIControlStateNormal];
     //[[ecranAccueil btnAide] setTitle:[ArrayCommand objectAtIndex:0] forState:UIControlStateNormal];
@@ -163,34 +164,26 @@ UIAlertView *alertAccueil;
         NSDictionary* response = @{@"response" : rep} ;
         if (replyHandler != nil) replyHandler(response);
         
-        _bWatchActive = true;
-        _btnAide.enabled = NO;
-        _btnAide.alpha = 0.5;
-        _btnDrone.enabled = NO;
-        _btnDrone.alpha = 0.5;
-        _btnOptions.enabled = NO;
-        _btnOptions.alpha = 0.5;
         
-        [[ecranAccueil labelMontre] setText:@"Montre active !"];
-        [[ecranAccueil labelMontre] setTextColor:[UIColor redColor]];
-        [ecranAccueil updateView:[[UIScreen mainScreen] bounds].size];
         return;
         
     }
     
     if([axe isEqualToString:@"END"]){
+        
         _bWatchActive = false;
-        _btnAide.enabled = YES;
-        _btnAide.alpha = 1;
-        _btnDrone.enabled = YES;
-        _btnDrone.alpha = 1;
-        _btnOptions.enabled = YES;
-        _btnOptions.alpha = 1;
-        [[ecranAccueil labelMontre] setText:@""];
-        [[ecranAccueil labelMontre] setTextColor:[UIColor redColor]];
-        [ecranAccueil updateView:[[UIScreen mainScreen] bounds].size];
-        NSDictionary* response = @{@"reply" : @"DONE"} ;
-        if (replyHandler != nil) replyHandler(response);
+        [_bebopDrone setFlag:0];
+        [_bebopDrone setPitch:0];
+        [_bebopDrone setRoll:0];
+        [_bebopDrone setGaz:0];
+        [_bebopDrone setYaw:0];
+        
+       
+            NSDictionary* response = @{@"reply" : @"DONE"} ;
+            if (replyHandler != nil) replyHandler(response);
+        
+        
+        return;
 
     }
     
@@ -202,8 +195,30 @@ UIAlertView *alertAccueil;
         [_bebopDrone setRoll:0];
         [_bebopDrone setGaz:0];
         [_bebopDrone setYaw:0];
-        NSDictionary* response = @{@"reply" : @"DONE 0"} ;
+        
+        NSString* rep = [[NSString alloc] initWithFormat:@"%f;%f;%d;",accelerationSettingAccueil,hauteurMaxAccueil,_bInterieurAccueil];
+        NSLog(@"MESSAGE POUR 0 %@",rep);
+        NSDictionary* response = @{@"reply" : rep} ;
         if (replyHandler != nil) replyHandler(response);
+        
+        _bWatchActive = true;
+        
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _btnAide.enabled = NO;
+            _btnAide.alpha = 0.5;
+            _btnDrone.enabled = NO;
+            _btnDrone.alpha = 0.5;
+            _btnOptions.enabled = NO;
+            _btnOptions.alpha = 0.5;
+            [[ecranAccueil labelMontre] setText:@"Montre active !"];
+            [[ecranAccueil labelMontre] setTextColor:[UIColor redColor]];
+            [ecranAccueil updateView:[[UIScreen mainScreen] bounds].size];
+        });
+        return;
+
+        
     }else if([axe isEqualToString:@"X"]) {
         [_bebopDrone setPitch:[valeur intValue]];
         NSDictionary* response = @{@"reply" : @"DONE X"} ;
@@ -268,17 +283,61 @@ UIAlertView *alertAccueil;
 
     //replyHandler = [[NSDictionary alloc] initWithObjectsAndKeys:@"DONE",@"reply", nil];
     
-    /*Vérification s'il n'y a pas de deconnexion */
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [NSThread sleepForTimeInterval:1.0f];
-        if([[NSDate date] timeIntervalSinceDate:_dateOldCommand] > 1.0){
-            [_bebopDrone setFlag:0];
-            [_bebopDrone setPitch:0];
-            [_bebopDrone setRoll:0];
-            [_bebopDrone setGaz:0];
-            [_bebopDrone setYaw:0];
-        }
-    });
+}
+/*Vérification s'il n'y a pas de deconnexion */
+- (void) checkConnectivityWatch{
+    
+    if(_dateOldCommand == nil){
+        [_bebopDrone setFlag:0];
+        [_bebopDrone setPitch:0];
+        [_bebopDrone setRoll:0];
+        [_bebopDrone setGaz:0];
+        [_bebopDrone setYaw:0];
+        _bWatchActive = false;
+        _btnAide.enabled = YES;
+        _btnAide.alpha = 1;
+        _btnDrone.enabled = YES;
+        _btnDrone.alpha = 1;
+        _btnOptions.enabled = YES;
+        _btnOptions.alpha = 1;
+        [[ecranAccueil labelMontre] setText:@""];
+        [[ecranAccueil labelMontre] setTextColor:[UIColor redColor]];
+        [ecranAccueil updateView:[[UIScreen mainScreen] bounds].size];
+
+        return;
+    }
+    
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"TIME : %f", [[NSDate date] timeIntervalSinceDate:_dateOldCommand] );
+            if([[NSDate date] timeIntervalSinceDate:_dateOldCommand] > 1.0){
+                [_bebopDrone setFlag:0];
+                [_bebopDrone setPitch:0];
+                [_bebopDrone setRoll:0];
+                [_bebopDrone setGaz:0];
+                [_bebopDrone setYaw:0];
+                _bWatchActive = false;
+                _btnAide.enabled = YES;
+                _btnAide.alpha = 1;
+                _btnDrone.enabled = YES;
+                _btnDrone.alpha = 1;
+                _btnOptions.enabled = YES;
+                _btnOptions.alpha = 1;
+                [[ecranAccueil labelMontre] setText:@""];
+                [[ecranAccueil labelMontre] setTextColor:[UIColor redColor]];
+                [ecranAccueil updateView:[[UIScreen mainScreen] bounds].size];
+            }else{
+                _btnAide.enabled = NO;
+                _btnAide.alpha = 0.5;
+                _btnDrone.enabled = NO;
+                _btnDrone.alpha = 0.5;
+                _btnOptions.enabled = NO;
+                _btnOptions.alpha = 0.5;
+                [[ecranAccueil labelMontre] setText:@"Montre active !"];
+                [[ecranAccueil labelMontre] setTextColor:[UIColor redColor]];
+                [ecranAccueil updateView:[[UIScreen mainScreen] bounds].size];
+            }
+        });
+   
     
 }
 
@@ -298,6 +357,14 @@ UIAlertView *alertAccueil;
                                                   selector:@selector(checkBattery)
                                                   userInfo:nil
                                                    repeats:YES];
+    /* Timer pour check la montre*/
+    timerWatch = [NSTimer scheduledTimerWithTimeInterval:3
+                                                 target:self
+                                               selector:@selector(checkConnectivityWatch)
+                                               userInfo:nil
+                                                repeats:YES];
+    
+    
     
     /* Récupération des options et mise en place des settings par defaut */
     hauteurMaxAccueil = [[NSUserDefaults standardUserDefaults] doubleForKey:@"Hauteur"];
@@ -449,7 +516,6 @@ UIAlertView *alertAccueil;
  */
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-    
     return UIInterfaceOrientationMaskAll;
 }
 /**

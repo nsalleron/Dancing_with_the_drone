@@ -8,7 +8,7 @@
 
 #import "InterfaceControllerOptions.h"
 
-@interface InterfaceControllerOptions ()
+@interface InterfaceControllerOptions ()<WCSessionDelegate>
 
 @end
 
@@ -19,6 +19,10 @@ bool home;
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
     [self setTitle:(NSString *) context];
+}
+
+- (void) session:(WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(NSError *)error{
+    
 }
 
 - (void)willActivate {
