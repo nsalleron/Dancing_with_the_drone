@@ -226,7 +226,7 @@
         [_lblModeIntExtBool setText:@"Intérieur"];
         
         [_stpHauteurMax setAutorepeat:YES];
-        [_stpHauteurMax setMinimumValue:4.0];
+        [_stpHauteurMax setMinimumValue:2.0];
         [_stpHauteurMax setMaximumValue:30];
         [_stpHauteurMax setStepValue:0.5];
         
