@@ -29,20 +29,10 @@
 @property (nonatomic) int8_t oldPitch;
 @property (nonatomic) int8_t oldRoll;
 @property (nonatomic) int8_t oldGaz;
-@property (nonatomic) int    nbPitch;
-@property (nonatomic) int    nbRoll;
-@property (nonatomic) int    nbGaz;
 @property (nonatomic, strong) UIAlertView *returnHomeAlert;
 @property (nonatomic) boolean homeExterieur;
 @property (nonatomic) boolean returnHome;
-@property (nonatomic) int nbMouvement;
-@property (nonatomic) int oldValue;
-@property (nonatomic) int sumValueX;
-@property (nonatomic) int sumValueY;
-@property (nonatomic) int sumValueZ;
 @property (nonatomic) float interval;
-@property (nonatomic) NSString *oldDirection;
-@property (nonatomic) float timeForThisMouvement;
 @property (nonatomic) dispatch_semaphore_t stateSem;
 @property (nonatomic) ViewControllerManuel* manuel;
 @property (nonatomic) int Flying;
@@ -69,11 +59,6 @@ float acceleration;
     _timeIntervalArray = [[NSMutableArray alloc] init];
     _returnHome = false;
     _homeExterieur = false;
-    _nbMouvement = 0;
-    _oldValue = 0;
-    _sumValueX = 0;
-    _oldDirection = nil;
-    _timeForThisMouvement = 0;
     return self;
 }
 
@@ -90,11 +75,6 @@ float acceleration;
         _timeIntervalArray = [[NSMutableArray alloc] init];
         _returnHome = false;
         _homeExterieur = false;
-        _nbMouvement = 0;
-        _oldValue = 0;
-        _sumValueX = 0;
-        _oldDirection = nil;
-        _timeForThisMouvement = 0;
     }
     return self;
     

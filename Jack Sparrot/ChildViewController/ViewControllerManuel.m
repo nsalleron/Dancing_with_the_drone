@@ -143,8 +143,8 @@ ViewManuel *ecran;
     if(_absX > THRESH){
         MVTX = true;
     }else{
-        if(_incStabX < THRESHSTABILITE){
-            _incStabX++;
+        if(_iStabX < THRESHSTABILITE){
+            _iStabX++;
         }else{
             if(_lastMoveX != STATIONNAIRE){
                 NSLog(@"STATIONNAIRE X");
@@ -153,15 +153,15 @@ ViewManuel *ecran;
             }
             _stabX = YES;
             _lastMoveX = STATIONNAIRE;
-            _incStabX = 0;
+            _iStabX = 0;
         }
     }
     
     if(_absY > THRESH){
         MVTY = true;
     }else{
-        if(_incStabY < THRESHSTABILITE){
-            _incStabY++;
+        if(_iStabY < THRESHSTABILITE){
+            _iStabY++;
         }else{
             if(_lastMoveY != STATIONNAIRE){
                 NSLog(@"STATIONNAIRE Y");
@@ -171,15 +171,15 @@ ViewManuel *ecran;
             }
             _stabY = YES;
             _lastMoveY = STATIONNAIRE;
-            _incStabY = 0;
+            _iStabY = 0;
         }
     }
     
     if(_absZ > THRESH){
         MVTZ = true;
     }else{
-        if(_incStabZ < THRESHSTABILITE){
-            _incStabZ++;
+        if(_iStabZ < THRESHSTABILITE){
+            _iStabZ++;
         }else{
             if(_lastMoveZ != STATIONNAIRE){
                 NSLog(@"STATIONNAIRE Z");
@@ -187,7 +187,7 @@ ViewManuel *ecran;
             }
             _stabZ = YES;
             _lastMoveZ = STATIONNAIRE;
-            _incStabZ = 0;
+            _iStabZ = 0;
         }
     }
     

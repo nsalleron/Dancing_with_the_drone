@@ -82,7 +82,7 @@
                             </connections>
                         </switch>
                         <label alignment="left" text="Haut. Max : " id="cQz-w2-RTa"/>
-                        <slider width="1" alignment="left" value="4" minimum="4" maximum="30" steps="26" id="J67-na-fq9">
+                        <slider width="1" alignment="left" value="2" minimum="2" maximum="30" steps="28" id="J67-na-fq9">
                             <connections>
                                 <action selector="changeHauteurMax:" destination="x5r-gL-5pW" id="VrE-yJ-Etf"/>
                             </connections>

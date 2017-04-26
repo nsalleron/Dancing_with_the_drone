@@ -35,7 +35,7 @@
 		A6E50DE21E5E0A9800830EFD /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E50DE11E5E0A9800830EFD /* NotificationController.m */; };
 		A6E50DE41E5E0A9800830EFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E50DE31E5E0A9800830EFD /* Assets.xcassets */; };
 		A6E50DE81E5E0A9800830EFD /* Jack Sparrot Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A6E50DC71E5E0A9800830EFD /* Jack Sparrot Watch.app */; };
-		A6EA180A1E79B0C500FB1EE4 /* BebopVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EA18091E79B0C500FB1EE4 /* BebopVideoView.m */; };
+		A6EA180A1E79B0C500FB1EE4 /* BebopVideoViewTOTO.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EA18091E79B0C500FB1EE4 /* BebopVideoViewTOTO.m */; };
 		A6EC7A721E40A54D0075039E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6EC7A701E40A54D0075039E /* Main.storyboard */; };
 		A6F6EE661E64EBB10007B54D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE651E64EBB10007B54D /* main.m */; };
 		A6F6EE6A1E64F05B0007B54D /* ViewDimensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE691E64F05B0007B54D /* ViewDimensionViewController.m */; };
@@ -159,8 +159,8 @@
 		A6E50DE11E5E0A9800830EFD /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
 		A6E50DE31E5E0A9800830EFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6E50DE51E5E0A9800830EFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A6EA18081E79B0C500FB1EE4 /* BebopVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BebopVideoView.h; sourceTree = "<group>"; };
-		A6EA18091E79B0C500FB1EE4 /* BebopVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BebopVideoView.m; sourceTree = "<group>"; };
+		A6EA18081E79B0C500FB1EE4 /* BebopVideoViewTOTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BebopVideoViewTOTO.h; sourceTree = "<group>"; };
+		A6EA18091E79B0C500FB1EE4 /* BebopVideoViewTOTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BebopVideoViewTOTO.m; sourceTree = "<group>"; };
 		A6EC7A711E40A54D0075039E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Jack Sparrot/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		A6F6EE651E64EBB10007B54D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A6F6EE681E64F05B0007B54D /* ViewDimensionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewDimensionViewController.h; path = EcranDimensionsView/ViewDimensionViewController.h; sourceTree = "<group>"; };
@@ -238,23 +238,23 @@
 			children = (
 				A668E7E61EA7FD3800F82E3C /* alert.mp3 */,
 				ECE9DCA31E7C02D2008F92F4 /* Videos */,
-				A6D4750C1E70753700B57D3C /* Discovery */,
-				A62504D11E7065B600288587 /* Drone */,
+				A6D4750C1E70753700B57D3C /* pkgDiscovery */,
+				A62504D11E7065B600288587 /* pkgDrone */,
 				A61AEECC1E40978F00EDB53B /* AppDelegate.h */,
 				A61AEECD1E40978F00EDB53B /* AppDelegate.m */,
 				A61AEED81E40978F00EDB53B /* Assets.xcassets */,
 				A61AEEDA1E40978F00EDB53B /* LaunchScreen.storyboard */,
 				A61AEEDD1E40978F00EDB53B /* Info.plist */,
 				A61AEED51E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld */,
-				A6D475101E72E32F00B57D3C /* OptionsView */,
-				A61AEEC91E40978F00EDB53B /* EcranAccueilView */,
-				A67EC1761E4333BF00F08072 /* EcranDroneView */,
-				EC0C622F1E7BF40500413B9A /* EcranAide */,
+				A6D475101E72E32F00B57D3C /* pkgEcranOptionsView */,
+				A61AEEC91E40978F00EDB53B /* pkgEcranAccueilView */,
+				A67EC1761E4333BF00F08072 /* pkgEcranDroneView */,
+				EC0C622F1E7BF40500413B9A /* pkgEcranAideView */,
 			);
 			path = "Jack Sparrot";
 			sourceTree = "<group>";
 		};
-		A61AEEC91E40978F00EDB53B /* EcranAccueilView */ = {
+		A61AEEC91E40978F00EDB53B /* pkgEcranAccueilView */ = {
 			isa = PBXGroup;
 			children = (
 				A6F6EE651E64EBB10007B54D /* main.m */,
@@ -265,7 +265,7 @@
 				A6F6EE711E6C26510007B54D /* CustomNavigationController.h */,
 				A6F6EE721E6C26510007B54D /* CustomNavigationController.m */,
 			);
-			name = EcranAccueilView;
+			name = pkgEcranAccueilView;
 			sourceTree = "<group>";
 		};
 		A61AEEE51E40978F00EDB53B /* Jack SparrotTests */ = {
@@ -293,19 +293,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A62504D11E7065B600288587 /* Drone */ = {
+		A62504D11E7065B600288587 /* pkgDrone */ = {
 			isa = PBXGroup;
 			children = (
 				A66C32861E9A29A40067D93A /* BebopDroneRecord.h */,
-				A6EA18081E79B0C500FB1EE4 /* BebopVideoView.h */,
-				A6EA18091E79B0C500FB1EE4 /* BebopVideoView.m */,
+				A6EA18081E79B0C500FB1EE4 /* BebopVideoViewTOTO.h */,
+				A6EA18091E79B0C500FB1EE4 /* BebopVideoViewTOTO.m */,
 				A62504D21E7065C800288587 /* BebopDrone.h */,
 				A62504D31E7065C800288587 /* BebopDrone.m */,
 			);
-			name = Drone;
+			name = pkgDrone;
 			sourceTree = "<group>";
 		};
-		A67EC1761E4333BF00F08072 /* EcranDroneView */ = {
+		A67EC1761E4333BF00F08072 /* pkgEcranDroneView */ = {
 			isa = PBXGroup;
 			children = (
 				A6F6EE671E64F0210007B54D /* EcranDimensionsView */,
@@ -314,19 +314,19 @@
 				A6565ED31E49C1E900CC7621 /* ViewControllerManuel.h */,
 				A6565ED41E49C1E900CC7621 /* ViewControllerManuel.m */,
 			);
-			name = EcranDroneView;
+			name = pkgEcranDroneView;
 			sourceTree = "<group>";
 		};
-		A6D4750C1E70753700B57D3C /* Discovery */ = {
+		A6D4750C1E70753700B57D3C /* pkgDiscovery */ = {
 			isa = PBXGroup;
 			children = (
 				A6D4750D1E70754F00B57D3C /* DroneDiscoverer.h */,
 				A6D4750E1E70754F00B57D3C /* DroneDiscoverer.m */,
 			);
-			name = Discovery;
+			name = pkgDiscovery;
 			sourceTree = "<group>";
 		};
-		A6D475101E72E32F00B57D3C /* OptionsView */ = {
+		A6D475101E72E32F00B57D3C /* pkgEcranOptionsView */ = {
 			isa = PBXGroup;
 			children = (
 				A6D4751D1E76F5CE00B57D3C /* ViewCouleurs */,
@@ -335,6 +335,7 @@
 				A6D475131E72E32F00B57D3C /* ViewOptions.h */,
 				A6D475141E72E32F00B57D3C /* ViewOptions.m */,
 			);
+			name = pkgEcranOptionsView;
 			path = OptionsView;
 			sourceTree = "<group>";
 		};
@@ -396,7 +397,7 @@
 			name = EcranDimensionsView;
 			sourceTree = "<group>";
 		};
-		EC0C622F1E7BF40500413B9A /* EcranAide */ = {
+		EC0C622F1E7BF40500413B9A /* pkgEcranAideView */ = {
 			isa = PBXGroup;
 			children = (
 				A692AD5B1E7BF57800A58AEE /* ViewAide.h */,
@@ -404,7 +405,7 @@
 				A692AD5D1E7BF57800A58AEE /* ViewControllerAide.m */,
 				A692AD5E1E7BF57800A58AEE /* ViewAide.m */,
 			);
-			name = EcranAide;
+			name = pkgEcranAideView;
 			sourceTree = "<group>";
 		};
 		ECE9DCA31E7C02D2008F92F4 /* Videos */ = {
@@ -628,7 +629,7 @@
 				A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */,
 				A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */,
 				A6D4751C1E76F58E00B57D3C /* ViewCouleursController.m in Sources */,
-				A6EA180A1E79B0C500FB1EE4 /* BebopVideoView.m in Sources */,
+				A6EA180A1E79B0C500FB1EE4 /* BebopVideoViewTOTO.m in Sources */,
 				A6D4751B1E76F58E00B57D3C /* ViewCouleurs.m in Sources */,
 				A61AEED71E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld in Sources */,
 				A6D475161E72E32F00B57D3C /* ViewOptions.m in Sources */,

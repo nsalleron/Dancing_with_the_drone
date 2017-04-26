@@ -3,7 +3,7 @@
 //  SDKSample
 //
 
-#import "BebopVideoView.h"
+#import "BebopVideoViewTOTO.h"
 #import <AVFoundation/AVFoundation.h>
 #import <VideoToolbox/VideoToolbox.h>
 

@@ -32,21 +32,21 @@
 @property (nonatomic) dispatch_semaphore_t stateSem;
 @property (atomic, strong) NSMutableArray *arrayFloat;
 @property (nonatomic) bool bInterieurManuel;
-@property (readonly, nonatomic) double incX;
-@property (readonly, nonatomic) double incY;
-@property (readonly, nonatomic) double incZ;
-@property (readonly, nonatomic) int incStabX;
-@property (readonly, nonatomic) int incStabY;
-@property (readonly, nonatomic) int incStabZ;
+@property (readonly, nonatomic) int lastMoveX;
+@property (readonly, nonatomic) int lastMoveY;
+@property (readonly, nonatomic) int lastMoveZ;
 @property (readonly, nonatomic) double absX;
 @property (readonly, nonatomic) double absY;
 @property (readonly, nonatomic) double absZ;
 @property (readonly, nonatomic) bool stabX;
 @property (readonly, nonatomic) bool stabY;
 @property (readonly, nonatomic) bool stabZ;
-@property (readonly, nonatomic) int lastMoveX;
-@property (readonly, nonatomic) int lastMoveY;
-@property (readonly, nonatomic) int lastMoveZ;
+@property (readonly, nonatomic) double incX;
+@property (readonly, nonatomic) double incY;
+@property (readonly, nonatomic) double incZ;
+@property (readonly, nonatomic) int iStabX;
+@property (readonly, nonatomic) int iStabY;
+@property (readonly, nonatomic) int iStabZ;
 @property (readonly, nonatomic) int MOUVEMENT;
 
 /**

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <libARDiscovery/ARDISCOVERY_BonjourDiscovery.h>
 #import "BebopDrone.h"
-#import "BebopVideoView.h"
+//#import "BebopVideoView.h"
 #import "DroneDiscoverer.h"
 #import <WatchConnectivity/WatchConnectivity.h>
 /// \brief Cette classe est le view controller de l'écran d'accueil
@@ -21,9 +21,6 @@
 ///
 @interface ViewControllerAccueil : UIViewController
 
-@property (readonly,nonatomic,retain) UIButton *btnDrone;
-@property (readonly,nonatomic,retain) UIButton *btnOptions;
-@property (readonly,nonatomic,retain) UIButton *btnAide;
 @property (assign, nonatomic) NSInteger index;
 @property (nonatomic, strong) ARService *service;
 @property (nonatomic) int *batteryDrone;
