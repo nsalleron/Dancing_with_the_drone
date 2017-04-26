@@ -14,7 +14,7 @@
 @interface ViewControllerAide : UIViewController
 
 /**
- *  @brief Permet de lancer la video explicative
+ *  @brief Permet de lancer la vidéo explicative
  */
 - (void) launchVideo:(UIButton*)send;
 

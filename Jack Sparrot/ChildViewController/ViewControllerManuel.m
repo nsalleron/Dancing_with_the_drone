@@ -70,7 +70,7 @@ ViewManuel *ecran;
     }
     _bebopDrone = [[BebopDrone alloc ] init];
     
-    /* Fin acceleration */
+    /* Fin accélération */
     _enStatio = FALSE;
     _enVol = FALSE;
     _axeX = TRUE;

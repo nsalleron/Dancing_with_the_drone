@@ -1,6 +1,5 @@
 //
 //  BebopVideoView.m
-//  SDKSample
 //
 
 #import "BebopVideoViewTOTO.h"

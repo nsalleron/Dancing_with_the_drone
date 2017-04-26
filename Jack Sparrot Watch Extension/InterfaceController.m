@@ -502,7 +502,7 @@ HKWorkoutSession *workoutSession;
 }
 
 /**
- * @brief Handler pour les action sur le bouton de changement de dimensions
+ * @brief Handler pour les actions sur le bouton de changement de dimensions
  */
 - (IBAction)actionbtnClick {
     if(currentDimensions == 3) currentDimensions = 0;
@@ -584,7 +584,7 @@ HKWorkoutSession *workoutSession;
      ];
 }
 /**
- * @brief Lancement retour home
+ * @brief Lancement retour Home
  */
 - (IBAction)startHome {
     NSLog(@"HOME");

@@ -23,7 +23,7 @@
 @protocol ViewCouleursControllerDelegate <NSObject>
 /// \brief La méthode de ce protocole
 /// \param controller le view controller qui utilisera le protocole
-/// \param item la couleur que l'utilisateur à cliqué.
+/// \param item la couleur que l'utilisateur choisit en cliquant.
 - (void)addCouleur:(ViewCouleursController *)controller didFinishEnteringItem:(UIColor *)item;
 @end
 

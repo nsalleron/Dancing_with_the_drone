@@ -55,8 +55,8 @@ bool home;
 }
 
 /**
- *  @brief changement du type de home;
- *  @param value true = interieur
+ *  @brief changement du type de Home;
+ *  @param value true = intérieur
  */
 - (IBAction)changeHome:(BOOL)value {
     home = value;
@@ -64,7 +64,7 @@ bool home;
 }
 /**
  *  @brief changement de la valeur de la hauteur
- *  @param value valeur actuel de la hauteur max du drone
+ *  @param value valeur actuelle de la hauteur maximale du drone
  */
 - (IBAction)changeHauteurMax:(float)value {
     hauteurMax = value;
@@ -72,8 +72,8 @@ bool home;
     
 }
 /**
- *  @brief changement de la valeur d'acceleration
- *  @param value valeur actuel de l'acceleration
+ *  @brief changement de la valeur d'accélération
+ *  @param value valeur actuel de l'accélération
  */
 - (IBAction)changeCoefAccel:(float)value {
     coefAccel = value;

@@ -1,6 +1,5 @@
 //
 //  DroneDiscoverer.m
-//  SDKSample
 //
 
 #import "DroneDiscoverer.h"

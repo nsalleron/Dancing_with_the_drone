@@ -11,9 +11,9 @@
 #import <libARDiscovery/ARDISCOVERY_BonjourDiscovery.h>
 /// \brief Cette classe est le view controller de l'écran ViewManuel.h
 /// \code
-/// Cette classe est également un handler des commandes du drone suivant l'acceleration
+/// Cette classe est également un handler des commandes du drone suivant l'accélération
 /// C'est elle qui se charge d'interpréter les commandes et de transmettre au drone les différentes instructions
-/// Elle possède également un timer qui se charge de vérifier la batterie toute les dix secondes. 
+/// Elle possède également un timer qui se charge de vérifier la batterie toutes les dix secondes.
 /// \endcode
 ///
 @interface ViewControllerManuel : UIViewController
@@ -54,15 +54,15 @@
  */
 - (void) goToDimensionChoice:(UILongPressGestureRecognizer*)gesture;
 /**
- * @brief changement mode stationnaire ou non
+ * @brief changement mode stationnaire ou non stationnaire
  */
 - (void) changeSatio:(UIButton*)send;
 /**
- * @brief activation de la fonction home
+ * @brief activation de la fonction Home
  */
 - (void) homeFunction:(UILongPressGestureRecognizer*)gesture;
 /**
- * @brief changement mode decollage / Atterrissage
+ * @brief changement mode Décollage / Atterrissage
  */
 - (void) changeDecoAttr:(UILongPressGestureRecognizer*)gesture;
 /**
@@ -88,7 +88,7 @@
  */
 - (void) mouvementDeviceMotion:(CMDeviceMotion *)motion;
 /**
- * @brief Deconnexion propre du drone
+ * @brief Déconnexion propre du drone
  */
 - (void) deconnexionDrone;
 /**

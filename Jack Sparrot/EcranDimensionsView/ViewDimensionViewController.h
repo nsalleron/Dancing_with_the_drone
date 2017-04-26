@@ -19,7 +19,7 @@
 @protocol ViewDimensionViewControllerDelegate <NSObject>
 /// \brief La méthode de ce protocole
 /// \param controller le view controller qui utilisera le protocole
-/// \param item la couleur que l'utilisateur à cliqué.
+/// \param item la couleur que l'utilisateur a choisie.
 - (void)addItemViewController:(ViewDimensionViewController *)controller didFinishEnteringItem:(NSString *)item;
 @end
 

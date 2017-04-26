@@ -1,6 +1,5 @@
 //
 //  BebopDrone.h
-//  SDKSample
 //
 
 #import <Foundation/Foundation.h>
@@ -94,17 +93,17 @@
  */
 - (void)connect;
 /**
- * @brief Deconnexion du drone
+ * @brief Déconnexion du drone
  */
 - (void)disconnect;
 /**
  * @brief Récupère l'état actuel du drone
- * @return etat de connexion au drone
+ * @return état de connexion au drone
  */
 - (eARCONTROLLER_DEVICE_STATE)connectionState;
 /**
  * @brief Récupération de l'état de vol du drone
- * @return L'etat du drone en cours. 
+ * @return L'état du drone en cours.
  */
 - (eARCOMMANDS_ARDRONE3_PILOTINGSTATE_FLYINGSTATECHANGED_STATE)flyingState;
 /**
@@ -117,7 +116,7 @@
  */
 - (void)takeOff;
 /**
- * @brief Atterrissage du drone, l'atterrissage est gérée automatiquement par l'API
+ * @brief Atterrissage du drone, l'atterrissage est géré automatiquement par l'API
  */
 - (void)land;
 /**
@@ -146,11 +145,11 @@
  */
 - (void)setFlag:(uint8_t)flag;
 /**
- * @brief Annulation immédiate si un returnToHome est en cours (Interieur/Exterieur)
+ * @brief Annulation immédiate si un returnToHome est en cours (Intérieur/Extérieur)
  */
 - (void)cancelReturnHome;
 /**
- * @brief implémentation particulière du returnHome le drone fait les mouvements inverse de ceux qu'il a effectué
+ * @brief implémentation particulière du returnHome le drone fait les mouvements inverses de ceux qu'il a effectué
  */
 - (void)returnHomeInterieur;
 /**
@@ -163,12 +162,12 @@
  */
 - (void)setMaxHauteur:(float)altitude;
 /**
- * @brief Mise en place de l'acceleration maximale pour le drone
- * @param coef Le coefficient d'acceleration du drone
+ * @brief Mise en place de l'accélération maximale pour le drone
+ * @param coef Le coefficient d'accélération du drone
  */
 - (void)setAcceleration:(float)coef;
 /**
- * @brief Remise en place des réglages par défault (vitesse/camera)
+ * @brief Remise en place des réglages par défaut (vitesse/caméra)
  */
 - (void)setDefaultSetting;
 /**

@@ -56,14 +56,14 @@ UIAlertView *alertAccueil;
 
 - (void) checkBattery{
     
-    //Battery of the terminal
+    //Battery du terminal
     UIDevice *myDevice = [UIDevice currentDevice];
     [myDevice setBatteryMonitoringEnabled:YES];
     
     int state = [myDevice batteryState];
     double batTermin = (float)[myDevice batteryLevel] * 100;
     
-    //Battery of the drone
+    //Battery du drone
     if(batTermin < 10 || _batteryDrone < 10){
         
         
@@ -284,7 +284,7 @@ UIAlertView *alertAccueil;
     //replyHandler = [[NSDictionary alloc] initWithObjectsAndKeys:@"DONE",@"reply", nil];
     
 }
-/*Vérification s'il n'y a pas de deconnexion */
+/*Vérification s'il n'y a pas de déconnexion */
 - (void) checkConnectivityWatch{
     
     if(_dateOldCommand == nil){
@@ -423,7 +423,7 @@ UIAlertView *alertAccueil;
 }
 
 /**
- * @brief Deconnexion propre du drone
+ * @brief Déconnexion propre du drone
  */
 - (void) deconnexionDrone{
     
@@ -551,7 +551,7 @@ UIAlertView *alertAccueil;
 }
 
 /**
- * @brief vers le controle du drone
+ * @brief vers le contrôle du drone
  */
 -(void) goToDroneControl:(UIButton*)send{
     if(!_bWatchActive){
