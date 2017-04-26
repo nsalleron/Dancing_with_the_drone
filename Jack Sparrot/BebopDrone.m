@@ -1,6 +1,5 @@
 //
 //  BebopDrone.m
-//  SDKSample
 //
 
 #import "BebopDrone.h"

@@ -12,7 +12,7 @@
 
 /// \brief Cette classe définit la vue de l'écran d'accueil
 /// \code
-/// Cette classe met en place le logo de l'application ainsi que les différents boutons et label.
+/// Cette classe met en place le logo de l'application ainsi que les différents boutons et labels.
 /// \endcode
 ///
 @interface ViewEcranAccueil : UIView

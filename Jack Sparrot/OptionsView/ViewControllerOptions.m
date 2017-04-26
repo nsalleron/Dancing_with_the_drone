@@ -118,7 +118,7 @@ int btnColorID = 0;
 }
 /**
  * @brief Sauvegarde de l'ensemble des données de l'écran des options
- *        Chaque valeur est associé à une clé qui peut ensuite être récupérer par l'application.
+ *        Chaque valeur est associée à une clé qui peut ensuite être récupérée par l'application.
  */
 - (void) saveData {
     

@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 
 #import "ViewCouleursController.h"
-/// \brief Cette classe affiche les différentes couleurs disponible pour le client.
+/// \brief Cette classe affiche les différentes couleurs disponibles pour le client.
 ///
 @interface ViewCouleurs : UIView
 

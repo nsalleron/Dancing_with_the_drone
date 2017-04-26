@@ -1,6 +1,5 @@
 //
 //  BebopDroneRecord.m
-//  SDKSample
 //
 //  Created by Gregoire Gasc on 04/04/2017.
 //  Copyright © 2017 Parrot. All rights reserved.
@@ -9,11 +8,11 @@
 #import <Foundation/Foundation.h>
 
 
-/// \brief Class pour les enregistrements des "mouvements" suivant les intervals de temps.
+/// \brief Class pour les enregistrements des "mouvements" suivant les intervalles de temps.
 /// \code
 /// Cette classe permet d'enregistrer la direction dans laquelle va le drone
 /// ainsi que le temps du drone dans cette direction
-/// Plusieurs valeurs sont enregistrés :
+/// Plusieurs valeurs sont enregistrées :
 ///       - Pitch : 'P'
 ///       - Roll : 'R'
 ///       - Gaz : 'G'
@@ -25,27 +24,27 @@
     float droneTime;  // Temps (en seconde ) dans cette direction
 }
 
-/// \brief Méthode pour mettre en place la direction associé à la valeur envoyé au drone.
+/// \brief Méthode pour mettre en place la direction associée à la valeur envoyée au drone.
 /// \code
 /// Le format doit être le suivant :
 ///     Direction;Valeur
-/// La direction doit être la chaine de caractère :
+/// La direction doit être la chaîne de caractère :
 ///     - "P" pour Pitch
 ///     - "R" pour Roll
 ///     - "G" pour Gaz
-/// La valeur doit être une chaine de caractère issue d'un entier compris entre -100 et 100
+/// La valeur doit être une chaîne de caractère issue d'un entier compris entre -100 et 100
 /// \endcode
 ///
 -(void) setDroneDirectionValue:(NSString*)value;
-/// \brief Méthode pour mettre en place l'interval de temps de la directions
+/// \brief Méthode pour mettre en place l'intervalle de temps de la direction
 /// \code
 /// Un setter qui permet la mise en place du temps au format float.
-/// Cette valeur doit être calculé avant entre deux dates de la manière suivante:
+/// Cette valeur doit être calculée avant entre deux dates de la manière suivante:
 ///     time = [Date date] difference avec _oldDate
-/// Cette est calculer uniquement quand un mouvement est en cours puis s'arrête.
+/// Cette date est calculée uniquement quand un mouvement est en cours puis s'arrête.
 /// C'est l'arrêt qui marque la fin du mouvement et donc la détermination de time.
 /// \endcode
-/// \param value le temps déterminée auparavant
+/// \param value le temps déterminé auparavant
 -(void) setTimeInterval:(float)value;
 /// \brief Permet de récupérer la direction
 /// \return Une string contenant la direct (X ou Y ou Z)
@@ -53,8 +52,8 @@
 /// \brief Permet de récupérer la valeur envoyer au drone
 /// \return la valeur à envoyer au drone.
 -(int) getValue;
-/// \brief Permet de récupérer l'interval de temps du mouvement
-/// \return l'interval de temps
+/// \brief Permet de récupérer l'intervalle de temps du mouvement
+/// \return l'intervalle de temps
 -(float) getTimeInterval;
 @end
 

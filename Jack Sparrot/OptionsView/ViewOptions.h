@@ -11,7 +11,7 @@
 /// \brief Cette classe affiche les différentes options du client
 /// \code
 /// Cette classe se charge du chargement des options de l'utilisateur.
-/// Elle affichera les différentes options ainsi que les couleurs des différents bouttons.
+/// Elle affichera les différentes options ainsi que les couleurs des différents boutons.
 /// \endcode
 ///
 @interface ViewOptions : UIView
@@ -55,7 +55,7 @@
  */
 - (IBAction)stepperHauteurMaxUpdate:(UIStepper *)sender;
 /**
- * @brief Mise à jour du stepper concernant l'acceleration
+ * @brief Mise à jour du stepper concernant l'accélération
  */
 - (IBAction)stepperCoeffAccelUpdate:(UIStepper *)sender;
 /**

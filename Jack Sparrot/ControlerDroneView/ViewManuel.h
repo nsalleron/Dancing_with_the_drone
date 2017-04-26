@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ViewControllerManuel.h"
 
-/// \brief Cette classe définit la vue du contrôle du drone
+/// \brief Cette classe définit la vue de contrôle du drone
 
 @interface ViewManuel : UIView
 
@@ -70,7 +70,7 @@
  */
 - (void) homeFunction:(UILongPressGestureRecognizer*)gesture;
 /**
- * @brief Mise en place des couleurs et autre settings enregistré par l'utilisateur
+ * @brief Mise en place des couleurs et autre settings enregistrés par l'utilisateur
  */
 - (void) getUserSettings;
 /**

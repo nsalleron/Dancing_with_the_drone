@@ -57,7 +57,7 @@
     
     /* Mise en place des couleurs par défaut */
     NSLog(@"Colorisation...");
-    /* Mise en place des couleurs par défaut + changement couleur texte */
+    /* Mise en place des couleurs par défaut + changement des couleurs du texte */
     [self btnColorText];
     
     [_btnColor1D setBackgroundColor:_color1D];

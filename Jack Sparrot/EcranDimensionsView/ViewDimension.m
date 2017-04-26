@@ -12,7 +12,7 @@
 @implementation ViewDimension
 
 /**
- * @brief Affiche les couleurs voulu par l'utilisateur ou les couleurs par defaut
+ * @brief Affiche les couleurs voulues par l'utilisateur ou les couleurs par defaut
  */
 - (void) colors{
     

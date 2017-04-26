@@ -1,6 +1,5 @@
 //
 //  BebopVideoView.h
-//  SDKSample
 //
 
 #import <UIKit/UIKit.h>

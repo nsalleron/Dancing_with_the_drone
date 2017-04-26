@@ -15,7 +15,7 @@
 /// \brief Cette classe est le view controller de l'écran d'accueil
 /// \code
 /// Cette classe est également un handler des commandes de la montre.
-/// C'est elle qui se charge d'interpréter et de transmettre les commandes reçu par la montre au drone.
+/// C'est elle qui se charge d'interpréter et de transmettre les commandes reçues par la montre au drone.
 /// Elle se charge également de récupérer la batterie du drone afin de mettre à jour l'interface de l'utilisateur.
 /// \endcode
 ///
@@ -47,7 +47,7 @@
  */
 - (void) goToDroneHelp:(UIButton*)send;
 /**
- * @brief Verification du niveau de batterie pour prévenir l'utilisateur d'une batterie faible.
+ * @brief Vérification du niveau de batterie pour prévenir l'utilisateur d'une batterie faible.
  */
 - (void) checkBattery;
 /**
@@ -60,7 +60,7 @@
  */
 - (void) session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message replyHandler:(void (^)(NSDictionary<NSString *,id> * _Nonnull))replyHandler;
 /**
- * @brief Deconnexion propre du drone
+ * @brief Déconnexion propre du drone
  */
 - (void) deconnexionDrone;
 @end

@@ -401,9 +401,9 @@
 			isa = PBXGroup;
 			children = (
 				A692AD5B1E7BF57800A58AEE /* ViewAide.h */,
+				A692AD5E1E7BF57800A58AEE /* ViewAide.m */,
 				A692AD5C1E7BF57800A58AEE /* ViewControllerAide.h */,
 				A692AD5D1E7BF57800A58AEE /* ViewControllerAide.m */,
-				A692AD5E1E7BF57800A58AEE /* ViewAide.m */,
 			);
 			name = pkgEcranAideView;
 			sourceTree = "<group>";
