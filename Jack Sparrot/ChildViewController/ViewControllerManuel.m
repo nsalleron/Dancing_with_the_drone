@@ -68,13 +68,13 @@ ViewManuel *ecran;
         _droneDiscoverer = [[DroneDiscoverer alloc] init];
         [_droneDiscoverer setDelegate:self];
     }
-    
+    //_bebopDrone = [[BebopDrone alloc] init];
     
     /* Fin accélération */
     _enStatio = FALSE;
     _enVol = FALSE;
     _axeX = TRUE;
-    _homeActivate = false;
+    _homeActivate = FALSE;
     
     ecran = [[ViewManuel alloc ] initWithFrame:[[UIScreen mainScreen] bounds]];
     [ecran setBackgroundColor:[UIColor colorWithRed:250.0/255 green:246.0/255 blue:244.0/255 alpha:1.0]];
@@ -117,7 +117,7 @@ ViewManuel *ecran;
 - (void) mouvementDeviceMotion:(CMDeviceMotion *)motion{
     
     /* Le mouvement est-il autorisé */
-    if(_bebopDrone == nil || !_enVol || _enStatio || _homeActivate){
+    if(_bebopDrone == nil || !_enVol || _enStatio){
         [_bebopDrone setFlag:0];
         [_bebopDrone setRoll:0];
         [_bebopDrone setPitch:0];
@@ -125,6 +125,8 @@ ViewManuel *ecran;
         [_bebopDrone setYaw:0];
         return;
     }
+    
+    if(_homeActivate) return;
     
     boolean MVTX = false,
             MVTY = false,

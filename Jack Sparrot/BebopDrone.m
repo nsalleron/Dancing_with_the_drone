@@ -320,6 +320,7 @@ float acceleration;
             [self setRoll:0];
             [self setPitch:0];
             [self setGaz:0];
+            [NSThread sleepForTimeInterval:2.0F];
             
         }
         _returnHome = false;
