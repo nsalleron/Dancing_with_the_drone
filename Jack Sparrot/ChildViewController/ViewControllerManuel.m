@@ -68,7 +68,7 @@ ViewManuel *ecran;
         _droneDiscoverer = [[DroneDiscoverer alloc] init];
         [_droneDiscoverer setDelegate:self];
     }
-    _bebopDrone = [[BebopDrone alloc ] init];
+    
     
     /* Fin accélération */
     _enStatio = FALSE;
@@ -117,14 +117,14 @@ ViewManuel *ecran;
 - (void) mouvementDeviceMotion:(CMDeviceMotion *)motion{
     
     /* Le mouvement est-il autorisé */
-    /*if(_bebopDrone == nil || !_enVol || _enStatio || _homeActivate){
+    if(_bebopDrone == nil || !_enVol || _enStatio || _homeActivate){
         [_bebopDrone setFlag:0];
         [_bebopDrone setRoll:0];
         [_bebopDrone setPitch:0];
         [_bebopDrone setGaz:0];
         [_bebopDrone setYaw:0];
         return;
-    }*/
+    }
     
     boolean MVTX = false,
             MVTY = false,
