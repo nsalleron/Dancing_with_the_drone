@@ -302,7 +302,8 @@ UIAlertView *alertAccueil;
         [ecranAccueil btnOptions].alpha = 1;
         [[ecranAccueil labelMontre] setText:@""];
         [[ecranAccueil labelMontre] setTextColor:[UIColor redColor]];
-        [ecranAccueil updateView:[[UIScreen mainScreen] bounds].size];
+        [ecranAccueil setFrame:[[UIScreen mainScreen] bounds]];
+        [ecranAccueil timerUpdate:[[UIScreen mainScreen] bounds].size];
 
         return;
     }
@@ -321,9 +322,11 @@ UIAlertView *alertAccueil;
                 [ecranAccueil btnDrone].enabled = YES;
                 [ecranAccueil btnDrone].alpha = 1;
                 [ecranAccueil btnOptions].enabled = YES;
-                [ecranAccueil btnOptions].alpha = 1;                [[ecranAccueil labelMontre] setText:@""];
+                [ecranAccueil btnOptions].alpha = 1;
+                [[ecranAccueil labelMontre] setText:@""];
                 [[ecranAccueil labelMontre] setTextColor:[UIColor redColor]];
-                [ecranAccueil updateView:[[UIScreen mainScreen] bounds].size];
+                [ecranAccueil setFrame:[[UIScreen mainScreen] bounds]];
+                [ecranAccueil timerUpdate:[[UIScreen mainScreen] bounds].size];
             }else{
                 [ecranAccueil btnAide].enabled = NO;
                 [ecranAccueil btnAide].alpha = 0.5;
@@ -333,7 +336,8 @@ UIAlertView *alertAccueil;
                 [ecranAccueil btnOptions].alpha = 0.5;
                 [[ecranAccueil labelMontre] setText:@"Montre active !"];
                 [[ecranAccueil labelMontre] setTextColor:[UIColor redColor]];
-                [ecranAccueil updateView:[[UIScreen mainScreen] bounds].size];
+                [ecranAccueil setFrame:[[UIScreen mainScreen] bounds]];
+                [ecranAccueil timerUpdate:[[UIScreen mainScreen] bounds].size];
             }
         });
    

@@ -41,6 +41,10 @@
  */
 -(double)battery;
 
+-(void) setFrame:(CGRect)frame;
+
+-(void) timerUpdate:(CGSize) frame;
+
 @end
 
 #endif
