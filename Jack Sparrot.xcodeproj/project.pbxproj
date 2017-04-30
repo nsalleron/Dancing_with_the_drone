@@ -35,7 +35,6 @@
 		A6E50DE21E5E0A9800830EFD /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E50DE11E5E0A9800830EFD /* NotificationController.m */; };
 		A6E50DE41E5E0A9800830EFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6E50DE31E5E0A9800830EFD /* Assets.xcassets */; };
 		A6E50DE81E5E0A9800830EFD /* Jack Sparrot Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A6E50DC71E5E0A9800830EFD /* Jack Sparrot Watch.app */; };
-		A6EA180A1E79B0C500FB1EE4 /* BebopVideoViewTOTO.m in Sources */ = {isa = PBXBuildFile; fileRef = A6EA18091E79B0C500FB1EE4 /* BebopVideoViewTOTO.m */; };
 		A6EC7A721E40A54D0075039E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6EC7A701E40A54D0075039E /* Main.storyboard */; };
 		A6F6EE661E64EBB10007B54D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE651E64EBB10007B54D /* main.m */; };
 		A6F6EE6A1E64F05B0007B54D /* ViewDimensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F6EE691E64F05B0007B54D /* ViewDimensionViewController.m */; };
@@ -159,8 +158,6 @@
 		A6E50DE11E5E0A9800830EFD /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
 		A6E50DE31E5E0A9800830EFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6E50DE51E5E0A9800830EFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A6EA18081E79B0C500FB1EE4 /* BebopVideoViewTOTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BebopVideoViewTOTO.h; sourceTree = "<group>"; };
-		A6EA18091E79B0C500FB1EE4 /* BebopVideoViewTOTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BebopVideoViewTOTO.m; sourceTree = "<group>"; };
 		A6EC7A711E40A54D0075039E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Jack Sparrot/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		A6F6EE651E64EBB10007B54D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A6F6EE681E64F05B0007B54D /* ViewDimensionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewDimensionViewController.h; path = EcranDimensionsView/ViewDimensionViewController.h; sourceTree = "<group>"; };
@@ -297,8 +294,6 @@
 			isa = PBXGroup;
 			children = (
 				A66C32861E9A29A40067D93A /* BebopDroneRecord.h */,
-				A6EA18081E79B0C500FB1EE4 /* BebopVideoViewTOTO.h */,
-				A6EA18091E79B0C500FB1EE4 /* BebopVideoViewTOTO.m */,
 				A62504D21E7065C800288587 /* BebopDrone.h */,
 				A62504D31E7065C800288587 /* BebopDrone.m */,
 			);
@@ -629,7 +624,6 @@
 				A67EC1791E4333E500F08072 /* ViewManuel.m in Sources */,
 				A6565ED61E49C1E900CC7621 /* ViewControllerManuel.m in Sources */,
 				A6D4751C1E76F58E00B57D3C /* ViewCouleursController.m in Sources */,
-				A6EA180A1E79B0C500FB1EE4 /* BebopVideoViewTOTO.m in Sources */,
 				A6D4751B1E76F58E00B57D3C /* ViewCouleurs.m in Sources */,
 				A61AEED71E40978F00EDB53B /* Jack_Sparrot.xcdatamodeld in Sources */,
 				A6D475161E72E32F00B57D3C /* ViewOptions.m in Sources */,

@@ -167,7 +167,7 @@ ViewManuel *ecran;
         }else{
             if(_lastMoveY != STATIONNAIRE){
                 NSLog(@"STATIONNAIRE Y");
-                [ecran updateBtnDimensions:@"STATIONNAIRE"];
+                //[ecran updateBtnDimensions:@"STATIONNAIRE"];
                 [_bebopDrone setFlag:0];
                 [_bebopDrone setRoll:0];
             }

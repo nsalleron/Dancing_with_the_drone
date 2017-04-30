@@ -419,6 +419,7 @@ UIAlertView *alertAccueil;
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
     [timerAccueil invalidate];
 }
 
