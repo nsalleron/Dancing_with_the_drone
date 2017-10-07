@@ -13,16 +13,18 @@
     *  Utilisation d'un drone type Parrot Bebop 2
     *  Réalisation d'une fonction avancée (Home, implémentation différente de celle de Parrot).
     *  Utilisation d'une montre de Type Apple Watch
-    *  Via Camera du smartphone
  
  
 ## Interface d'utilisation
 
  * Ecran de contrôle du drone
- (https://github.com/nsalleron/Dancing_with_the_drone/blob/master/1.png?raw=true)
- [![Ecran de contrôle du drone](https://github.com/nsalleron/Dancing_with_the_drone/blob/master/2.png?raw=true)]
- [![Ecran des options](https://github.com/nsalleron/Dancing_with_the_drone/blob/master/3.png?raw=true)]
- [![Ecran de la montre](https://github.com/nsalleron/Dancing_with_the_drone/blob/master/4.png?raw=true)]
+ (link : https://github.com/nsalleron/Dancing_with_the_drone/blob/master/1.png?raw=true)
+ * Ecran de contrôle du drone
+ (link : https://github.com/nsalleron/Dancing_with_the_drone/blob/master/2.png?raw=true)
+ * Ecran des options 
+ (link : https://github.com/nsalleron/Dancing_with_the_drone/blob/master/3.png?raw=true)
+ * Ecran de la montre
+ (link : https://github.com/nsalleron/Dancing_with_the_drone/blob/master/4.png?raw=true)
 
 ## Exemple d'utilisation
 
