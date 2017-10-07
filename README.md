@@ -32,6 +32,6 @@
 
 ## Sources
 
-  • La documentation Parrot : http://developer.parrot.com/docs/SDK3/#general-information
-  • L'ensemble de la documentation Apple.
+  * La documentation Parrot : http://developer.parrot.com/docs/SDK3/#general-information
+  * L'ensemble de la documentation Apple.
 
