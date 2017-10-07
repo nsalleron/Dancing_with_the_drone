@@ -1,19 +1,19 @@
 ## Projet de Master 1
 
 * Application iOS
- * iOS 10.0 minimum
- * SDK Parrot version 3.9.2
+    * iOS 10.0 minimum
+    * SDK Parrot version 3.9.2
 * Application WatchOS
- * WatchOS version 3
+    * WatchOS version 3
 * Description de la demande
- *  Intégration d'un drone dans une chorégraphie
-    * Détection des mouvements
-    * Application des mouvements par le drone.
- *  Utilisation d'un terminal type : iPhone / iPod
- *  Utilisation d'un drone type Parrot Bebop 2
- *  Réalisation d'une fonction avancée (Home, implémentation différente de celle de Parrot).
- *  Utilisation d'une montre de Type Apple Watch
- *  Via Camera du smartphone
+    *  Intégration d'un drone dans une chorégraphie
+       * Détection des mouvements
+       * Application des mouvements par le drone.
+    *  Utilisation d'un terminal type : iPhone / iPod
+    *  Utilisation d'un drone type Parrot Bebop 2
+    *  Réalisation d'une fonction avancée (Home, implémentation différente de celle de Parrot).
+    *  Utilisation d'une montre de Type Apple Watch
+    *  Via Camera du smartphone
  
  
 ## Interface d'utilisation
