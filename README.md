@@ -19,13 +19,12 @@
 
  * Ecran de contrôle du drone
  [![Interface de contrôle ](https://github.com/nsalleron/Dancing_with_the_drone/blob/master/1.png?raw=true)](https://github.com/nsalleron/Dancing_with_the_drone/blob/master/1.png?raw=true )
- (link : https://github.com/nsalleron/Dancing_with_the_drone/blob/master/1.png?raw=true)
  * Ecran de contrôle du drone
- (link : https://github.com/nsalleron/Dancing_with_the_drone/blob/master/2.png?raw=true)
+ [![Interface de contrôle ](https://github.com/nsalleron/Dancing_with_the_drone/blob/master/2.png?raw=true)](https://github.com/nsalleron/Dancing_with_the_drone/blob/master/2.png?raw=true )
  * Ecran des options 
- (link : https://github.com/nsalleron/Dancing_with_the_drone/blob/master/3.png?raw=true)
+ [![Interface de contrôle ](https://github.com/nsalleron/Dancing_with_the_drone/blob/master/3.png?raw=true)](https://github.com/nsalleron/Dancing_with_the_drone/blob/master/3.png?raw=true )
  * Ecran de la montre
- (link : https://github.com/nsalleron/Dancing_with_the_drone/blob/master/4.png?raw=true)
+[![Interface de contrôle ](https://github.com/nsalleron/Dancing_with_the_drone/blob/master/4.png?raw=true)](https://github.com/nsalleron/Dancing_with_the_drone/blob/master/4.png?raw=true )
 
 ## Exemple d'utilisation
 
